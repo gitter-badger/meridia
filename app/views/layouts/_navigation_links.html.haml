@@ -1,0 +1,6 @@
+-if user_signed_in?
+  -if current_user.roles.name == "Admin" 
+    = link_to 'Centros', centers_path, class:  "item"		 
+    = link_to 'Roles & Permisos', roles_path,class:  "item"
+    = link_to 'Users', users_path,class:  "item"
+  =link_to 'Logout', destroy_user_session_path,class:"item", :method=>'delete'

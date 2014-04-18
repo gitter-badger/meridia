@@ -1,13 +1,6 @@
 -# navigation styled for Bootstrap 3.0
-%nav.navbar.navbar-default.navbar-fixed-top
-  .container
-    .navbar-header
-      %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
-        %span.sr-only Toggle navigation
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-      = link_to 'Home', root_path, class: 'navbar-brand'
-    .collapse.navbar-collapse
-      %ul.nav.navbar-nav
-        = render 'layouts/navigation_links'
+.list-items
+  =link_to "Participantes", members_path, class: "list-group-item"
+  = link_to "Nuevo Regsitro", new_customer_path, class: "list-group-item"
+  = link_to "Activities", activities_path, class: "list-group-item"
+  = link_to "Pagos", customers_path, class: "list-group-item" 

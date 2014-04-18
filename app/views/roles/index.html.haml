@@ -1,0 +1,28 @@
+.container
+  = link_to "Crear Rol", new_role_path
+  %table.table
+    %thead
+      %tr
+        %th
+          Nombre
+        %th
+          Clase
+        %th
+          Accion
+        %th
+          Descripcion
+        %th
+        %th
+    %tbody
+      -@roles.each do |f|
+        %tr
+          %td
+            = link_to  f.name, role_path(f)
+          %td
+            = f.resource_type
+          %td
+            
+          %td
+            
+          %td
+          %td

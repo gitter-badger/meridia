@@ -5,13 +5,22 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-# Environment variables (ENV['...']) can be set in the file .env file.
-puts 'ROLES'
-YAML.load(ENV['ROLES']).each do |role|
-  Role.mongo_session['roles'].insert({ :name => role })
-  puts 'role: ' << role
-end
+# Environment variables (ENV['...']) can be set in the file .env file.#puts 'ROLES'
+#YAML.load(ENV['ROLES']).each do |role|
+#  Role.mongo_session['roles'].insert({ :name => role })
+#  puts 'role: ' << role
+#end
+
+
 puts 'DEFAULT USERS'
-user = User.create! :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
+
+user = User.create! :name => 'Admin General', :email => 'master@meridia.mx', :password =>"123456789", :password_confirmation => '123456789'
+
 puts 'user: ' << user.name
-user.add_role :admin
+
+center = Center.create! name: "Meridia Amores", address: "Amores 1209", phone: "555-555"
+
+puts 'Canter: ' << center.name
+
+
+admin_amores = User.create! name: "Admin_Amores", email: "admin_amores@meridia.mx", password:"123456789", password_confirmation: "123456789", center_id: Center.first.id

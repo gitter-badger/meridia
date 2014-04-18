@@ -1,0 +1,70 @@
+.row
+  = form_for @customer do |f|
+    - if @customer.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@customer.errors.count, "error")} prohibited this member from being saved:"
+        %ul
+          - @customer.errors.full_messages.each do |msg|
+            %li= msg
+
+    .col-md-10.col-md-offset-1
+      %p.lead
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        
+    .col-md-5.col-md-offset-1
+      .form-group
+        =f.label :name
+        =f.text_field :name, class: "form-control"
+
+      .form-group
+        =f.label :phone
+        =f.text_field :phone, class: "form-control"
+    
+      .form-group
+        =f.label :address
+        =f.text_field :address, class: "form-control"
+    .col-md-5 
+      .form-group
+        =f.label :lastname
+        =f.text_field :lastname, class: "form-control"
+      .form-group
+        =f.label :mobile
+        =f.text_field :mobile, class: "form-control"
+      .form-group
+        =f.label :neighborhood
+        =f.text_field :neighborhood, class: "form-control"
+    
+    .col-md-11
+      .pull-right
+        = link_to "Siguiente >>", "#", class: "btn btn-success"
+  
+    %h3
+      Member
+    = f.fields_for :members do |member|
+      .col-md-5.col-md-offset-1
+        .form-group
+          =member.label :name
+          =member.text_field :name,class: "form-control"
+        .form-group
+          = member.label :lastname
+          = member.text_field :lastname, class: "form-control"
+      .col-md-5
+        .form-group
+          = member.label :address
+          =member.text_field :address ,class: "form-control"
+        .form-group
+          = member.label :phone 
+          = member.text_field :phone,class: "form-control"
+        .form-group
+          =member.label :age
+          =member.number_field :age, class: "form-control"
+      = member.fields_for :families  do |family|
+        %h3
+          familiare
+        .col-md-5.col-md-offset-1
+          .form-group
+            =family.label :firstname
+            =family.text_field :firstname,class: "form-control"
+  
+    = f.submit "Guardar", class: "ui green  button"
+      

@@ -1,0 +1,21 @@
+= link_to 'New Center', new_center_path, class: 'ui blue button'
+%h1 Listing centers
+
+%table.ui.table.segment
+  %tr
+    %th Name
+    %th Address
+    %th Phone
+    %th
+    %th
+    %th
+
+  - @centers.each do |center|
+    %tr
+      %td= center.name
+      %td= center.address
+      %td= center.phone
+      %td= link_to 'Show', center
+      %td= link_to 'Edit', edit_center_path(center)
+      %td= link_to 'Destroy', center, :method => :delete, :data => { :confirm => 'Are you sure?' }
+

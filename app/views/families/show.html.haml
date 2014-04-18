@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Firstname:
+  = @family.firstname
+%p
+  %b Lastname:
+  = @family.lastname
+%p
+  %b Relationship:
+  = @family.relationship
+%p
+  %b Phone home:
+  = @family.phone_home
+%p
+  %b Address:
+  = @family.address
+%p
+  %b Phone mobile:
+  = @family.phone_mobile
+
+= link_to 'Edit', edit_family_path(@family)
+\|
+= link_to 'Back', families_path

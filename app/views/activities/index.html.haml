@@ -1,0 +1,35 @@
+%h1 Listing activities
+
+%table.ui.table.segment
+  %tr
+    %th Title
+    %th Body
+    %th Participants
+    %th Area
+    %th Adjetive
+    %th Physical level
+    %th Social level
+    %th Depression level
+    %th Anxiety level
+    %th
+    %th
+    %th
+
+  - @activities.each do |activity|
+    %tr
+      %td= activity.title
+      %td= activity.body
+      %td= activity.participants
+      %td= activity.area
+      %td= activity.adjetive
+      %td= activity.physical_level
+      %td= activity.social_level
+      %td= activity.depression_level
+      %td= activity.anxiety_level
+      %td= link_to 'Show', activity
+      %td= link_to 'Edit', edit_activity_path(activity)
+      %td= link_to 'Destroy', activity, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'Crear Actividad', new_activity_path

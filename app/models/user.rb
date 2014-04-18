@@ -1,15 +1,17 @@
 class User
   include Mongoid::Document
-  rolify
+  include Mongoid::Multitenancy::Document
+
+	tenant(:center, optional: true)
+	rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable,:recoverable, :rememberable, :trackable, :validatable
 
   ## Database authenticatable
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
-
+	field :name, 							 type: String, default:	""
   ## Recoverable
   field :reset_password_token,   type: String
   field :reset_password_sent_at, type: Time

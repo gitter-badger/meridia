@@ -2,5 +2,7 @@
 %ul.users
   - @users.each do |user|
     %li
-      = link_to user.name, user
-      signed up #{user.created_at.to_date}
+      = link_to user.email, user
+
+= link_to 'New account', new_user_path
+     	
