@@ -14,7 +14,8 @@ class Member
   field :lastname, type: String
 	field :address, type: String
   field :phone, type: String
-  field :age, type: String
+  field :date_borth, type: Date
+	field :birthday_city, type: String
   field :code, type: String
   field :status, type: String
 

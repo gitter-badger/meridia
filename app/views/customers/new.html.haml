@@ -45,19 +45,22 @@
         .form-group
           =member.label :name
           =member.text_field :name,class: "form-control"
-        .form-group
-          = member.label :lastname
-          = member.text_field :lastname, class: "form-control"
-      .col-md-5
+      
         .form-group
           = member.label :address
           =member.text_field :address ,class: "form-control"
+      
+        .form-group
+          =member.label :date_borth
+          =member.date_field :date_borth, class: "form-control"
+      
+      .col-md-5
+        .form-group
+          = member.label :lastname
+          = member.text_field :lastname, class: "form-control"
         .form-group
           = member.label :phone 
           = member.text_field :phone,class: "form-control"
-        .form-group
-          =member.label :age
-          =member.number_field :age, class: "form-control"
       = member.fields_for :families  do |family|
         %h3
           familiare
