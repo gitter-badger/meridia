@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @vig.name
+%p
+  %b Date:
+  = @vig.date
+
+= link_to 'Edit', edit_vig_path(@vig)
+\|
+= link_to 'Back', vigs_path

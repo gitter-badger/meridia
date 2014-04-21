@@ -1,11 +1,17 @@
 Meridia::Application.routes.draw do
+
+  resources :tests
+
   resources :activities
 
   resources :families
 
 
   resources :centers 
-  resources :members
+ 
+ 	resources :members do		
+  	resources :vigs
+	end
 	resources :customers
 	
  	devise_for :users

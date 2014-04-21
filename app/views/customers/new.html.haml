@@ -7,67 +7,158 @@
           - @customer.errors.full_messages.each do |msg|
             %li= msg
 
-    .col-md-10.col-md-offset-1
-      %p.lead
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        
-    .col-md-5.col-md-offset-1
-      .form-group
-        =f.label :name
-        =f.text_field :name, class: "form-control"
+    #rootwizard
+      .navbar
+        .col-md-10.col-md-offset-1
+          %ul.steps
+            %li
+              %a{"data-toggle" => "tab", href: "#tab1"} Responsable
+            %li
+              %a{"data-toggle" => "tab", href: "#tab2"} Miembro
+            %li
+              %a{"data-toggle" => "tab", href: "#tab3"} Familiares
+            %li
+              %a{"data-toggle" => "tab", href: "#tab4"} Servicio Salud
 
-      .form-group
-        =f.label :phone
-        =f.text_field :phone, class: "form-control"
-    
-      .form-group
-        =f.label :address
-        =f.text_field :address, class: "form-control"
-    .col-md-5 
-      .form-group
-        =f.label :lastname
-        =f.text_field :lastname, class: "form-control"
-      .form-group
-        =f.label :mobile
-        =f.text_field :mobile, class: "form-control"
-      .form-group
-        =f.label :neighborhood
-        =f.text_field :neighborhood, class: "form-control"
-    
-    .col-md-11
-      .pull-right
-        = link_to "Siguiente >>", "#", class: "btn btn-success"
-  
-    %h3
-      Member
-    = f.fields_for :members do |member|
-      .col-md-5.col-md-offset-1
-        .form-group
-          =member.label :name
-          =member.text_field :name,class: "form-control"
-      
-        .form-group
-          = member.label :address
-          =member.text_field :address ,class: "form-control"
-      
-        .form-group
-          =member.label :date_borth
-          =member.date_field :date_borth, class: "form-control"
-      
-      .col-md-5
-        .form-group
-          = member.label :lastname
-          = member.text_field :lastname, class: "form-control"
-        .form-group
-          = member.label :phone 
-          = member.text_field :phone,class: "form-control"
-      = member.fields_for :families  do |family|
-        %h3
-          familiare
-        .col-md-5.col-md-offset-1
-          .form-group
-            =family.label :firstname
-            =family.text_field :firstname,class: "form-control"
-  
-    = f.submit "Guardar", class: "ui green  button"
-      
+      .tab-content
+        = form_for @customer do |f|
+          - if @customer.errors.any?
+            #error_explanation
+              %h2= "#{pluralize(@customer.errors.count, "error")} prohibited this member from being saved:"
+              %ul
+                - @customer.errors.full_messages.each do |msg|
+                  %li= msg
+
+          #tab1.tab-pane
+            .col-md-10.col-md-offset-1
+              %p.lead
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                
+            .col-md-5.col-md-offset-1
+              .form-group
+                =f.label :name
+                =f.text_field :name, class: "form-control"
+
+              .form-group
+                =f.label :phone
+                =f.text_field :phone, class: "form-control"
+            
+              .form-group
+                =f.label :address
+                =f.text_field :address, class: "form-control"
+            .col-md-5 
+              .form-group
+                =f.label :lastname
+                =f.text_field :lastname, class: "form-control"
+              .form-group
+                =f.label :mobile
+                =f.text_field :mobile, class: "form-control"
+              .form-group
+                =f.label :neighborhood
+                =f.text_field :neighborhood, class: "form-control"
+          
+          = f.fields_for :members do |member|
+            #tab2.tab-pane
+              .col-md-10.col-md-offset-1
+                %p.lead
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              .col-md-5.col-md-offset-1
+                .form-group
+                  =member.label :name
+                  =member.text_field :name,class: "form-control"
+              
+                .form-group
+                  = member.label :address
+                  =member.text_field :address ,class: "form-control"
+              
+                .form-group
+                  = member.label :neighborhood
+                  = member.text_field :neighborhood, class: "form-control"
+                .form-group
+                  =member.label :date_borth
+                  =member.date_field :date_borth, class: "form-control"
+              
+              .col-md-5
+                .form-group
+                  = member.label :lastname
+                  = member.text_field :lastname, class: "form-control"
+                .form-group
+                  = member.label :city
+                  = member.text_field :city, class: "form-control"
+                .form-group
+                  = member.label :phone 
+                  = member.text_field :phone,class: "form-control"
+                .form-group
+                  = member.label :birthday_city
+                  = member.text_field :birthday_city, class: "form-control"
+            #tab3.tab-pane
+              = member.fields_for :families  do |family|
+                .col-md-10.col-md-offset-1
+                  %p.lead
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                .col-md-5.col-md-offset-1
+                  .form-group
+                    =family.label :firstname
+                    =family.text_field :firstname,class: "form-control"
+                  .form-group
+                    =family.label :phone_home
+                    =family.text_field :phone_home, class: "form-control"
+                  .form-group
+                    = family.label :address
+                    = family.text_field :address, class: "form-control"
+                .col-md-5
+                  .form-group
+                    =family.label :lastname
+                    =family.text_field :lastname, class: "form-control"
+            
+                  .form-group
+                    = family.label :phone_mobile
+                    = family.text_field :phone_mobile, class: "form-control"
+                  .form-group
+                    = family.label :city
+                    = family.text_field :city, class: "form-control"
+              
+            #tab4.tab-pane
+              .col-md-10.col-md-offset-1
+                %p.lead
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              = member.fields_for :health_insurances do|health|
+                .col-md-5.col-md-offset-1
+                  .form-group
+                    =health.label :company
+                    =health.text_field :company, class: "form-control"
+                  .form-group
+                    =health.label :licence_number
+                    = health.text_field :licence_number, class: "form-control"
+                .col-md-5
+                  .form-group
+                    =health.label :policy_number
+                    =health.text_field :policy_number, class: "form-control"
+                  .form-group
+                    =health.label :institute
+                    = health.text_field :institute, class: "form-control"
+
+              =member.fields_for :health_services do |service|
+                .col-md-5.col-md-offset-1
+                  .form-group
+                    = service.label :hospital
+                    = service.text_field :hospital ,class: "form-control"
+                  .form-group
+                    = service.label :phone2
+                    = service.text_field :phone2, class: "form-control"
+                .col-md-5
+                  .form-group
+                    = service.label :phone1
+                    = service.text_field :phone1, class: "form-control"
+                  .form-group
+                    = service.label :address
+                    = service.text_field :address, class: "form-control"
+            .col-md-10.col-md-offset-1
+              %ul.pager.wizard
+                %li.previous
+                  %a{:href => "javascript:;"} << Atras
+                %li.next
+                  %a{:href => "javascript:;"} Siguiente >>
+                %li.next.finish{:style => "display:none;"}
+                  = f.submit "Guardar", class: "btn btn-success pull-right"
+                    

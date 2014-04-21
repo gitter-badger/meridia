@@ -1,7 +1,6 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy]
 
-	before_action :set_center
   # GET /members
   # GET /members.json
   def index
@@ -64,13 +63,10 @@ class MembersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_center
-			@center = Center.find(params[:center_id])
+    def set_member
+			@member = Member.find(params[:id])
 		end
 		
-		def set_member
-      @member = Member.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params

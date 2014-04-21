@@ -1,0 +1,15 @@
+%h1 Listing vigs
+
+%table
+  %tr
+    %th Name
+    %th Date
+    %th
+    %th
+    %th
+
+  - @vigs.each do |vig|
+    %tr
+      %td= vig.name
+      %td= vig.date
+

@@ -1,23 +1,19 @@
 %h1 Listing members
 
-%table.ui.table.segment
+%table.table
   %tr
     %th Name
     %th Addres
     %th Phone
-    %th Age
     %th Code
     %th Status
 
   - @members.each do |member|
     %tr
-      %td= member.name
+      %td= link_to  member.name, member_path(member)
       %td= member.address
       %td= member.phone
-      %td= member.age
       %td= member.code
       %td= member.status
 
-%br
 
-= link_to 'New Member', new_center_member_path(@center)
