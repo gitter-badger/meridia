@@ -1,12 +1,25 @@
-%p#notice= notice
+.col-md-12.vig
+  .row
+    .col-md-3
+      .panel.panel_profile
+        .profile_box
+          = image_tag "profile.jpg"
+        %ul
+          %li
+            %span.icon-male
+            %b
+              Edad:
+            67
+          %li
+            %span.icon-home
+            %b Addres:
+            = @member.address
+          %li
+            %span.icon-phone2
+            %b Phone:
+            = @member.phone
+    .col-md-9
+      .panel
+        -@vig.tests.each do |test|
+          = link_to test.title, member_vig_test_path(@member,@vig,test)
 
-%p
-  %b Name:
-  = @vig.name
-%p
-  %b Date:
-  = @vig.date
-
-= link_to 'Edit', edit_vig_path(@vig)
-\|
-= link_to 'Back', vigs_path

@@ -3,6 +3,7 @@ class Vig
   field :name, type: String
   field :date, type: String
 	
-	has_many :tests
+	belongs_to :member
+	has_and_belongs_to_many  :tests
 	has_many :answers
 end

@@ -1,15 +1,13 @@
-%p#notice= notice
-
-%p
-  %b Title:
-  = @test.title
-%p
-  %b Observation:
-  = @test.observation
-%p
-  %b Description:
-  = @test.description
-
-= link_to 'Edit', edit_test_path(@test)
-\|
-= link_to 'Back', tests_path
+.panel
+  = form_tag member_vig_answers_path(@member, @vig) do
+    - @answers.each_with_index do |answer,index|
+      = fields_for "answers[#{index}]", answer do |f|
+        .form-group
+          %label
+            = index
+            = ". #{@questions[index].content}"
+            = f.hidden_field :question_id, value: @questions[index].id
+            = f.hidden_field :member_id, value: @member.id
+            = f.hidden_field :vig_id, value: @vig.id
+          = f.text_field :description, class: "form-control" 
+    = submit_tag "Guardar"

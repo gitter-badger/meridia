@@ -10,7 +10,10 @@ Meridia::Application.routes.draw do
   resources :centers 
  
  	resources :members do		
-  	resources :vigs
+  	resources :vigs do
+			resources	:answers
+			resources :tests
+		end
 	end
 	resources :customers
 	

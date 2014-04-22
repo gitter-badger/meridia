@@ -88,8 +88,15 @@
                   Facha
                 %th
                   Status
-          -@member.vigs.each do |vig|
-            = vig.name
+            %tbody
+              -@member.vigs.each do |vig|
+                %tr
+                  %td
+                    = link_to vig.name, member_vig_path(@member, vig)
+                  %td
+
+                  %td
+
         .tab-pane#calendar
           %h4
             Lista De Actividades
@@ -167,7 +174,7 @@
             .form-group
               .checkbox
                 = label_tag test.title
-                =  check_box_tag "test[test_ids][]" , test.id
+                =  check_box_tag "vig[test_ids][]" , test.id
         .modal-footer
           = vig.submit "Guardar", class: "btn btn-success" 
 

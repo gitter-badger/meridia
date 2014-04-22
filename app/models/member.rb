@@ -3,7 +3,7 @@ class Member
   belongs_to :center
 	belongs_to :customer
 	has_many	:doctors
-	has_many :vigs
+	has_many  :vigs
 	embeds_many :families
 	embeds_many :health_insurances
 	embeds_many :health_services

@@ -10,12 +10,18 @@ class TestsController < ApplicationController
   # GET /tests/1
   # GET /tests/1.json
   def show
-  end
+		@member = Member.find(params[:member_id])
+		@vig= Vig.find(params[:vig_id])
+		@questions= @test.questions
+		@answers = Array.new(@questions.count){Answer.new}
+	
+	end
 
   # GET /tests/new
   def new
     @test = Test.new
-  end
+  	3.times {@test.questions.build}
+	end
 
   # GET /tests/1/edit
   def edit
@@ -69,6 +75,6 @@ class TestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def test_params
-      params.require(:test).permit(:title, :observation, :description)
+      params.require(:test).permit(:title, :observation, :description, :questions_attributes => [:content,:level, :type, :points])
     end
 end

@@ -1,9 +1,11 @@
 class Question
   include Mongoid::Document
-  field :body, type: String
+  
+	field :content, type: String
   field :points, type: String
   field :level, type: String
-	
+	field :type, type: String
+
 	has_many :answers
-	belogs_to :tests
+	belongs_to :tests
 end

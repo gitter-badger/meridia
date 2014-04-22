@@ -15,5 +15,10 @@
   .field
     = f.label :description
     = f.text_field :description
+  
+  =f.fields_for :questions do |q|
+    .form-group
+      =q.label :content
+      =q.text_field :content
   .actions
     = f.submit 'Save'
