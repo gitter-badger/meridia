@@ -1,5 +1,7 @@
-%h1 New activity
+- content_for :title do
+  = 'New activity'.upcase
 
-= render 'form'
+.col-md-12.panel
+  = render 'form'
 
 = link_to 'Back', activities_path

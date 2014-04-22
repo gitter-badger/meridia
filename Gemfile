@@ -16,6 +16,8 @@ gem 'rolify'
 gem 'sendgrid'
 gem 'thin'
 gem 'mongoid-multitenancy'
+gem 'mongoid-enum', :github=>"bmccoelho/mongoid-enum"
+gem 'enumerize', '~> 0.8.0'
 
 group :development do
   gem 'better_errors'

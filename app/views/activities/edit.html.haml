@@ -1,6 +1,8 @@
-%h1 Editing activity
+- content_for :title do
+  = 'Editing activity'.upcase
 
-= render 'form'
+.col-md-12.panel
+  = render 'form'
 
 = link_to 'Show', @activity
 \|

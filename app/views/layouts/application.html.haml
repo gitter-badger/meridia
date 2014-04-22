@@ -25,6 +25,7 @@
           = render 'layouts/navigation'
         .col-md-10
           .title_bar
-            TITLE
+            = yield :title
           = render 'layouts/messages'
           = yield
+    = yield :footer
