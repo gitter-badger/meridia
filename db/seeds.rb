@@ -24,3 +24,5 @@ puts 'Canter: ' << center.name
 
 
 admin_amores = User.create! name: "Admin_Amores", email: "admin_amores@meridia.mx", password:"123456789", password_confirmation: "123456789", center_id: Center.first.id
+
+

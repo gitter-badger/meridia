@@ -8,4 +8,8 @@ class Question
 
 	has_many :answers
 	belongs_to :tests
+	embeds_many :options_answers
+
+	accepts_nested_attributes_for :options_answers
+
 end

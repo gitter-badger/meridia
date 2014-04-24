@@ -9,5 +9,14 @@
             = f.hidden_field :question_id, value: @questions[index].id
             = f.hidden_field :member_id, value: @member.id
             = f.hidden_field :vig_id, value: @vig.id
-          = f.text_field :description, class: "form-control" 
+          -if @questions[index].type == "check"
+            - @questions[index].options_answers.each do |opc|
+              .checkbox
+                %label
+                  = f.radio_button :points, opc.points
+                  %strong
+                    = opc.content
+                  = opc.description
+          -else
+            = f.text_field :description, class: "form-control" 
     = submit_tag "Guardar"

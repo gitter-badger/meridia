@@ -51,9 +51,5 @@ namespace :permission do
 	        end
 	    end
 	  end
-
-
-
-
 	end
 end
