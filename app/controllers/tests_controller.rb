@@ -18,14 +18,22 @@ class TestsController < ApplicationController
 	end
 
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_test
-      @test = Test.find(params[:id])
-    end
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def test_params
-      params.require(:test).permit(:title, :observation, :description, :questions_attributes => [:content,:level, :type, :points])
-    end
+  # GET /tests/new
+  def new
+    @test = Test.new
+    3.times {@test.questions.build}
+  end
+
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_test
+    @test = Test.includes(:questions).find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def test_params
+    params.require(:test).permit(:title, :observation, :description, :questions_attributes => [:content,:level, :type, :points])
+  end
 end
