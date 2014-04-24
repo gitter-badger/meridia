@@ -1,5 +1,5 @@
 .panel
-  = form_tag member_vig_answers_path(@member, @vig) do
+  -#= form_tag member_vig_answers_path(@member, @vig) do
     - @answers.each_with_index do |answer,index|
       = fields_for "answers[#{index}]", answer do |f|
         .form-group
@@ -20,3 +20,25 @@
           -else
             = f.text_field :description, class: "form-control" 
     = submit_tag "Guardar"
+  = form_for(@test, :as => :answer, :url => answers_path, :method => :post) do |f|
+    %h1 Form
+    = f.text_field :jota
+
+    -# - @answers.each_with_index do |answer,index|
+      %h2 Hola
+      = fields_for "answers[#{index}]", answer do |f|
+        %h3= "Hola"
+
+    -# = f.fields_for :questions do |q|
+      %h2= q.object.content
+      - @test.questions.each do |q|
+        - q.questions.each do |question| 
+          -# = f.fields_for "value", answer do |f|
+            %h3
+      -# = q.fields_for :questions do |question|
+        = debug question
+        = question.object.content
+        = q.hidden_field :id, :name => "hola" 
+        = text_field_tag "answer[value]"
+        %br
+      = f.button "Submit", :type => "submit"

@@ -7,6 +7,7 @@ Meridia::Application.routes.draw do
   resources :families
 
 
+  resources	:answers
   resources :centers 
  
  	resources :members do		

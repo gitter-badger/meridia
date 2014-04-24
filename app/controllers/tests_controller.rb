@@ -10,18 +10,33 @@ class TestsController < ApplicationController
   # GET /tests/1
   # GET /tests/1.json
   def show
-		@member = Member.find(params[:member_id])
-		@vig= Vig.find(params[:vig_id])
-		@questions= @test.questions
-		@answers = Array.new(@questions.count){Answer.new}
-	
-	end
+    #@member = Member.find(params[:member_id])
+    #@vig= Vig.find(params[:vig_id])
+    #@questions= @test.questions
+    @test[ 'jota' ] = "JAVIEr"
+    @answers = []
+    @test.questions.each do |q|
+      case q.type
+      when 'section'
+        q.questions.each do |question| 
+          @answers << Answer.new({question: question})
+          @test.write_attribute(:gender, "Male")
+        end
+      else
+        @answers << Answer.new({question: q})
+      end
+    end
+    @answers = Array.new(@test.questions.count){Answer.new}
+    #@test.answers = @answers
+
+
+  end
 
   # GET /tests/new
   def new
     @test = Test.new
-  	3.times {@test.questions.build}
-	end
+    3.times {@test.questions.build}
+  end
 
   # GET /tests/1/edit
   def edit
@@ -68,13 +83,13 @@ class TestsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_test
-      @test = Test.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_test
+    @test = Test.includes(:questions).find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def test_params
-      params.require(:test).permit(:title, :observation, :description, :questions_attributes => [:content,:level, :type, :points])
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def test_params
+    params.require(:test).permit(:title, :observation, :description, :questions_attributes => [:content,:level, :type, :points])
+  end
 end
