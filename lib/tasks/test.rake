@@ -5,9 +5,10 @@ namespace :test do
 		questions_bartel = Hash.new
 		@questions = Array.new
 	
-		def test_build(test, q_content,type,options) 
+		def test_build(test, q_content,type,sec= "",options) 
 				questions_= {"content" => q_content,
 														"type" => type,
+														"sec" => sec,
 														"options_answers_attributes"=>{}
 										}
 		
@@ -30,7 +31,7 @@ namespace :test do
 			options << {"contentq"=> "Necesita ayuda ","point" => 5, "desc" => "Para cortar la carne, extender la mantequilla... pero es capaz de comer sólo
 "}
 			options << {"contentq"=> "Dependiente ","point" => 0, "desc" => "Necesita ser alimentado por otra persona"}				
-			test_build(test,"COMIDA" ,"check",options)
+			test_build(test,"COMIDA" ,"check","seccion_test",options)
 
 			options= Array.new
 			options << {"contentq"=> "Independiente","point" => 5, "desc" => "Capaz de lavarse completo, de entrar y salir del baño sin ayuda y de hacerlo sin que una persona supervise"}
@@ -52,7 +53,7 @@ namespace :test do
 			options << {"contentq"=> "Independiente","point" => 10, "desc" => "No presenta episodios. Capaz de utilizar cualquier dispositivo por sí solo (botella, sonda, orinal... )."}
 			options << {"contentq"=> "Necesita ayuda ","point" => 5, "desc" => "Presenta un máximo de un episodio en 24 horas o requiere ayuda para la manipulación de sondas o de otros dispositivos."}
 			options << {"contentq"=> "Dependiente ","point" => 0, "desc" => "Más de un episodio en 24 horas"}				
-			test_build(test,"MICCIÓN" ,"check",options)
+			test_build(test,"MICCIÓN" ,"check","seccion 2",options)
 
 			options= Array.new
 			options << {"contentq"=> "Independiente","point" => 10, "desc" => "Entra y sale solo y no necesita ayuda alguna por parte de otra persona"}

@@ -3,5 +3,7 @@ class OptionsAnswer
   field :content, type: String
   field :points, type: String
 	field	:description, type: String
-	embedded_in :question
+	belongs_to  :question
+
+	has_many :answers
 end

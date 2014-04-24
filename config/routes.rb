@@ -1,19 +1,19 @@
 Meridia::Application.routes.draw do
 
   resources :tests
-
   resources :activities
-
   resources :families
-
-
   resources :centers 
  
  	resources :members do		
-  	resources :vigs do
-			resources	:answers
-			resources :tests
-		end
+  	resources :vigs
+	end
+	
+	resources :vigs do
+		resources :tests
+	end
+	resources :tests do
+		resources	:answers
 	end
 	resources :customers
 	

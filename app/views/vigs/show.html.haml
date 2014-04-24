@@ -21,5 +21,4 @@
     .col-md-9
       .panel
         -@vig.tests.each do |test|
-          = link_to test.title, member_vig_test_path(@member,@vig,test)
-
+          = status(test, @vig)

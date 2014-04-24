@@ -26,10 +26,12 @@ class VigsController < ApplicationController
   # POST /vigs
   # POST /vigs.json
   def create
+		binding.pry
     @vig = Vig.new(vig_params)
     respond_to do |format|
       if @member.vigs << @vig
-        format.html { redirect_to member_vig_path(@member, @vig), notice: 'Vig was successfully created.' }
+        
+				format.html { redirect_to member_vig_path(@member, @vig), notice: 'Vig was successfully created.' }
       else
         format.html { render action: 'new' }
       end
@@ -42,10 +44,8 @@ class VigsController < ApplicationController
     respond_to do |format|
       if @vig.update(vig_params)
         format.html { redirect_to @vig, notice: 'Vig was successfully updated.' }
-        format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @vig.errors, status: :unprocessable_entity }
       end
     end
   end

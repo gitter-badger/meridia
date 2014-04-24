@@ -2,12 +2,14 @@ class AnswersController < ApplicationController
 	def index
 	end
 	def create
-		member = params[:member_id]
-		vig = params[:vig_id]
+		test = params[:test_id]
 		answers= params[:answers].values.collect { |q| Answer.new(q)}	
 		if answers.all?(&:valid?)
 			answers.each(&:save!)
-			redirect_to member_vig_answers_path(member, vig)
+			VigsTest.create(status: true , vig_id: params[:vig], test_id: test)
+			redirect_to test_answers_path(test)
+		else
+			redirect_to vig_test_path(params[:vig],test)
 		end
 	
 	end

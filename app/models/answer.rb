@@ -8,4 +8,5 @@ class Answer
 	belongs_to :question
 	belongs_to :member
 	belongs_to :vig
+	belongs_to :options_answers
 end

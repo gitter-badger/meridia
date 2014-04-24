@@ -1,7 +1,13 @@
 .panel
-  = form_tag member_vig_answers_path(@member, @vig) do
+  = form_tag test_answers_path(@test) do
+    = hidden_field_tag :vig, @vig.id
+    - current_secction = ""
     - @answers.each_with_index do |answer,index|
       = fields_for "answers[#{index}]", answer do |f|
+        -secction = @questions[index].sec
+        - if secction != current_secction
+          = current_secction = secction
+        
         .form-group
           %label
             = index
@@ -13,7 +19,7 @@
             - @questions[index].options_answers.each do |opc|
               .checkbox
                 %label
-                  = f.radio_button :points, opc.points
+                  = f.radio_button :options_answers_id, opc.id
                   %strong
                     = opc.content
                   = opc.description
