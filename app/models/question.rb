@@ -5,7 +5,7 @@ class Question
   #field :points, type: String
   #field :level, type: String
   field :type, type: String
-
+	field :sec, type: String
   has_many :answers
   belongs_to :tests
 

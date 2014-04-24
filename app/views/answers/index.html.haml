@@ -1,0 +1,8 @@
+.col-md-9
+  .panel
+    @answers.each_with_index do |f , index|
+    .form_group
+      %label
+        =f.test.content
+      %em
+        =f.options_answer.content

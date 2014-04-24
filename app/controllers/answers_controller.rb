@@ -1,5 +1,6 @@
 class AnswersController < ApplicationController
 	def index
+		@answers = Answer.all
 	end
 	def create
 		test = params[:test_id]

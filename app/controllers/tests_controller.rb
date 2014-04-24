@@ -17,9 +17,6 @@ class TestsController < ApplicationController
 	
 	end
 
-
-  end
-
   # GET /tests/new
   def new
     @test = Test.new

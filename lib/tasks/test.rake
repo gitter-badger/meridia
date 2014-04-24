@@ -117,7 +117,7 @@ namespace :test do
     end
 
 
-    #bartel
+    bartel
     personal_history
 
   end

@@ -1,0 +1,18 @@
+.col-md-3
+  .panel.panel_profile
+    .profile_box
+      = image_tag "profile.jpg"
+    %ul
+      %li
+        %span.icon-male
+        %b
+          Edad:
+        67
+      %li
+        %span.icon-home
+        %b Addres:
+        = @member.address
+      %li
+        %span.icon-phone2
+        %b Phone:
+        = @member.phone

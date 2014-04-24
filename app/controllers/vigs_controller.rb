@@ -26,7 +26,6 @@ class VigsController < ApplicationController
   # POST /vigs
   # POST /vigs.json
   def create
-		binding.pry
     @vig = Vig.new(vig_params)
     respond_to do |format|
       if @member.vigs << @vig

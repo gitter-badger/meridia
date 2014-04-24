@@ -1,24 +1,27 @@
 .col-md-12.vig
   .row
-    .col-md-3
-      .panel.panel_profile
-        .profile_box
-          = image_tag "profile.jpg"
-        %ul
-          %li
-            %span.icon-male
-            %b
-              Edad:
-            67
-          %li
-            %span.icon-home
-            %b Addres:
-            = @member.address
-          %li
-            %span.icon-phone2
-            %b Phone:
-            = @member.phone
+    = render "shared/profile" 
     .col-md-9
       .panel
-        -@vig.tests.each do |test|
-          = status(test, @vig)
+        %h3
+          valoraciones aplicadas:
+        %table.table
+          %tr
+            %th
+              Examen
+            %td
+              status
+            %td
+              Valor
+          -@vig.tests.each do |test|
+            %tr
+              %td
+                - value =  status(test, @vig)
+                = test.title.humanize
+              %td
+                
+              %td 
+                -if value
+                  =link_to "Detalles", test_answers_path(test)
+                -else
+                  =link_to "Aplicar", vig_test_path(@vig,test)
