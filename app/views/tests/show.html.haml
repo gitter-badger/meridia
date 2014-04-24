@@ -1,32 +1,63 @@
-.col-md-12
-  .row
-    =render "shared/profile"
-    .col-md-9
-      .panel
-        = form_tag test_answers_path(@test) do
-          = hidden_field_tag :vig, @vig.id
-          - current_secction = ""
-          - @answers.each_with_index do |answer,index|
-            = fields_for "answers[#{index}]", answer do |f|
-              -secction = @questions[index].sec
-              - if secction != current_secction
-                = current_secction = secction
-              
-              .form-group
+.panel
+  -# = form_tag test_answers_path(@test) do
+    = hidden_field_tag :vig, @vig.id
+    - current_secction = ""
+    - @answers.each_with_index do |answer,index|
+      = fields_for "answers[#{index}]", answer do |f|
+        -secction = @questions[index].sec
+        - if secction != current_secction
+          = current_secction = secction
+        
+        .form-group
+          %label
+            = index
+            = ". #{@questions[index].content}"
+            = f.hidden_field :question_id, value: @questions[index].id
+            = f.hidden_field :member_id, value: @member.id
+            = f.hidden_field :vig_id, value: @vig.id
+          -if @questions[index].type == "check"
+            - @questions[index].options_answers.each do |opc|
+              .checkbox
                 %label
-                  = index
-                  = ". #{@questions[index].content}"
-                  = f.hidden_field :question_id, value: @questions[index].id
-                  = f.hidden_field :member_id, value: @member.id
-                  = f.hidden_field :vig_id, value: @vig.id
-                -if @questions[index].type == "check"
-                  - @questions[index].options_answers.each do |opc|
-                    .checkbox
-                      %label
-                        = f.radio_button :options_answers_id, opc.id
-                        %strong
-                          = opc.content
-                        = opc.description
-                -else
-                  = f.text_field :description, class: "form-control" 
-          = submit_tag "Guardar"
+                  = f.radio_button :options_answers_id, opc.id
+                  %strong
+                    = opc.content
+                  = opc.description
+          -else
+            = f.text_field :description, class: "form-control" 
+    = submit_tag "Guardar"
+  = form_for( @formulario, as: :answer, :url => test_answers_path(@test)  ) do |f|
+    %h1 holwa
+    - @counter = 0
+    - @formulario.members.each_with_index do |member, key|
+      - if member.type == 'section'
+        %section
+          %header
+            %h2= member.name
+          - member.answers.each do |a|
+            = fields_for "answers[#{@counter}]", a do |m|
+              %span= m.object.question.content
+              = m.text_field :note 
+              = m.hidden_field :question_id, :value => m.object.question.id
+              %br
+              - @counter += 1
+      - elsif member.type == 'checkbox'
+        %section
+          %header
+            %h2= member.name
+          = fields_for "answers[#{@counter}]" do |q|
+            = q.hidden_field :question_id, :value => member.id
+          - member.answers.each do |a|
+            = fields_for "answers[#{@counter}]", a do |m|
+              %span= m.object.option.content
+              = m.radio_button :options_answers_id, m.object.option.id
+              %br
+          - @counter += 1
+      - else
+        %h2= member.name
+        - member.answers.each do |a|
+          = fields_for "answers[#{@counter}]", a do |m|
+            = m.text_area :note
+            = m.hidden_field :question_id, :value => m.object.question.id
+            - @counter += 1
+    = f.submit 'Enviar'
