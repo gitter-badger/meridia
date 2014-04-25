@@ -159,7 +159,7 @@ namespace :test do
 
 
     bartel
-    #personal_history
+    personal_history
 
   end
 end

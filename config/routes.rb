@@ -12,11 +12,13 @@ Meridia::Application.routes.draw do
 	resources :vigs do
 		resources :tests
 	end
+	
+	get ':vigs_test_id/answers', to: 'answers#index', as: 'answers_all'
 	resources :tests do
 		resources	:answers
 	end
-	resources :customers
 	
+	resources :customers
  	devise_for :users
 	 
  	authenticated :user do

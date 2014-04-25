@@ -1,35 +1,9 @@
 .panel
-  -# = form_tag test_answers_path(@test) do
-    = hidden_field_tag :vig, @vig.id
-    - current_secction = ""
-    - @answers.each_with_index do |answer,index|
-      = fields_for "answers[#{index}]", answer do |f|
-        -secction = @questions[index].sec
-        - if secction != current_secction
-          = current_secction = secction
-        
-        .form-group
-          %label
-            = index
-            = ". #{@questions[index].content}"
-            = f.hidden_field :question_id, value: @questions[index].id
-            = f.hidden_field :member_id, value: @member.id
-            = f.hidden_field :vig_id, value: @vig.id
-          -if @questions[index].type == "check"
-            - @questions[index].options_answers.each do |opc|
-              .checkbox
-                %label
-                  = f.radio_button :options_answers_id, opc.id
-                  %strong
-                    = opc.content
-                  = opc.description
-          -else
-            = f.text_field :description, class: "form-control" 
-    = submit_tag "Guardar"
   = form_for( @formulario, as: :answer, :url => test_answers_path(@test)  ) do |f|
-    %h1 holwa
     - @counter = 0
+    = f.hidden_field :vigs, value: @vig.id
     - @formulario.members.each_with_index do |member, key|
+      
       - if member.type == 'section'
         %section
           %header
@@ -46,11 +20,12 @@
           %header
             %h2= member.name
           = fields_for "answers[#{@counter}]" do |q|
-            = q.hidden_field :question_id, :value => member.id
+            = q.hidden_field :question_id, :value => member.id_question
+            = q.hidden_field :vig_id, :value => @vig.id
           - member.answers.each do |a|
-            = fields_for "answers[#{@counter}]", a do |m|
+            = fields_for "answers[#{@counter}]", a do |m| 
               %span= m.object.option.content
-              = m.radio_button :options_answers_id, m.object.option.id
+              = m.radio_button :options_answers_id, m.object.option.id, :checked => true
               %br
           - @counter += 1
       - else

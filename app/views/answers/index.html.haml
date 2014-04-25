@@ -1,8 +1,14 @@
+= render "shared/profile"
 .col-md-9
   .panel
-    @answers.each_with_index do |f , index|
-    .form_group
+    - @answers.each_with_index do |asw, i|
+      -if i == 0
+        %h3
+          = asw.vigs_test.test.title.humanize
       %label
-        =f.test.content
-      %em
-        =f.options_answer.content
+        - i += 1
+        =" #{i}. " 
+        = asw.question.content.humanize 
+        = "(#{asw.options_answers.points} Points)"
+      %p
+        =asw.options_answers.content
