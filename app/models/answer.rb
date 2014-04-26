@@ -14,4 +14,7 @@ class Answer
   belongs_to :input
 	belongs_to :vigs_test
 
+  belongs_to :parent, :class_name => "Answer"
+  has_many :answers, :foreign_key => "parent_id"
+
 end

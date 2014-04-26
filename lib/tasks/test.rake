@@ -11,17 +11,20 @@ namespace :test do
         "type" => type
       }
 
-      puts 'type'
-      puts type
-      puts 'options'
-      puts options
-
       #add question if the type is section
       if type  == 'section' && !options[:questions].nil?
 
         questions_["questions_attributes" ] = {}
         options[:questions].each_with_index do |q, key|
-          questions_["questions_attributes"][key] = q
+          questions_["questions_attributes"][key] = q.except :answers
+
+          if q[:type] && !q[:answers].nil?
+            questions_["questions_attributes"][key]["options_answers_attributes"] = {}
+            q[:answers].each_with_index do |o,index|
+              questions_["questions_attributes"][key]["options_answers_attributes"]["#{index}"]={"content"=>o["contentq"],"points"=>o["point"],"description"=>o["desc"]}
+            end
+          end
+          
         end
       elsif type == 'check' && !options[:answers].nil?
         questions_["options_answers_attributes"] = {}
@@ -29,22 +32,14 @@ namespace :test do
           questions_["options_answers_attributes"]["#{index}"]={"content"=>o["contentq"],"points"=>o["point"],"description"=>o["desc"]}
         end
       end
+
+      puts questions_
       test.questions <<  Question.create(questions_)
 
-      #added options to questions hash
-      #unless !options
-      #  questions_["options_answers_attributes"] = {}
-      #  options.each_with_index do |o,index|
-      #  questions_["options_answers_attributes"]["#{index}"]={"content"=>o["contentq"],"points"=>o["point"],"description"=>o["desc"]}
-      #  end
-      #end
-
-      #p test.questions
-      #options = []
     end
 
     def bartel
-      test = Test.new(title: "ÍNDICE DE BARTHEL")
+      test = Test.new(title: "ÍNDICE DE BARTHEL", calculate: :average )
       test.save!
 
 
@@ -105,7 +100,7 @@ namespace :test do
     end	
 
     def personal_history 
-      test = Test.new(title: "BREVE HISTORIA PERSONAL")
+      test = Test.new(title: "BREVE HISTORIA PERSONAL", calculate: nil )
       test.save!
 
       questions = Array.new
@@ -157,9 +152,381 @@ namespace :test do
       #test_build(test,"Religión" ,"text" )
     end
 
+    def dummy_funcionality
+      test = Test.new(title: "Dummy de la Funcionalidad", calculate: :average )
+      test.save!
+      
+      options= Array.new
+      options << {"contentq"=> "Independiente","point" => 1, "desc" => "white"}
+      options << {"contentq"=> "Con ayuda","point" => 2, "desc" => "green"}
+      options << {"contentq"=> "Necesita ayuda ","point" => 3, "desc" => "red"}
+      options << {"contentq"=> "Dependiente ","point" => 4, "desc" => "blue"}
+      test_build(test,"orientación/cognición" ,"check", answers: options)
+      
+      options= Array.new
+      options << {"contentq"=> "Independiente","point" => 1, "desc" => "white"}
+      options << {"contentq"=> "Con ayuda","point" => 2, "desc" => "green"}
+      options << {"contentq"=> "Necesita ayuda ","point" => 3, "desc" => "red"}
+      options << {"contentq"=> "Dependiente ","point" => 4, "desc" => "blue"}
+      test_build(test,"Vista" ,"check", answers: options)
+      
+      options= Array.new
+      options << {"contentq"=> "Independiente","point" => 1, "desc" => "white"}
+      options << {"contentq"=> "Con ayuda","point" => 2, "desc" => "green"}
+      options << {"contentq"=> "Necesita ayuda ","point" => 3, "desc" => "red"}
+      options << {"contentq"=> "Dependiente ","point" => 4, "desc" => "blue"}
+      test_build(test,"Oído" ,"check", answers: options)
+      
+      options= Array.new
+      options << {"contentq"=> "Independiente","point" => 1, "desc" => "white"}
+      options << {"contentq"=> "Con ayuda","point" => 2, "desc" => "green"}
+      options << {"contentq"=> "Necesita ayuda ","point" => 3, "desc" => "red"}
+      options << {"contentq"=> "Dependiente ","point" => 4, "desc" => "blue"}
+      test_build(test,"Habla" ,"check", answers: options)
+      
+      options= Array.new
+      options << {"contentq"=> "Independiente","point" => 1, "desc" => "white"}
+      options << {"contentq"=> "Con ayuda","point" => 2, "desc" => "green"}
+      options << {"contentq"=> "Necesita ayuda ","point" => 3, "desc" => "red"}
+      options << {"contentq"=> "Dependiente ","point" => 4, "desc" => "blue"}
+      test_build(test,"Depresión/Ansiedad" ,"check", answers: options)
+      
+      options= Array.new
+      options << {"contentq"=> "Independiente","point" => 1, "desc" => "white"}
+      options << {"contentq"=> "Con ayuda","point" => 2, "desc" => "green"}
+      options << {"contentq"=> "Necesita ayuda ","point" => 3, "desc" => "red"}
+      options << {"contentq"=> "Dependiente ","point" => 4, "desc" => "blue"}
+      test_build(test,"Actividad Social" ,"check", answers: options)
+      
+      options= Array.new
+      options << {"contentq"=> "Independiente","point" => 1, "desc" => "white"}
+      options << {"contentq"=> "Con ayuda","point" => 2, "desc" => "green"}
+      options << {"contentq"=> "Necesita ayuda ","point" => 3, "desc" => "red"}
+      options << {"contentq"=> "Dependiente ","point" => 4, "desc" => "blue"}
+      test_build(test,"Alimentación" ,"check", answers: options)
+      
+      options= Array.new
+      options << {"contentq"=> "Independiente","point" => 1, "desc" => "white"}
+      options << {"contentq"=> "Con ayuda","point" => 2, "desc" => "green"}
+      options << {"contentq"=> "Necesita ayuda ","point" => 3, "desc" => "red"}
+      options << {"contentq"=> "Dependiente ","point" => 4, "desc" => "blue"}
+      test_build(test,"Continencia Urinaria" ,"check", answers: options)
+      
+      options= Array.new
+      options << {"contentq"=> "Independiente","point" => 1, "desc" => "white"}
+      options << {"contentq"=> "Con ayuda","point" => 2, "desc" => "green"}
+      options << {"contentq"=> "Necesita ayuda ","point" => 3, "desc" => "red"}
+      options << {"contentq"=> "Dependiente ","point" => 4, "desc" => "blue"}
+      test_build(test,"Continencia Fecal" ,"check", answers: options)
+      
+      options= Array.new
+      options << {"contentq"=> "Independiente","point" => 1, "desc" => "white"}
+      options << {"contentq"=> "Con ayuda","point" => 2, "desc" => "green"}
+      options << {"contentq"=> "Necesita ayuda ","point" => 3, "desc" => "red"}
+      options << {"contentq"=> "Dependiente ","point" => 4, "desc" => "blue"}
+      test_build(test,"Ducha/Baño" ,"check", answers: options)
+      
+      options= Array.new
+      options << {"contentq"=> "Independiente","point" => 1, "desc" => "white"}
+      options << {"contentq"=> "Con ayuda","point" => 2, "desc" => "green"}
+      options << {"contentq"=> "Necesita ayuda ","point" => 3, "desc" => "red"}
+      options << {"contentq"=> "Dependiente ","point" => 4, "desc" => "blue"}
+      test_build(test,"Marcha" ,"check", answers: options)
 
-    bartel
-    personal_history
+      options= Array.new
+      options << {"contentq"=> "Independiente","point" => 1, "desc" => "white"}
+      options << {"contentq"=> "Con ayuda","point" => 2, "desc" => "green"}
+      options << {"contentq"=> "Necesita ayuda ","point" => 3, "desc" => "red"}
+      options << {"contentq"=> "Dependiente ","point" => 4, "desc" => "blue"}
+      test_build(test,"Ayudas Técnicas" ,"check", answers: options)
 
+      options= Array.new
+      options << {"contentq"=> "Independiente","point" => 1, "desc" => "white"}
+      options << {"contentq"=> "Con ayuda","point" => 2, "desc" => "green"}
+      options << {"contentq"=> "Necesita ayuda ","point" => 3, "desc" => "red"}
+      options << {"contentq"=> "Dependiente ","point" => 4, "desc" => "blue"}
+      test_build(test,"Subir/Bajar Escaleras" ,"check", answers: options)
+
+      options= Array.new
+      options << {"contentq"=> "Independiente","point" => 1, "desc" => "white"}
+      options << {"contentq"=> "Con ayuda","point" => 2, "desc" => "green"}
+      options << {"contentq"=> "Necesita ayuda ","point" => 3, "desc" => "red"}
+      options << {"contentq"=> "Dependiente ","point" => 4, "desc" => "blue"}
+      test_build(test,"Transferencias" ,"check", answers: options)
+
+      options= Array.new
+      options << {"contentq"=> "Independiente","point" => 1, "desc" => "white"}
+      options << {"contentq"=> "Con ayuda","point" => 2, "desc" => "green"}
+      options << {"contentq"=> "Necesita ayuda ","point" => 3, "desc" => "red"}
+      options << {"contentq"=> "Dependiente ","point" => 4, "desc" => "blue"}
+      test_build(test,"Tareas Domésticas" ,"check", answers: options)
+
+      options= Array.new
+      options << {"contentq"=> "Independiente","point" => 1, "desc" => "white"}
+      options << {"contentq"=> "Con ayuda","point" => 2, "desc" => "green"}
+      options << {"contentq"=> "Necesita ayuda ","point" => 3, "desc" => "red"}
+      options << {"contentq"=> "Dependiente ","point" => 4, "desc" => "blue"}
+      test_build(test,"Vestido" ,"check", answers: options)
+
+      options= Array.new
+      options << {"contentq"=> "Independiente","point" => 1, "desc" => "white"}
+      options << {"contentq"=> "Con ayuda","point" => 2, "desc" => "green"}
+      options << {"contentq"=> "Necesita ayuda ","point" => 3, "desc" => "red"}
+      options << {"contentq"=> "Dependiente ","point" => 4, "desc" => "blue"}
+      test_build(test,"Arreglo Personal" ,"check", answers: options)
+
+      options= Array.new
+      options << {"contentq"=> "Independiente","point" => 1, "desc" => "white"}
+      options << {"contentq"=> "Con ayuda","point" => 2, "desc" => "green"}
+      options << {"contentq"=> "Necesita ayuda ","point" => 3, "desc" => "red"}
+      options << {"contentq"=> "Dependiente ","point" => 4, "desc" => "blue"}
+      test_build(test,"Aseo" ,"check", answers: options)
+    end
+
+    def oars_social
+      test = Test.new(title: "OARS Social")
+      test.save!
+
+      options= Array.new
+      options << {"contentq"=> "","point" => 1, "desc" => "white"}
+      options << {"contentq"=> "Con ayuda","point" => 1, "desc" => "green"}
+      options << {"contentq"=> "Necesita ayuda ","point" => 1, "desc" => "red"}
+      options << {"contentq"=> "Dependiente ","point" => 1, "desc" => "blue"}
+      test_build(test,"¿Su estado civil es?:" ,"check", answers: options)
+
+    end
+
+    def index_lawton_and_brody
+      test = Test.new(title: "ÍNDICE DE LAWTON & BRODY", calculate: :sum )
+      test.save!
+
+      options= Array.new
+      options << {"contentq"=> "Utiliza el teléfono por iniciativa propia y sin ayuda.","point" => 1, "desc" => ""}
+      options << {"contentq"=> "Marca números bien conocidos","point" => 1, "desc" => ""}
+      options << {"contentq"=> "contesta al teléfono pero no marca.","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No usa el teléfono en absoluto.","point" => 0, "desc" => ""}
+      test_build(test,"Capacidad para usar el teléfono" ,"check", answers: options)
+
+      options= Array.new
+      options << {"contentq"=> "Realiza todas las compras necesarias sin ayuda.","point" => 1, "desc" => ""}
+      options << {"contentq"=> "Compra pequeñas cosas.","point" => 0, "desc" => ""}
+      options << {"contentq"=> "Necesita compañía para realizar cualquier compra.","point" => 0, "desc" => ""}
+      options << {"contentq"=> "Es incapaz de ir de compras.","point" => 0, "desc" => ""}
+      test_build(test,"Ir de compras" ,"check", answers: options)
+
+      options= Array.new
+      options << {"contentq"=> "Planea, prepara y sirve sin ayuda las comidas adecuadas.","point" => 1, "desc" => ""}
+      options << {"contentq"=> "Prepara las comidas si le proporcionan los ingredientes.","point" => 0, "desc" => ""}
+      options << {"contentq"=> "Prepara la comida, pero no mantiene una dieta adecuada.","point" => 0, "desc" => ""}
+      options << {"contentq"=> "Necesita que se le prepare la comida.","point" => 0, "desc" => ""}
+      test_build(test,"Preparación de la comida" ,"check", answers: options)
+
+      options= Array.new
+      options << {"contentq"=> "Cuida la casa sin ayuda o ésta es ocasional.","point" => 1, "desc" => ""}
+      options << {"contentq"=> "Realiza tareas domésticas ligeras.","point" => 1, "desc" => ""}
+      options << {"contentq"=> "Realiza tareas domésticas pero no mantiene un nivel de limpieza aceptable.","point" => 1, "desc" => ""}
+      options << {"contentq"=> "Necesita ayuda en todas las tareas de la casa.","point" => 0, "desc" => ""}
+      options << {"contentq"=> "No participa en ninguna tarea domestica.","point" => 0, "desc" => ""}
+      test_build(test,"Cuidar la casa" ,"check", answers: options)
+
+      options= Array.new
+      options << {"contentq"=> "Lo realiza sin ayuda.","point" => 1, "desc" => ""}
+      options << {"contentq"=> "Lava o aclara algunas prendas.","point" => 1, "desc" => ""}
+      options << {"contentq"=> "Necesita que otro se ocupe de todo el lavado.","point" => 0, "desc" => ""}
+      test_build(test,"Lavado de la ropa" ,"check", answers: options)
+
+      options= Array.new
+      options << {"contentq"=> "Viaja de forma independiente.","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No usa transporte público, salvo taxis.","point" => 1, "desc" => ""}
+      options << {"contentq"=> "Viaja en transporte público si le acompaña otra persona.","point" => 1, "desc" => ""}
+      options << {"contentq"=> "Viaja en taxi o automóvil solamente con la ayuda de otros.","point" => 0, "desc" => ""}
+      options << {"contentq"=> "No viaja en lo absoluto.","point" => 0, "desc" => ""}
+      test_build(test,"Medio de transporte" ,"check", answers: options)
+
+      options= Array.new
+      options << {"contentq"=> "No precisa ayuda para tomar correctamente la medicación","point" => 1, "desc" => ""}
+      options << {"contentq"=> "Necesita que le sean preparadas las dosis o las pastillas.","point" => 0, "desc" => ""}
+      options << {"contentq"=> "No es capaz de responsabilizarse de su propia medicación.","point" => 0, "desc" => ""}
+      test_build(test,"Responsabilidad sobre la medicación" ,"check", answers: options)
+
+      options= Array.new
+      options << {"contentq"=> "No precisa ayuda para manejar dinero ni llevar cuentas.","point" => 1, "desc" => ""}
+      options << {"contentq"=> "Necesita ayuda para ir al banco para grades gastos.","point" => 1, "desc" => ""}
+      options << {"contentq"=> "Incapaz de manejar dinero.","point" => 0, "desc" => ""}
+      test_build(test,"Capacidad para utilizar el dinero" ,"check", answers: options)
+    end
+
+    def mini_mental
+      test = Test.new(title: "MINI-MENTAL STATE EXAMINATION (MMSE)")
+      test.save!
+
+      #
+      questions = Array.new
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 5, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      questions << { content: 'Lugar y fecha de nacimiento. Edad:', type: 'check', answers: options }
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 5, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      questions << { content: '¿Dónde está Ud. ahora? (domicilio, lugar, hospital, ciudad, país)', type: 'check', answers: options }
+
+      test_build( test, "Orientación", "section", questions: questions )
+      
+      #
+      questions = Array.new
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 3, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      questions << { content: 'Nombrar tres objetos lentamente. Ej. Casa, zapato, papel.', type: 'check', answers: options }
+
+      test_build( test, "Registro.", "section", questions: questions )
+
+      #
+      questions = Array.new
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 5, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      questions << { content: 'Múltiplos de atrás hacia adelante.(93, 86, 79, 72, 85) - Deletrear de atrás hacia delante la palabra MUNDO.', type: 'check', answers: options }
+
+      test_build( test, "Atención y cálculo.", "section", questions: questions )
+
+      #
+      questions = Array.new
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 3, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      questions << { content: 'Repetir los objetos nombrados anteriormente (casa, zapato, papel)', type: 'check', answers: options }
+
+      test_build( test, "Memoria", "section", questions: questions )
+      
+      #
+      questions = Array.new
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 2, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      questions << { content: 'Mostrar un lápiz y un reloj, preguntar sus respectivos nombres.', type: 'check', answers: options }
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      questions << { content: 'Repetir: tres perros en un trigal.', type: 'check', answers: options }
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 3, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      questions << { content: 'Indicar: Tome el papel con su mano derecha, dóblelo a la mitad y póngalo en el suelo.', type: 'check', answers: options }
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      questions << { content: 'Lea  y realice lo  siguiente: -CIERRE LOS OJOS-', type: 'check', answers: options }
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      questions << { content: 'Escriba una oración, enunciado o frece.', type: 'check', answers: options }
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      questions << { content: 'Copie este dibujo.', type: 'check', answers: options }
+
+      test_build( test, "Lenguaje", "section", questions: questions )
+    end
+
+    def yesavage
+      test = Test.new(title: "ESCALA DE YESAVAGE (Versión reducida)", calculate: :sum)
+      test.save!
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      test_build(test,"¿Está satisfecho con su vida?" ,"check", answers: options )
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      test_build(test,"¿Ha dejado de hacer actividades?" ,"check", answers: options )
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      test_build(test,"¿Siente que su vida está vacía?" ,"check", answers: options )
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      test_build(test,"¿Se encuentra a menudo aburrido(a)?" ,"check", answers: options )
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      test_build(test,"¿Se siente contento(a) la mayor parte del tiempo?" ,"check", answers: options )
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      test_build(test,"¿Teme que algo malo le pase?" ,"check", answers: options )
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      test_build(test,"¿Se siente feliz muchas veces?" ,"check", answers: options )
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      test_build(test,"¿Se siente a menudo abandonado?" ,"check", answers: options )
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      test_build(test,"¿Prefiere quedarse en casa que  salir a hacer cosas nuevas?" ,"check", answers: options )
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      test_build(test,"¿Cree tener más problemas de memoria que la mayoría de la gente?" ,"check", answers: options )
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      test_build(test,"¿Piensa que es maravilloso vivir?" ,"check", answers: options )
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      test_build(test,"¿Le cuesta realizar nuevas actividades?" ,"check", answers: options )
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      test_build(test,"¿Le cuesta realizar nuevas actividades?" ,"check", answers: options )
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      test_build(test,"¿Siente que su situación es desesperada?" ,"check", answers: options )
+
+      options= Array.new
+      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
+      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      test_build(test,"¿Cree que mucha gente está mejor que usted?" ,"check", answers: options )
+    end
+
+
+    #bartel
+    #personal_history
+    #dummy_funcionality
+    #index_lawton_and_brody
+    #mini_mental
+    #yesavage
   end
 end

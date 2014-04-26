@@ -9,12 +9,24 @@
           %header
             %h2= member.name
           - member.answers.each do |a|
-            = fields_for "answers[#{@counter}]", a do |m|
-              %span= m.object.question.content
-              = m.text_field :note 
-              = m.hidden_field :question_id, :value => m.object.question.id
-              %br
+            - if a.type == 'checkbox'
+              = a.content
+              = fields_for "answers[#{@counter}]" do |q|
+                = q.hidden_field :question_id, :value => a.id_question
+                = q.hidden_field :vig_id, :value => @vig.id
+              - a.answers.each_with_index do |option, key|
+                = fields_for "answers[#{@counter}]", option do |m|
+                  %span= m.object.option.content
+                  = m.radio_button :options_answers_id, m.object.option.id, (key == 0 ? { :checked => true } : {} )
               - @counter += 1
+              %br
+            - else
+              = fields_for "answers[#{@counter}]", a do |m|
+                %span= m.object.question.content
+                = m.text_field :note 
+                = m.hidden_field :question_id, :value => m.object.question.id
+                %br
+                - @counter += 1
       - elsif member.type == 'checkbox'
         %section
           %header
