@@ -12,7 +12,7 @@ class Question
   belongs_to :parent, :class_name => "Question"
   has_many :questions, :foreign_key => "parent_id"
 
-  embeds_many :options_answers
+  has_many :options_answers
 
   accepts_nested_attributes_for :options_answers, :questions
 

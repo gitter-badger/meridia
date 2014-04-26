@@ -10,8 +10,8 @@ class TestsController < ApplicationController
   # GET /tests/1
   # GET /tests/1.json
   def show
-    #@vig= Vig.find(params[:vig_id])
-    #@member = @vig.member
+    @vig= Vig.find(params[:vig_id])
+    @member = @vig.member
 
     @formulario = Form.new( name: "Javier" )
     @test.questions.each do |q|
@@ -19,16 +19,25 @@ class TestsController < ApplicationController
       when 'section'
         @input = @formulario.members.build type: 'section', name: q.content
         q.questions.each do |question|
-          @input.answers << Answer.new( note: nil, question: question )
+          if question.type == 'check'
+            @answer = @input.answers.build( type: 'checkbox', content: question.content, id_question: question.id )
+            question.options_answers.each do |opt|
+              @answer.answers << Answer.new(vig_id: @vig.id , type: 'radio', question: question, option: opt )
+            end
+          else
+            @input.answers << Answer.new( note: nil, question: question, type: 'text_field' )
+          end
         end
       when 'text', 'textarea'
         @input = @formulario.members.build type: 'text_field', name: q.content
         @input.answers << Answer.new( note: nil, question: q )
       when 'check'
 
-        @input = @formulario.members.build type: 'checkbox', name: q.content
+        @input = @formulario.members.build type: 'checkbox', name: q.content, id_question:q.id
+				puts q.id
         q.options_answers.each do |question|
-          @input.answers << Answer.new( type: 'checkbox', question: q, option: question )
+
+          @input.answers << Answer.new(vig_id: @vig.id , type: 'checkbox', question: q, option: question )
         end
 
       else

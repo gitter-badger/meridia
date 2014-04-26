@@ -22,6 +22,9 @@
                 
               %td 
                 -if value
-                  =link_to "Detalles", test_answers_path(test)
+                  =link_to "Detalles", answers_all_path(@res[0].id)
                 -else
                   =link_to "Aplicar", vig_test_path(@vig,test)
+
+
+
