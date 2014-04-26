@@ -11,4 +11,7 @@ class Test
 	has_many :vigs_test
 	accepts_nested_attributes_for :questions
 
+	def	calcule_type
+		
+	end
 end
