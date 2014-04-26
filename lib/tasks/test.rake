@@ -49,7 +49,7 @@ namespace :test do
     end
 
     def bartel
-      test = Test.new(title: "ÍNDICE DE BARTHEL")
+      test = Test.new(title: "ÍNDICE DE BARTHEL", calculate: :average )
       test.save!
 
 
@@ -110,7 +110,7 @@ namespace :test do
     end	
 
     def personal_history 
-      test = Test.new(title: "BREVE HISTORIA PERSONAL")
+      test = Test.new(title: "BREVE HISTORIA PERSONAL", calculate: nil )
       test.save!
 
       questions = Array.new
@@ -163,7 +163,7 @@ namespace :test do
     end
 
     def dummy_funcionality
-      test = Test.new(title: "Dummy de la Funcionalidad")
+      test = Test.new(title: "Dummy de la Funcionalidad", calculate: :average )
       test.save!
       
       options= Array.new
@@ -307,7 +307,7 @@ namespace :test do
     end
 
     def index_lawton_and_brody
-      test = Test.new(title: "ÍNDICE DE LAWTON & BRODY")
+      test = Test.new(title: "ÍNDICE DE LAWTON & BRODY", calculate: :sum )
       test.save!
 
       options= Array.new
