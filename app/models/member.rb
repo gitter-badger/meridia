@@ -1,6 +1,7 @@
 class Member
   include Mongoid::Document
-  belongs_to :center
+  include Mongoid::Timestamps
+	belongs_to :center
 	belongs_to :customer
 	has_many	:doctors
 	has_many  :vigs

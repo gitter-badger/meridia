@@ -18,6 +18,7 @@ class AnswersController < ApplicationController
 			end
 			vig_test.calcule_points(test,answers.count, points)
 			redirect_to answers_all_path(vig_test)
+		
 		else
 			redirect_to vig_test_path(params[:answer][:vigs],test)
 		end

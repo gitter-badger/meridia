@@ -1,15 +1,21 @@
-%h1 Listing vigs
+= render "shared/vig_menu" 
 
-%table
-  %tr
-    %th Name
-    %th Date
-    %th
-    %th
-    %th
+- content_for :title_breadcrumb do
+  %strong
+    = @member.name.upcase
+    = @member.lastname.upcase
+  ="/Valoraciones"
+.col-md-9
+  .panel
+    %h3 Valoraciones
 
-  - @vigs.each do |vig|
-    %tr
-      %td= vig.name
-      %td= vig.date
+    %table.table
+      %tr
+        %th Nombre
+        %th Fecha
+
+      - @vigs.each do |vig|
+        %tr
+          %td= link_to vig.name, member_vig_path(@member,vig)
+          %td= (vig.created_at).strftime('%Y-%m-%d')
 

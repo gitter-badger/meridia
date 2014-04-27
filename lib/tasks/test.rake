@@ -522,11 +522,11 @@ namespace :test do
     end
 
 
-    #bartel
-    #personal_history
-    #dummy_funcionality
-    #index_lawton_and_brody
-    #mini_mental
-    #yesavage
+    bartel
+    personal_history
+    dummy_funcionality
+    index_lawton_and_brody
+    mini_mental
+    yesavage
   end
 end

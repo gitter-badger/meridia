@@ -14,6 +14,6 @@ class Test
   accepts_nested_attributes_for :questions
 
 	def	calcule_type
-		
 	end
+
 end

@@ -1,30 +1,62 @@
+- content_for :title_breadcrumb do
+  %strong
+    = @member.name.upcase
+    = @member.lastname.upcase
+  ="Valoraciones/#{@vig.name}"
+
 .col-md-12.vig
   .row
-    = render "shared/profile" 
+    = render "shared/vig_menu" 
     .col-md-9
       .panel
         %h3
           valoraciones aplicadas:
+        -if @vig.status
+          .row.text-center
+            .col-md-3.box-vig
+              %label
+                =@vig.physical
+              Fisico
+            .col-md-3.box-vig
+              = @vig.social
+              Social
+            .col-md-3.box-vig
+              = @vig.personaldev
+              Desarrollo personal
+            .col-md-3.box-vig
+              = @vig.cognitive
+              Cognitivo
+        -else
+          = link_to "Calcular Probien","#",class: "btn btn-primary pull-right"
         %table.table
           %tr
             %th
               Examen
-            %td
-              status
-            %td
+            %th
+              Estado
+            %th
+              Resultado
+            %th
               Valor
           -@vig.tests.each do |test|
+            - value =  status(test, @vig)
             %tr
               %td
-                - value =  status(test, @vig)
                 = test.title.humanize
-              %td
-                
-              %td 
-                -if value
-                  =link_to "Detalles", answers_all_path(@res[0].id)
-                -else
-                  =link_to "Aplicar", vig_test_path(@vig,test)
+              -if value
+                %td
+                  Aplicado
+                %td
+                  =@res[0].points
+                %td
+                  =link_to "Detalles", answers_all_path(@res[0].id), class: "btn btn-success btn-xs"
+              -else
+                %td
+                  Pendiente
+                %td
+                  ="--"
+                %td
+                  =link_to "Aplicar", vig_test_path(@vig,test), class: "btn btn-warning btn-xs"
 
 
 

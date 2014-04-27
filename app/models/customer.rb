@@ -1,7 +1,7 @@
 class Customer
   include Mongoid::Document
  	include Mongoid::Multitenancy::Document 
-	
+	include Mongoid::Timestamps	
 	tenant(:center)
  
 	has_many :members

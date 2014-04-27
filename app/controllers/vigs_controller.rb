@@ -1,6 +1,6 @@
 class VigsController < ApplicationController
   before_action :set_vig, only: [:show, :edit, :update, :destroy]
-	before_action :set_member,only: [:show, :create, :update]
+	before_action :set_member,only: [:index, :show, :create, :update]
 
   # GET /vigs
   # GET /vigs.json

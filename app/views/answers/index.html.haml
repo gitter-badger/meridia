@@ -1,10 +1,29 @@
-= render "shared/profile"
+= render "shared/vig_menu"
+- content_for :title_breadcrumb do
+  %strong
+    = @member.name.upcase
+    = @member.lastname.upcase
+  ="/Valoracionesi/tests"
 .col-md-9
   .panel
     - @answers.each_with_index do |asw, i|
       -if i == 0
-        %h3
-          = asw.vigs_test.test.title.humanize
+        .row
+          .col-md-6
+            %h3
+              = asw.vig.name
+          .col-md-5
+            .pull-right
+              = link_to "Volver a valoracion",member_vig_path(asw.vig.member,asw.vig), class: "btn btn-success"
+          .col-md-10
+            %h4
+              = asw.vigs_test.test.title.humanize
+              %small
+                (Detalles)
+            .pull-right
+              %h4
+                Total:
+                = @answers[0].vigs_test.points
       %label
         - i += 1
         =" #{i}. " 
