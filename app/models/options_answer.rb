@@ -1,5 +1,6 @@
 class OptionsAnswer
   include Mongoid::Document
+  include Mongoid::Attributes::Dynamic
   
 	field :content, type: String
   field :points, type: String

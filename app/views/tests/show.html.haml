@@ -40,11 +40,39 @@
               = m.radio_button :options_answers_id, m.object.option.id, :checked => true
               %br
           - @counter += 1
+      - elsif member.type == 'nested'
+        %section
+          %h2= member.name
+          - @nested_id = nil
+          - member.answers.each_with_index do |a, i|
+            - @nested_id = a.id if a.option.isnested == true
+            = fields_for "answers[#{@counter}]", a do |m| 
+              %span= m.object.option.content
+              = m.radio_button :options_answers_id, m.object.option.id,  (i == 1 ? { :checked => true } : {} ).merge({:data => {:section => a.id.to_s }})
+              %br
+          - @counter += 1
+          %section{ :data=>{ :option => @nested_id }}
+            - member.inputs.each do |nested|
+              %section
+                %header= nested.name
+                - if nested.type == 'section'
+                  - nested.answers.each do |a, i|
+                    = fields_for "answers[#{@counter}]", a do |m|
+                      = m.text_area :note
+                      = m.hidden_field :question_id, :value => m.object.question.id
+                    - @counter += 1
+                - else
+                  - nested.answers.each_with_index do |a, i|
+                    = fields_for "answers[#{@counter}]", a do |m|
+                      = m.radio_button :options_answers_id, m.object.option.id, (i == 0 ? { :checked => true } : {} )
+                      %span= m.object.option.content
+                      %br
+                  - @counter += 1
       - else
         %h2= member.name
         - member.answers.each do |a|
           = fields_for "answers[#{@counter}]", a do |m|
             = m.text_area :note
             = m.hidden_field :question_id, :value => m.object.question.id
-            - @counter += 1
+          - @counter += 1
     = f.submit 'Enviar'

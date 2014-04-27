@@ -34,12 +34,32 @@ class TestsController < ApplicationController
       when 'check'
 
         @input = @formulario.members.build type: 'checkbox', name: q.content, id_question:q.id
-				puts q.id
         q.options_answers.each do |question|
-
           @input.answers << Answer.new(vig_id: @vig.id , type: 'checkbox', question: q, option: question )
         end
+      when 'nested'
+        puts "NESTED"
+        # create the input member
+        @input = @formulario.members.build type: 'nested', name: q.content
+        
+        #  create nested member
+        q.questions.each do |question|
+          @member = @input.inputs.build( type:question.type, name:question.content, id_question: question.id )
+          if @member.type == 'section'
+            question.questions.each do |a|
+              @member.answers << Answer.new( note: nil, question: question )
+            end
+          else 
+            question.options_answers.each do |opt|
+              @member.answers << Answer.new( vig_id: @vig.id, type:'radio', question:question, option: opt )
+            end
+          end
+        end
 
+        # added opt answers
+        q.options_answers.each do |opt|
+          @input.answers << Answer.new(vig_id: @vig.id , type: 'checkbox', question: q, option: opt )
+        end
       else
         #puts @input.name
       end
@@ -50,7 +70,7 @@ class TestsController < ApplicationController
     #
   end
 
-    # GET /tests/new
+  # GET /tests/new
   def new
     @test = Test.new
     3.times {@test.questions.build}
