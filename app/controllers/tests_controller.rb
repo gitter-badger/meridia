@@ -44,14 +44,14 @@ class TestsController < ApplicationController
         
         #  create nested member
         q.questions.each do |question|
-          @member = @input.inputs.build( type:question.type, name:question.content, id_question: question.id )
-          if @member.type == 'section'
+          member = @input.inputs.build( type:question.type, name:question.content, id_question: question.id )
+          if member.type == 'section'
             question.questions.each do |a|
-              @member.answers << Answer.new( note: nil, question: question )
+              member.answers << Answer.new( note: nil, question: question )
             end
           else 
             question.options_answers.each do |opt|
-              @member.answers << Answer.new( vig_id: @vig.id, type:'radio', question:question, option: opt )
+              member.answers << Answer.new( vig_id: @vig.id, type:'radio', question:question, option: opt )
             end
           end
         end

@@ -1,5 +1,6 @@
 = render "shared/vig_menu" 
 
+
 - content_for :title_breadcrumb do
   %strong
     = @member.name.upcase
@@ -8,6 +9,9 @@
 .col-md-9
   .panel
     %h3 Valoraciones
+    %button.btn.btn-primary.pull-right.btn-success{"data-target" => "#myModal", "data-toggle" => "modal"}
+      %span.icon-plus-square
+      Agregar Nueva Valoracion
 
     %table.table
       %tr
@@ -18,4 +22,28 @@
         %tr
           %td= link_to vig.name, member_vig_path(@member,vig)
           %td= (vig.created_at).strftime('%Y-%m-%d')
+
+= form_for Vig.new , url: member_vigs_path(@member) do |vig|
+  .modal.fade#myModal
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+          %h4
+            Nueva Valoracion
+        .modal-body
+          .form-group
+            =vig.label :name
+            = vig.text_field :name, class: "form-control"
+          .form-gruop
+            %label
+              Agregar Examen
+          - for test in Test.all
+            .form-group
+              .checkbox
+                = label_tag test.title
+                =  check_box_tag "vig[test_ids][]" , test.id
+        .modal-footer
+          = vig.submit "Guardar", class: "btn btn-success" 
+
 
