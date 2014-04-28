@@ -78,7 +78,7 @@ namespace :test do
     end
 
     def bartel
-      test = Test.new(title: "ÍNDICE DE BARTHEL", calculate: :average )
+      test = Test.new(title: "ÍNDICE DE BARTHEL", calculate: :average, test_code: 1 )
       test.save!
 
 
@@ -139,7 +139,7 @@ namespace :test do
     end	
 
     def personal_history 
-      test = Test.new(title: "BREVE HISTORIA PERSONAL", calculate: nil )
+      test = Test.new(title: "BREVE HISTORIA PERSONAL", calculate: nil, test_code: 2 )
       test.save!
 
       questions = Array.new
@@ -192,7 +192,7 @@ namespace :test do
     end
 
     def dummy_funcionality
-      test = Test.new(title: "Dummy de la Funcionalidad", calculate: :average )
+      test = Test.new(title: "Dummy de la Funcionalidad", calculate: :average, test_code: 3 )
       test.save!
       
       options= Array.new
@@ -323,7 +323,7 @@ namespace :test do
     end
 
     def oars_social
-      test = Test.new(title: "OARS Social")
+      test = Test.new(title: "OARS Social",test_code:4 )
       test.save!
 
       # question 1
@@ -462,7 +462,7 @@ namespace :test do
     end
 
     def index_lawton_and_brody
-      test = Test.new(title: "ÍNDICE DE LAWTON & BRODY", calculate: :sum )
+      test = Test.new(title: "ÍNDICE DE LAWTON & BRODY", calculate: :sum,test_code: 5 )
       test.save!
 
       options= Array.new
@@ -522,7 +522,7 @@ namespace :test do
     end
 
     def mini_mental
-      test = Test.new(title: "MINI-MENTAL STATE EXAMINATION (MMSE)")
+      test = Test.new(title: "MINI-MENTAL STATE EXAMINATION (MMSE)", test_code: 6)
       test.save!
 
       #
@@ -607,7 +607,7 @@ namespace :test do
     end
 
     def yesavage
-      test = Test.new(title: "ESCALA DE YESAVAGE (Versión reducida)", calculate: :sum)
+      test = Test.new(title: "ESCALA DE YESAVAGE (Versión reducida)", calculate: :sum, test_code:7)
       test.save!
 
       options= Array.new
@@ -687,12 +687,12 @@ namespace :test do
     end
 
 
-    #bartel
-    #personal_history
-    #dummy_funcionality
-    #index_lawton_and_brody
-    #mini_mental
-    #yesavage
+    bartel
+    personal_history
+    dummy_funcionality
+    index_lawton_and_brody
+    mini_mental
+    yesavage
     oars_social
   end
 end

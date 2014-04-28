@@ -6,10 +6,11 @@ Meridia::Application.routes.draw do
   resources :centers 
  
  	resources :members do		
-  	resources :vigs
+		resources :vigs
 	end
 	
 	resources :vigs do
+		resources :progress	
 		resources :tests
 	end
 	

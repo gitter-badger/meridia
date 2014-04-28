@@ -1,78 +1,91 @@
-.panel
-  = form_for( @formulario, as: :answer, :url => test_answers_path(@test)  ) do |f|
-    - @counter = 0
-    = f.hidden_field :vigs, value: @vig.id
-    - @formulario.members.each_with_index do |member, key|
-      
-      - if member.type == 'section'
-        %section
-          %header
-            %h2= member.name
-          - member.answers.each do |a|
-            - if a.type == 'checkbox'
-              = a.content
-              = fields_for "answers[#{@counter}]" do |q|
-                = q.hidden_field :question_id, :value => a.id_question
-                = q.hidden_field :vig_id, :value => @vig.id
-              - a.answers.each_with_index do |option, key|
-                = fields_for "answers[#{@counter}]", option do |m|
-                  %span= m.object.option.content
-                  = m.radio_button :options_answers_id, m.object.option.id, (key == 0 ? { :checked => true } : {} )
-              - @counter += 1
-              %br
-            - else
-              = fields_for "answers[#{@counter}]", a do |m|
-                %span= m.object.question.content
-                = m.text_field :note 
-                = m.hidden_field :question_id, :value => m.object.question.id
-                %br
+- content_for :title_breadcrumb do
+  %strong
+    = @member.name.upcase
+    = @member.lastname.upcase
+  ="Valoraciones/#{@vig.name}"
+= render "shared/vig_menu"
+.col-md-9
+  .panel.panel-default
+    .panel-heading
+      %strong
+        = @test.title
+    = form_for( @formulario, as: :answer, :url => test_answers_path(@test)  ) do |f|
+      - @counter = 0
+      = f.hidden_field :vigs, value: @vig.id
+      - @formulario.members.each_with_index do |member, key|
+        
+        - if member.type == 'section'
+          %section
+            %header
+              %label = member.name
+            - member.answers.each do |a|
+              - if a.type == 'checkbox'
+                = a.content
+                = fields_for "answers[#{@counter}]" do |q|
+                  = q.hidden_field :question_id, :value => a.id_question
+                  = q.hidden_field :vig_id, :value => @vig.id
+                - a.answers.each_with_index do |option, key|
+                  = fields_for "answers[#{@counter}]", option do |m|
+                    .radio
+                      %label
+                        = m.object.option.content
+                        = m.radio_button :options_answers_id, m.object.option.id, (key == 0 ? { :checked => true } : {} )
                 - @counter += 1
-      - elsif member.type == 'checkbox'
-        %section
-          %header
-            %h2= member.name
-          = fields_for "answers[#{@counter}]" do |q|
-            = q.hidden_field :question_id, :value => member.id_question
-            = q.hidden_field :vig_id, :value => @vig.id
-          - member.answers.each do |a|
-            = fields_for "answers[#{@counter}]", a do |m| 
-              %span= m.object.option.content
-              = m.radio_button :options_answers_id, m.object.option.id, :checked => true
-              %br
-          - @counter += 1
-      - elsif member.type == 'nested'
-        %section
-          %h2= member.name
-          - @nested_id = nil
-          - member.answers.each_with_index do |a, i|
-            - @nested_id = a.id if a.option.isnested == true
-            = fields_for "answers[#{@counter}]", a do |m| 
-              %span= m.object.option.content
-              = m.radio_button :options_answers_id, m.object.option.id,  (i == 1 ? { :checked => true } : {} ).merge({:data => {:section => a.id.to_s }})
-              %br
-          - @counter += 1
-          %section{ :data=>{ :option => @nested_id }}
-            - member.inputs.each do |nested|
-              %section
-                %header= nested.name
-                - if nested.type == 'section'
-                  - nested.answers.each do |a, i|
-                    = fields_for "answers[#{@counter}]", a do |m|
-                      = m.text_area :note
-                      = m.hidden_field :question_id, :value => m.object.question.id
-                    - @counter += 1
-                - else
-                  - nested.answers.each_with_index do |a, i|
-                    = fields_for "answers[#{@counter}]", a do |m|
-                      = m.radio_button :options_answers_id, m.object.option.id, (i == 0 ? { :checked => true } : {} )
-                      %span= m.object.option.content
-                      %br
+              - else
+                = fields_for "answers[#{@counter}]", a do |m|
+                  %span= m.object.question.content
+                  = m.text_field :note 
+                  = m.hidden_field :question_id, :value => m.object.question.id
+                  %br
                   - @counter += 1
-      - else
-        %h2= member.name
-        - member.answers.each do |a|
-          = fields_for "answers[#{@counter}]", a do |m|
-            = m.text_area :note
-            = m.hidden_field :question_id, :value => m.object.question.id
-          - @counter += 1
-    = f.submit 'Enviar'
+        - elsif member.type == 'checkbox'
+          %section
+            %header
+              %label= member.name
+            = fields_for "answers[#{@counter}]" do |q|
+              = q.hidden_field :question_id, :value => member.id_question
+              = q.hidden_field :vig_id, :value => @vig.id
+            - member.answers.each do |a|
+              = fields_for "answers[#{@counter}]", a do |m| 
+                .radio
+                  %label 
+                    =m.object.option.content
+                    = m.radio_button :options_answers_id, m.object.option.id, :checked => true
+            - @counter += 1
+        - elsif member.type == 'nested'
+          %section
+            %label= member.name
+            - @nested_id = nil
+            - member.answers.each_with_index do |a, i|
+              - @nested_id = a.id if a.option.isnested == true
+              = fields_for "answers[#{@counter}]", a do |m| 
+                %span= m.object.option.content
+                = m.radio_button :options_answers_id, m.object.option.id,  (i == 1 ? { :checked => true } : {} ).merge({:data => {:section => a.id.to_s }})
+                %br
+            - @counter += 1
+            %section{ :data=>{ :option => @nested_id }}
+              - member.inputs.each do |nested|
+                %section
+                  %header= nested.name
+                  - if nested.type == 'section'
+                    - nested.answers.each do |a, i|
+                      = fields_for "answers[#{@counter}]", a do |m|
+                        = m.text_area :note
+                        = m.hidden_field :question_id, :value => m.object.question.id
+                      - @counter += 1
+                  - else
+                    - nested.answers.each_with_index do |a, i|
+                      = fields_for "answers[#{@counter}]", a do |m|
+                        = m.radio_button :options_answers_id, m.object.option.id, (i == 0 ? { :checked => true } : {} )
+                        %span= m.object.option.content
+                        %br
+                    - @counter += 1
+        - else
+          %label= member.name
+          - member.answers.each do |a|
+            = fields_for "answers[#{@counter}]", a do |m|
+              = m.text_area :note
+              = m.hidden_field :question_id, :value => m.object.question.id
+            - @counter += 1
+      .actions
+        = f.submit 'Guardar', class: "btn btn-success "

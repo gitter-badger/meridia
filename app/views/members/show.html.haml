@@ -39,18 +39,12 @@
           Social
 .col-md-12
   .row
-    = render 'shared/profile'
+    = render 'shared/vig_menu'
     .col-md-9 
       %ul.nav.nav-tabs#myTab
         %li.active
           %a{href: "#info", :"data-toggle"=>"tab"}
             Informacion
-        %li 
-          %a{href: "#vig", :"data-toggle"=>"tab"}
-            Valoraciones
-        %li
-          %a{href: "#calendar", :"data-toggle"=>"tab"}
-            Actividades
         %li
           %a{href: "#family", :"data-toggle"=>"tab"}
             Familiares
@@ -63,50 +57,6 @@
       .panel.tab-content
         .tab-pane.active#info
           Active
-        .tab-pane#vig
-          %button.btn.btn-primary.pull-right.btn-success{"data-target" => "#myModal", "data-toggle" => "modal"}
-            %span.icon-plus-square
-            Agregar Nueva Valoracion
-          %table.table
-            %thead
-              %tr
-                %th
-                  Valoracion
-                %th
-                  Facha
-                %th
-                  Status
-            %tbody
-              -@member.vigs.each do |vig|
-                %tr
-                  %td
-                    = link_to vig.name, member_vig_path(@member, vig)
-                  %td
-
-                  %td
-
-        .tab-pane#calendar
-          %h4
-            Lista De Actividades
-        .tab-pane#family
-          %ul.list_data
-            -@member.families.each do |family|
-              %li
-                %h5
-                  = "#{family.firstname} #{family.lastname}".upcase
-                %ul
-                  %li
-                    %span.icon-home
-                    = family.address
-                  %li  
-                    %span.icon-phone2
-                      = "#{family.phone_home} - #{family.phone_mobile}"
-                  %li  
-                    %span.icon-location2
-                    = family.city
-                  %li
-                    %span.icon-users
-                    Parentesco
         .tab-pane#salud
           
           %ul.list_data

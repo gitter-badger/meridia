@@ -5,7 +5,8 @@ class Test
   field :title, type: String
   field :observation, type: String
   field :description, type: String
-  field :calculate, type: Symbol
+  field :test_code, type: String
+	field :calculate, type: Symbol
   enum :kindof, [:cognitive, :physical, :personaldev, :social]
 
   has_many :questions
@@ -13,7 +14,5 @@ class Test
   has_many :vigs_test
   accepts_nested_attributes_for :questions
 
-	def	calcule_type
-	end
 
 end

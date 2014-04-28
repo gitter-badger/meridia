@@ -14,4 +14,19 @@ class Vig
 	has_and_belongs_to_many  :tests
 	has_many :answers
 	has_many :vigs_tests
+
+	def calculate
+		self.tests.each do |test|
+			case test.test_code
+				when :cognitive
+											
+				when :physical
+				
+				when :personaldev
+				
+				when :social
+				
+			end				
+		end
+	end
 end
