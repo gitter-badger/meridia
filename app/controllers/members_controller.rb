@@ -10,6 +10,24 @@ class MembersController < ApplicationController
   # GET /members/1
   # GET /members/1.json
   def show
+    @member.allergies.build kindof: :medicine
+    @member.medicines.build day: [:monday, :tuesday, :wednesday, :thursday, :friday ]
+    @member.build_breath
+    @member.build_blood
+    @member.build_other
+    @member.build_nutrition
+    @member.build_body
+    @member.build_urinary
+    #@sign = Sign.new
+    #sign = @member.signs.build
+    #sign.measures.build( kindof: :ta )
+    #sign.measures.build( kindof: :fc )
+    #sign.measures.build( kindof: :fr )
+    #sign.measures.build( kindof: :temp )
+    #sign.measures.build( kindof: :o2 )
+    #sign.measures.build( kindof: :glucose )
+    #sign.measures.build( kindof: :weight )
+    #sign.measures.build( kindof: :height )
   end
 
   # GET /members/new
@@ -70,6 +88,6 @@ class MembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
-      params.require(:member).permit(:name, :addres, :phone, :age, :code, :status, customer_attributes:[:name])
+      params.require(:member).permit(:name, :addres, :phone, :age, :code, :status, customer_attributes:[:name], signs_attributes:[ measures_attributes:[:kindof, :value ]] )
     end
 end
