@@ -22,12 +22,12 @@
                 (Detalles)
             .pull-right
               %h4
-                Total:
-                = @answers[0].vigs_test.points
+              
+                = raw( calculate @answers[0].vigs_test)
       %label
         - i += 1
         =" #{i}. " 
-        = asw.question.content.humanize 
-        = "(#{asw.options_answers.points} Points)"
+        = asw.question.content.humanize if !asw.question.nil? 
+        = "(#{asw.options_answers.points if !asw.options_answers.nil? } Points)"
       %p
-        =asw.options_answers.content
+        =asw.options_answers.content if !asw.options_answers.nil?

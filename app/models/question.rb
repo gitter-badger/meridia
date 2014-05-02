@@ -6,7 +6,9 @@ class Question
   #field :level, type: String
   field :type, type: String
 	field :sec, type: String
-  has_many :answers
+	field :group,	type:  Integer
+
+	has_many :answers
   belongs_to :tests
 
   belongs_to :parent, :class_name => "Question"

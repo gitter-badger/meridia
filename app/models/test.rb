@@ -5,9 +5,10 @@ class Test
   field :title, type: String
   field :observation, type: String
   field :description, type: String
-  field :test_code, type: String
+  field :test_code, type: Integer
 	field :calculate, type: Symbol
-  enum :kindof, [:cognitive, :physical, :personaldev, :social]
+  field	:function, type: String
+	enum :kindof, [:cognitive, :physical, :personaldev, :social]
 
   has_many :questions
   has_and_belongs_to_many  :vigs

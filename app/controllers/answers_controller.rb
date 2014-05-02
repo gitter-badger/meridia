@@ -6,21 +6,21 @@ class AnswersController < ApplicationController
 	def create
 		test = Test.find(params[:test_id])
 		answers= params[:answers].values.collect { |q| Answer.new(q)}	
-		vig_test = VigsTest.create(status: true , vig_id: params[:answer][:vigs], test_id: test.id)
+		vig = params[:answer][:vigs]
+		vig_test = VigsTest.new(status: true ,vig_id: vig, test_id: test.id)
 		
-		points = 0
 
 		if answers.all?(&:valid?)
 			answers.each do |anw|
 				anw.vigs_test_id = vig_test.id	
 				anw.save!
-				points += anw.options_answers.points.to_i
 			end
-			vig_test.calcule_points(test,answers.count, points)
+		
+			vig_test.calcule(test)
 			redirect_to answers_all_path(vig_test)
 		
 		else
-			redirect_to vig_test_path(params[:answer][:vigs],test)
+			redirect_to vig_test_path(vig,test)
 		end
 	
 	end

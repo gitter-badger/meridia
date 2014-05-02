@@ -9,6 +9,7 @@ class Member
 	embeds_many :health_insurances
 	embeds_many :health_services
 
+	has_and_belongs_to_many :activities
 	accepts_nested_attributes_for :families
 	accepts_nested_attributes_for :health_insurances
 	accepts_nested_attributes_for :health_services

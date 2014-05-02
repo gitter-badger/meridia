@@ -27,7 +27,7 @@
               = @vig.cognitive
               Cognitivo
         -else
-          = link_to "Calcular Probien","#",class: "btn btn-primary pull-right"
+          = link_to "Calcular Probien",vig_progress_index_path(@vig),class: "btn btn-primary pull-right", method: :post
         %table.table
           %tr
             %th
@@ -47,7 +47,7 @@
                 %td
                   Aplicado
                 %td
-                  =@res[0].points
+                  = @res[0].points["total2"].nil? ? @res[0].points["total1"] : @res[0].points["total1"].to_i + @res[0].points["total2"].to_i 
                 %td
                   =link_to "Detalles", answers_all_path(@res[0].id), class: "btn btn-success btn-xs"
               -else

@@ -11,7 +11,8 @@ class Activity
 
   embeds_many :areas
   embeds_many :lessons
-
+	
+	has_and_belongs_to_many :members
   accepts_nested_attributes_for :areas
   accepts_nested_attributes_for :lessons, :allow_destroy => true
 

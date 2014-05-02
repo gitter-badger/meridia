@@ -27,7 +27,14 @@ class VigsController < ApplicationController
   # POST /vigs.json
   def create
     @vig = Vig.new(vig_params)
-    respond_to do |format|
+    @vig_current = @member.vigs.desc.first
+		if !@vig_current.nil?
+						@vig.cognitive = @vig_current.cognitive
+						@vig.social = @vig_current.social
+						@vig.physical = @vig_current.physical
+						@vig.personaldev = @vig_current.personaldev
+		end
+		respond_to do |format|
       if @member.vigs << @vig
         
 				format.html { redirect_to member_vig_path(@member, @vig), notice: 'Vig was successfully created.' }
