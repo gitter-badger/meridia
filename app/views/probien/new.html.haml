@@ -1,0 +1,30 @@
+=render "shared/vig_menu"
+.col-md-9
+  .panel
+    %h2
+      Asignar actividades
+    %table.table
+      %thead
+        %tr
+          %th
+            Nombre
+          %th
+            Descripcion
+          %th
+            Areas
+          %th
+      %tbody
+        = form_for @member, url: vig_probien_index_path(@vig), method: :past do |f|
+          =f.submit "Generar Probien", class: "btn pull-right"
+          -@activities.each do |activity|
+            %tr
+              %td
+                =activity.title
+              %td
+                =activity.description
+              %td
+              %td
+                .checkbox
+                  %label
+                    = check_box_tag "member[activity_ids][]" , activity.id
+                    Asignar
