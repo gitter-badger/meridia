@@ -1,7 +1,4 @@
-class Urinary
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  #include Mongoid::Enum
+class Deposition < Evaluation
 
   LEVELS = [
     [ "Patron", "radio", [ [ "Incontinencia", 1 ], [ "Retencion", 2 ], [ "Sin Alteraciones", 3 ] ] ],
@@ -35,5 +32,21 @@ class Urinary
 
   field :levels, type: Array, default: []
 
-  embedded_in :member
+  field :urinary_pattern, type: Integer, default: 0
+  field :urinary_frequency, type: Integer, default: 1
+  field :urinary_alterations, type: Integer, default: 0
+
+  field :intestinal_movement, type: Integer, default: 0
+  field :intestinal_pattern, type: Integer, default: 0
+  field :intestinal_frequency, type: Integer, default: 1
+  field :intestinal_characteristics, type: Integer, default: 0
+  field :laxatives, type: Integer, default: 0
+  field :laxatives_note, type: String, default: nil
+
+  field :catheter_or_ostomy, type: Integer, default: 0
+  field :catheter_or_ostomy_note, type: String, default: nil
+
+  field :sweating, type: Integer, default: 1
+
+  belongs_to :member
 end

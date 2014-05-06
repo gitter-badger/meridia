@@ -9,19 +9,29 @@ class Member
   embeds_many :families
   embeds_many :health_insurances
   embeds_many :health_services
-  embeds_many :allergies
-  embeds_many :medicines
-  embeds_one :breath
-  embeds_one :blood
-  embeds_one :other
-  embeds_one :nutrition
-  embeds_one :body
-  embeds_one :urinary
+  #embeds_many :allergies
+  has_many :allergies
+  #embeds_many :medicines
+  has_many :medicines
+  #embeds_one :breath
+  has_many :breaths
+  #embeds_one :blood
+  has_many :bloods
+  has_many :others
+  has_many :nutritions
+  #embeds_one :body
+  has_many :bodies
+  has_many :depositions
+  has_many :mobilizations
+  has_many :hygienes
+  has_many :communications
+  has_many :sleeps
+  has_many :pains
 
   accepts_nested_attributes_for :families
   accepts_nested_attributes_for :health_insurances
   accepts_nested_attributes_for :health_services
-  accepts_nested_attributes_for :signs, :allergies, :medicines, :breath, :blood, :other, :nutrition, :body, :urinary
+  accepts_nested_attributes_for :signs, :allergies, :medicines, :breaths, :bloods, :others, :nutritions, :bodies, :depositions, :mobilizations, :hygienes, :communications, :sleeps, :pains
 
   field :name, type: String
   field :lastname, type: String

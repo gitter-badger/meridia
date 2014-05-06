@@ -1,0 +1,307 @@
+- content_for :title_breadcrumb do
+  %strong
+    = @member.name.upcase
+    = @member.lastname.upcase
+  ="/Valoracion Inicial de Enfermeria"
+
+.col-md-12
+  .panel
+    = render 'steps'
+    %hr
+    = form_for( @member, :url => member_nursing_index_path(@member), :method => "post", :html => { :class => "form-horizontal" }  ) do |f|
+      = hidden_field_tag :_step, 'step_four'
+      %fieldset#depositions{ :style =>  "padding: 0 0 1em 0;" }
+        %legend Eliminacion
+        = f.fields_for :depositions, @member.depositions.build do |deposition|
+          .form-group
+            = deposition.label :urinary_pattern, 'Patron Urinario', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :urinary_pattern, 1
+                Incontinencia
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :urinary_pattern, 2
+                Retencion
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :urinary_pattern, 0
+                Sin Alteracines
+          .form-group
+            = deposition.label :urinary_frequency, 'Frecuencia Urinaria', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :urinary_frequency, 1
+                1-2 dias
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :urinary_frequency, 2
+                3-5 dias
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :urinary_frequency, 3
+                6 dias
+          .form-group
+            = deposition.label :urinary_alterations, 'Alterqaciones Urinarias', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :urinary_alterations, 1
+                Coluria
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :urinary_alterations, 2
+                Disuria
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :urinary_alterations, 3
+                Nicturia
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :urinary_alterations, 4
+                Hematuria
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :urinary_alterations, 0
+                Sin alteraciones
+          .form-group
+            = deposition.label :intestinal_movement, 'Movimiento Intestinal en 4 cuadrantes?', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :intestinal_movement, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :intestinal_movement, 0
+                No
+          .form-group
+            = deposition.label :intestinal_pattern, 'Patron Intestinal', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :intestinal_pattern, 1
+                Diarrea
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :intestinal_pattern, 2
+                Estrenimiento
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :intestinal_pattern, 3
+                Incontinencia
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :intestinal_pattern, 0
+                Sin alteraciones
+          .form-group
+            = deposition.label :intestinal_frequency, 'Frecuencia Intestinal', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :intestinal_frequency, 1
+                Diario
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :intestinal_frequency, 2
+                2-3 dias
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :intestinal_frequency, 3
+                3 dias
+          .form-group
+            = deposition.label :intestinal_characteristics, 'Caracteristicas Intestinal', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :intestinal_characteristics, 1
+                Bien formada
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :intestinal_characteristics, 2
+                Pastosa
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :intestinal_characteristics, 3
+                Semiliquida
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :intestinal_characteristics, 4
+                Liquida
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :intestinal_characteristics, 0
+                Sin alteraciones
+          .form-group
+            = deposition.label :laxatives, 'Uso de laxantes y otros', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :laxatives, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :laxatives, 0
+                No
+          .form-group
+            = deposition.label :laxatives_note, 'Si respondio afirmativamente, cual?', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = deposition.text_field :laxatives_note, :class => "form-control"
+          .form-group
+            = deposition.label :catheter_or_ostomy, 'Sonda u Ostomia', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :catheter_or_ostomy, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :catheter_or_ostomy, 0
+                No
+          .form-group
+            = deposition.label :catheter_or_ostomy_note, 'Si respondio afirmativamente, cual?', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = deposition.text_field :catheter_or_ostomy_note, :class => "form-control"
+          .form-group
+            = deposition.label :sweating, 'Sudoracion', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :sweating, 1
+                Excesiva
+                No
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :sweating, 2
+                Regular
+              = label_tag '', '', :class => "radio-inline" do
+                = deposition.radio_button :sweating, 3
+                Escasa
+      %fieldset#mobilizations{ :style =>  "padding: 0 0 1em 0;" }
+        %legend Movilizacion
+        = f.fields_for :mobilizations, @member.mobilizations.build do |mobilization|
+          .form-group
+            = mobilization.label :mobilization, 'Movilizacion', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = mobilization.radio_button :mobilization, 1
+                Autosuficiente
+              = label_tag '', '', :class => "radio-inline" do
+                = mobilization.radio_button :mobilization, 2
+                Bano-Higiene
+              = label_tag '', '', :class => "radio-inline" do
+                = mobilization.radio_button :mobilization, 3
+                Uso WC
+              = label_tag '', '', :class => "radio-inline" do
+                = mobilization.radio_button :mobilization, 4
+                Vestido
+              = label_tag '', '', :class => "radio-inline" do
+                = mobilization.radio_button :mobilization, 5
+                Deambulacion
+          .form-group
+            = mobilization.label :dominant_member, 'Miembro Dominante', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = mobilization.radio_button :dominant_member, 1
+                Derecho
+              = label_tag '', '', :class => "radio-inline" do
+                = mobilization.radio_button :dominant_member, 2
+                Izquierdo
+          .form-group
+            = mobilization.label :devices, 'Dispositivos', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = mobilization.radio_button :devices, 0
+                No requiere
+              = label_tag '', '', :class => "radio-inline" do
+                = mobilization.radio_button :devices, 1
+                Andadera
+              = label_tag '', '', :class => "radio-inline" do
+                = mobilization.radio_button :devices, 3
+                Aparato Ortopedico
+              = label_tag '', '', :class => "radio-inline" do
+                = mobilization.radio_button :devices, 4
+                Baston
+              = label_tag '', '', :class => "radio-inline" do
+                = mobilization.radio_button :devices, 5
+                Retrete
+              = label_tag '', '', :class => "radio-inline" do
+                = mobilization.radio_button :devices, 6
+                Otro
+      %fieldset#hygienes{ :style =>  "padding: 0 0 1em 0;" }
+        %legend Higiene
+        = f.fields_for :hygienes, @member.hygienes.build do |hygiene|
+          .form-group
+            = hygiene.label :bath, 'Preferencia de hora de bano', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = hygiene.radio_button :bath, 1
+                Matutino
+              = label_tag '', '', :class => "radio-inline" do
+                = hygiene.radio_button :bath, 2
+                Vespertino
+              = label_tag '', '', :class => "radio-inline" do
+                = hygiene.radio_button :bath, 3
+                Nocturno
+          .form-group
+            = hygiene.label :hair, 'Frecuencia de lavadao de cabello', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = hygiene.radio_button :hair, 1
+                Diario
+              = label_tag '', '', :class => "radio-inline" do
+                = hygiene.radio_button :hair, 2
+                Cada 3er dia
+              = label_tag '', '', :class => "radio-inline" do
+                = hygiene.radio_button :hair, 3
+                Otro
+          .form-group
+            = hygiene.label :teeth, 'Frecuencia lavado de Dientes', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = hygiene.radio_button :teeth, 1
+                1 dia
+              = label_tag '', '', :class => "radio-inline" do
+                = hygiene.radio_button :teeth, 2
+                2 dia
+              = label_tag '', '', :class => "radio-inline" do
+                = hygiene.radio_button :teeth, 3
+                3 dia
+          .form-group
+            = hygiene.label :observations, 'Recomendaciones', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = hygiene.text_field :observations, :class => "form-control"
+      %fieldset#communications{ :style =>  "padding: 0 0 1em 0;" }
+        %legend Higiene
+        = f.fields_for :communications, @member.communications.build do |communication|
+          .form-group
+            = communication.label :see, 'Dificultad para ver', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = communication.radio_button :see, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = communication.radio_button :see, 0
+                No
+          .form-group
+            = communication.label :hear, 'Dificultad para oir', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = communication.radio_button :hear, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = communication.radio_button :hear, 0
+                No
+          .form-group
+            = communication.label :speak, 'Dificultad para hablar', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = communication.radio_button :speak, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = communication.radio_button :speak, 0
+                No
+          .form-group
+            = communication.label :hearing_aid, 'Usa protesis auditiva?', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = communication.radio_button :hearing_aid, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = communication.radio_button :hearing_aid, 0
+                No
+          .form-group
+            = communication.label :contact_lenses, 'Usa lentes de contacto?', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = communication.radio_button :contact_lenses, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = communication.radio_button :contact_lenses, 0
+                No
+          .form-group
+            = communication.label :glasses, 'Usa anteojos?', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = communication.radio_button :glasses, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = communication.radio_button :glasses, 0
+                No
+          .form-group
+            = communication.label :observations, 'Recomendaciones', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = communication.text_field :observations, :class => "form-control"
+      %hr
+      = f.submit "Guardar  & Continuar", :class => "btn btn-primary" 

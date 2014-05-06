@@ -11,5 +11,6 @@ class Medicine
   field :validity, type: String
   enum :day, [ :monday, :tuesday, :wednesday, :thursday, :friday ], { :multiple => true , :default => [ :monday ]  }
 
-  embedded_in :member
+  #embedded_in :member
+  belongs_to :member
 end

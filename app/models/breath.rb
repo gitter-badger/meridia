@@ -1,7 +1,7 @@
-class Breath
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  #include Mongoid::Enum
+class Breath < Evaluation
+
+  #include Mongoid::Document
+  #include Mongoid::Timestamps
 
   LEVELS = [
     ["Regular Sin Esfuerzo", 1], 
@@ -12,9 +12,9 @@ class Breath
     ["Productiva", 6]
   ]
 
-  #enum :level, [ :monday, :tuesday, :wednesday, :thursday, :friday ], { :multiple => true , :default => [ :monday ]  }
-  field :level, type: Array, default: [1]
+  field :level, type: Integer, default: 1
   field :note, type: String, default: nil
 
-  embedded_in :member
+  #embedded_in :member
+  belongs_to :member
 end

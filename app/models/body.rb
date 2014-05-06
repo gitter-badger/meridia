@@ -1,7 +1,4 @@
-class Body
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  #include Mongoid::Enum
+class Body < Evaluation
 
   LEVELS = [
     [ "Piel", "radio", [ [ "Rosada", 1 ], [ "Pálida", 2 ], [ "Seca", 3 ], [ "Ictérica", 4 ], [ "Seca", 5 ], [ "Lesiones", 6 ] ] ],
@@ -17,5 +14,15 @@ class Body
 
   field :levels, type: Array, default: []
 
-  embedded_in :member
+  field :skin, type: Integer, default: 1
+  field :mucous, type: Integer, default: 1
+  field :dentition, type: Integer, default: 1
+  field :oral_cavity, type: Integer, default: 1
+  field :previous_fallen, type: Integer, default: 1
+  field :medicines, type: Integer, default: 1
+  field :sensory_deficits, type: Integer, default: 1
+  field :state_of_mind, type: Integer, default: 1
+  field :ambulation, type: Integer, default: 1
+
+  belongs_to :member
 end

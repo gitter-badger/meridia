@@ -7,7 +7,29 @@
     = @member.lastname.upcase
   ="/Valoraciones"
 .col-md-9
-  .panel
+  .row
+    %ul.nav.nav-tabs#evaluations
+      %li
+        %a{href: "#info", :"data-toggle"=>"gerontology"}
+          Gerontologicas
+      %li.active
+        %a{href: member_nursing_index_path(@member), :data => { :toggle => "nursing"}}
+          Enfermeria
+      %li
+        %a{href: "#info", :"data-toggle"=>"medical"}
+          Clinicas
+    .panel.tab-content
+      .tab-pane.active#nursing
+        %ul.nav.nav-pills
+          %li.active
+            %a{ :href => "#" } Alergias
+          %li
+            %a{ :href => "#" } Medicamentos
+          %li
+            %a{ :href => "#" } Signos Vitales
+
+
+  -#.panel
     %h3 Valoraciones
     %button.btn.btn-primary.pull-right.btn-success{"data-target" => "#myModal", "data-toggle" => "modal"}
       %span.icon-plus-square
@@ -23,7 +45,7 @@
           %td= link_to vig.name, member_vig_path(@member,vig)
           %td= (vig.created_at).strftime('%Y-%m-%d')
 
-= form_for Vig.new , url: member_vigs_path(@member) do |vig|
+-#= form_for Vig.new , url: member_vigs_path(@member) do |vig|
   .modal.fade#myModal
     .modal-dialog
       .modal-content

@@ -7,12 +7,12 @@ class Test
   field :description, type: String
   field :test_code, type: String
 	field :calculate, type: Symbol
-  enum :kindof, [:cognitive, :physical, :personaldev, :social]
+  enum :kindof, [ :gerontology, :nursing ]
 
   has_many :questions
   has_and_belongs_to_many  :vigs
   has_many :vigs_test
   accepts_nested_attributes_for :questions
 
-
+  has_and_belongs_to_many :evaluations
 end

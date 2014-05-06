@@ -1,14 +1,8 @@
-class Other
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  #include Mongoid::Enum
+class Other < Evaluation
 
-  SIGNS = [
-    [ "Edema", [ [ "Si", 1 ], [ "No", 0 ] ], [ [ "Leve", 1 ], [ "Moderado", 2 ] ] ],
-    [ "Llenado Capilar", [ [ "< seg", 1 ], [ "> seg", 2 ] ] ]
-  ]
+  field :edema, type: Integer, default: 1
+  field :edema_level, type: Integer, default: 0
+  field :capilar, type: Integer, default: 0
 
-  field :signs, type: Array, default: []
-
-  embedded_in :member
+  belongs_to :member
 end

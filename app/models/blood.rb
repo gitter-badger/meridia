@@ -1,7 +1,4 @@
-class Blood
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  #include Mongoid::Enum
+class Blood < Evaluation
 
   LEVELS = [
     ["Palpitaciones", 1], 
@@ -12,9 +9,8 @@ class Blood
     ["Hormigueo", 6]
   ]
 
-  #enum :level, [ :monday, :tuesday, :wednesday, :thursday, :friday ], { :multiple => true , :default => [ :monday ]  }
-  field :level, type: Array, default: [1]
+  field :level, type: Integer, default: 1
   field :note, type: String, default: nil
 
-  embedded_in :member
+  belongs_to :member
 end

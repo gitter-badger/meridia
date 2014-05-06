@@ -1,0 +1,146 @@
+- content_for :title_breadcrumb do
+  %strong
+    = @member.name.upcase
+    = @member.lastname.upcase
+  ="/Valoracion Inicial de Enfermeria"
+
+.col-md-12
+  .panel
+    = render 'steps'
+    %hr
+    = form_for( @member, :url => member_nursing_index_path(@member), :method => "post", :html => { :class => "form-horizontal" }  ) do |f|
+      = hidden_field_tag :_step, 'step_five'
+      %fieldset#depositions{ :style =>  "padding: 0 0 1em 0;" }
+        %legend Reposo y Sueno
+        = f.fields_for :sleeps, @member.sleeps.build do |sleep|
+          .form-group
+            = sleep.label :duration, 'Horas de sueno', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = sleep.radio_button :duration, 1
+                <6 horas
+              = label_tag '', '', :class => "radio-inline" do
+                = sleep.radio_button :duration, 2
+                De 6 a 8 horas
+              = label_tag '', '', :class => "radio-inline" do
+                = sleep.radio_button :duration, 3
+                > 8 horas
+          .form-group
+            = sleep.label :nap, 'Aconstumbra a tomar siesta?', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = sleep.radio_button :nap, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = sleep.radio_button :nap, 0
+                No
+          .form-group
+            = sleep.label :pattern, 'Patron de sueno', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = sleep.radio_button :pattern, 1
+                Continuo
+              = label_tag '', '', :class => "radio-inline" do
+                = sleep.radio_button :pattern, 0
+                DisContinuo
+          .form-group
+            = sleep.label :drugs, 'Toma algun medicamento para dormir?', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = sleep.radio_button :drugs, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = sleep.radio_button :drugs, 0
+                No
+          .form-group
+            = sleep.label :drugs_note, 'En caso de que la respuesta es si, cual?', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = sleep.text_field :drugs_note, :class => "form-control"
+          .form-group
+            = sleep.label :other, 'Utiliza otra medida para inducir el sueno?', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = sleep.radio_button :other, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = sleep.radio_button :other, 0
+                No
+          .form-group
+            = sleep.label :other_note, 'En caso de que la respuesta es si, cual?', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = sleep.text_field :other_note, :class => "form-control"
+          .form-group
+            = sleep.label :observations, 'Observaciones', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = sleep.text_field :observations, :class => "form-control"
+      %fieldset#pains{ :style =>  "padding: 0 0 1em 0;" }
+        %legend Dolor
+        = f.fields_for :pains, @member.pains.build do |pain|
+          .form-group
+            = pain.label :has_pain, 'En las ultimas 24h  ha experimentado dolor?', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = pain.radio_button :has_pain, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = pain.radio_button :has_pain, 0
+                No
+          .form-group
+            = pain.label :has_pain_note, 'Si respondio Si, que hace que el dolor se aumente?', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = pain.text_field :has_pain_note, :class => "form-control"
+          .form-group
+            = pain.label :location, 'Localizacion del dolor', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = pain.text_field :location, :class => "form-control"
+          .form-group
+            = pain.label :over_pain, 'Que le ayudo a eliminarlo?', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = pain.text_field :over_pain, :class => "form-control"
+          .form-group
+            = pain.label :value, 'En una escala de 1 a 10 con que numero lo evalua?', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = pain.radio_button :value, 1
+                1
+              = label_tag '', '', :class => "radio-inline" do
+                = pain.radio_button :value, 2
+                2
+              = label_tag '', '', :class => "radio-inline" do
+                = pain.radio_button :value, 3
+                3
+              = label_tag '', '', :class => "radio-inline" do
+                = pain.radio_button :value, 4
+                4
+              = label_tag '', '', :class => "radio-inline" do
+                = pain.radio_button :value, 5
+                5
+              = label_tag '', '', :class => "radio-inline" do
+                = pain.radio_button :value, 6
+                6
+              = label_tag '', '', :class => "radio-inline" do
+                = pain.radio_button :value, 7
+                7
+              = label_tag '', '', :class => "radio-inline" do
+                = pain.radio_button :value, 8
+                8
+              = label_tag '', '', :class => "radio-inline" do
+                = pain.radio_button :value, 9
+                9
+              = label_tag '', '', :class => "radio-inline" do
+                = pain.radio_button :value, 10
+                10
+          .form-group
+            = pain.label :level, 'El dolor lo considera como:', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = pain.radio_button :level, 1
+                level
+              = label_tag '', '', :class => "radio-inline" do
+                = pain.radio_button :level, 2
+                Moderado
+              = label_tag '', '', :class => "radio-inline" do
+                = pain.radio_button :level, 3
+                Severo
+      %hr
+      = f.submit "Finalizar Valoracion", :class => "btn btn-primary" 
