@@ -1,0 +1,41 @@
+= render "shared/vig_menu"
+.col-md-9
+  .panel
+    %h3 
+      Horario
+    = link_to "Editar Horario", new_vig_schedule_path(@member.vigs.last), class: "btn btn-success pull-right"
+
+    %table.table
+      %thead
+        %tr
+          %th
+            Hora
+          %th
+            Lunes
+          %th
+            Martes
+          %th
+            Miercoles
+          %th
+            Jueves
+          %th
+            Viernes
+          %th
+            Sabado
+      - (8..18).map do |n|
+        %tr
+          %td
+            = n
+          %td
+            = lesson(@activities, n , :monday)
+          %td
+            = lesson(@activities, n , :tuesday)
+          %td
+            = lesson(@activities, n , :wednesday)
+          %td 
+            = lesson(@activities, n , :thursday)
+          %td 
+            = lesson(@activities, n , :friday)
+          %td 
+            = lesson(@activities, n , :saturday)
+

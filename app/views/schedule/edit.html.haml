@@ -1,0 +1,52 @@
+= render "shared/vig_menu"
+.col-md-9
+  .panel
+    = form_for @member, url: member_schedule_index_path(@member), method: :post do |f|     
+      - if !@current_activity.empty?
+        %h3 
+          Horario Actual
+        %table.table
+          %tr
+            %th 
+              Actividad
+            %th
+              Horario
+            %th
+              Check
+          -for activity in @current_activity
+            %tr
+              %td
+                = activity.title
+              %td
+                = activity.description
+              %td
+                = check_box_tag "member[activity_ids][]" , activity.id, @member.activities.include?(activity)        
+      %h3
+        Actividades Recomendas
+      %table.table
+        %tr
+          %th
+            Actividad
+          %th
+            Description
+          %th
+            Horario
+          %th
+            Check
+        - for activity in @activities 
+          %tr
+            %td
+              = activity.title
+            %td
+              = activity.description
+            %td
+              - activity.lessons.each do |lesson|
+                =lesson.day
+                =lesson.hour
+                =lesson.minutes
+                ="-"
+            %td
+              = check_box_tag "member[activity_ids][]" , activity.id, @member.activities.include?(activity)          
+
+      =f.submit "Crear Horario", class: "btn btn-success"
+
