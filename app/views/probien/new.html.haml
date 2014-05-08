@@ -1,30 +1,69 @@
 =render "shared/vig_menu"
 .col-md-9
   .panel
-    %h2
-      Asignar actividades
-    %table.table
-      %thead
-        %tr
-          %th
-            Nombre
-          %th
-            Descripcion
-          %th
-            Areas
-          %th
-      %tbody
-        = form_for @member, url: vig_probien_index_path(@vig), method: :past do |f|
-          =f.submit "Generar Probien", class: "btn pull-right"
-          -@activities.each do |activity|
-            %tr
-              %td
-                =activity.title
-              %td
-                =activity.description
-              %td
-              %td
-                .checkbox
-                  %label
-                    = check_box_tag "member[activity_ids][]" , activity.id
-                    Asignar
+    %h3
+      Programa personalizado de participante y bienestar (Pro-Bien)
+    .row
+      .col-md-12
+        .well.text-center
+          .row
+            .col-md-3
+              = raw(barthel(@vig.abvd))
+              %br
+              %strong
+                ABVD- Barthel
+            .col-md-3
+              = raw(lawton(@vig.aivd))
+              %br
+              %strong
+                AIVD Lawton-Brody
+            .col-md-3
+              = raw(tinetti(@vig.tinetti))
+              %br
+              %strong
+                Marcha y Equilibrio
+            .col-md-3
+              = raw (mental(@vig.folstein))
+              %br
+              %strong
+                Funcion Cognitiva
+          .row
+            %hr
+            .col-md-3
+              = raw (yesavage(@vig.yesavage))
+              %strong
+                Deprecion Yasavage
+            .col-md-3
+              = raw(hamilton(@vig.hamilton))
+              %br
+              %strong
+                Hamilton
+            .col-md-3
+              %strong
+                Nutricion
+            .col-md-3
+              %strong
+                OARS
+    = form_for @probien, url: vig_probien_index_path(@vig), method: :past do |f|
+      .form-group
+        = f.label :objetive, "Objetivo General"
+        = f.text_area :objetive, class: "form-control"
+      %h4  
+        Objetivos Particulares
+      .form-group
+        = f.label :social, "Socio Cultural"
+        = f.text_field :social , class: "form-control"
+      .form-group
+        = f.label :personaldev, "Desarrollo Personal"
+        =f.text_field :personaldev, class: "form-control"
+      .form-group
+        = f.label :physical, "Fisico"
+        = f.text_field :physical, class: "form-control"
+      .form-group
+        = f.label :cognitive, "Cognitivo"
+        = f.text_field :cognitive, class: "form-control"
+      .form-group
+        = f.label :health, "Salud y bienestar "
+        = f.text_field :health, class: "form-control"
+      
+      = f.submit "Siguente", class: "btn btn-success"

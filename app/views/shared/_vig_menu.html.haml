@@ -1,6 +1,10 @@
+
 .col-md-3
-  .list-group
-    = link_to "Perfil", member_path(@member), class: "list-group-item"
-    =link_to "Valoraciones", member_vigs_path(@member) , class: "list-group-item"
-    = link_to "Actividades", "#", class: "list-group-item"
-    = link_to "Evolucion", "#", class: "list-group-item"
+  .panel.panel_profile
+    .profile_box
+      = image_tag "profile.jpg"
+    .list-group
+      = link_to "Perfil", member_path(@member), class: "list-group-item"
+      =link_to "Valoraciones", member_vigs_path(@member) , class: "list-group-item"
+      = link_to "Horarios",member_schedule_index_path(@member), class: "list-group-item"
+      = link_to "Evolucion", "#", class: "list-group-item"

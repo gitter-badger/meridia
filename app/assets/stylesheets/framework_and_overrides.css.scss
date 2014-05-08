@@ -139,6 +139,12 @@ html,body,main{
 		border: 1px solid #d7e3f0;
 		height: 80px;
 		text-align: center;
+		.title{
+			margin: -10px;
+			padding: 5px;
+			margin-bottom: 2px;
+			color:#fff;
+		}
 		.icon{
 			padding:10px;
 			display: inline;
@@ -163,7 +169,7 @@ html,body,main{
 }
 .box_2{
 	border-bottom: 1px solid #df6c6e;
-	.icon{
+	.title{
 		background: #df6c6e
 	}
 

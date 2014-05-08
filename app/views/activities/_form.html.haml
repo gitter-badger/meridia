@@ -20,15 +20,22 @@
     = f.label :objective
     = f.text_area :objective, :class => "form-control"
   
-  = f.fields_for :areas do |area|
-    = area.label '%s:' % [area.object.kindof]
-    -#= area.label '%s:' % [area.object.kindof]
-    = area.hidden_field :kindof, :value => area.object.kindof
-    - Area::LEVEL.each do |l|
-      = area.label l, :class => "checkbox-inline" do
-        = area.check_box :level, { :multiple => true, :checked => area.object.send( [l,'?'].join ) ? true : false }, l.to_sym, nil
-        = l
-    %br
+    -for area in Area.all 
+      .checkbox
+        %label
+          =area.kindof
+          = check_box_tag "activity[area_ids][]", area.id, @activity.areas.include?(area)
+  %fieldset
+    .form-group
+      =f.label :difficulty, "Dificultad"
+      =f.select :difficulty, [['basico',1], ['intemedio',2],['avanzado',3]]
+    .form-group
+      =f.label :cognitive, "Cognitivo"
+      =f.select :cognitive, [['Funcional',1],['Deterioro cognitivo',2],['demencia',3]]
+    .form-group
+      = f.label :physical, "Fisico"
+      = f.select :physical, [['Fincional',1],['Con ayuda',2],['Dependiente',3]]
+  %br
   %fieldset#lessons
     %legend Horarios
     - @counter = 0

@@ -3,6 +3,7 @@ class AnswersController < ApplicationController
 		@answers = Answer.where(vigs_test_id: params[:vigs_test_id])
 		@member = @answers[0].vig.member
 	end
+
 	def create
 		test = Test.find(params[:test_id])
 		answers= params[:answers].values.collect { |q| Answer.new(q)}	

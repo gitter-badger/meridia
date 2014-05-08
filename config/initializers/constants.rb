@@ -1,4 +1,9 @@
 module Constants
+	VIG_STATUS={
+		active:1,
+		cloused:2
+	}
+				
 	TEST={
 		barthel:1,
 		aivd:2,

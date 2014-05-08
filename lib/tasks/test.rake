@@ -2,8 +2,6 @@ namespace :test do
   desc "test"
 
   task :setup_test=> :environment do
-    #questions_bartel = Hash.new
-    #@questions = Array.new
 
     def test_build(test, q_content, type, options = false) 
       questions_= {
@@ -79,7 +77,7 @@ namespace :test do
     end
 
     def bartel
-      test = Test.new(title: "ÍNDICE DE BARTHEL", calculate: :average, test_code: 1 )
+      test = Test.new(title: "ÍNDICE DE BARTHEL", calculate: :barthel, test_code: 1 )
       test.save!
 
 
@@ -324,7 +322,7 @@ namespace :test do
     end
 
     def oars_social
-      test = Test.new(title: "OARS Social",test_code:4 )
+      test = Test.new(title: "OARS Social",function: :oars,test_code:4 )
       test.save!
 
       # question 1
@@ -463,7 +461,7 @@ namespace :test do
     end
 
     def index_lawton_and_brody
-      test = Test.new(title: "ÍNDICE DE LAWTON & BRODY", calculate: :sum,test_code: 5 )
+      test = Test.new(title: "ÍNDICE DE LAWTON & BRODY", calculate: :lawton,test_code: 5 )
       test.save!
 
       options= Array.new
@@ -523,20 +521,26 @@ namespace :test do
     end
 
     def mini_mental
-      test = Test.new(title: "MINI-MENTAL STATE EXAMINATION (MMSE)", test_code: 6)
+      test = Test.new(title: "MINI-MENTAL STATE EXAMINATION (MMSE)", calculate: :mental,test_code: 6)
       test.save!
 
       #
       questions = Array.new
 
       options= Array.new
-      options << {"contentq"=> "Si","point" => 5, "desc" => ""}
-      options << {"contentq"=> "No","point" => 0, "desc" => ""}
-      questions << { content: 'Lugar y fecha de nacimiento. Edad:', type: 'check', answers: options }
+      options << {"contentq"=> "1","point" => 1, "desc" => ""}
+      options << {"contentq"=> "2","point" => 2, "desc" => ""}
+      options << {"contentq"=> "3","point" => 3, "desc" => ""}
+      options << {"contentq"=> "4","point" => 4, "desc" => ""}
+      options << {"contentq"=> "5","point" => 5, "desc" => ""}
+			questions << { content: 'Lugar y fecha de nacimiento. Edad:', type: 'check', answers: options }
 
       options= Array.new
-      options << {"contentq"=> "Si","point" => 5, "desc" => ""}
-      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      options << {"contentq"=> "1","point" => 1, "desc" => ""}
+      options << {"contentq"=> "2","point" => 2, "desc" => ""}
+      options << {"contentq"=> "3","point" => 3, "desc" => ""}
+      options << {"contentq"=> "4","point" => 4, "desc" => ""}
+      options << {"contentq"=> "5","point" => 5, "desc" => ""}
       questions << { content: '¿Dónde está Ud. ahora? (domicilio, lugar, hospital, ciudad, país)', type: 'check', answers: options }
 
       test_build( test, "Orientación", "section", questions: questions )
@@ -545,9 +549,10 @@ namespace :test do
       questions = Array.new
 
       options= Array.new
-      options << {"contentq"=> "Si","point" => 3, "desc" => ""}
-      options << {"contentq"=> "No","point" => 0, "desc" => ""}
-      questions << { content: 'Nombrar tres objetos lentamente. Ej. Casa, zapato, papel.', type: 'check', answers: options }
+      options << {"contentq"=> "1","point" => 1, "desc" => ""}
+      options << {"contentq"=> "2","point" => 2, "desc" => ""}
+      options << {"contentq"=> "3","point" => 3, "desc" => ""}
+			questions << { content: 'Nombrar tres objetos lentamente. Ej. Casa, zapato, papel.', type: 'check', answers: options }
 
       test_build( test, "Registro.", "section", questions: questions )
 
@@ -555,8 +560,11 @@ namespace :test do
       questions = Array.new
 
       options= Array.new
-      options << {"contentq"=> "Si","point" => 5, "desc" => ""}
-      options << {"contentq"=> "No","point" => 0, "desc" => ""}
+      options << {"contentq"=> "1","point" => 1, "desc" => ""}
+      options << {"contentq"=> "2","point" => 2, "desc" => ""}
+      options << {"contentq"=> "3","point" => 3, "desc" => ""}
+      options << {"contentq"=> "4","point" => 4, "desc" => ""}
+      options << {"contentq"=> "5","point" => 5, "desc" => ""}
       questions << { content: 'Múltiplos de atrás hacia adelante.(93, 86, 79, 72, 85) - Deletrear de atrás hacia delante la palabra MUNDO.', type: 'check', answers: options }
 
       test_build( test, "Atención y cálculo.", "section", questions: questions )
@@ -565,9 +573,10 @@ namespace :test do
       questions = Array.new
 
       options= Array.new
-      options << {"contentq"=> "Si","point" => 3, "desc" => ""}
-      options << {"contentq"=> "No","point" => 0, "desc" => ""}
-      questions << { content: 'Repetir los objetos nombrados anteriormente (casa, zapato, papel)', type: 'check', answers: options }
+      options << {"contentq"=> "1","point" => 1, "desc" => ""}
+			options << {"contentq"=> "2","point" => 2, "desc" => ""}
+			options << {"contentq"=> "3","point" => 3, "desc" => ""}
+			questions << { content: 'Repetir los objetos nombrados anteriormente (casa, zapato, papel)', type: 'check', answers: options }
 
       test_build( test, "Memoria", "section", questions: questions )
       
@@ -575,40 +584,37 @@ namespace :test do
       questions = Array.new
 
       options= Array.new
-      options << {"contentq"=> "Si","point" => 2, "desc" => ""}
-      options << {"contentq"=> "No","point" => 0, "desc" => ""}
-      questions << { content: 'Mostrar un lápiz y un reloj, preguntar sus respectivos nombres.', type: 'check', answers: options }
+      options << {"contentq"=> "1","point" => 1, "desc" => ""}
+			options << {"contentq"=> "2","point" => 2, "desc" => ""}
+			questions << { content: 'Mostrar un lápiz y un reloj, preguntar sus respectivos nombres.', type: 'check', answers: options }
 
       options= Array.new
-      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
-      options << {"contentq"=> "No","point" => 0, "desc" => ""}
-      questions << { content: 'Repetir: tres perros en un trigal.', type: 'check', answers: options }
+      options << {"contentq"=> "1","point" => 1, "desc" => ""}
+			questions << { content: 'Repetir: tres perros en un trigal.', type: 'check', answers: options }
 
       options= Array.new
-      options << {"contentq"=> "Si","point" => 3, "desc" => ""}
-      options << {"contentq"=> "No","point" => 0, "desc" => ""}
-      questions << { content: 'Indicar: Tome el papel con su mano derecha, dóblelo a la mitad y póngalo en el suelo.', type: 'check', answers: options }
+      options << {"contentq"=> "1","point" => 1, "desc" => ""}
+			options << {"contentq"=> "2","point" => 2, "desc" => ""}
+			options << {"contentq"=> "3","point" => 3, "desc" => ""}
+			questions << { content: 'Indicar: Tome el papel con su mano derecha, dóblelo a la mitad y póngalo en el suelo.', type: 'check', answers: options }
 
       options= Array.new
-      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
-      options << {"contentq"=> "No","point" => 0, "desc" => ""}
-      questions << { content: 'Lea  y realice lo  siguiente: -CIERRE LOS OJOS-', type: 'check', answers: options }
+      options << {"contentq"=> "1","point" => 1, "desc" => ""}
+			questions << { content: 'Lea  y realice lo  siguiente: -CIERRE LOS OJOS-', type: 'check', answers: options }
 
       options= Array.new
-      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
-      options << {"contentq"=> "No","point" => 0, "desc" => ""}
-      questions << { content: 'Escriba una oración, enunciado o frece.', type: 'check', answers: options }
+      options << {"contentq"=> "1","point" => 1, "desc" => ""}
+			questions << { content: 'Escriba una oración, enunciado o frece.', type: 'check', answers: options }
 
       options= Array.new
-      options << {"contentq"=> "Si","point" => 1, "desc" => ""}
-      options << {"contentq"=> "No","point" => 0, "desc" => ""}
-      questions << { content: 'Copie este dibujo.', type: 'check', answers: options }
+      options << {"contentq"=> "1","point" => 1, "desc" => ""}
+			questions << { content: 'Copie este dibujo.', type: 'check', answers: options }
 
       test_build( test, "Lenguaje", "section", questions: questions )
     end
 
     def yesavage
-      test = Test.new(title: "ESCALA DE YESAVAGE (Versión reducida)", calculate: :sum, test_code:7)
+      test = Test.new(title: "ESCALA DE YESAVAGE (Versión reducida)", calculate: :yesavage, test_code:7)
       test.save!
 
       options= Array.new
@@ -688,55 +694,55 @@ namespace :test do
     end
 
     def tinetti
-      test = Test.new(title: "ESCALA DE TINETTI", calculate: :sum, test_code:8 )
+      test = Test.new(title: "ESCALA DE TINETTI", calculate: :tinetti, test_code:8 )
       test.save!
 
       # question 1
       options= Array.new
       options << {"contentq"=> "Se inclina o se desliza en la silla","point" => 0, "desc" => ""}
       options << {"contentq"=> "Se mantiene seguro","point" => 0, "desc" => ""}
-      test_build(test,"Equilibrio sentado" ,"check", answers: options )
+      test_build(test,"Equilibrio sentado" ,"check", answers: options, group: 1 )
 
       # question 2
       options= Array.new
       options << {"contentq"=> "Imposible sin ayuda","point" => 0, "desc" => ""}
       options << {"contentq"=> "Capaz, pero usa los brazos para ayudarse","point" => 1, "desc" => ""}
       options << {"contentq"=> "Capaz sin usar los brazos","point" => 2, "desc" => ""}
-      test_build(test,"Levantarse" ,"check", answers: options )
+      test_build(test,"Levantarse" ,"check", answers: options, group: 1 )
       
       # question 3
       options= Array.new
       options << {"contentq"=> "Incapaz sin ayuda","point" => 0, "desc" => ""}
       options << {"contentq"=> "Capaz, pero necesita más de un intento","point" => 1, "desc" => ""}
       options << {"contentq"=> "Capaz de levantarse con sólo un intento","point" => 2, "desc" => ""}
-      test_build(test,"Intentos para levantarse" ,"check", answers: options )
+      test_build(test,"Intentos para levantarse" ,"check", answers: options,  group: 1 )
       #
       # question 4
       options= Array.new
       options << {"contentq"=> "Inestable (se tambalea, mueve los pies), marcado balanceo del tronco","point" => 0, "desc" => ""}
       options << {"contentq"=> "Estable pero usa el andador, bastón o se agarra a otro objeto para mantenerse","point" => 1, "desc" => ""}
       options << {"contentq"=> "Estable sin andador, bastón u otros soportes","point" => 2, "desc" => ""}
-      test_build(test,"Equilibrio en bipedestación inmediata (los primeros 5 segundos)" ,"check", answers: options )
+      test_build(test,"Equilibrio en bipedestación inmediata (los primeros 5 segundos)" ,"check", answers: options, group: 1 )
       #
       # question 5
       options= Array.new
       options << {"contentq"=> "Inestable","point" => 0, "desc" => ""}
       options << {"contentq"=> "Estable, pero con apoyo amplio (talones separados más de 10 cm) o un bastón u otro soporte","point" => 1, "desc" => ""}
       options << {"contentq"=> "Estable sin usar bastón u otros soportes por 10 segundos, no requiere ayudas","point" => 2, "desc" => ""}
-      test_build(test,"Equilibrio en bipedestación" ,"check", answers: options )
+      test_build(test,"Equilibrio en bipedestación" ,"check", answers: options, group: 1 )
       #
       # question 6
       options= Array.new
       options << {"contentq"=> "Empieza a caerse","point" => 0, "desc" => ""}
       options << {"contentq"=> "Se tambalea, se agarra, pero se mantiene","point" => 1, "desc" => ""}
       options << {"contentq"=> "Estable","point" => 2, "desc" => ""}
-      test_build(test,"6. Empujar (el paciente en bipedestación con el tronco erecto y los pies tan juntos como sea posible). El examinador empuja suavemente en el esternón del paciente con la palma de la mano, tres veces (sin prevenirlo). Asegúrese que un evaluador esté detrás de la persona para evitar caída." ,"check", answers: options )
+      test_build(test,"6. Empujar (el paciente en bipedestación con el tronco erecto y los pies tan juntos como sea posible). El examinador empuja suavemente en el esternón del paciente con la palma de la mano, tres veces (sin prevenirlo). Asegúrese que un evaluador esté detrás de la persona para evitar caída." ,"check", answers: options,  group: 1 )
       #
       # question 7
       options= Array.new
       options << {"contentq"=> "Inestable","point" => 0, "desc" => ""}
       options << {"contentq"=> "Estable","point" => 1, "desc" => ""}
-      test_build(test,"Ojos cerrados (en la posición del punto 6)" ,"check", answers: options )
+      test_build(test,"Ojos cerrados (en la posición del punto 6)" ,"check", answers: options, group: 1 )
       #
       # question 8
       options= Array.new
@@ -744,20 +750,20 @@ namespace :test do
       options << {"contentq"=> "Continuos.","point" => 1, "desc" => ""}
       options << {"contentq"=> "Inestable (se tambalea, se agarra)","point" => 1, "desc" => ""}
       options << {"contentq"=> "Estable","point" => 0, "desc" => ""}
-      test_build(test,"Vuelta de 360 grados sobre su propio eje" ,"check", answers: options )
+      test_build(test,"Vuelta de 360 grados sobre su propio eje" ,"check", answers: options, group: 1 )
       # 
       # question 9
       options= Array.new
       options << {"contentq"=> "Inseguro, calcula mal la distancia, cae en la silla","point" => 0, "desc" => ""}
       options << {"contentq"=> "Usa los brazos o el movimiento es brusco","point" => 1, "desc" => ""}
       options << {"contentq"=> "Seguro, movimiento suave","point" => 2, "desc" => ""}
-      test_build(test,"Sentarse" ,"check", answers: options )
+      test_build(test,"Sentarse" ,"check", answers: options, group: 1 )
       #
       # question 10
       options= Array.new
       options << {"contentq"=> "Algunas vacilaciones o múltiples intentos para empezar","point" => 0, "desc" => ""}
       options << {"contentq"=> "No vacila","point" => 1, "desc" => ""}
-      test_build(test,"Iniciación de la marcha (inmediatamente después de decir que ande)" ,"check", answers: options )
+      test_build(test,"Iniciación de la marcha (inmediatamente después de decir que ande)" ,"check", answers: options, group: 2 )
       #
       # question 11
       options= Array.new
@@ -765,7 +771,7 @@ namespace :test do
       options << {"contentq"=> "Sobrepasa al pie izquierdo","point" => 0, "desc" => ""}
       options << {"contentq"=> "El pie derecho, no se separa completamente del suelo con el paso","point" => 0, "desc" => ""}
       options << {"contentq"=> "El pie derecho, se separa completamente del suelo","point" => 1, "desc" => ""}
-      test_build(test,"Longitud y altura de paso a) Movimiento del pie derecho" ,"check", answers: options )
+      test_build(test,"Longitud y altura de paso a) Movimiento del pie derecho" ,"check", answers: options, group: 2 )
       #
       # question 11
       options= Array.new
@@ -773,44 +779,44 @@ namespace :test do
       options << {"contentq"=> "Sobrepasa al pie derecho","point" => 1, "desc" => ""}
       options << {"contentq"=> "El pie izquierdo, no se separa completamente del suelo con el paso","point" => 0, "desc" => ""}
       options << {"contentq"=> "El pie izquierdo, se separa completamente del suelo","point" => 1, "desc" => ""}
-      test_build(test,"b) Movimiento del pie izquierdo" ,"check", answers: options )
+      test_build(test,"b) Movimiento del pie izquierdo" ,"check", answers: options, group: 2 )
       # 
       # question 12
       options= Array.new
       options << {"contentq"=> "La longitud de los pasos con los pies izquierdo y derecho, no es igual","point" => 0, "desc" => ""}
       options << {"contentq"=> "La longitud parece igual","point" => 1, "desc" => ""}
-      test_build(test,"Simetría del paso" ,"check", answers: options )
+      test_build(test,"Simetría del paso" ,"check", answers: options, group: 2 )
       #
       # question 13
       options= Array.new
       options << {"contentq"=> "Paradas entre los pasos","point" => 0, "desc" => ""}
       options << {"contentq"=> "Los pasos parecen continuos","point" => 1, "desc" => ""}
-      test_build(test,"Fluidez del paso" ,"check", answers: options )
+      test_build(test,"Fluidez del paso" ,"check", answers: options,  group: 1 )
       #
       # question 14
       options= Array.new
       options << {"contentq"=> "Desviación grave de la trayectoria","point" => 0, "desc" => ""}
       options << {"contentq"=> "Leve/moderada desviación o usa ayudas para mantener la trayectoria","point" => 1, "desc" => ""}
       options << {"contentq"=> "Sin desviación o ayudas","point" => 2, "desc" => ""}
-      test_build(test,"Trayectoria (observar el trazado que realiza uno de los pies durante unos 3 metros)" ,"check", answers: options )
+      test_build(test,"Trayectoria (observar el trazado que realiza uno de los pies durante unos 3 metros)" ,"check", answers: options, group: 2 )
       #
       # question 15
       options= Array.new
       options << {"contentq"=> "Balanceo marcado o usa ayudas","point" => 0, "desc" => ""}
       options << {"contentq"=> "No se balancea pero flexiona las rodillas o la espalda o separa los brazos al caminar","point" => 1, "desc" => ""}
       options << {"contentq"=> "No se balancea, no se flexiona, ni utiliza otras ayudas","point" => 2, "desc" => ""}
-      test_build(test,"Tronco" ,"check", answers: options )
+      test_build(test,"Tronco" ,"check", answers: options, group: 2 )
       #
       # question 16
       options= Array.new
       options << {"contentq"=> "Talones separados","point" => 0, "desc" => ""}
       options << {"contentq"=> "Talones casi juntos al caminar","point" => 1, "desc" => ""}
-      test_build(test,"Postura al caminar" ,"check", answers: options )
+      test_build(test,"Postura al caminar" ,"check", answers: options , group: 2)
 
     end
 
     def hamilton
-      test = Test.new(title: "ESCALA DE ANSIEDAD DE HAMILTON", calculate: "hamilton" )
+      test = Test.new(title: "ESCALA DE ANSIEDAD DE HAMILTON", calculate: :hamilton )
       test.save!
       #
       # question 1

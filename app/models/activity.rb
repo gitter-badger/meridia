@@ -8,8 +8,12 @@ class Activity
   field :objective, type: String
   field :description, type: String
   field :participants, type: Integer
+	field :difficulty, type: Integer
+	field :cognitive, type: Integer
+	field :physical, type: Integer
 
-  embeds_many :areas
+  
+	has_and_belongs_to_many :areas
   embeds_many :lessons
 	
 	has_and_belongs_to_many :members

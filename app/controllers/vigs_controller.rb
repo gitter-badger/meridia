@@ -26,17 +26,21 @@ class VigsController < ApplicationController
   # POST /vigs
   # POST /vigs.json
   def create
-    @vig = Vig.new(vig_params)
-    @vig_current = @member.vigs.desc.first
-		if !@vig_current.nil?
-						@vig.cognitive = @vig_current.cognitive
-						@vig.social = @vig_current.social
-						@vig.physical = @vig_current.physical
-						@vig.personaldev = @vig_current.personaldev
-		end
+		member = Member.find(params[:member_id])
+    current_vig = member.vigs.last
+		@vig = Vig.new(vig_params)
+		if !current_vig.nil?
+			@vig.abvd = current_vig.abvd
+			@vig.aivd = current_vig.aivd
+			@vig.tinetti = current_vig.tinetti
+			@vig.folstein = current_vig.folstein
+			@vig.yesavage = current_vig.yesavage
+			@vig.hamilton = current_vig.hamilton
+			@vig.nutrition = current_vig.nutrition
+			@vig.oars = current_vig.oars
+		end	
 		respond_to do |format|
       if @member.vigs << @vig
-        
 				format.html { redirect_to member_vig_path(@member, @vig), notice: 'Vig was successfully created.' }
       else
         format.html { render action: 'new' }

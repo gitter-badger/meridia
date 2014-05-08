@@ -1,5 +1,6 @@
 Meridia::Application.routes.draw do
 
+  get "schedule/index"
   resources :tests
   resources :activities
   resources :families
@@ -7,12 +8,14 @@ Meridia::Application.routes.draw do
  
  	resources :members do		
 		resources :vigs
+		resources :schedule
 	end
 	
 	resources :vigs do
 		resources :progress	
 		resources :tests
 		resources :probien
+		resources :schedule
 	end
 	
 	get ':vigs_test_id/answers', to: 'answers#index', as: 'answers_all'

@@ -3,7 +3,7 @@
   %strong
     = @member.name.upcase
     = @member.lastname.upcase
-  ="/Valoracionesi/tests"
+  ="/Valoraciones/tests"
 .col-md-9
   .panel
     - @answers.each_with_index do |asw, i|
@@ -22,7 +22,6 @@
                 (Detalles)
             .pull-right
               %h4
-              
                 = raw( calculate @answers[0].vigs_test)
       %label
         - i += 1

@@ -2,9 +2,9 @@ class Area
   include Mongoid::Document
   include Mongoid::Enum
 
-  enum :kindof, [:cognitive, :physical, :personaldev, :social]
-  enum :level, [ :basic, :intermediate, :advanced ], { :multiple => true, :default => [] }
+  enum :kindof, [:health,:cognitive, :physical, :personaldev, :social]
+  #enum :level, [ :basic, :intermediate, :advanced ], { :multiple => true, :default => [] }
 
-  embedded_in :activity
+   has_and_belongs_to_many :activities
 
 end

@@ -10,7 +10,7 @@ module VigsHelper
 	end
 
 	def hamilton(points)
-		total = points['total1']+ points['total2']
+		total = points['total']+ points['total2']
 		html  = "Asiedad Somatica:#{ points['total2']} <br>
 		Ansiedad Psiquica: #{points['total1']}
 		<br>"
@@ -22,20 +22,84 @@ module VigsHelper
 			when proc {|total| total > 15 }
 				html += "Total : #{total} (Ansiedad Moderada/Grave)"
 			else
-				"error"
+				html = "No Disponible"
 		end
 		html
 	end
-	def barthel(total)
-		 case total
+
+	def barthel(points)
+		total = points['total']
+		case total
 				when 0..44
-					"Severa"
+					"Dependencia : #{total} (Severa)"
 				when 45..59
-					"Grave"
+					"Dependencia :  #{total} (Grave)"
 				when 60..79
-					"#{total} Puntos (Dependencia Moderada)"
+					"Dependencia :#{total} Puntos (Moderada)"
 				when 80..100
-					"Ligera"
+					"Dependendia : #{total} (Ligera)"
+				else
+					"No disponible"
+		end
+	end
+
+	def mental(points)
+		total = points['total']
+		case total
+		when total >= 25
+				"Total : #{total} (Normal)"
+		when 24..26
+				"Total : #{total} (Deterioro Cognitivo)"		
+		when 21..23
+						"Total : #{total} (Deterioro Leve)"
+		when 11..20
+						"Total : #{total} (Demecia Moderada)"
+		when 0..10
+						"Total : #{total} (Demencia Severa)"
+		else
+						"No Disponible"
+		end
+
+	end
+
+	def lawton(points)
+		case points['total']
+		when 4..7
+						"Dependencia : #{points['total']}(Moderada)"
+		when 0..4
+						"Dependencia : #{points['total']}(Mayor)"
+		else
+						"No disponible"
+		end
+	end
+	def tinetti(points)
+		total = points['total']+ points['total2']
+		html  = "Marcha:#{ points['total2']} <br>
+		Equilibrio: #{points['total']}
+		<br>"
+		case total.to_i
+			when 25..28
+				html += "Total : #{total} (Riesgo Bajo)"
+			when 19..24
+				html +="Total :  #{total} (Riesgo moderada)"
+			when proc {|total| total < 18 }
+				html += "Total : #{total} (Alto riesgo de caidas)"
+			else
+				html = "No Disponible"
+		end
+		html
+		
+	end
+	def yesavage(points)
+		case points['total']
+		when 0..5
+						"Deprecion : #{points['total']}(Normal)"
+		when 6..9
+						"Deprecion : #{points['total']}(Leve)"
+		when points['total'] > 10 
+						 "Deprecion : #{points['total']}(establecida)"
+		else
+						"No disponible"
 		end
 	end
 end
