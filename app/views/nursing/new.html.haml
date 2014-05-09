@@ -1,0 +1,126 @@
+- content_for :title_breadcrumb do
+  %strong
+    = @member.name.upcase
+    = @member.lastname.upcase
+  ="/Enfermeria"
+
+.col-md-12
+  .panel
+    = render 'steps'
+    %hr
+    = form_for( @member, :url => member_nursing_index_path(@member), :method => "post", :html => { :class => "form-horizontal" }  ) do |f|
+      = hidden_field_tag :_step, 'step_one'
+      %fieldset#allergies{ :style =>  "padding: 0 0 1em 0;" }
+        %legend Alergias 
+        #allergies-wrapper
+          .allergy{ :style => "position:relative;" }
+            = f.fields_for :allergies do |allergy|
+              .form-group
+                = allergy.label 'Tipo:', :class => "col-sm-2 control-label" 
+                .col-sm-8
+                  = allergy.select :kindof, Allergy::KINDOF, :selected => allergy.object.kindof, :class => "form-control"
+              .form-group
+                = allergy.label 'Nombre:', :class => "col-sm-2 control-label" 
+                .col-sm-8
+                  = allergy.text_field :name, :class => "form-control"
+        = f.button "Agregar", :class => "btn btn-default btn-add", :type => "button", :data => { :clone => ".allergy", :cloneto => "#allergies-wrapper"  }
+      %fieldset#medicines{ :padding => "0 0 1em 0" }
+        %legend Medicamentos
+        #medicines-wrapper
+          .medicine
+            = f.fields_for :medicines do |medicine|
+              .form-group
+                = medicine.label 'farmaco', :class => "col-sm-2 control-label"
+                .col-sm-8
+                  = medicine.text_field :name, :class => "form-control"
+              .form-group
+                = medicine.label 'dias de la semana', :class => "col-sm-2 control-label"
+                .col-sm-8
+                  - Medicine::DAY.each do |day|
+                    = medicine.label day, :class => "checkbox-inline" do
+                      = medicine.check_box :day, { :multiple => true, :checked => medicine.object.send( [day,'?'].join ) ? true : false }, day, nil
+                      = day
+              .form-group
+                = medicine.label 'Frecuencia', :class => "col-sm-2 control-label"
+                .col-sm-8
+                  = medicine.select :frequency, (1..24).map{ |h| h.to_i > 9 ? [h, h] : ['%s%s' % [0, h], h] }, :selected => medicine.object.frequency
+              .form-group
+                = medicine.label 'Dosis', :class => "col-sm-2 control-label"
+                .col-sm-8
+                  = medicine.select :dose, (1..10).map{ |h| h.to_i > 9 ? [h, h] : ['%s%s' % [0, h], h] }, :selected => medicine.object.dose
+              .form-group
+                = medicine.label 'Via', :class => "col-sm-2 control-label"
+                .col-sm-8
+                  = medicine.text_field :way,  :class => "form-control"
+              .form-group
+                = medicine.label 'Vigencia', :class => "col-sm-2 control-label"
+                .col-sm-8
+                  = medicine.text_field :validity,  :class => "form-control"
+        = f.button "Agregar", :class => "btn btn-default btn-add", :type => "button", :data => { :clone => ".medicine", :cloneto => "#medicines-wrapper"  }
+      %hr
+      = f.submit "Guardar  & Continuar", :class => "btn btn-primary" 
+      (
+      %a{ :href => "/" } Saltar este paso
+      )
+- content_for :footer do
+  %script{ :src => "//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" }
+  :javascript
+    window.jQuery || document.write('<script src="assets/javascripts/jquery-1.11.0.min.js"><\/script>')
+  :javascript
+    (function($){
+      $(function(){
+
+        //total = +$('div.allergy').size() - 1
+        copy = $('div.allergy').first().clone().html()
+
+        var action = '#{action_name}'
+
+        //console.log( copy );
+
+        function remove_lesson(){
+          console.log('click');
+        }
+        $('.btn-add').on('click', function( e ){
+          e.stopPropagation();
+
+
+          var container,
+            element;
+
+          container = $(this).data( 'cloneto' );
+          element = $(this).data( 'clone' );
+
+          total = +$( element ).size() - 1
+          copy = $( element ).first().clone().html()
+
+          //console.log( 'Add', total, copy );
+
+          var regularexp = new RegExp( '[]', 'g' )
+          var html = copy.replace(/\[\d\]/g, '['+(total+1)+']').replace(/\_\d\_/g, '_'+(total+1)+'_')
+          console.log( html );
+          /*if( action == 'edit'){
+            html = html.replace(/selected="selected"/g, '')
+          }*/
+          var wrapper = $('<div/>', {class: element.replace(/\./, ''), style: "position: relative;" })
+          wrapper.append( html )
+
+          var button = $( '<button/>', { class: 'delete', text: 'Eliminar', style: 'position: absolute; top: 0; right:0;' ,click: function( event){ event.preventDefault(); $( this ).parent().remove() }  } )
+          wrapper.append( button );
+
+          //Added to DOM
+          wrapper.appendTo( container )
+          //total++
+        })
+
+        /*$('.allergy[data-type="delete"]').on('click',function(e){
+          console.log('prueba')
+          var id = $( this ).data('id')
+          var removeinput = $( '<input/>', { type: 'hidden', name: 'activity[lessons_attributes]['+id+'][_destroy]', value: '1' } )
+          var parent = $( this ).parent();
+          parent.prepend( removeinput );
+          parent.css({ display: 'none' });
+        })*/
+
+      })
+    })(jQuery)
+

@@ -10,7 +10,8 @@ class MembersController < ApplicationController
   # GET /members/1
   # GET /members/1.json
   def show
-  end
+  	@vig = @member.vigs.last
+	end
 
   # GET /members/new
   def new
@@ -70,6 +71,6 @@ class MembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
-      params.require(:member).permit(:name, :addres, :phone, :age, :code, :status, customer_attributes:[:name])
+      params.require(:member).permit(:name, :addres, :phone, :age, :code, :status, customer_attributes:[:name], signs_attributes:[ measures_attributes:[:kindof, :value ]], allergies_attributes: [ :id, :kindof, :name ], medicines_attributes: [ :id, :name, :frequency, :doses, :way, :validity, :day => [] ] )
     end
 end

@@ -1,0 +1,151 @@
+- content_for :title_breadcrumb do
+  %strong
+    = @member.name.upcase
+    = @member.lastname.upcase
+  ="/Valoracion Inicial de Enfermeria"
+
+.col-md-12
+  .panel
+    = render 'steps'
+    %hr
+    = form_for( @member, :url => member_nursing_index_path(@member), :method => "post", :html => { :class => "form-horizontal" }  ) do |f|
+      = hidden_field_tag :_step, 'step_three'
+      = f.fields_for :bodies, @member.bodies.build do |body|
+        %fieldset#phisic{ :style =>  "padding: 0 0 1em 0;" }
+          %legend Exploración física
+          .form-group
+            = body.label :skin, 'Piel', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :skin, 1
+                Rosada
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :skin, 2
+                Palida
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :skin, 3
+                Cianotica
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :skin, 4
+                Icteria
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :skin, 5
+                Seca
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :skin, 6
+                Lesiones
+          .form-group
+            = body.label :mucous, 'Mucosas', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :mucous, 1
+                Hidratadas
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :mucous, 2
+                Deshidratadas
+          .form-group
+            = body.label :dentition, 'Denticion', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :dentition, 1
+                Completa
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :dentition, 2
+                Incompleta
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :dentition, 3
+                Protesis
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :dentition, 4
+                Puente
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :dentition, 5
+                Otra
+          .form-group
+            = body.label :oral_cavity, 'Cavidad Oral', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :oral_cavity, 1
+                Placas
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :oral_cavity, 2
+                Enrojecimiento
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :oral_cavity, 3
+                Lesiones
+        %fieldset#jdownton{ :style =>  "padding: 0 0 1em 0;" }
+          %legend Escala de Riesgo de Caidas (J.H Downton)
+          .form-group
+            = body.label :previous_fallen, 'Cavidad Oral', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :previous_fallen, 0
+                No
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :previous_fallen, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :previous_fallen, 0
+                Ninguno
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :previous_fallen, 1
+                Sedante
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :previous_fallen, 1
+                Diureticos
+          .form-group
+            = body.label :medicines, 'Medicamentos', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :medicines, 1
+                Hipotensores
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :medicines, 1
+                Antiparkinsionano
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :medicines, 1
+                Antidepresivo
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :medicines, 1
+                Otros medicamentos
+          .form-group
+            = body.label :sensory_deficits, 'Déficits sensoriales', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :sensory_deficits, 0
+                Ninguno
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :sensory_deficits, 1
+                Alteraciones visuales
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :sensory_deficits, 1
+                Alteraciones auditivas
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :sensory_deficits, 1
+                Extremidades
+          .form-group
+            = body.label :state_of_mind, 'Estado Mental', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :state_of_mind, 0
+                Orientado
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :state_of_mind, 1
+                Confuso
+          .form-group
+            = body.label :ambulation, 'Deambulación', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :ambulation, 0
+                Normal
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :ambulation, 1
+                Segura con ayuda
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :ambulation, 1
+                Insegura con ayuda/sin ayuda
+              = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :ambulation, 1
+                Imposible
+      %hr
+      = f.submit "Guardar  & Continuar", :class => "btn btn-primary" 

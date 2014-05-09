@@ -7,43 +7,63 @@
   .row
     .col-md-3
       .info_box.box_1
-        .icon
-          %span.icon-pencil
+        .title
+          Cognitivo
         .summary
           %h4
-            55%
-          cognitivo
-    .col-md-3.info_box.box_2
-      Social
-      .row
-        .col-md-6
+            %small
+              Deterioro
+            Normal
+        .summary
           %h4
-            45
-        .col-md-6
+            56
+    .col-md-3
+      .info_box.box_2
+        .title
+          Fisico
+        .summary
           %h4
-            45
+            %small
+              Caidas
+            Riesgo-Bajo
+        .summary
+          %h4
+            %small
+              Dependencia
+            Grave
     .col-md-3
       .info_box.box_3
-        .icon
-          %span.icon-flag
+        .title
+          Desarrollo personal
         .summary
           %h4
-            45%
-          Desarrollo personal
+            %small
+              Deprecion
+        .summary
+          %h4
+            %small
+              Ansiedad
     .col-md-3
       .info_box.box_4
-        .icon
-          %span.icon-group
+        .title
+          Social
         .summary
           %h4
-            66%
-          Social
+            %small
+              Social
+        .summary
+          %h4
+            %small
+              Cultural
 .col-md-12
   .row
     = render 'shared/vig_menu'
     .col-md-9 
       %ul.nav.nav-tabs#myTab
         %li.active
+          %a{href: "#perfil", :"data-toggle"=>"tab"}
+            Perfil
+        %li
           %a{href: "#info", :"data-toggle"=>"tab"}
             Informacion
         %li
@@ -52,49 +72,33 @@
         %li
           %a{href: "#salud", :"data-toggle"=>"tab"}
             Sevicios de Salud
-        %li
-          %a{href: "#pagos", :"data-toggle"=>"tab"}
-            Pagos
       .panel.tab-content
-        .tab-pane.active#info
-          Active
-        .tab-pane#salud
-          
-          %ul.list_data
-            -@member.health_insurances.each do |service|
-              %li
-                %h5
-                  = "#{service.company}".upcase
-                %ul
-                  %li
-                    %span.icon-medkit
-                    Lic N.
-                    = service.licence_number
-                  %li  
-                    %span.icon-medkit
-                    Poliza N.
-                    = service.policy_number
-                  %li  
-                    %span.icon-h-square
-                    = service.institute
-          %ul.list_data
-            -@member.health_services.each do |health|
-              %li
-                %h5
-                  = "#{health.hospital}".upcase
-                %ul
-                  %li
-                    %span.icon-phone2
-                    = health.phone1
-                  %li  
-                    %span.icon-phone2
-                      = health.phone2
-                  %li  
-                    %span.icon-home
-                    = health.address
+        .tab-pane#info
         .tab-pane#family
-        .tab-pane#pagos
-          Pagos
+        .tab-pane.active#perfil
+          %h4
+            = @member.name
+            = @member.lastname
+          .well
+            %span.pull-right
+              %strong
+                Ultima Valoracion: 27-10-23
+            %dl.dl-horizontal
+              %dt
+                Fecha de Nacimiento:
+              %dd
+                23/45/56
+              %dt
+                Edad:
+              %dd
+                18 años
+              %dt
+                Mexico
+
+          .text-danger
+            %strong
+              Alegias:
+              nec ullamcorper nulla non metus auctor fringilla.
 = form_for Vig.new , url: member_vigs_path(@member) do |vig|
   .modal.fade#myModal
     .modal-dialog

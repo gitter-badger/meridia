@@ -1,0 +1,117 @@
+- content_for :title_breadcrumb do
+  %strong
+    = @member.name.upcase
+    = @member.lastname.upcase
+  ="/Valoracion Inicial de Enfermeria"
+
+.col-md-12
+  .panel
+    = render 'steps'
+    %hr
+    = form_for( @member, :url => member_nursing_index_path(@member), :method => "post", :html => { :class => "form-horizontal" }  ) do |f|
+      = hidden_field_tag :_step, 'step_two'
+      %fieldset#breath{ :style =>  "padding: 0 0 1em 0;" }
+        %legend Oxigenacion
+        .form-group
+          = f.fields_for :breaths, @member.breaths.build do |breath|
+            = breath.label 'Respiracion', :class => "col-sm-2 control-label"
+            .col-sm-8
+              - Breath::LEVELS.each do |breath_level|
+                = breath.label "Niveles", :class => "checkbox-inline" do
+                  = breath.check_box :level, { :checked => breath.object.level == breath_level[1] ? true : false }, breath_level[1], nil
+                  = breath_level[0]
+        .form-group
+          = f.fields_for :bloods, @member.bloods.build do |blood|
+            = blood.label 'Circulacion', :class => "col-sm-2 control-label"
+            .col-sm-8
+              - Blood::LEVELS.each do |blood_level|
+                = blood.label "Niveles", :class => "checkbox-inline" do
+                  = blood.check_box :level, { :checked => blood.object.level == blood_level[1] ? true : false }, blood_level[1], nil
+                  = blood_level[0]
+        = f.fields_for "others", @member.others.build do |other|
+          .form-group
+            = other.label :edema, 'Edema', :class => "col-sm-2 control-label"
+            .col-sm-2
+              = label_tag '', '', :class => "radio-inline" do
+                = other.radio_button :edema, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = other.radio_button :edema, 0
+                No
+            %section.nested{ :style => "float: left; margin-right: 10px;", :data => { :id => "" }}
+              = label_tag '', '', :class => "radio-inline" do
+                = other.radio_button :edema_level, 0
+                Leve
+              = label_tag '', '', :class => "radio-inline" do
+                = other.radio_button :edema_level, 1
+                Moderado
+          .form-group
+            = other.label :capilar, 'Llenado Capilar', :class => "col-sm-2 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = other.radio_button :capilar, 1
+                < Seg
+              = label_tag '', '', :class => "radio-inline" do
+                = other.radio_button :capilar, 0
+                > Seg
+      %fieldset#nutrition
+        %legend Nutrición e hidratación
+        = f.fields_for :nutritions, @member.nutritions.build do |nutrition|
+          .form-group
+            = nutrition.label :lose, 'Pérdida de peso > a 5 kg sin causa aparente', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = nutrition.radio_button :lose, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = nutrition.radio_button :lose, 0
+                No
+          .form-group
+            = nutrition.label :masticate, 'Dicultad para masticar', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = nutrition.radio_button :masticate, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = nutrition.radio_button :masticate, 0
+                No
+          .form-group
+            = nutrition.label :eat, 'Dicultad para Deglutir', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = nutrition.radio_button :eat, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = nutrition.radio_button :eat, 0
+                No
+          .form-group
+            = nutrition.label :none, 'Ninguna de las anteriores', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = label_tag '', '', :class => "radio-inline" do
+                = nutrition.radio_button :none, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = nutrition.radio_button :none, 0
+                No
+          .form-group
+            = nutrition.label :change, 'En los últiimos 3 días ha presentado algúm cambio en el aparato digestivo', :class => "col-sm-6 control-label"
+            .col-sm-6
+              = label_tag '', '', :class => "radio-inline" do
+                = nutrition.radio_button :change, 1
+                Si
+              = label_tag '', '', :class => "radio-inline" do
+                = nutrition.radio_button :change, 0
+                No
+              = label_tag '', '', :class => "radio-inline" do
+                = nutrition.radio_button :change, 0
+                Ninguna de las anteriores
+          .form-group
+            = label_tag '', 'Especifique cual, si respondio si', :class => "col-sm-4 control-label"
+            .col-sm-6
+              = nutrition.text_field :change_note, :class => "form-control"
+          .form-group
+            = nutrition.label :foods, 'Alimentos que le causen malestar:', :class => "col-sm-4 control-label"
+            .col-sm-8
+              = nutrition.text_field :foods, :class => "form-control" 
+      %hr
+      = f.submit "Guardar  & Continuar", :class => "btn btn-primary" 

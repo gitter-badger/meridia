@@ -946,15 +946,32 @@ namespace :test do
       test_build(test,"Conducta en el transcurso del test: Tendencia al abatimiento. Agitación: manos inquietas, cierra los puños, tics. Inquietud. Rostro preocupado. Palidez facial. Traga saliva. Eructos. Taquicardia o palpitaciones. Ritmo respiratorio acelerado. Sudoración." ,"check", answers: options ,group: 1)
     end
 
+    def nursing
+      test = Test.new(title: "VALORACION INICIAL DE ENFERMERIA", kindof: :nursing );
+      test.save!
 
-    bartel
-    personal_history
-    dummy_funcionality
-    index_lawton_and_brody
-    mini_mental
-    yesavage
-    oars_social
-    tinetti
-    hamilton
+      questions = Array.new
+
+      options= Array.new
+      options << {"contentq"=> "Medicina", "desc" => "" }
+      options << {"contentq"=> "Alimento", "desc" => "" }
+      questions << { content: 'Tipo', type: 'check', answers: options }
+
+      questions << { content: "Nombre", type: "text" }
+      test_build(test, "Alergias (Medicamentos/Alimentos)" ,"section", questions: questions, multiple: true )
+    end
+
+
+    #bartel
+    #personal_history
+    #dummy_funcionality
+    #index_lawton_and_brody
+    #mini_mental
+    #yesavage
+    #oars_social
+    #tinetti
+    #hamilton
+    nursing
+
   end
 end

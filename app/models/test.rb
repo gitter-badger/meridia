@@ -7,8 +7,7 @@ class Test
   field :description, type: String
   field :test_code, type: Integer
 	field :calculate, type: Symbol
-  field	:function, type: String
-	enum :kindof, [:cognitive, :physical, :personaldev, :social]
+  enum :kindof, [ :gerontology, :nursing ]
 
   has_many :questions
   has_and_belongs_to_many  :vigs

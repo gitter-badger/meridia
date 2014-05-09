@@ -1,0 +1,3 @@
+class Medical < Evaluation
+
+end

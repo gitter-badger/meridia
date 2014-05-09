@@ -133,17 +133,16 @@ html,body,main{
 	margin: 10px 0px; 
 }
 .info_box{
-		padding: 10px;
 		margin-bottom: 20px;
 		background-color: #FFFFFF;
 		border: 1px solid #d7e3f0;
 		height: 80px;
 		text-align: center;
 		.title{
-			margin: -10px;
-			padding: 5px;
+			padding: 2px;
 			margin-bottom: 2px;
 			color:#fff;
+			display:block;
 		}
 		.icon{
 			padding:10px;
@@ -155,14 +154,17 @@ html,body,main{
 			margin-top: 6px;
 		}
 		.summary{
-			width:60%;
+			width:50%;
 			float:left;
+			small{
+				display:block;
+			}
 		}
 }
 
 .box_1{
 	border-bottom: 1px solid #6cadd1;	
-	.icon{
+	.title{
 		background: #6cadd1
 	}
 	
@@ -176,14 +178,14 @@ html,body,main{
 }
 .box_3{
 	border-bottom: 1px solid #a0d269;
-	.icon{
+	.title{
 		background: #a0d269
 	}
 
 }
 .box_4{
 	border-bottom: 1px solid #373947;
-	.icon{
+	.title{
 		background: #373947;
 	}
 }

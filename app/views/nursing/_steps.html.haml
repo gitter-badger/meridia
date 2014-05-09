@@ -1,0 +1,34 @@
+:css
+  .visuallyhidden{ display: none; }
+  .wizard-progress{ list-style: none; list-style-image: none; margin: 0; padding: 0; float: left; white-space: nowrap;  }
+  .wizard-progress li{ float: left; margin-right: 50px; text-align: center; position: relative; width: 100px; }
+  .wizard-progress .step-name{ display: table-cell; height: 32px; vertical-align: bottom; text-align: center; width: 100px; }
+  .wizard-progress .step-name-wrapper{ display: table-cell; height: 100%; vertical-align: bottom;  }
+  .wizard-progress .step-num{ font-size: 14px; font-weight: bold; border: 3px solid #ccc; border-radius: 50%; width: 25px; display: inline-block; margin-top: 10px; color: #ccc }
+  .wizard-progress .step-num:after{ content: ""; display: block; background: #ccc; height: 5px; width: 130px; position: absolute; bottom: 10px; left: 60px;  }
+  .wizard-progress li:last-of-type .step-num:after{ display: none; }
+  .wizard-progress .active-step .step-num{  background-color: #eeeeee; }
+.row
+  .col-md-12
+    .well{ :style => "min-height: 130px; background: none; border: 0; box-shadow: none;" }
+      %ol.wizard-progress.clearfix
+        %li
+          %span.step-name Alergias
+          %span.visuallyhidden
+          %span.step-num 1
+        %li
+          %span.step-name Paso 2
+          %span.visuallyhidden
+          %span.step-num 2
+        %li
+          %span.step-name Paso 3
+          %span.visuallyhidden
+          %span.step-num 2
+        %li
+          %span.step-name Paso 4
+          %span.visuallyhidden
+          %span.step-num 4
+        %li.active-step
+          %span.step-name Paso 5
+          %span.visuallyhidden
+          %span.step-num 5
