@@ -7,7 +7,8 @@ class NursingController < ApplicationController
   def index
     #@medicals = Medical.all
     @member = Member.find(params[:member_id])
-    @vie =  Vig.find_by( member: @member, type: 'nursing' )
+    @vie =  Vig.find_by( member: @member, kind: :nursing )
+
   end
 
   # GET /nursing/1
@@ -19,10 +20,12 @@ class NursingController < ApplicationController
   # GET /nursing/new
   def new
     @member = Member.find(params[:member_id])
+
+    # check for initial evaluation
+    @member.vigs.create! kind: :nursing
+
     @member.allergies.build kindof: :medicine
     @member.medicines.build day: [:monday, :tuesday, :wednesday, :thursday, :friday ]
-    #@medical = Medical.new
-    #@vig = Vig.new
   end
 
   # GET /nursing/step_two

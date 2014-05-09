@@ -6,9 +6,113 @@
     = @member.lastname.upcase
   ="/Enfermeria"
 .col-md-9
+  %ul.nav.nav-tabs#myTab
+    %li.active
+      %a{href: "#perfil", :"data-toggle"=>"tab"}
+        Valoracion Inicial
+    %li
+      %a{href: "#info", :"data-toggle"=>"tab"}
+        Alergias
+    %li
+      %a{href: "#family", :"data-toggle"=>"tab"}
+        Medicamentos
+    %li
+      %a{href: "#salud", :"data-toggle"=>"tab"}
+        Sevicios de Salud
   .panel
-    %h3 Valoraciones de Enfermeria
-    - if @vie
+    - if !@vie.nil?
+      %h3 Informacion Del Participante
+      %dl.dl-horizontal
+        %dt Fecha de Nacimiento
+        %dd= @member.date_borth.strftime "%d-%b-%Y"
+        %dt Edad
+        %dd= age @member.date_borth
+        %dt Genero
+        %dd= sex @member.gender.to_s
+        %dt Estado Civil
+        %dd= @member.marital_status.to_s
+        %dt Nacionalidad
+        %dd= @member.country.to_s
+        %dt Lugar de Origen
+        %dd= @member.origin
+        %dt Nivel Educativo
+        %dd= @member.education
+        %dt Religion
+        %dd= @member.religion
+        %dt Ocupacion
+        %dd= @member.occupation
+        %dt Cuidador Principal
+        %dd= "%s %s" % [@member.families.first.firstname, @member.families.first.lastname]
+        %dt Conocimiento de diagnostico
+        %dd
+        %dt Grupo Sanguineo
+        %dd
+        %dt RH
+        %dd
+        %dt Diagnostico
+        %dd
+        %dt Bebidas Alcoholicas
+        %dd
+        %dt Tabaquismo
+        %dd
+        %dt Medico Tratante
+        %dd= @member.doctors.first
+        %dt Breve Historia
+        %dd 
+      %h3 Oxigenacion
+      %dl.dl-horizontal
+        %dt Respiracion
+        - @breath_level = @member.breaths.first.level
+        - @breath_value = nil
+        - Breath::LEVELS.map do |level|
+          - ( level[1] == @breath_level ) ? @breath_value = level[0] : ''
+        %dd= @breath_value
+        %dt Circulacion
+        - @blood_level = @member.bloods.first.level
+        - @blood_value = nil
+        - Blood::LEVELS.map do |level|
+          - ( level[1] == @blood_level ) ? @blood_value = level[0] : ''
+        %dd= @blood_value
+        %dt Edema
+        %dd= yes_or_not @member.others.first.edema
+        %dt Nivel de Edema
+        %dd= ( @member.others.first.edema_level == 1 ) ? "Moderado" : "Leve"
+        %dt Llenado Capilar
+        %dd= ( @member.others.first.capilar == 1 ) ? "< Seg" : "> Seg"
+      %h3 Nutricion
+      %dl.dl-horizontal
+        %dt Perdida de peso > 5kg sin causa aparente
+        %dd= yes_or_not @member.nutritions.first.lose
+        %dt Dificultad para Masticar
+        %dd= yes_or_not @member.nutritions.first.masticate
+        %dt Dificultad para Deglutir
+        %dd= yes_or_not @member.nutritions.first.eat
+        %dt Ninguna de las anteriores
+        %dd= yes_or_not @member.nutritions.first.none
+        %dt En los ultimos 3 dias ha presentado algun cambio en el aparato digestivo
+        %dd= yes_or_not @member.nutritions.first.change
+        %dt Cual?
+        %dd= yes_or_not @member.nutritions.first.change_note
+        %dt Alimentos que le causan malestar
+        %dd= yes_or_not @member.nutritions.first.foods
+      %h3 Exploracion Fisica
+      %dl.dl-horizontal
+        %dt Piel
+        - Body::LEVELS[0][1].each do |level|
+          - if level[1] == @member.bodies.first.skin
+            %dd= level[0]
+        %dt Mucosas
+        - Body::LEVELS[1][1].each do |level|
+          - if level[1] == @member.bodies.first.mucous
+            %dd= level[0]
+        %dt Denticion
+        - Body::LEVELS[2][1].each do |level|
+          - if level[1] == @member.bodies.first.dentition
+            %dd= level[0]
+        %dt Cavidad Oral
+        - Body::LEVELS[3][1].each do |level|
+          - if level[1] == @member.bodies.first.oral_cavity
+            %dd= level[0]
     - else
       No hay una valoracion de enfermeria actualmente, 
       %a{ :href => new_member_nursing_path } quieres crearla?
