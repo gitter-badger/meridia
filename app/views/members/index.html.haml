@@ -1,18 +1,19 @@
+.col-md-12
+  .panel
+    %table.table
+      %tr
+        %th Name
+        %th Addres
+        %th Phone
+        %th Code
+        %th Status
 
-%table.table
-  %tr
-    %th Name
-    %th Addres
-    %th Phone
-    %th Code
-    %th Status
-
-  - @members.each do |member|
-    %tr
-      %td= link_to  member.name, member_path(member)
-      %td= member.address
-      %td= member.phone
-      %td= member.code
-      %td= member.status
+      - @members.each do |member|
+        %tr
+          %td= link_to  member.name, member_path(member)
+          %td= member.address
+          %td= member.phone
+          %td= member.code
+          %td= member.status
 
 

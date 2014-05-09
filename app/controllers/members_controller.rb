@@ -26,7 +26,6 @@ class MembersController < ApplicationController
   # POST /members.json
   def create
     @member = Member.new(member_params)
-		
     respond_to do |format|
       if @center.members << @member
         format.html { redirect_to center_member_path (@center), notice: 'Member was successfully created.' }
