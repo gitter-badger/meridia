@@ -14,11 +14,11 @@
       %a{href: "#info", :"data-toggle"=>"tab"}
         Alergias
     %li
-      %a{href: "#family", :"data-toggle"=>"tab"}
-        Medicamentos
+      %a{href: "#signs", :"data-toggle"=>"tab"}
+        Signos Vitales
     %li
-      %a{href: "#salud", :"data-toggle"=>"tab"}
-        Sevicios de Salud
+      %a{href: "#medicines", :"data-toggle"=>"tab"}
+        Medicamentos
   .panel
     - if !@vie.nil?
       %h3 Informacion Del Participante
@@ -113,6 +113,143 @@
         - Body::LEVELS[3][1].each do |level|
           - if level[1] == @member.bodies.first.oral_cavity
             %dd= level[0]
+      %h3 Escala de Riesgo de Caidas (J.H. Downton)
+      %dl.dl-horizontal
+        %dt Caidas Previas
+        %dd= @member.bodies.first.previous_fallen
+        %dt Medicamentos
+        %dd= @member.bodies.first.medicines
+        %dt Deficits Sensoriales
+        %dd= @member.bodies.first.sensory_deficits
+        %dt Estado Mental
+        %dd= @member.bodies.first.state_of_mind
+        %dt Deambulacion
+        %dd= @member.bodies.first.ambulation
+      %h3 Eliminacion
+      %dl.dl-horizontal
+        %dt Patron Urinario
+        - Deposition::LEVELS[0][1].each do |level|
+          - if level[1] == @member.depositions.first.urinary_pattern
+            %dd= level[0]
+        %dt Patron Urinario
+        - Deposition::LEVELS[1][1].each do |level|
+          - if level[1] == @member.depositions.first.urinary_frequency
+            %dd= level[0]
+        %dt Aleraciones Urinarias
+        - Deposition::LEVELS[2][1].each do |level|
+          - if level[1] == @member.depositions.first.urinary_alterations
+            %dd= level[0]
+        %dt Movimiento Intestinal en los 4 cuadrantes
+        %dd= yes_or_not @member.depositions.first.intestinal_movement
+        %dt Patron Intestinal
+        - Deposition::LEVELS[4][1].each do |level|
+          - if level[1] == @member.depositions.first.intestinal_pattern
+            %dd= level[0]
+        %dt Frecuencia Intestinal
+        - Deposition::LEVELS[5][1].each do |level|
+          - if level[1] == @member.depositions.first.intestinal_frequency
+            %dd= level[0]
+        %dt Caracteristica Intestinal
+        - Deposition::LEVELS[6][1].each do |level|
+          - if level[1] == @member.depositions.first.intestinal_characteristics
+            %dd= level[0]
+        %dt Uso de laxantes y otros
+        %dd= yes_or_not @member.depositions.first.laxatives
+        %dt Cual
+        %dd= @member.depositions.first.laxatives_note.nil? ? 'Ninguno' : @member.depositions.first.laxatives_note
+        %dt Sonda u Ostomia
+        %dd= yes_or_not @member.depositions.first.catheter_or_ostomy
+        %dt Cual
+        %dd= @member.depositions.first.catheter_or_ostomy_note.nil? ? 'Ninguno' : @member.depositions.first.catheter_or_ostomy_note
+        %dt Sudoracion
+        - Deposition::LEVELS[9][1].each do |level|
+          - if level[1] == @member.depositions.first.sweating
+            %dd= level[0]
+      %h3 Movilizacion
+      %dl.dl-horizontal
+        %dt Mobilizacion
+        - Mobilization::LEVELS[0][1].each do |level|
+          - if level[1] == @member.mobilizations.first.mobilization
+            %dd= level[0]
+        %dt Miembro Dominante
+        - Mobilization::LEVELS[1][1].each do |level|
+          - if level[1] == @member.mobilizations.first.dominant_member
+            %dd= level[0]
+        %dt Dispositivos
+        - Mobilization::LEVELS[2][1].each do |level|
+          - if level[1] == @member.mobilizations.first.devices
+            %dd= level[0]
+      %h3 Higiene
+      %dl.dl-horizontal
+        %dt Preferencia Hora de Bano
+        - Hygiene::LEVELS[0][1].each do |level|
+          - if level[1] == @member.hygienes.first.bath
+            %dd= level[0]
+        %dt Preferencia Lavado de Cabello
+        - Hygiene::LEVELS[1][1].each do |level|
+          - if level[1] == @member.hygienes.first.hair
+            %dd= level[0]
+        %dt Frecuencia de Lavado de Dientes
+        - Hygiene::LEVELS[2][1].each do |level|
+          - if level[1] == @member.hygienes.first.teeth
+            %dd= level[0]
+        %dt Recomendaciones sobre habitos higienicos
+        %dd= @member.hygienes.first.observations
+      %h3 Comunicacion
+      %dl.dl-horizontal
+        %dt Dificultad para ver
+        %dd= yes_or_not @member.communications.first.see
+        %dt Dificultad para oir
+        %dd= yes_or_not @member.communications.first.hear
+        %dt Dificultad para hablar
+        %dd= yes_or_not @member.communications.first.speak
+        %dt Usa protesis auditiva?
+        %dd= yes_or_not @member.communications.first.hearing_aid
+        %dt Usa lentes de contacto?
+        %dd= yes_or_not @member.communications.first.contact_lenses
+        %dt Usa anteojos?
+        %dd= yes_or_not @member.communications.first.glasses
+        %dt Observaciones
+        %dd= @member.communications.first.observations
+      %h3 Reposos y Sueno
+      %dl.dl-horizontal
+        %dt Horas de sueno
+        - Sleep::LEVELS[0][1].each do |level|
+          - if level[1] == @member.sleeps.first.duration
+            %dd= level[0]
+        %dt Acostumbra a tomar siesta?
+        %dd= yes_or_not @member.sleeps.first.nap
+        %dt Patron de sueno
+        - Sleep::LEVELS[1][1].each do |level|
+          - if level[1] == @member.sleeps.first.pattern
+            %dd= level[0]
+        %dt Toma algun medicamento para dormir
+        %dd= yes_or_not @member.sleeps.first.drugs
+        %dt Cual (es) ?
+        %dd= @member.sleeps.first.drugs_note
+        %dt Toma alguna otra medida para inducir el sueno?
+        %dd= yes_or_not @member.sleeps.first.other
+        %dt Cual (es) ?
+        %dd= @member.sleeps.first.other_note
+        %dt Observaciones
+        %dd= @member.sleeps.first.observations
+      %h3 Dolor
+      %dl.dl-horizontal
+        %dt En las ultimas 24 horas ha experimentado dolor?
+        %dd= yes_or_not @member.pains.first.has_pain
+        %dt que situacion hace que el dolor se aumente?
+        %dd= @member.pains.first.has_pain_note
+        %dt localizacion
+        %dd= @member.pains.first.location
+        %dt Que le ayudo a eliminarlo?
+        %dd= @member.pains.first.over_pain
+        %dt En una escala de 0 al 10 con que numero lo evalua?
+        %dd= @member.pains.first.value
+        %dt El dolor lo considera como?
+        - Pain::LEVELS[0][1].each do |level|
+          - if level[1] == @member.sleeps.first.pattern
+            %dd= level[0]
+        %dt Otras Observaciones
     - else
       No hay una valoracion de enfermeria actualmente, 
       %a{ :href => new_member_nursing_path } quieres crearla?

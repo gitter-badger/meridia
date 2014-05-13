@@ -1,5 +1,6 @@
 class Communication < Evaluation
 
+
   field :see, type: Integer, default: 0
   field :hear, type: Integer, default: 0
   field :speak, type: Integer, default: 0
