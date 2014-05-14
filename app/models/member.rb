@@ -22,8 +22,8 @@ class Member
   has_many :communications
   has_many :sleeps
   has_many :pains
-
-  accepts_nested_attributes_for :families
+  has_and_belongs_to_many :activities
+	accepts_nested_attributes_for :families
   accepts_nested_attributes_for :health_insurances
   accepts_nested_attributes_for :health_services
   accepts_nested_attributes_for :signs, :allergies, :medicines, :breaths, :bloods, :others, :nutritions, :bodies, :depositions, :mobilizations, :hygienes, :communications, :sleeps, :pains

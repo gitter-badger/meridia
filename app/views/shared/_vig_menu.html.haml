@@ -6,6 +6,7 @@
     .list-group
       = link_to "Perfil", member_path(@member), class: "list-group-item"
       =link_to "Valoraciones", member_vigs_path(@member) , class: "list-group-item"
-      = link_to "Horarios",member_schedule_index_path(@member), class: "list-group-item"
+      - if @member.vigs.count > 0
+        = link_to "Horarios",member_schedule_index_path(@member), class: "list-group-item"
       = link_to "Enfermeria",member_nursing_index_path(@member), class: "list-group-item"
-      = link_to "Evolucion", "#", class: "list-group-item"
+      = link_to "Evolucion", member_progress_index_path(@member), class: "list-group-item"

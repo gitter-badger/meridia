@@ -1,22 +1,81 @@
 - content_for :title do
   = 'Listing activities'.upcase
 
-%table.ui.table.segment
-  %tr
-    %th Title
-    %th Participants
-    %th
-    %th
-    %th
+.panel
+  %h3
+    Horario Semanal
+  %table.table
+    %thead
+      %tr
+        %th
+          Hora
+        %th
+          Lunes
+        %th
+          Martes
+        %th
+          Miercoles
+        %th
+          Jueves
+        %th
+          Viernes
+        %th
+          Sabado
+    - (8..18).map do |n|
+      %tr
+        %td
+          = n
+        -if  @time.monday?
+          %td.yellow
+            = lesson(@activities, n , :monday)
+        -else
+          %td
+            = lesson(@activities, n , :monday)
+        -if @time.tuesday?
+          %td.yellow
+            = lesson(@activities, n , :tuesday)
+        -else
+          %td
+            = lesson(@activities, n , :tuesday)
+        -if @time.wednesday?
+          %td.yellow
+            = lesson(@activities, n , :wednesday)
+        -else
+          %td
+            = lesson(@activities, n , :wednesday)
+        -if @time.thursday?
+          %td 
+            = lesson(@activities, n , :thursday)
+        -else
+          %td
+            = lesson(@activities, n , :thursday)
+        -if @time.friday?
+          %td.yellow 
+            = lesson(@activities, n , :friday)
+        -else  
+          %td 
+            = lesson(@activities, n , :friday)
+        %td 
+          = lesson(@activities, n , :saturday)
 
-  - @activities.each do |activity|
+  %h2
+    Actividades Desactivadas
+  %table.table
     %tr
-      %td= activity.title
-      %td= activity.participants
-      %td= link_to 'Show', activity
-      %td= link_to 'Edit', edit_activity_path(activity)
-      %td= link_to 'Destroy', activity, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %th Title
+      %th Participants
+      %th
+      %th
+      %th
 
-%br
+    - @activities.each do |activity|
+      %tr
+        %td= activity.title
+        %td= activity.participants
+        %td= link_to 'Show', activity
+        %td= link_to 'Edit', edit_activity_path(activity)
+        %td= link_to 'Destroy', activity, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-= link_to 'Crear Actividad', new_activity_path
+  %br
+
+  = link_to 'Crear Actividad', new_activity_path
