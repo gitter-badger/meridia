@@ -1,0 +1,12 @@
+= form_for( @sign, :url => member_signs_path(@member), :method => "post", :html => { :class => "form-horizontal" }  ) do |f|
+  = f.hidden_field :member_id, :value => @member.id
+  %fieldset#allergies{ :style =>  "padding: 0 0 1em 0;" }
+    %legend Agregar Signos Vitales
+    = f.fields_for :measures do |measure|
+      .form-group
+        = measure.hidden_field :kindof
+        = measure.label :kindof, Measure::LEVELS[ measure.object.kindof ], :class => "col-sm-2 control-label"
+        .col-sm-8
+          = measure.text_field :value, :class => "form-control"
+  %hr
+  = f.submit "Guardar", :class => "btn btn-primary" 

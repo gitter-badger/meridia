@@ -1,0 +1,14 @@
+= form_for( @allergy, :url => member_allergies_path(@member), :method => "post", :html => { :class => "form-horizontal" }  ) do |f|
+  = f.hidden_field :member_id, :value => @member.id
+  %fieldset#allergies{ :style =>  "padding: 0 0 1em 0;" }
+    %legend Agregar Alergia
+    .form-group
+      = f.label 'Tipo:', :class => "col-sm-2 control-label" 
+      .col-sm-8
+        = f.select :kindof, Allergy::KINDOF
+    .form-group
+      = f.label 'Nombre:', :class => "col-sm-2 control-label" 
+      .col-sm-8
+        = f.text_field :name, :class => "form-control"
+  %hr
+  = f.submit "Guardar", :class => "btn btn-primary" 

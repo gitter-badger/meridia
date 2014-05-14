@@ -1,0 +1,41 @@
+= render "shared/vig_menu" 
+
+- content_for :title_breadcrumb do
+  %strong
+    = @member.name.upcase
+    = @member.lastname.upcase
+  ="/Enfermeria"
+.col-md-9
+  %ul.nav.nav-tabs
+    %li
+      %a{href: "#perfil", }
+        Valoracion Inicial
+    %li.active
+      %a{href: member_allergies_path(@member ) }
+        Alergias
+    %li
+      %a{href: "#signs" }
+        Signos Vitales
+    %li
+      %a{href: "#medicines" }
+        Medicamentos
+  .panel
+    #allergies.tab-content
+      .btn-group
+        %a.btn.btn-default{:href => new_member_allergy_path( @member ) }
+          %span.glyphicon.glyphicon-plus-sign
+          Agregar
+      %table.table
+        %thead
+          %tr
+            %th #
+            %th Nombre
+            %th Tipo
+            %th Acciones
+        %tbody
+          - @member.allergies.each_with_index do |allergy, i|
+            %tr
+              %td= ( i + 1 )
+              %td= allergy.name
+              %td= allergy.kindof
+              %td= button_to 'Eliminar', {:controller => :allergies, :action => :destroy, :id => allergy.id }, :method => :delete
