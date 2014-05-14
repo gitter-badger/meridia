@@ -1,31 +1,63 @@
 @import  "bootstrap";
+$purple: #64509a;
+$verde: #707521;
+
 html,body,main{
 	height:100%;
 	background-color:#ededed;
 }
-
+main{
+	margin-top: 52px;
+}
 .login{
 	background:url("login-background.jpg")no-repeat;
 	background-size: cover;
-	color: #a9eeff;
+	color: #66519d;
 	.authform{
 		margin-top: 200px;
 	}
 	a{
 		font-weight: bold;
 		margin-top:20px;
-		color: #a9eeff;
+		color: #66519d;
 		&:hover{
-			color: #a9eeff;
+			color: #66519d;
 		}
 	}
 }
 
 .navbar-head{
+	@extend .navbar-fixed-top;
 	margin-bottom:0px;
-	background:#23bab5;
+	background:$purple;
 	border-radius:0px;
-	min-height:10%;
+	a{
+		color: #fff;
+	}
+}
+.nav-accion{
+	@extend .nav;
+	@extend .navbar-nav;
+	.open{
+		a{
+			&:hover{
+				background-color:transparent;
+			}
+		}
+	}
+	li{
+		a{
+			&:hover{
+				text-decoration: underline;
+				background-color:transparent;
+			}
+		}
+	}
+	.off{
+		font-size: 1.5em;
+		background: #000;
+		text-decoration: none;
+	}
 }
 .title_bar{
 	background: #fff;
@@ -37,14 +69,19 @@ html,body,main{
 	-moz-box-shadow: 0px 1px 0px 0px #e2e2e2;
 	box-shadow: 0px 1px 0px 0px #e2e2e2
 }
+.bg_l{
+	background: rgba(255,255,255,0.3);
+	height: 100%;
+}
 .general-row{
 	@extend  .row;
 	height:100%;
 }
 .main-menu{
-	height:90%;
+	height:95%;
 	padding:0px;
 	background:#2a3336;
+	position: fixed;
 	.list-menu{
 		@extend .nav-list;
 		margin-top:10px;
@@ -55,7 +92,7 @@ html,body,main{
 			color: #80969c;
 			&:hover{
 				text-decoration: none;
-				background-color: #23bab5;
+				background-color: $purple;
 				color: #ffffff;
 				-webkit-transition: all 0.3s ease;
 				-moz-transition: all 0.3s ease;
@@ -78,7 +115,7 @@ html,body,main{
 	
 	.avatar{
 		float: left;
-		border: 2px solid #23bab5;
+		border: 2px solid $purple;
 		border-radius: 50%;
 		margin-right: 10px;
 		width: 50px;

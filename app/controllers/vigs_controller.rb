@@ -19,12 +19,7 @@ class VigsController < ApplicationController
     @vig = Vig.new
   end
 
-  # GET /vigs/1/edit
-  def edit
-  end
 
-  # POST /vigs
-  # POST /vigs.json
   def create
 		member = Member.find(params[:member_id])
     current_vig = member.vigs.last
@@ -45,28 +40,6 @@ class VigsController < ApplicationController
       else
         format.html { render action: 'new' }
       end
-    end
-  end
-
-  # PATCH/PUT /vigs/1
-  # PATCH/PUT /vigs/1.json
-  def update
-    respond_to do |format|
-      if @vig.update(vig_params)
-        format.html { redirect_to @vig, notice: 'Vig was successfully updated.' }
-      else
-        format.html { render action: 'edit' }
-      end
-    end
-  end
-
-  # DELETE /vigs/1
-  # DELETE /vigs/1.json
-  def destroy
-    @vig.destroy
-    respond_to do |format|
-      format.html { redirect_to vigs_url }
-      format.json { head :no_content }
     end
   end
 

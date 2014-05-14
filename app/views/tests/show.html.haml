@@ -14,7 +14,7 @@
         - if member.type == 'section'
           %section
             %header
-              %label = member.name
+              %label= member.name
             - member.answers.each do |a|
               - if a.type == 'checkbox'
                 = a.content
