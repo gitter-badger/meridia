@@ -1,7 +1,10 @@
 @import  "bootstrap";
 $purple: #64509a;
 $verde: #707521;
-
+$green: #95cd46;
+$red: #d05654;
+$black: #292b38;
+$blue: #63b8d8;
 html,body,main{
   height:100%;
   background-color:#ededed;
@@ -192,7 +195,11 @@ li{
     color: #fff;
     font-size: 1.7em;
     margin-top: 6px;
-  }
+		span{
+			font-size: 1.7em;;
+
+		}  
+}
   .summary{
     width:50%;
     float:left;
@@ -253,4 +260,16 @@ li{
 }
 .yellow{
   background: #fcf88d
+}
+.red{
+	color:$red
+}
+.black{
+	color:$black
+}
+.green{
+	color:$green
+}
+.blue{
+	color:$blue
 }

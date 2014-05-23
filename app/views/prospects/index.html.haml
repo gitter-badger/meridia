@@ -1,0 +1,33 @@
+.panel
+  %h1 Listing prospects
+  = link_to 'New Prospect', new_prospect_path, class: "btn btn-success pull-right"
+
+  %table.table
+    %tr
+      %th Code
+      %th Name
+      %th Lastname
+      %th Phone
+      %th Mobile
+      %th Mail
+      %th Delegacion
+      %th Status
+      %th
+      %th
+      %th
+
+    - @prospects.each do |prospect|
+      %tr
+        %td= prospect.code
+        %td= prospect.name
+        %td= prospect.lastname
+        %td= prospect.phone
+        %td= prospect.mobile
+        %td= prospect.mail
+        %td= prospect.delegacion
+        %td= prospect.status
+        %td= link_to 'Show', prospect
+        %td= link_to 'Edit', edit_prospect_path(prospect)
+        %td= link_to 'Destroy', prospect, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+

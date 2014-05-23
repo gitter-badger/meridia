@@ -1,0 +1,117 @@
+= form_for @prospect do |f|
+  - if @prospect.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@prospect.errors.count, "error")} prohibited this prospect from being saved:"
+      %ul
+        - @prospect.errors.full_messages.each do |msg|
+          %li= msg
+
+  .row
+    #rootwizard
+      .navbar
+        .col-md-10.col-md-offset-1
+          %ul.steps
+            %li
+              %a{"data-toggle" => "tab", href: "#tab1"}
+                Datos Generales Cliente
+            %li
+              %a{"data-toggle" => "tab", href: "#tab2"}
+                Datos Generales Miembro
+            %li
+              %a{"data-toggle" => "tab", href: "#tab3"}
+                Datos Medicos Miembro
+
+      .tab-content
+        #tab1.tab-pane
+          .col-md-5.col-md-offset-1
+            .form-group
+              = f.label :name
+              = f.text_field :name, class: 'form-control'
+            .form-group
+              = f.label :mobile
+              = f.text_field :mobile, class: 'form-control'
+            .form-group
+              = f.label :mail
+              = f.text_field :mail, class: 'form-control'
+            .form-group
+              = f.label :delegacion
+              = f.select :delegacion,Prospect::DELEGATION,{}, class: 'form-control'
+            .form-group
+              = f.label :contact_type
+              = f.select :contact_type,Prospect::MEDIO,{}, class: 'form-control'
+          .col-md-5
+            .form-group
+              = f.label :lastname
+              = f.text_field :lastname, class: 'form-control'
+            .form-group
+              = f.label :phone
+              = f.text_field :phone, class: 'form-control'
+            .form-group
+              = f.label :relationship
+              = f.select :relationship,ProspectMember::PERSON_CONTACT ,{}, class: 'form-control' 
+            .form-group
+              = f.label :other_state
+              = f.text_field :other_state, class: 'form-control'
+            .form-group
+              = f.label :observation_contact
+              = f.text_field :observation_contact, class: 'form-control'
+        
+        = f.fields_for :prospect_member do |member|
+          #tab2.tab-pane
+            .col-md-5.col-md-offset-1
+              .form-group
+                = member.label :name 
+                = member.text_field :name,class: 'form-control'
+ 
+              .form-group
+                =member.label :genre
+                = member.select :genre, [['Masculino', 1],['Femenino','0']],{}, class: 'form-control'
+
+              .form-group
+                =member.label :phone
+                =member.text_field :phone, class: 'form-control'
+
+            .col-md-5
+              .form-group
+                = member.label :lastname
+                = member.text_field :lastname, class: 'form-control'
+ 
+              .form-group
+                = member.label :age
+                = member.number_field :age, class: 'form-control'
+ 
+              .form-group
+                =member.label :mobile 
+                =member.text_field :mobile, class: 'form-control'
+
+          #tab3.tab-pane
+            .col-md-5.col-md-offset-1   
+              .form-group
+                =member.label :physical
+                =member.select :physical,ProspectMember::PHYSICAL,{},class: 'form-control'
+            .col-md-5
+              .form-group
+                =member.label :cognitive
+                =member.select :cognitive,ProspectMember::COGNITIVE,{}, class: 'form-control'
+            .col-md-10.col-md-offset-1
+              %label
+                Diagnostico Preliminar
+              -for pathology in Pathology.all
+                .checkbox
+                  %label
+                    =pathology.name
+                    = check_box_tag "prospect[prospect_member_attributes[pathology_ids][]]" , pathology.id
+            .col-md-10.col-md-offset-1
+              .form-group
+                = f.label :observation
+                = f.text_area :observation, class: "form-control"
+              
+        .col-md-10.col-md-offset-1
+          %ul.pager.wizard
+            %li.previous
+              %a{:href => "javascript:;"} << Atras
+            %li.next
+              %a{:href => "javascript:;"} Siguiente >>
+            %li.next.finish{:style => "display:none;"}
+              = f.submit "Guardar", class: "btn btn-success pull-right"
+          

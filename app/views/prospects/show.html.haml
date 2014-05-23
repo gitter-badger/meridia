@@ -1,0 +1,80 @@
+.panel
+  %p#notice= notice
+
+  %p
+    %b Code:
+    = @prospect.code
+  %p
+    %b Name:
+    = @prospect.name
+  %p
+    %b Lastname:
+    = @prospect.lastname
+  %p
+    %b Phone:
+    = @prospect.phone
+  %p
+    %b Mobile:
+    = @prospect.mobile
+  %p
+    %b Mail:
+    = @prospect.mail
+  %p
+    %b Contact type:
+    = @prospect.contact_type
+  %p
+    %b Delegacion:
+    = @prospect.delegacion
+  %p
+    %b Status:
+    = @prospect.status
+  %p
+    %b Observation:
+    = @prospect.observation
+
+  = link_to 'Edit', edit_prospect_path(@prospect)
+  %button.btn.btn-success.pull-right{"data-target" => "#myModal", "data-toggle" => "modal"}
+    Crear Nuevo Evento
+
+-@tickets.each do |ticket|
+  .panel
+    %strong
+      = ticket.type
+      = ticket.title
+      %br
+    %p
+      = ticket.observation
+    %small
+      %em
+        Creado por:  // Fecha de crecion:
+
+#myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h4
+          Nuevo Ticket
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type=> "button"} &times;
+      =form_for @ticket, url: prospect_tickets_path(@prospect) do |f|
+        .modal-body
+          .row
+            .col-md-12
+              .form-group
+                = f.label :title
+                = f.text_field :title, class: 'form-control'
+            .col-md-6 
+              .form-group
+                = f.label :event_date
+                = f.date_field :event_date, class: 'form-control'
+            .col-md-6
+              .form-group
+                = f.label :type, 'Tipo'
+                = f.select :type,['Llamada','Email','Cita', 'Cambio Estado' ],{},class: 'form-control'
+          .form-group
+            = f.label :observation
+            = f.text_area :observation, class: 'form-control'
+          
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}
+            Cancelar  
+          = f.submit 'Crear Ticket', class: 'btn btn-success'

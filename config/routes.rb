@@ -1,10 +1,14 @@
 Meridia::Application.routes.draw do
 
+
   resources :tests
   resources :activities
   resources :centers 
+ 	resources :attends 
   
-	
+	resources :prospects do
+		resources :tickets, only: [:create]
+	end
 	resources :vigs do
 		resources :progress , only: [:create]
 		resources :tests
@@ -29,7 +33,7 @@ Meridia::Application.routes.draw do
 	end	
   
   resources :members do		
-  	resources :schedule, only: [:index,:create,:show]
+		resources :schedule, only: [:index,:create,:show]
 		resources :progress , only: [:index]
     resources :vigs
     resources :medicals

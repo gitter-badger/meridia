@@ -7,7 +7,8 @@
     = truncate(current_user.name, :length => 10)
 .list-menu
   = link_to "Participantes", members_path, class: "list-group-item"
-  = link_to "Prospectos", "#", class: "list-group-item"
+  = link_to "Prospectos", prospects_path, class: "list-group-item"
   = link_to "Actividades & Horarios", activities_path, class: "list-group-item"
+  = link_to "Asistencia", attends_path, class: "list-group-item"
   = link_to "Pagos", customers_path, class: "list-group-item"
   = link_to 'Salir', destroy_user_session_path,class: "list-group-item", :method=>'delete'
