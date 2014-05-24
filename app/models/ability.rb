@@ -1,6 +1,6 @@
 class Ability
   include CanCan::Ability
-   resourcify
+   #resourcify
   def initialize(user)
   	user.roles.each do |permission|
 			if permission.subject_id.nil?
