@@ -18,6 +18,7 @@ gem 'thin'
 gem 'mongoid-multitenancy'
 gem 'mongoid-enum', :github=>"bmccoelho/mongoid-enum"
 gem 'enumerize', '~> 0.8.0'
+gem 'rails_12factor'
 
 group :development do
   gem 'better_errors'
