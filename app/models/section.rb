@@ -1,2 +1,0 @@
-class Section < MemberForm
-end
