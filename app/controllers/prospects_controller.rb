@@ -11,6 +11,7 @@ class ProspectsController < ApplicationController
   # GET /prospects/1.jso
   def show
 		@tickets = @prospect.tickets.desc(:created_at)
+		@prospect_member = @prospect.prospect_member
 		@ticket = Ticket.new 
 	end
 

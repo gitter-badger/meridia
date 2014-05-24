@@ -1,40 +1,63 @@
 .panel
-  %p#notice= notice
+  .row
+    .col-md-12
+      %h3
+        = "#{@prospect.name} #{@prospect.lastname}".upcase
 
-  %p
-    %b Code:
-    = @prospect.code
-  %p
-    %b Name:
-    = @prospect.name
-  %p
-    %b Lastname:
-    = @prospect.lastname
-  %p
-    %b Phone:
-    = @prospect.phone
-  %p
-    %b Mobile:
-    = @prospect.mobile
-  %p
-    %b Mail:
-    = @prospect.mail
-  %p
-    %b Contact type:
-    = @prospect.contact_type
-  %p
-    %b Delegacion:
-    = @prospect.delegacion
-  %p
-    %b Status:
-    = @prospect.status
-  %p
+        %button.btn.btn-success.pull-right{"data-target" => "#myModal", "data-toggle" => "modal"}
+          Crear Nuevo Evento      
+    .col-md-6
+      .sub-content.right-border
+        %h4 
+          Contacto
+        %br
+        %p
+          %em
+            %b Phone:
+            = @prospect.phone
+        %p
+          %em
+            %b Mobile:
+            = @prospect.mobile
+        %p
+          %em
+            %b Mail:
+            = @prospect.mail
+        %p
+          %em
+            %b Delegacion:
+            = @prospect.delegacion
+        %p
+          %em
+            %b Tipo de Contacto:
+            = @prospect.contact_type
+    .col-md-6
+      %h4
+        Miembro:
+      %br
+      %p
+        %em
+          %b Nombre:
+          = "#{@prospect_member.name} #{@prospect_member.lastname}"
+      %p
+        %em
+          %b Genero:
+          = @prospect_member.genre
+      %p
+        %em
+          %b Edad
+          = @prospect_member.age
+      %p
+        %em
+          %b cognitive
+          =@prospect_member.cognitive
+      %p
+        %em
+          %b physical
+          =@prospect_member.physical
+  %hr
     %b Observation:
     = @prospect.observation
-
-  = link_to 'Edit', edit_prospect_path(@prospect)
-  %button.btn.btn-success.pull-right{"data-target" => "#myModal", "data-toggle" => "modal"}
-    Crear Nuevo Evento
 
 -@tickets.each do |ticket|
   .panel
