@@ -14,7 +14,9 @@
         - if attend.member.days.include? @day
           %tr
             %td
-              = member.name
+              = attend.member.name
+            %td
+              =attend.member.created_at.to_formatted_s(:time)
   %hr
   %h3
     Pendientes 
@@ -30,7 +32,7 @@
       %tbody
         -@members.each do |member|
           - if member.days.include? @day 
-            - if !@attends.include? member
+            -if member_exist @attends, member
               %tr
                 %td
                   = member.name
