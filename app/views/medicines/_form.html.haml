@@ -1,0 +1,33 @@
+= form_for( @medicine, :url => member_medicines_path(@member), :method => "post", :html => { :class => "form-horizontal" }  ) do |f|
+  = f.hidden_field :member_id, :value => @member.id
+  %fieldset#allergies{ :style =>  "padding: 0 0 1em 0;" }
+    %legend Agregar Farmaco
+    .form-group
+      = f.label :name, 'Nombre:', :class => "col-sm-2 control-label" 
+      .col-sm-8
+        = f.text_field :name, :class => "form-control" 
+    .form-group
+      = f.label :frequency, 'Frecuencia:', :class => "col-sm-2 control-label" 
+      .col-sm-8
+        = f.text_field :frequency, :class => "form-control" 
+    .form-group
+      = f.label :dose, 'Dosis:', :class => "col-sm-2 control-label" 
+      .col-sm-8
+        = f.text_field :dose, :class => "form-control"
+    .form-group
+      = f.label :way, 'Via:', :class => "col-sm-2 control-label" 
+      .col-sm-8
+        = f.text_field :way, :class => "form-control"
+    .form-group
+      = f.label :validity, 'Valido Hasta:', :class => "col-sm-2 control-label" 
+      .col-sm-8
+        = f.text_field :validity, :class => "form-control"
+    .form-group
+      = f.label :day, 'dias de la semana', :class => "col-sm-2 control-label"
+      .col-sm-8
+        - Medicine::DAY.each do |day|
+          = f.label day, :class => "checkbox-inline" do
+            = f.check_box :day, { :multiple => true, :checked => f.object.send( [day,'?'].join ) ? true : false }, day, nil
+            = day
+  %hr
+  = f.submit "Guardar", :class => "btn btn-primary" 

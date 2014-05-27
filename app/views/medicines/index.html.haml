@@ -1,0 +1,50 @@
+= render "shared/vig_menu" 
+
+- content_for :title_breadcrumb do
+  %strong
+    = @member.name.upcase
+    = @member.lastname.upcase
+  ="/Enfermeria"
+.col-md-9
+  %ul.nav.nav-tabs
+    %li
+      %a{href: member_nursing_index_path(@member) }
+        Valoracion Inicial
+    %li
+      %a{href: member_allergies_path(@member ) }
+        Alergias
+    %li
+      %a{href: member_signs_path(@member ) }
+        Signos Vitales
+    %li.active
+      %a{href: member_medicines_path(@member ) }
+        Medicamentos
+  .panel
+    #allergies.tab-content
+      .btn-group
+        %a.btn.btn-default{:href => new_member_medicine_path( @member ) }
+          %span.glyphicon.glyphicon-plus-sign
+          Agregar
+      %table.table
+        %thead
+          %tr
+            %th #
+            %th Nombre
+            %th Frecuencia
+            %th dosis
+            %th Via
+            %th Valido
+            %th Dias
+            %th Acciones
+        %tbody
+          - @member.medicines.each_with_index do |medicine, i|
+            %tr
+              %td= ( i + 1 )
+              %td= medicine.name
+              %td= medicine.frequency
+              %td= medicine.dose
+              %td= medicine.way
+              %td= medicine.validity
+              - @day = medicine.day.map do |day| day_es day end
+              %td= @day.join(", ")
+              %td= button_to 'Eliminar', {:controller => :medicines, :action => :destroy, :id => medicine.id }, :method => :delete

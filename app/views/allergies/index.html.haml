@@ -8,16 +8,16 @@
 .col-md-9
   %ul.nav.nav-tabs
     %li
-      %a{href: "#perfil", }
+      %a{href: member_nursing_index_path(@member) }
         Valoracion Inicial
     %li.active
       %a{href: member_allergies_path(@member ) }
         Alergias
     %li
-      %a{href: "#signs" }
+      %a{href: member_signs_path(@member) }
         Signos Vitales
     %li
-      %a{href: "#medicines" }
+      %a{href: member_medicines_path(@member) }
         Medicamentos
   .panel
     #allergies.tab-content

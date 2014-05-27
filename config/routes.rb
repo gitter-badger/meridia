@@ -40,6 +40,7 @@ Meridia::Application.routes.draw do
     resources :medicals
     resources :allergies, only: [ :index, :new, :create, :destroy ]
     resources :signs, only: [ :index, :new, :create, :destroy ]
+    resources :medicines, only: [ :index, :new, :create, :destroy ]
 
     resources :nursing, only: [ :index, :new, :create ] do
       collection do

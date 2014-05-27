@@ -11,4 +11,21 @@ module MembersHelper
   def yes_or_not( answer )
     ( answer && answer == 1 ) ? 'Si' : 'No'
   end
+
+  def day_es( d )
+    case d
+    when :monday
+      "Lunes"
+    when :tuesday
+      "Martes"
+    when :wednesday
+      "Miercoles"
+    when :thursday
+      "Jueves"
+    when :friday
+      "Viernes"
+    else
+      d
+    end
+  end
 end
