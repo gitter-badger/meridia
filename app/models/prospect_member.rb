@@ -1,6 +1,8 @@
 class ProspectMember
   include Mongoid::Document
-  field :name, type: String
+  include Mongoid::Timestamps	
+
+	field :name, type: String
   field :lastname, type: String
   field :genre, type: String
   field :age, type: String

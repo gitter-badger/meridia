@@ -1,6 +1,8 @@
 class Prospect
   include Mongoid::Document
-  field :code, type: String
+	include Mongoid::Timestamps
+
+	field :code, type: String
   field :name, type: String
   field :lastname, type: String
   field :phone, type: String
@@ -45,4 +47,19 @@ class Prospect
 								Azcapotzalco
 								Venustiano_Carranza
 								Otros)
+	STATUS= %w(Busca_trabajo
+							En_Espera
+							Contrata_residencia
+							No_interés_real
+							INDEP/Busca_talleres
+							Cancelado
+							Fue_a_Club Mayores
+							Fue_a_Residencia
+							Fallecimiento
+							Precio
+							Salió_de_ciudad
+							El_AM_rehusa_serv
+							Desacuerdo_Fam
+							Espionaje
+							Datos_falsos)
 end

@@ -32,6 +32,7 @@ class CustomersController < ApplicationController
 								:date_borth,
 								:neighborhood,
 								:city,
+								:days =>[],
 				families_attributes:[
 								:firstname,
 								:lastname,

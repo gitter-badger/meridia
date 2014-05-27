@@ -91,6 +91,11 @@
                 .form-group
                   = member.label :birthday_city
                   = member.text_field :birthday_city, class: "form-control"
+              .col-md-10.col-md-offset-1
+                -Constants::DAYS.each_with_index do |day, index|
+                  .checkbox
+                    = label_tag day
+                    = member.check_box :days ,{:multiple=> true,:checked=>true}, index, nil
             #tab3.tab-pane
               = member.fields_for :families  do |family|
                 .col-md-10.col-md-offset-1

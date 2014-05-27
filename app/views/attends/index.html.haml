@@ -9,3 +9,30 @@
         %th
           Hora
         %th
+    %tbody
+      -@attends.each do |attend|
+        - if attend.member.days.include? @day
+          %tr
+            %td
+              = member.name
+  %hr
+  %h3
+    Pendientes 
+  = form_for :attend do |f|
+    = f.submit "Actualizar", class: "btn btn-success pull-right"
+    %table.table
+      %thead
+        %tr
+          %th
+            Nombre
+          %th
+            Check
+      %tbody
+        -@members.each do |member|
+          - if member.days.include? @day 
+            - if !@attends.include? member
+              %tr
+                %td
+                  = member.name
+                %td
+                  = f.check_box :member_id,{:multiple => true},  member._id, nil

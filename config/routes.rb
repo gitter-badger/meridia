@@ -6,6 +6,7 @@ Meridia::Application.routes.draw do
   resources :centers 
  	resources :attends 
   
+  get "prospect_grafic", to: "prospect_grafic#index"
 	resources :prospects do
 		resources :tickets, only: [:create]
 	end

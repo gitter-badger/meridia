@@ -22,7 +22,7 @@ class Member
   has_many :communications
   has_many :sleeps
   has_many :pains
-	has_many :attends
+	has_one :attend
   has_and_belongs_to_many :activities
 	accepts_nested_attributes_for :families
   accepts_nested_attributes_for :health_insurances

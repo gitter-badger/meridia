@@ -1,0 +1,167 @@
+:javascript
+  $(function () {
+
+  // Create the chart
+  $('#level').highcharts({
+  chart: {
+  type: 'column'
+  },
+  title: {
+  text: 'DEPENDENCIA'
+  },
+  xAxis: {
+  type: 'category'
+  },
+  yAxis: {
+  title: {
+  text: 'Participantes'
+  }
+  },
+  legend: {
+  enabled: false
+  },
+  plotOptions: {
+  series: {
+  borderWidth: 0,
+  dataLabels: {
+    enabled: true,
+      format: '{point.y:.1f}'
+  }
+  }
+  },
+
+  tooltip: {
+  headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+  pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> of total<br/>'
+  }, 
+
+  series: [{
+  name: 'Participante',
+  colorByPoint: true,
+  data:#{grafic @data_member, ProspectMember::PHYSICAL, :physical}
+  }],
+
+  })
+  });
+
+
+  $(function () {
+
+
+  // Create the chart
+  $('#contact').highcharts({
+  chart: {
+  type: 'column'
+  },
+  title: {
+  text: 'SEGUIMIENTO'
+  },
+  xAxis: {
+  type: 'category'
+  },
+  yAxis: {
+  title: {
+  text: 'Participantes'
+  }
+  },
+  legend: {
+  enabled: false
+  },
+  plotOptions: {
+  series: {
+  borderWidth: 0,
+  dataLabels: {
+    enabled: true,
+      format: '{point.y:.1f}'
+  }
+  }
+  },
+
+  tooltip: {
+  headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+  pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> of total<br/>'
+  }, 
+
+  series: [{
+  name: 'Participante',
+  colorByPoint: true,
+  data: #{grafic @data, Prospect::STATUS, :status}
+  }],
+
+  })
+  });
+
+  $(function () {
+    var chart;
+    
+    $(document).ready(function () {
+      
+      // Build the chart
+        $('#tracing').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'DELEGACIONES'
+            },
+            tooltip: {
+              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Browser share',
+                data: #{grafic @data, Prospect::DELEGATION, :delegacion}
+            }]
+        });
+    }); 
+  });
+  
+  
+  $(function () {
+    var chart;
+    
+    $(document).ready(function () {
+      
+      // Build the chart
+        $('#container').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+              text: 'MEDIO DE CONTACTO'
+            },
+            tooltip: {
+              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Browser share',
+                data: #{grafic @data , Prospect::MEDIO, :contact_type}
+            }]
+        });
+    }); 
+  });
