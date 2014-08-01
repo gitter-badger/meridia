@@ -47,5 +47,6 @@ class Member
   field :code, type: String
   field :status, type: String
 	field :days, type: Array
-
+  
+  validates_presence_of :name, :lastname, :gender, :date_borth, :phone , :address
 end

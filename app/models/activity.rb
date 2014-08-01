@@ -20,4 +20,5 @@ class Activity
   accepts_nested_attributes_for :areas
   accepts_nested_attributes_for :lessons, :allow_destroy => true
 
+  validates_presence_of :title
 end
