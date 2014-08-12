@@ -8,7 +8,7 @@
         %span.icon-group.green
       .summary
         %h4
-          10
+          = @members['all']
         Participantes
   .col-md-3
     .info_box
@@ -16,7 +16,7 @@
         %span.icon-female.red
       .summary
         %h4
-          4
+          = @members['female'] 
         Mujeres
   .col-md-3
     .info_box
@@ -24,7 +24,7 @@
         %span.icon-male.blue
       .summary
         %h4
-          10
+          = @members['male'] 
         Hombres
   .col-md-3
     .info_box
@@ -32,7 +32,7 @@
         %span.icon-calendar-o.black
       .summary
         %h4
-          74
+          = @members['edad_promedio']
         Edad Promedio
 
 .row

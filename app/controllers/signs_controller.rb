@@ -17,7 +17,6 @@ class SignsController < ApplicationController
   # GET /signs/new
   def new
     @member = Member.find(params[:member_id])
-
     @sign = @member.signs.build
     @sign.measures.build( kindof: :ta )
     @sign.measures.build( kindof: :fc )

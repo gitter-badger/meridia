@@ -1,4 +1,3 @@
-console.log("hola")
 jQuery(function ($) { 
    $('#new_activity').validate({
       rules : {
