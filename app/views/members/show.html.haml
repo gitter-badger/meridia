@@ -115,6 +115,12 @@
                 -@member.medicines.each do |medicine|
                   %li
                     ="#{ medicine.name} (#{ medicine.way})" 
+      .col-md-14 
+        .div.panel
+          %h3 Observaciones
+          -@vig.probien.descriptions.each do |description|
+            .div.well
+              =description.name
 = form_for Vig.new , url: member_vigs_path(@member) do |vig|
   .modal.fade#myModal
     .modal-dialog

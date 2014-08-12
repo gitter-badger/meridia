@@ -2,13 +2,14 @@ class ProbienController< ApplicationController
 	
 	def index
 		@activities = Activity.all
-		
 	end
 
 	def new
 		@vig = Vig.find(params[:vig_id])
 		@member = @vig.member_id
 		@probien = Probien.new
+		@probien.descriptions.build
+  
 		@activities = Activity.all
 	end
 
@@ -23,6 +24,6 @@ class ProbienController< ApplicationController
 
 	private
 	def params_probien
-		params.require(:probien).permit(:objetive,:cognitive,:physical,:health,:physical,:personaldev,:social,:activity_ids=>[])
+		params.require(:probien).permit(:objetive,:cognitive,:physical,:health,:physical,:personaldev,:social,:activity_ids=>[], descriptions_attributes:[:name])
 	end
 end

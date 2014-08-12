@@ -65,5 +65,62 @@
       .form-group
         = f.label :health, "Salud y bienestar "
         = f.text_field :health, class: "form-control"
-      
-      = f.submit "Siguente", class: "btn btn-success"
+      %fieldset#descriptions
+        %legend Observaciones
+        - @counter = 0
+        = f.fields_for :descriptions do |description|
+          %div.description
+            .form-group
+              = description.label :Observacion, "Observación"
+              = description.text_area :name, class: "form-control"
+              - if @counter > 0
+                = description.button :eliminar, :class => "description", :type => "button", :data => { :type => "delete", :id => @counter  }
+            -@counter = @counter + 1
+      .action
+        = f.button 'Agregar observación', :class => "description btn btn-default", :type => "button", :data => { :type => "add" }
+        = f.submit "Siguente", class: "btn btn-success"
+- content_for :footer do
+  %script{ :src => "//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" }
+  :javascript
+    window.jQuery || document.write('<script src="assets/javascripts/jquery-1.11.0.min.js"><\/script>')
+  :javascript
+    (function($){
+      $(function(){
+
+        total = +$('div.description').size() - 1
+        copy = $('div.description').first().clone().html()
+        var action = '#{action_name}'
+
+        function remove_lesson(){
+          console.log('click');
+        }
+        $('.description[data-type="add"]').on('click', function( e ){
+          e.stopPropagation();
+          
+          var regularexp = new RegExp( '[]', 'g' )
+          var html = copy.replace(/\[\d\]/g, '['+(total+1)+']').replace(/\_\d\_/g, '_'+(total+1)+'_')
+          if( action == 'edit'){
+            html = html.replace(/selected="selected"/g, '')
+          }
+          var wrapper = $('<div/>', {class: 'description'})
+          wrapper.append( html )
+
+          var button = $( '<button/>', { class: 'delete', text: 'Eliminar', click: function( event){ event.preventDefault(); $( this ).parent().remove() }  } )
+          wrapper.append( button );
+
+          //Added to DOM
+          wrapper.appendTo( '#descriptions' )
+          total++
+        })
+
+        $('.description[data-type="delete"]').on('click',function(e){
+          console.log('prueba')
+          var id = $( this ).data('id')
+          var removeinput = $( '<input/>', { type: 'hidden', name: 'activity[lessons_attributes]['+id+'][_destroy]', value: '1' } )
+          var parent = $( this ).parent();
+          parent.prepend( removeinput );
+          parent.css({ display: 'none' });
+        })
+
+      })
+    })(jQuery)

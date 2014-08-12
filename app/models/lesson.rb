@@ -8,6 +8,6 @@ class Lesson
   field :minutes, type: Integer
   field :length, type: Integer
 
-  embedded_in :activity
+  embedded_in :activity	
 
 end
