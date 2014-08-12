@@ -19,4 +19,5 @@ class Measure
   field :value, type: Integer, default: 0
 
   embedded_in :sign
+
 end

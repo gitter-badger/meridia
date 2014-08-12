@@ -69,7 +69,7 @@
       = ticket.observation
     %small
       %em
-        Creado por:  // Fecha de crecion:
+        Creado por: // Fecha de crecion: #{ticket.created_at.to_date}
 
 #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog

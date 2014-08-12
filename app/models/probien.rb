@@ -11,4 +11,5 @@ class Probien
 	field :observation, type: String
 
 	belongs_to :vig
+	belongs_to :member
 end

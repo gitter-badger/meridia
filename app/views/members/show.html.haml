@@ -3,6 +3,7 @@
     = @member.name.upcase
     = @member.lastname.upcase
   ="/Perfil"
+
 .title_seccion
   .row
     .col-md-3
@@ -75,19 +76,22 @@
       .panel.tab-content
         .tab-pane#info
         .tab-pane#family
+          - @member.families do |family| 
+            %hr  
+        .tab-pane#salud
+          - @member.health_insurances do |insurances|
+            %hr  
+          - @member.health_services do |service|
+            %hr    
         .tab-pane.active#perfil
           %h4
-            = @member.name
-            = @member.lastname
+            = (@member.name + " "+ @member.lastname).capitalize 
           .well
             %span.pull-right
               %strong
-                Ultima Valoracion: 27-10-23
+                Ultima Valoracion: 
+                = @member.probiens.last.created_at if !@member.probiens
             %dl.dl-horizontal
-              %dt
-                Fecha de Nacimiento:
-              %dd
-                23/45/56
               %dt
                 Edad:
               %dd
@@ -95,10 +99,22 @@
               %dt
                 Mexico
 
-          .text-danger
-            %strong
-              Alegias:
-              nec ullamcorper nulla non metus auctor fringilla.
+          .row
+            .col-md-6
+              .text-danger
+                %strong
+                  Alegias:
+                %ul
+                  -@member.allergies.each do |allergy|
+                    %li
+                      = allergy.name
+            .col-md-6
+              %strong
+                Medicinas
+              %ul
+                -@member.medicines.each do |medicine|
+                  %li
+                    ="#{ medicine.name} (#{ medicine.way})" 
 = form_for Vig.new , url: member_vigs_path(@member) do |vig|
   .modal.fade#myModal
     .modal-dialog

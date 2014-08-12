@@ -36,7 +36,7 @@
             %th o2
             %th glucosa
             %th peso
-            %th altura
+            //%th altura
             %th Acciones
         %tbody
           - @member.signs.each_with_index do |sign, i|
@@ -49,5 +49,5 @@
               %td= sign.measures.where({ kindof: :o2 }).first.value
               %td= sign.measures.where({ kindof: :glucose }).first.value
               %td= sign.measures.where({ kindof: :weight }).first.value
-              %td= sign.measures.where({ kindof: :height }).first.value
+              //%td= sign.measures.where({ kindof: :height }).first.value
               %td= button_to 'Eliminar', {:controller => :signs, :action => :destroy, :id => sign.id }, :method => :delete

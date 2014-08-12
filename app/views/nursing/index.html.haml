@@ -25,9 +25,9 @@
         %h3 Informacion Del Participante
         %dl.dl-horizontal
           %dt Fecha de Nacimiento
-          %dd= @member.date_borth.strftime "%d-%b-%Y"
+          %dd= @member.date_borth.strftime "%d-%b-%Y" if @member.date_borth
           %dt Edad
-          %dd= age @member.date_borth
+          %dd= age @member.date_borth if @member.date_borth
           %dt Genero
           %dd= sex @member.gender.to_s
           %dt Estado Civil
