@@ -7,8 +7,7 @@ class NursingController < ApplicationController
   def index
     #@medicals = Medical.all
     @member = Member.find(params[:member_id])
-    @vie =  Vig.find_by( member: @member, kind: :nursing )
-
+    @vie =  Vig.find_by( member: @member, kind: :nursing )   
   end
 
   # GET /nursing/1

@@ -9,11 +9,13 @@ class Customer
 
 	accepts_nested_attributes_for :members
 
-	field :name, type: String
+  field :name, type: String
   field :lastname, type: String
   field :phone, type: String
   field :mobile, type: String
   field :contact, type: String
   field :address, type: String
   field :neighborhood, type: String
+
+  validates_presence_of :name, :lastname, :phone, :mobile , :address
 end

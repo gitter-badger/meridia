@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
 	end
 	protected
 
-  def layout_by_resource
+  	def layout_by_resource
 		if devise_controller?
 			"devise"
 		end

@@ -1,4 +1,6 @@
 class CentersController < ApplicationController
+include MembersHelper
+
   before_action :set_center, only: [:show, :edit, :update, :destroy]
 
   # GET /centers
@@ -10,6 +12,23 @@ class CentersController < ApplicationController
   # GET /centers/1
   # GET /centers/1.json
   def show
+    members=Member.all
+    @members = {}
+    @members['all'] = members.count
+    @members['female'] = members.where(gender: 'female').count
+    @members['male'] = members.where(gender: 'male').count
+    now = Time.now.utc.to_date
+    sum_years = 0 
+    con_edad = 0 
+    members.each do |member|
+      if member['date_borth']
+        # sum_years += now.year - member['date_borth'].year - (members[18]['date_borth'].to_date.change(:year => now.year) > now ? 1 : 0)
+       sum_years += age(member['date_borth'])
+        con_edad += 1
+      end 
+    end
+    @members['edad_promedio']=sum_years/con_edad
+
   end
 
   # GET /centers/new

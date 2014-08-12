@@ -4,38 +4,41 @@ Meridia::Application.routes.draw do
   resources :tests
   resources :activities
   resources :centers 
- 	resources :attends 
+  resources :attends 
   
   get "prospect_grafic", to: "prospect_grafic#index"
-	resources :prospects do
-		resources :tickets, only: [:create]
-	end
-	resources :vigs do
-		resources :progress , only: [:create]
-		resources :tests
-		resources :probien, only: [:create, :new]
-		resources :schedule,only: [:new]
-	end
-	
-	get ':vigs_test_id/answers', to: 'answers#index', as: 'answers_all'
-
-	resources :tests do
-		resources	:answers
-	end
-	resources :customers
- 	devise_for :users
-
- 	authenticated :user do
-		root to: "centers#show", :as => "root_center"
-	end
-
-	devise_scope :user do
-		root to: "devise/sessions#new", :as => "unauthenticated"
-	end	
+  resources :prospects do
+    resources :tickets, only: [:create]
+  end
+  resources :vigs do
+    resources :progress , only: [:create]
+    resources :tests
+    resources :probien, only: [:create, :new]
+    resources :schedule,only: [:new]
+  end
   
-  resources :members do		
-		resources :schedule, only: [:index,:create,:show]
-		resources :progress , only: [:index]
+  get ':vigs_test_id/answers', to: 'answers#index', as: 'answers_all'
+
+  resources :tests do
+    resources :answers
+  end
+  resources :customers
+  devise_for :users
+
+  authenticated :user do
+    root to: "centers#show", :as => "root_center"
+  end
+
+   # devise_scope :user do
+   #   root to: "devise/sessions#new", :as => "unauthenticated"
+   # end 
+   devise_scope :user do
+     root to: "home#index", :as => "unauthenticated"
+   end 
+  
+  resources :members do   
+    resources :schedule, only: [:index,:create,:show]
+    resources :progress , only: [:index]
     resources :vigs
     resources :medicals
     resources :allergies, only: [ :index, :new, :create, :destroy ]
@@ -57,6 +60,6 @@ Meridia::Application.routes.draw do
       post 'new_user'
     end
   end
-	
-	resources :roles
+  
+  resources :roles
 end
