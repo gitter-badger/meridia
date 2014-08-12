@@ -5,7 +5,6 @@
     %title= content_for?(:title) ? yield(:title) : 'Meridia'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Meridia'}"}
       = stylesheet_link_tag 'style'
-      = stylesheet_link_tag 'bootstrap'
       = stylesheet_link_tag 'framework_and_overrides'
       = javascript_include_tag 'application'
     = csrf_meta_tags
