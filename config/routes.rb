@@ -28,14 +28,10 @@ Meridia::Application.routes.draw do
   authenticated :user do
     root to: "centers#show", :as => "root_center"
   end
+  devise_scope :user do
+    root to: "devise/sessions#new", :as => "unauthenticated"
+  end 
 
-   # devise_scope :user do
-   #   root to: "devise/sessions#new", :as => "unauthenticated"
-   # end 
-   devise_scope :user do
-     root to: "home#index", :as => "unauthenticated"
-   end 
-  
   resources :members do   
     resources :schedule, only: [:index,:create,:show]
     resources :progress , only: [:index]

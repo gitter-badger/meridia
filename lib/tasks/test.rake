@@ -962,15 +962,15 @@ namespace :test do
     end
 
 
-    #bartel
-    #personal_history
-    #dummy_funcionality
-    #index_lawton_and_brody
-    #mini_mental
-    #yesavage
-    #oars_social
-    #tinetti
-    #hamilton
+    bartel
+    personal_history
+    dummy_funcionality
+    index_lawton_and_brody
+    mini_mental
+    yesavage
+    oars_social
+    tinetti
+    hamilton
     nursing
 
   end
