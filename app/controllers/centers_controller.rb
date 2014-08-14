@@ -2,7 +2,6 @@ class CentersController < ApplicationController
 include MembersHelper
 
   before_action :set_center, only: [:show, :edit, :update, :destroy]
-
   # GET /centers
   # GET /centers.json
   def index
