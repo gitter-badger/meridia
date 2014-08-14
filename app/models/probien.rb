@@ -12,4 +12,6 @@ class Probien
 
 	belongs_to :vig
 	belongs_to :member
+	embeds_many :descriptions
+	accepts_nested_attributes_for :descriptions, :allow_destroy => true
 end
