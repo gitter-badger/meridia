@@ -21,14 +21,13 @@ include MembersHelper
     sum_years = 0 
     con_edad = 0 
     members.each do |member|
-      if member['date_borth']
+      if member['date_borth'] && @members['all'] > 0
         # sum_years += now.year - member['date_borth'].year - (members[18]['date_borth'].to_date.change(:year => now.year) > now ? 1 : 0)
        sum_years += age(member['date_borth'])
-        con_edad += 1
+       con_edad += 1
       end 
     end
-    @members['edad_promedio']=sum_years/con_edad
-
+		@members['edad_promedio']=sum_years > 0 ? (sum_years/con_edad) : 0
   end
 
   # GET /centers/new
