@@ -3,60 +3,8 @@
     = @member.name.upcase
     = @member.lastname.upcase
   ="/Perfil"
-
 .title_seccion
-  .row
-    .col-md-3
-      .info_box.box_1
-        .title
-          Cognitivo
-        .summary
-          %h4
-            %small
-              Deterioro
-            Normal
-        .summary
-          %h4
-            56
-    .col-md-3
-      .info_box.box_2
-        .title
-          Fisico
-        .summary
-          %h4
-            %small
-              Caidas
-            Riesgo-Bajo
-        .summary
-          %h4
-            %small
-              Dependencia
-            Grave
-    .col-md-3
-      .info_box.box_3
-        .title
-          Desarrollo personal
-        .summary
-          %h4
-            %small
-              Deprecion
-        .summary
-          %h4
-            %small
-              Ansiedad
-    .col-md-3
-      .info_box.box_4
-        .title
-          Social
-        .summary
-          %h4
-            %small
-              Social
-        .summary
-          %h4
-            %small
-              Cultural
-.col-md-12
+  .col-md-12
   .row
     = render 'shared/vig_menu'
     .col-md-9 
@@ -83,21 +31,65 @@
             %hr  
           - @member.health_services do |service|
             %hr    
-        .tab-pane.active#perfil
+        .tab-pane.active#perfil.well
           %h4
             = (@member.name + " "+ @member.lastname).capitalize 
-          .well
-            %span.pull-right
-              %strong
-                Ultima Valoracion: 
-                = @member.probiens.last.created_at if !@member.probiens
-            %dl.dl-horizontal
-              %dt
-                Edad:
-              %dd
-                18 años
-              %dt
-                Mexico
+            = '('
+            = age(@member.date_borth) if @member.date_borth 
+            = 'años )'
+            = 'Cuidad'
+            =  @member.city
+          .row
+            .col-md-3
+              .info_box.box_1
+                .title
+                  Cognitivo
+                .summary
+                  %h4
+                    %small
+                      Deterioro
+                    Normal
+                .summary
+                  %h4
+                    56
+            .col-md-3
+              .info_box.box_1
+                .title
+                  Fisico
+                .summary
+                  %h4
+                    %small
+                      Caidas
+                    Riesgo-Bajo
+                .summary
+                  %h4
+                    %small
+                      Dependencia
+                    Grave
+            .col-md-3
+              .info_box.box_1
+                .title
+                  Desarrollo personal
+                .summary
+                  %h4
+                    %small
+                      Deprecion
+                .summary
+                  %h4
+                    %small
+                      Ansiedad
+            .col-md-3
+              .info_box.box_1
+                .title
+                  Social
+                .summary
+                  %h4
+                    %small
+                      Social
+                .summary
+                  %h4
+                    %small
+                      Cultural
 
           .row
             .col-md-6
@@ -118,9 +110,10 @@
       .col-md-14 
         .div.panel
           %h3 Observaciones
-          -@vig.probien.descriptions.each do |description|
-            .div.well
-              =description.name
+          - unless @vig.nil?
+            -@vig.probien.descriptions.each do |description|
+              .div.well
+                =description.name
 = form_for Vig.new , url: member_vigs_path(@member) do |vig|
   .modal.fade#myModal
     .modal-dialog

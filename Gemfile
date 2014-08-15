@@ -19,6 +19,8 @@ gem 'mongoid-multitenancy'
 gem 'mongoid-enum', :github=>"bmccoelho/mongoid-enum"
 gem 'enumerize', '~> 0.8.0'
 gem 'rails_12factor'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem "fog"
 
 group :development do
   gem 'better_errors'
