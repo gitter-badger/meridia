@@ -23,8 +23,9 @@ Meridia::Application.routes.draw do
     resources :answers
   end
   resources :customers
-  devise_for :users
+ 
 
+ 	devise_for :users
   authenticated :user do
     root to: "centers#show", :as => "root_center"
   end
@@ -51,11 +52,14 @@ Meridia::Application.routes.draw do
     end
   end
 
-  resources :users do
-    collection do
-      post 'new_user'
-    end
-  end
-  
-  resources :roles
+  namespace 'admin' do
+		root to: "users#index", :as => "root_admin"
+		resources :users do
+			collection do
+				post 'new_user'
+			end
+		end
+  	resources :roles
+	end
+
 end

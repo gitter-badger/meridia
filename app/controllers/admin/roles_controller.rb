@@ -1,5 +1,5 @@
-class RolesController < ApplicationController
-	
+class Admin::RolesController < ApplicationController
+	layout 'admin'	
   before_action :set_role, only: [:show, :edit, :update, :destroy]
 	def	index	
 		@roles = Role.all
@@ -16,12 +16,12 @@ class RolesController < ApplicationController
 	
 	def update
 		@role.update_attributes!(role_params)
-		redirect_to role_path(@role)
+		redirect_to admin_role_path(@role)
 	end
 	def create
 		@role = Role.new(role_params) 
 		@role.save
-		redirect_to roles_path		
+		redirect_to admin_role_path(@role)	
 	end
 
   private

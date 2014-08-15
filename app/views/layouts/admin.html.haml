@@ -4,7 +4,9 @@
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
     %title= content_for?(:title) ? yield(:title) : 'Meridia'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Meridia'}"}
-    = stylesheet_link_tag 'application'
+    = stylesheet_link_tag 'style'
+    = stylesheet_link_tag 'bootstrap'
+    = stylesheet_link_tag 'framework_and_overrides'
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
@@ -21,19 +23,16 @@
             %a.navbar-brand{:href => "#"}
               GeroSoft
           %ul.nav-accion.navbar-right
+            = render 'layouts/user_nav'
             %li
-              =link_to  Mongoid::Multitenancy.current_tenant.name,root_center_path
+              = link_to Mongoid::Multitenancy.current_tenant.name , root_center_path 
             %li
               = link_to destroy_user_session_path, class: 'off', :method=>'delete' do
                 %span.icon-power-off
     %main.container-fluid
       .general-row
-        .col-md-2.main-menu.hidden-xs
-          = render 'layouts/navigation'
-        .col-md-10.col-md-offset-2
-          .title_bar
-            = yield :title_breadcrumb
-          = render 'layouts/messages'
-          = yield
+        = render 'layouts/messages'
+        = yield
     = yield :footer
     = yield(:javascripts)
+

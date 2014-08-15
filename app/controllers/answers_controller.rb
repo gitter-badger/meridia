@@ -1,4 +1,6 @@
 class AnswersController < ApplicationController
+	before_filter :authenticate_user!
+	load_and_authorize_resource
 	def index
 		@answers = Answer.where(vigs_test_id: params[:vigs_test_id])
 		@member = @answers[0].vig.member

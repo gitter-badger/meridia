@@ -2,14 +2,11 @@ class Ability
   include CanCan::Ability
    #resourcify
   def initialize(user)
-  	user.roles.each do |permission|
-			if permission.subject_id.nil?
+  	user.roles.each do |role|
+			role.permissions.each do |permission|
 				can permission.action.to_sym, permission.subject_class.constantize
-			else
-				can permission.action.to_sym, permission.subject_class.constantize, :id => permission.subject_id
 			end
 		end
-	
 	end
 
 end

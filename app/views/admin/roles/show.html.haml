@@ -1,11 +1,10 @@
 .container
   .row
-    %h4
-      Agregar permisos Rol
-      = @role.name
-  = form_for  @role do |f|
-    .row
-      .col-md-6
+    .col-md-12.panel
+      %h4
+        Agregar permisos Rol
+        = @role.name
+      = form_for  [:admin,@role] do |f|
         %table.table
           %thead
             %tr
@@ -30,6 +29,4 @@
                   =permission.description
                 %td
                   = check_box_tag "role[permission_ids][]",permission.id,@role.permissions.include?(permission) 
-
-
-    =f.submit
+        =f.submit
