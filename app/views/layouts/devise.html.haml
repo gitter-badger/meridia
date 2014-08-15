@@ -4,9 +4,9 @@
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
     %title= content_for?(:title) ? yield(:title) : 'Meridia'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Meridia'}"}
+      = javascript_include_tag 'application'
       = stylesheet_link_tag 'style'
       = stylesheet_link_tag 'framework_and_overrides'
-      = javascript_include_tag 'application'
     = csrf_meta_tags
   %body.login
     .bg_l
