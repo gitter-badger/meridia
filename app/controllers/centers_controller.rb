@@ -17,7 +17,6 @@ include MembersHelper
     @members['all'] = members.count
     @members['female'] = members.where(gender: 'female').count
     @members['male'] = members.where(gender: 'male').count
-    now = Time.now.utc.to_date
     sum_years = 0 
     con_edad = 0 
     members.each do |member|

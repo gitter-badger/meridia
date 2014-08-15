@@ -2,10 +2,14 @@
 .col-md-3
   .panel.panel_profile
     .profile_box
-      = image_tag "profile.jpg"
+      = form_for @member, :html => {:multipart => true} do |f|
+        %label My Avatar
+        = image_tag(@member.avatar_url) if @member.avatar?
+        = f.file_field :avatar
+        = f.submit
     .list-group
       = link_to "Perfil", member_path(@member), class: "list-group-item"
-      =link_to "Valoraciones", member_vigs_path(@member) , class: "list-group-item"
-      = link_to "Horarios",member_schedule_index_path(@member), class: "list-group-item"
+      = link_to "Valoraciones", member_vigs_path(@member) , class: "list-group-item"      
+      = link_to "Horarios",member_schedule_index_path(@member), class: "list-group-item" unless @vig.nil?
       = link_to "Enfermeria",member_nursing_index_path(@member), class: "list-group-item"
       = link_to "Evolucion", member_progress_index_path(@member), class: "list-group-item"
