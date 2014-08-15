@@ -1,8 +1,10 @@
 class CentersController < ApplicationController
 include MembersHelper
-
-  before_action :set_center, only: [:show, :edit, :update, :destroy]
-  # GET /centers
+  before_filter :authenticate_user!
+	load_and_authorize_resource
+	before_action :set_center, only: [:show, :edit, :update, :destroy]
+  
+	# GET /centers
   # GET /centers.json
   def index
     @centers = Center.all

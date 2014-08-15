@@ -1,4 +1,6 @@
 class TicketsController < ApplicationController
+	before_filter :authenticate_user!
+	load_and_authorize_resource
 	def create
 		@ticket = Ticket.new(ticket_params)
 		@ticket.prospect_id = params[:prospect_id]

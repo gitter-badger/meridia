@@ -1,0 +1,24 @@
+.col-md-12
+  .panel
+    %h3 Usuarios
+
+    = link_to 'Nuevo Usuario', new_admin_user_path, class: "btn btn-success pull-right"
+    %table.table
+      %thead
+        %tr
+          %th
+            Nombre
+          %th
+            Email
+          %th
+            Perfil
+
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td
+              = user.name
+            %td
+              = link_to user.email, admin_user_path(user) 
+            %td
+              =""

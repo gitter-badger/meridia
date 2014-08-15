@@ -971,11 +971,7 @@ namespace :test do
     oars_social
     tinetti
     hamilton
-<<<<<<< HEAD
     #nursing
-=======
-    nursing
->>>>>>> origin/master
 
   end
 end
