@@ -9,31 +9,29 @@
     = csrf_meta_tags
 
   %body
-    %header
-      .navbar.navbar-head
-        .container-fluid
-          .navbar-header
-            %button.navbar-toggle{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
-              %span.sr-only Toggle navigation
-              %span.icon-bar
-              %span.icon-bar
-              %span.icon-bar
-            %a.navbar-brand{:href => "#"}
-              GeroSoft
-          %ul.nav-accion.navbar-right
+    %header#top.navbar.navbar-static-top.bs-docs-nav{role: "banner"}
+      .container
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".bs-navbar-collapse", "data-toggle" => "collapse", type: "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{href: "../"} GeroSoft
+        %nav.collapse.navbar-collapse.bs-navbar-collapse{role: "navigation"}          
+          %ul.nav.navbar-nav.navbar-right
             %li
               =link_to  Mongoid::Multitenancy.current_tenant.name,root_center_path
             %li
               = link_to destroy_user_session_path, class: 'off', :method=>'delete' do
                 %span.icon-power-off
-    %main.container-fluid
-      .general-row
-        .col-md-2.main-menu.hidden-xs
-          = render 'layouts/navigation'
-        .col-md-10.col-md-offset-2
-          .title_bar
-            = yield :title_breadcrumb
-          = render 'layouts/messages'
-          = yield
+    .general-row
+      .col-md-2.main-menu.hidden-xs
+        = render 'layouts/navigation'
+      .col-md-10.col-md-offset-2
+        .title_bar
+          = yield :title_breadcrumb
+        = render 'layouts/messages'
+        = yield
     = yield :footer
     = yield(:javascripts)

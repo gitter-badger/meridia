@@ -296,7 +296,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
-  bootstrap-sass (>= 3.0.0.0)
+  bootstrap-sass
   cancan
   capybara
   carrierwave-mongoid
