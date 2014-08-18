@@ -3,6 +3,13 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 	before_filter  :set_multitenancy
+	
+	 before_filter do
+    resource = controller_path.singularize.gsub('/', '_').to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
+
 	def after_sign_in_path_for(resource)
 		set_current_client(resource.center)
 		request.env['omniauth.origin'] || stored_location_for(resource) || root_center_path

@@ -1,6 +1,6 @@
 class ScheduleController < ApplicationController
-  before_filter :authenticate_user!
-	load_and_authorize_resource
+  #before_filter :authenticate_user!
+	#authorize_resource :class => false
   def index
 		@member = Member.find(params[:member_id])
 		@activities = @member.activities

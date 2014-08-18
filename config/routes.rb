@@ -7,10 +7,12 @@ Meridia::Application.routes.draw do
   resources :attends 
   
   get "prospect_grafic", to: "prospect_grafic#index"
-  resources :prospects do
-    resources :tickets, only: [:create]
+ 
+ 	resources :prospects do
+    resources :tickets, only: [:create, :update]
   end
-  resources :vigs do
+ 
+ 	resources :vigs do
     resources :progress , only: [:create]
     resources :tests
     resources :probien, only: [:create, :new]
