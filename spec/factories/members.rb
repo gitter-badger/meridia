@@ -3,9 +3,8 @@
 FactoryGirl.define do
   factory :member do
     name "MyString"
-    addres "MyString"
     phone "MyString"
-    age "MyString"
+    age "34"
     code "MyString"
     status "MyString"
   end

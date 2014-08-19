@@ -7,16 +7,25 @@
         %th
           Nombre
         %th
-          Hora
+          Hora Entrada
+        %th
+          Hora Salida
         %th
     %tbody
       -@attends.each do |attend|
-        - if attend.member.days.include? @day
+        - if attend.member
           %tr
             %td
               = attend.member.name
             %td
-              =attend.member.created_at.to_formatted_s(:time)
+              =attend.entry_time.to_formatted_s(:time)
+            %td
+              -if attend.exit_time.nil?
+                = form_for attend do |f|
+                  =f.submit "Salir"
+              -elsif
+                =attend.exit_time.to_formatted_s(:time)
+
   %hr
   %h3
     Pendientes 
