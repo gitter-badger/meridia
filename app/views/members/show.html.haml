@@ -110,7 +110,7 @@
       .col-md-14 
         .div.panel
           %h3 Observaciones
-          - unless @vig.nil?
+          - unless @vig.nil? || @vig.probien.nil?
             -@vig.probien.descriptions.each do |description|
               .div.well
                 =description.name

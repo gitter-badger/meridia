@@ -1,6 +1,7 @@
 class AttendsController < ApplicationController
   before_filter :authenticate_user!
 	load_and_authorize_resource
+
 	def index
  		@hour = Time.now.to_formatted_s(:time)
 		@day = Time.now.strftime('%w')
