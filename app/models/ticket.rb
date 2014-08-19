@@ -7,6 +7,8 @@ class Ticket
   field :visit, type: String
   field :event_date, type: String
 	field :title, type: String
-
+	field :status, type: Boolean, default: false
+	
+	belongs_to :user
 	belongs_to :prospect
 end

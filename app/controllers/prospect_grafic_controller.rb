@@ -1,6 +1,6 @@
 class ProspectGraficController < ApplicationController
-  before_filter :authenticate_user!
-	load_and_authorize_resource
+  #before_filter :authenticate_user!
+	#load_and_authorize_resource
   def index
 		if params[:search].nil?
   		@date_start = (Time.now - 30.days).strftime("%F")

@@ -48,7 +48,9 @@ class Member
   field :code, type: String
   field :status, type: String
 	field :days, type: Array
-  mount_uploader :avatar, AvatarUploader
+	field :avatar, type:String
+
+	mount_uploader :avatar, AvatarUploader
   
   validates_presence_of :name, :lastname, :gender, :date_borth, :phone , :address
 end

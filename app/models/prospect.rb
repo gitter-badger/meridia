@@ -11,11 +11,11 @@ class Prospect
   field :contact_type, type: String
   field :other_state, type: String
   field :delegacion, type: String
-  field :status, type: String
+  field :status, type: String, default: 'Activo'
   field :observation_contact, type: String
   field :observation, type: String
   field :relationship, type: String
-
+	field :reason, type: String
   has_one :prospect_member
   has_many :tickets
   accepts_nested_attributes_for :prospect_member
@@ -48,11 +48,9 @@ class Prospect
                 Venustiano_Carranza
                 Otros)
   STATUS= %w(Busca_trabajo
-              En_Espera
               Contrata_residencia
               No_interés_real
               INDEP/Busca_talleres
-              Cancelado
               Fue_a_Club Mayores
               Fue_a_Residencia
               Fallecimiento

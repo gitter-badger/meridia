@@ -60,16 +60,22 @@
     = @prospect.observation
 
 -@tickets.each do |ticket|
-  .panel
+  .panel{:style=> "#{status_style(ticket.status)}"}
+    .pull-right
+      =@label
     %strong
       = ticket.type
       = ticket.title
       %br
     %p
       = ticket.observation
+    -if !ticket.status && ticket.type != 3
+      =form_for [@prospect , ticket] do |f|
+        =f.hidden_field :status, value: true
+        =f.submit "Realizado", class: "btn-xs pull-right btn-success"
     %small
       %em
-        Creado por: // Fecha de crecion: #{ticket.created_at.to_date}
+        Creado por:#{ticket.user.name} // Fecha de crecion: #{ticket.created_at.to_date}
 
 #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
@@ -92,12 +98,31 @@
             .col-md-6
               .form-group
                 = f.label :type, 'Tipo'
-                = f.select :type,['Llamada','Email','Cita', 'Cambio Estado' ],{},class: 'form-control'
-          .form-group
-            = f.label :observation
-            = f.text_area :observation, class: 'form-control'
+                = f.select :type,['Llamada','Email','Cita', ['Cambio de Estado', 3 ] ],{},class: 'form-control'
+            #status{style:"display:none"}
+              .col-md-6
+                .form-group
+                  =f.label :status ,'Status'
+                  =select_tag "status", options_for_select([["Cancelado",'Cancel'],['En Espera','Espera'],['Activo','Active']]),class: 'form-control'
+              .col-md-6
+                .form-group
+                  =f.label :reason, 'Razon'
+                  =select_tag "reason", options_for_select(Prospect::STATUS),class: 'form-control'
+
+            .col-md-12
+              .form-group
+                = f.label :observation
+                = f.text_area :observation, class: 'form-control'
           
         .modal-footer
           %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}
             Cancelar  
           = f.submit 'Crear Ticket', class: 'btn btn-success'
+:javascript
+  $( "#ticket_type" ).change(function() {
+    if (this.value == 3){
+     $('#status').show();
+    }else{
+      $('#status').hide();
+    }
+    });
