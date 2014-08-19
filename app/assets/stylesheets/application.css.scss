@@ -15,6 +15,71 @@
  */
 
 .error{
-	font-size: 10px;
-	color: #a94442;
+  font-size: 10px;
+  color: #a94442;
+  position: absolute
+}
+
+.navbar-static-top {
+    background: none repeat scroll 0 0 #64509a;
+    border: 1px solid transparent;
+    margin-bottom: 20px;
+    min-height: 50px;
+    position: fixed;
+    width: 100%;
+}
+
+.navbar-static-top a{
+  color:  #fff;
+  text-aling: center;
+}
+
+.navbar-static-top li a:hover{
+  background-color: #2a3336;
+}
+
+.main-menu{
+  margin-top: 50px
+}
+.title_bar{
+  margin-top: 50px
+  
+}
+.contenido{
+  margin-top: 20px
+}
+
+.navbar-static-top .icon-bar {
+    border: 1px solid;
+ 
+}
+
+.navbar-toggle {
+    background-color: #ededed;
+}
+
+.list-menu a {
+    padding-left: 40px;
+}
+
+.title_contenido{
+  margin-top: 100px;
+}
+
+.separador_div{
+  height: 50px;
+}
+
+.profile_box img {
+    max-height: none;
+    width: 100%;
+}
+
+.panel_table_index{
+  min-width:400px;
+}
+
+.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
+    margin-left: 0px;
+    position: absolute;
 }

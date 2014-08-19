@@ -1,7 +1,7 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
-  load_and_authorize_resource
+  #load_and_authorize_resource
   def new
     @customer = Customer.new
     @member = @customer.members.build

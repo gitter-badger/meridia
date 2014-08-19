@@ -2,9 +2,9 @@
 .col-md-3
   .panel.panel_profile
     .profile_box
+      -  @member = Member.find(@member)
       = form_for @member, :html => {:multipart => true} do |f|
-        %label My Avatar
-        = image_tag(@member.avatar_url) if @member.avatar?
+        = @member.avatar? ? image_tag(@member.avatar_url) : image_tag("profile.jpg")
         = f.file_field :avatar
         = f.submit
     .list-group

@@ -1,6 +1,5 @@
 = render "shared/vig_menu" 
 
-
 - content_for :title_breadcrumb do
   %strong
     = @member.name.upcase
@@ -30,10 +29,10 @@
         .modal-header
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
           %h4
-            Nueva Valoracion
+            Nueva Valoración
         .modal-body
           .form-group
-            =vig.label :name
+            =vig.label :name, "Nombre de la Valoración"
             = vig.text_field :name, class: "form-control"
           .form-gruop
             %label
@@ -41,9 +40,14 @@
           - for test in Test.all
             .form-group
               .checkbox
-                = label_tag test.title
-                =  check_box_tag "vig[test_ids][]" , test.id
+                .col-md-9
+                  = label_tag test.title
+                .col-md-3
+                  =  check_box_tag "vig[test_ids][]" , test.id
         .modal-footer
           = vig.submit "Guardar", class: "btn btn-success" 
+- content_for :javascripts do
+  = javascript_include_tag "jquery.validate"
+  = javascript_include_tag "vigs"
 
 

@@ -1,0 +1,15 @@
+.col-md-4
+  .authform
+    = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :role => 'form'}) do |f|
+      %h3 Olvidaste tú password?
+      %p Ingresa tú email a continuación.
+      = devise_error_messages!
+      .form-group
+        = f.label :email
+        = f.email_field :email, :autofocus => true, class: 'form-control'
+      = f.submit 'Reiniciar contraseña', :class => 'btn-info button right'
+      .form-group.separador_top
+        - if devise_mapping.recoverable?
+          .text-center.separador
+            = link_to "Ingresar", new_session_path(resource_name), class: 'right'
+

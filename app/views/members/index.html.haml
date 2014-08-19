@@ -1,13 +1,14 @@
 .col-md-12
-  .panel
+  .panel.panel_table_index
     = link_to 'Nuevo Participante', new_customer_path, class: 'btn btn-success pull-right'
     %table.table
-      %tr
-        %th Nombre
-        %th Edad
-        %th Nacionalidad
-        %th Code
-        %th Status
+      %thead
+        %tr
+          %th Nombre
+          %th Edad
+          %th Nacionalidad
+          %th Code
+          %th Status
 
       - @members.each do |member|
         %tr

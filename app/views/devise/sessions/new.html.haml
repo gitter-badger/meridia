@@ -12,11 +12,11 @@
       .form-group
         = f.submit 'Ingresar', :class => 'btn-info button pull-right'
       - if devise_mapping.rememberable?
-        .checkbox.left
+        .form-group.block
           = f.check_box :remember_me
-          = f.label :remember_me
+          = f.label :remember_me, "Recordarme"
 
       .form-group.forgot
         - if devise_mapping.recoverable?
           .text-center
-            = link_to "Forgot password?", new_password_path(resource_name), class: 'right'
+            = link_to "Olvidaste tú contraseña?", new_password_path(resource_name), class: 'right'
