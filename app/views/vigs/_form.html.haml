@@ -14,3 +14,6 @@
     = f.text_field :date
   .actions
     = f.submit 'Save'
+- content_for :javascripts do
+  = javascript_include_tag "jquery.validate"
+  = javascript_include_tag "vigs"

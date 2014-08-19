@@ -17,3 +17,8 @@
 //= require amodule/highcharts
 //= require jquery.validate
 //= require wizard
+$(document).ready(function() {
+  $('.navbar-toggle ').click(function() {
+    $('.list-menu > a').toggleClass('active');
+  });
+});

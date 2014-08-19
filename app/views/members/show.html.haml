@@ -31,7 +31,7 @@
             %hr  
           - @member.health_services do |service|
             %hr    
-        .tab-pane.active#perfil.well
+        .tab-pane.active#perfil
           %h4
             = (@member.name + " "+ @member.lastname).capitalize 
             = '('
@@ -40,57 +40,36 @@
             = 'Cuidad'
             =  @member.city
           .row
-            .col-md-3
-              .info_box.box_1
-                .title
-                  Cognitivo
-                .summary
-                  %h4
-                    %small
-                      Deterioro
-                    Normal
-                .summary
-                  %h4
-                    56
-            .col-md-3
-              .info_box.box_1
-                .title
-                  Fisico
-                .summary
-                  %h4
-                    %small
-                      Caidas
-                    Riesgo-Bajo
-                .summary
-                  %h4
-                    %small
-                      Dependencia
-                    Grave
-            .col-md-3
-              .info_box.box_1
-                .title
-                  Desarrollo personal
-                .summary
-                  %h4
-                    %small
-                      Deprecion
-                .summary
-                  %h4
-                    %small
-                      Ansiedad
-            .col-md-3
-              .info_box.box_1
-                .title
-                  Social
-                .summary
-                  %h4
-                    %small
-                      Social
-                .summary
-                  %h4
-                    %small
-                      Cultural
-
+            -unless @vig.nil?
+              .col-md-3.text-center
+                .panel.panel-default
+                  .panel-heading.text-cente
+                    %h3 Cognitivo
+                  .panel-body
+                    = @vig.probien ? @vig.probien.cognitive : "No completado"
+              .col-md-3.text-center
+                .panel.panel-default
+                  .panel-heading 
+                    %h3 Salud
+                  .panel-body
+                    = @vig.probien ? @vig.probien.health : "No completado"
+              .col-md-3.text-center
+                .panel.panel-default
+                  .panel-heading 
+                    %h3 Sicológico
+                  .panel-body
+                    = @vig.probien ? @vig.probien.physical : "No completado"
+              .col-md-3.text-center
+                .panel.panel-default
+                  .panel-heading 
+                    %h3 Personalidad
+                  .panel-body
+                    = @vig.probien ? @vig.probien.personaldev : "No completado"
+            - else
+              .col-md-12
+                .panel.panel-default
+                  .panel-heading 
+                    %h4 Aun no se ha hecho el ProBien
           .row
             .col-md-6
               .text-danger
@@ -110,7 +89,7 @@
       .col-md-14 
         .div.panel
           %h3 Observaciones
-          - unless @vig.nil?
+          - unless @vig.nil? || @vig.probien.nil?
             -@vig.probien.descriptions.each do |description|
               .div.well
                 =description.name
@@ -136,4 +115,3 @@
                 =  check_box_tag "vig[test_ids][]" , test.id
         .modal-footer
           = vig.submit "Guardar", class: "btn btn-success" 
-
