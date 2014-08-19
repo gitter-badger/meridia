@@ -5,9 +5,7 @@
 
   %table.table
     %tr
-      %th Code
       %th Nombre
-      %th Apellido
       %th Telefono
       %th Mobile
       %th Email
@@ -20,7 +18,6 @@
 
     - @prospects.each do |prospect|
       %tr
-        %td= prospect.code
         %td= link_to "#{prospect.name} #{prospect.lastname}", prospect
         %td= prospect.phone 
         %td= prospect.mobile
