@@ -83,3 +83,21 @@
     margin-left: 0px;
     position: absolute;
 }
+.profile_box{
+     position: relative;
+    text-align: center;
+  }
+.profile_box .field_avatar {
+    cursor: pointer;
+    opacity: 0;
+}
+.profile_box .instructions {
+    border: 2px dashed #ddd;
+    opacity: 0.8;
+}
+.profile_box div, .profile_box .field_avatar {
+    height: 96%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}

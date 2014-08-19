@@ -5,8 +5,9 @@
       -  @member = Member.find(@member)
       = form_for @member, :html => {:multipart => true} do |f|
         = @member.avatar? ? image_tag(@member.avatar_url) : image_tag("profile.jpg")
-        = f.file_field :avatar
-        = f.submit
+        .instructions Click en la imagen para cambiar
+        = f.file_field :avatar , class: "field_avatar"
+        = f.submit "Cambiar foto"
     .list-group
       = link_to "Perfil", member_path(@member), class: "list-group-item"
       = link_to "Valoraciones", member_vigs_path(@member) , class: "list-group-item"      

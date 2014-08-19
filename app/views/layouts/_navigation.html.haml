@@ -1,10 +1,10 @@
 -# navigation styled for Bootstrap 3.0
 .user-menu
-  = image_tag "http://bootstrapguru.com/preview/delighted/images/avatar.png", class: "avatar"
+  = image_tag "profile.jpg", class: "avatar"
   .welcome
     Bienvenido
   .username
-    = truncate(current_user.name, :length => 10)
+    = truncate(current_user.name, :length => 20)
 .list-menu
   = link_to "Participantes", members_path, class: "list-group-item"
   = link_to "Prospectos", prospects_path, class: "list-group-item"

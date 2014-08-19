@@ -1,9 +1,5 @@
 class ProgressController < ApplicationController
-<<<<<<< HEAD
 	before_filter :authenticate_user!
-=======
-	#before_filter :authenticate_user!
->>>>>>> origin/master
 	#load_and_authorize_resource
 	def index
 		@member= Member.find(params[:member_id])
