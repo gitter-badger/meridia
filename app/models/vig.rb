@@ -20,5 +20,6 @@ class Vig
   has_and_belongs_to_many  :tests
   has_many :answers
   has_many :vigs_tests
-  
+
+	scope :withot_nursing,-> { where :kind => "gerontology"}	
 end

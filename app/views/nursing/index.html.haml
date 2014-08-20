@@ -63,7 +63,7 @@
         %h3 Oxigenacion
         %dl.dl-horizontal
           %dt Respiracion
-          - @breath_level = @member.breaths.first.level
+          - @breath_level = @member.breaths.empty? ? 0: @member.breaths.first.level
           - @breath_value = nil
           - Breath::LEVELS.map do |level|
             - ( level[1] == @breath_level ) ? @breath_value = level[0] : ''
@@ -253,7 +253,8 @@
           %dt Otras Observaciones
       - else
         No hay una valoracion de enfermeria actualmente, 
-        %a{ :href => new_member_nursing_path } quieres crearla?
+        -if can? :create, Vig
+          %a{ :href => new_member_nursing_path } quieres crearla?
       -# %table.table
         %tr
           %th Nombre

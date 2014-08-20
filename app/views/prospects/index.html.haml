@@ -1,13 +1,12 @@
 .panel
   %h1 Prospectos
   = link_to 'Informes', prospect_grafic_path, class: "btn btn-info pull-right"
-  = link_to 'Nuevo prospecto', new_prospect_path, class: "btn btn-success pull-right"
+  -if can? :create, Prospect
+    = link_to 'Nuevo prospecto', new_prospect_path, class: "btn btn-success pull-right"
 
   %table.table
     %tr
-      %th Code
       %th Nombre
-      %th Apellido
       %th Telefono
       %th Mobile
       %th Email
@@ -20,7 +19,6 @@
 
     - @prospects.each do |prospect|
       %tr
-        %td= prospect.code
         %td= link_to "#{prospect.name} #{prospect.lastname}", prospect
         %td= prospect.phone 
         %td= prospect.mobile

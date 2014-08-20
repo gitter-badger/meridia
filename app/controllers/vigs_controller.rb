@@ -6,7 +6,7 @@ class VigsController < ApplicationController
   # GET /vigs
   # GET /vigs.json
   def index
-    @vigs = Vig.all
+    @vigs = @member.vigs.withot_nursing
   end
 
   # GET /vigs/1
