@@ -9,7 +9,7 @@ class AnswersController < ApplicationController
 	def create
 		test = Test.find(params[:test_id])
 		answers= params[:answers].values.collect { |q| Answer.new(q)}	
-		vig = params[:answer][:vigs]
+		vig = answer_params[:vigs]
 		vig_test = VigsTest.new(status: true ,vig_id: vig, test_id: test.id)
 		
 
@@ -26,5 +26,9 @@ class AnswersController < ApplicationController
 			redirect_to vig_test_path(vig,test)
 		end
 	
+	end
+	private
+	def answer_params
+		params.require(:answer).permit(:test_id, :vigs ,:answers=>[])	
 	end
 end
