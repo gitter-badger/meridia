@@ -6,7 +6,7 @@ class Role
  
 
   field :name, :type => String
-
+	field :descripcion, :type => String
   index({
     :name => 1,
     :resource_type => 1,
