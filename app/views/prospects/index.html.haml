@@ -1,7 +1,8 @@
 .panel
   %h1 Prospectos
   = link_to 'Informes', prospect_grafic_path, class: "btn btn-info pull-right"
-  = link_to 'Nuevo prospecto', new_prospect_path, class: "btn btn-success pull-right"
+  -if can? :create, Prospect
+    = link_to 'Nuevo prospecto', new_prospect_path, class: "btn btn-success pull-right"
 
   %table.table
     %tr

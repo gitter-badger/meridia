@@ -8,9 +8,10 @@
 .col-md-9
   .panel
     %h3 Valoraciones
-    %button.btn.btn-primary.pull-right.btn-success{"data-target" => "#myModal", "data-toggle" => "modal"}
-      %span.icon-plus-square
-      Agregar Nueva Valoracion
+    - if can? :create, Vig
+      %button.btn.btn-primary.pull-right.btn-success{"data-target" => "#myModal", "data-toggle" => "modal"}
+        %span.icon-plus-square
+        Agregar Nueva Valoracion
 
     %table.table
       %tr

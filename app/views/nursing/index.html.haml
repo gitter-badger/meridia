@@ -253,7 +253,8 @@
           %dt Otras Observaciones
       - else
         No hay una valoracion de enfermeria actualmente, 
-        %a{ :href => new_member_nursing_path } quieres crearla?
+        -if can? :create, Vig
+          %a{ :href => new_member_nursing_path } quieres crearla?
       -# %table.table
         %tr
           %th Nombre
