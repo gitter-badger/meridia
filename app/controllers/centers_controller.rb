@@ -27,13 +27,10 @@ class CentersController < ApplicationController
       if member['date_borth'] && @members['all'] > 0      
        sum_years += age(member['date_borth'])
        con_edad += 1
-      end 
-      if member.vigs && !member.vigs.last.nil?
-       @mental = mental(member.vigs.last.folstein)
-      end
+      end       
     end
+    @mental = arr_cognitiva(members)
 		@members['edad_promedio']=sum_years > 0 ? (sum_years/con_edad) : 0
-     
   end
 
   # GET /centers/new

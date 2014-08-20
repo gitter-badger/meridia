@@ -59,7 +59,6 @@ module VigsHelper
 		else
 						"No Disponible"
 		end
-
 	end
 
 	def lawton(points)
@@ -100,6 +99,37 @@ module VigsHelper
 						 "Deprecion : #{points['total']}(establecida)"
 		else
 						"No disponible"
+		end
+	end
+
+	def arr_cognitiva members
+		normal = 0
+		cognitivo= 0
+		leve = 0
+		moderada = 0
+		severa = 0
+		falta = 0
+		none = 0
+		members.each do |member|
+			if member.vigs && !member.vigs.last.nil?
+				total = member.vigs.last.folstein['total']
+				case total
+				when total >= 25
+					normal += 1
+				when 24..26
+					cognitivo += 1
+				when 21..23
+					leve += 1
+				when 11..20
+					moderada += 1
+				when 0..10
+					severa += 1
+				else
+					none += 1
+				end
+			else
+				falta += 1
+			end
 		end
 	end
 end
