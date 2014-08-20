@@ -44,27 +44,27 @@
               .col-md-3.text-center
                 .panel.panel-default
                   .panel-heading.text-cente
+                    %h4 Dependencia
+                  .panel-body
+                    = raw(barthel(@vig.abvd))
+              .col-md-3.text-center
+                .panel.panel-default
+                  .panel-heading 
+                    %h4 Marcha y Eq
+                  .panel-body
+                    = raw(tinetti(@vig.tinetti))
+              .col-md-3.text-center
+                .panel.panel-default
+                  .panel-heading 
                     %h3 Cognitivo
                   .panel-body
-                    = @vig.probien ? @vig.probien.cognitive : "No completado"
+                    = raw(mental(@vig.folstein))
               .col-md-3.text-center
                 .panel.panel-default
                   .panel-heading 
-                    %h3 Salud
+                    %h3 Depresión
                   .panel-body
-                    = @vig.probien ? @vig.probien.health : "No completado"
-              .col-md-3.text-center
-                .panel.panel-default
-                  .panel-heading 
-                    %h3 Sicológico
-                  .panel-body
-                    = @vig.probien ? @vig.probien.physical : "No completado"
-              .col-md-3.text-center
-                .panel.panel-default
-                  .panel-heading 
-                    %h3 Personalidad
-                  .panel-body
-                    = @vig.probien ? @vig.probien.personaldev : "No completado"
+                    = raw(yesavage(@vig.yesavage))
             - else
               .col-md-12
                 .panel.panel-default

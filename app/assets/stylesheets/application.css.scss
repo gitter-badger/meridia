@@ -96,8 +96,18 @@
     opacity: 0.8;
 }
 .profile_box div, .profile_box .field_avatar {
-    height: 96%;
+    height: 100%;
     position: absolute;
     top: 0;
     width: 100%;
+}
+.submit_avatar{
+  left: 103px;  
+  position: absolute;
+  margin-top: 7px;
+  display: none;
+}
+.profile_box{
+  margin-bottom: 50px;
+
 }

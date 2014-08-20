@@ -1,5 +1,6 @@
 class CentersController < ApplicationController
-include MembersHelper
+  include MembersHelper
+  include VigsHelper
   before_filter :authenticate_user!
 	load_and_authorize_resource
 	before_action :set_center, only: [:show, :edit, :update, :destroy]
@@ -15,19 +16,24 @@ include MembersHelper
   def show
     members=Member.all
     @members = {}
+    @mental =[]
     @members['all'] = members.count
     @members['female'] = members.where(gender: 'female').count
     @members['male'] = members.where(gender: 'male').count
-    sum_years = 0 
-    con_edad = 0 
+    sum_years = 0
+    con_edad = 0
+   
     members.each do |member|
-      if member['date_borth'] && @members['all'] > 0
-        # sum_years += now.year - member['date_borth'].year - (members[18]['date_borth'].to_date.change(:year => now.year) > now ? 1 : 0)
+      if member['date_borth'] && @members['all'] > 0      
        sum_years += age(member['date_borth'])
        con_edad += 1
       end 
+      if member.vigs && !member.vigs.last.nil?
+       @mental = mental(member.vigs.last.folstein)
+      end
     end
 		@members['edad_promedio']=sum_years > 0 ? (sum_years/con_edad) : 0
+     
   end
 
   # GET /centers/new

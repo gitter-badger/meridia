@@ -16,7 +16,9 @@ $(document).ready(function() {
         }
       });
 
-
-  
+    $("#member_avatar").on('change', function() {
+      $(".submit_avatar").show();
+    });
+ 
 
 });
