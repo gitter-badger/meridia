@@ -21,6 +21,7 @@ gem 'enumerize', '~> 0.8.0'
 gem 'rails_12factor'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem "fog"
+gem 'gon'
 
 group :development do
   gem 'better_errors'

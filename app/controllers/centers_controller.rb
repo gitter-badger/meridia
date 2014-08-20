@@ -29,7 +29,9 @@ class CentersController < ApplicationController
        con_edad += 1
       end       
     end
-    @mental = arr_cognitiva(members)
+    gon.mental = arr_cognitiva(members)
+    gon.dependencia = arr_dependencia(members)   
+
 		@members['edad_promedio']=sum_years > 0 ? (sum_years/con_edad) : 0
   end
 

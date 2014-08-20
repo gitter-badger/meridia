@@ -108,8 +108,8 @@ module VigsHelper
 		leve = 0
 		moderada = 0
 		severa = 0
-		falta = 0
 		none = 0
+		falta = 0
 		members.each do |member|
 			if member.vigs && !member.vigs.last.nil?
 				total = member.vigs.last.folstein['total']
@@ -131,5 +131,51 @@ module VigsHelper
 				falta += 1
 			end
 		end
+		arr_cognitia = []
+		arr_cognitia << ['Normal', normal]
+		arr_cognitia << ['Deterioro Cognitivo', cognitivo]
+		arr_cognitia << ['Deterioro Leve', leve]
+		arr_cognitia << ['Demecia Moderada', moderada]
+		arr_cognitia << ['Demencia Severa', severa]
+		arr_cognitia << ['No llenado', none]
+		arr_cognitia << ['Falta examen', falta]
+		arr_cognitia 
+	end
+
+	def arr_dependencia members
+		falta = 0
+		none = 0
+		severa = 0
+		grave = 0
+		moderada= 0
+		ligera = 0
+		members.each do |member|
+			if member.vigs && !member.vigs.last.nil?
+				total = member.vigs.last.abvd['total']
+				puts "****"*50, total
+				case total
+				when 0..44
+					severa += 1
+				when 45..59
+					grave += 1
+				when 60..79
+					moderada += 1
+				when 80..100
+					ligera +=1
+				else
+					none += 1
+				end
+			else
+				falta += 1
+			end				
+		end
+		arr_dependencia = []
+		arr_dependencia << ['Servera', severa]
+		arr_dependencia << ['Grave', grave]
+		arr_dependencia << ['Moderada', moderada]
+		arr_dependencia << ['Ligera', ligera]
+		arr_dependencia << ['No llenado', none]
+		arr_dependencia << ['Falta examen', falta]
+		arr_dependencia 
 	end
 end
