@@ -322,7 +322,7 @@ namespace :test do
     end
 
     def oars_social
-      test = Test.new(title: "OARS Social",function: :oars,test_code:4 )
+      test = Test.new(title: "OARS Social",calculate: :oars,test_code:4 )
       test.save!
 
       # question 1

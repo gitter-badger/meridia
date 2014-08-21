@@ -8,7 +8,7 @@
     =form_for [:admin,@user] do |user|
       -@prof.each do |profile|
         .form-group
-          .checkbox
+          .ch
             =check_box_tag "user[role_ids][]", profile.id, @user.roles.include?(profile)
             = profile.name
             %em
