@@ -1,0 +1,48 @@
+= include_gon 
+- content_for :title_breadcrumb do
+  %strong
+    = @center.name
+.row
+  .col-md-3
+    .info_box.text-right
+      .icon
+        %span.icon-group.green
+      .summary
+        %h4
+          = @members['all']
+        Participantes
+  .col-md-3
+    .info_box
+      .icon
+        %span.icon-female.red
+      .summary
+        %h4
+          = @members['female'] 
+        Mujeres
+  .col-md-3
+    .info_box
+      .icon
+        %span.icon-male.blue
+      .summary
+        %h4
+          = @members['male'] 
+        Hombres
+  .col-md-3
+    .info_box
+      .icon
+        %span.icon-calendar-o.black
+      .summary
+        %h4
+          = @members['edad_promedio']
+        Edad Promedio
+
+.row
+  .col-md-6
+    .panel
+      #container{:style => "min-width: 310px; height: 400px; margin: 0 auto"}
+
+  .col-md-6
+    .panel      
+      #container1{:style => "min-width: 310px; height: 400px; margin: 0 auto"}
+    - content_for :javascripts do
+      = javascript_include_tag "members"

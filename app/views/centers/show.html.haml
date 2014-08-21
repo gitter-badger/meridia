@@ -6,43 +6,38 @@
   .col-md-3
     .info_box.text-right
       .icon
-        %span.icon-group.green
+        %span.icon-bell-o.green
       .summary
         %h4
-          = @members['all']
-        Participantes
+          = @result['tickets']
+        N° Tickets
   .col-md-3
     .info_box
       .icon
-        %span.icon-female.red
+        %span.icon-medkit.red
       .summary
         %h4
-          = @members['female'] 
-        Mujeres
+          = @result['visitas']
+        N° Visitas
   .col-md-3
     .info_box
       .icon
-        %span.icon-male.blue
+        %span.icon-hospital-o.blue
       .summary
         %h4
-          = @members['male'] 
-        Hombres
+          = @result['cancelaciones']
+        N° Cancelaciones
   .col-md-3
     .info_box
       .icon
-        %span.icon-calendar-o.black
+        %span.icon-group.black
       .summary
         %h4
-          = @members['edad_promedio']
-        Edad Promedio
+          = @result['ventas']
+        N° de Ventas
 
 .row
-  .col-md-6
+  .col-md-12
     .panel
-      #container{:style => "min-width: 310px; height: 400px; margin: 0 auto"}
-
-  .col-md-6
-    .panel      
-      #container1{:style => "min-width: 310px; height: 400px; margin: 0 auto"}
-    - content_for :javascripts do
-      = javascript_include_tag "members"
+      #contact
+= render "charts/prospect_grafic"

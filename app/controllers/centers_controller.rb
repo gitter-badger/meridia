@@ -14,6 +14,17 @@ class CentersController < ApplicationController
   # GET /centers/1
   # GET /centers/1.json
   def show
+    @result = {}
+    @result['tickets'] = Prospect.count
+    @result['cancelaciones'] = Prospect.where(:status=>'Cancel').count
+    @result['ventas'] = Prospect.where(:status=>'Venta').count
+    @result['visitas'] = Ticket.where(:type=>'Cita').count
+    @date_start = (Time.now - 30.days).strftime("%F")
+    @date_end = (Time.now + 1.days).strftime("%F")
+    @data_member = ProspectMember.where(:created_at.gte=> @date_start, :created_at.lte =>@date_end)
+    @data = Prospect.where(:created_at.gte=> @date_start, :created_at.lte =>@date_end)
+  end
+  def show1
     members=Member.all
     @members = {}
     @mental =[]
