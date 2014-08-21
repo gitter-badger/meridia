@@ -2,9 +2,9 @@
 
 %table
   %tr
-    %th Title
-    %th Observation
-    %th Description
+    %th Title , "Título"
+    %th Observation ,"Observación"
+    %th Description ,"Descripción"
     %th
     %th
     %th
@@ -14,10 +14,10 @@
       %td= test.title
       %td= test.observation
       %td= test.description
-      %td= link_to 'Show', test
-      %td= link_to 'Edit', edit_test_path(test)
-      %td= link_to 'Destroy', test, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to 'Ver', test
+      %td= link_to 'Editar', edit_test_path(test)
+      %td= link_to 'Eliminar', test, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= link_to 'New Test', new_test_path
+= link_to 'Nuevo', new_test_path

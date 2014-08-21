@@ -44,7 +44,8 @@
         -else
           .separador_div 
         = render 'layouts/messages'
-        .contenido   
-        = yield
+        .contenido  
+          .col-md-12
+            = yield
     = yield :footer
     = yield(:javascripts)
