@@ -1,5 +1,5 @@
 - content_for :title do
-  = 'Listing activities'.upcase
+  = 'Lista de actividades'.upcase
 
 .panel
   %h3
@@ -70,11 +70,11 @@
 
     - @activities.each do |activity|
       %tr
-        %td= activity.title
-        %td= activity.participants
-        %td= link_to 'Show', activity
-        %td= link_to 'Edit', edit_activity_path(activity)
-        %td= link_to 'Destroy', activity, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= activity.title 
+        %td= activity.participants 
+        %td= link_to 'Ver', activity
+        %td= link_to 'Editar', edit_activity_path(activity)
+        %td= link_to 'Eliminar', activity, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
   %br
 

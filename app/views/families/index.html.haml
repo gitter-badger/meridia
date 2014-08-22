@@ -1,13 +1,13 @@
-%h1 Listing families
+%h1 Lista de Familiares
 
 %table
   %tr
-    %th Firstname
-    %th Lastname
-    %th Relationship
-    %th Phone home
-    %th Address
-    %th Phone mobile
+    %th Nombre
+    %th Apellido
+    %th Parentesco
+    %th Teléfono
+    %th Dirección
+    %th Celular
     %th
     %th
     %th
@@ -20,10 +20,10 @@
       %td= family.phone_home
       %td= family.address
       %td= family.phone_mobile
-      %td= link_to 'Show', family
-      %td= link_to 'Edit', edit_family_path(family)
-      %td= link_to 'Destroy', family, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to 'Ver', family
+      %td= link_to 'Editar', edit_family_path(family)
+      %td= link_to 'Eliminar', family, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= link_to 'New Family', new_family_path
+= link_to 'Nuevo', new_family_path

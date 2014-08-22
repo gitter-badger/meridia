@@ -1,11 +1,11 @@
-= link_to 'New Center', new_center_path, class: 'ui blue button'
+= link_to 'Nuevo', new_center_path, class: 'ui blue button'
 %h1 Listing centers
 
 %table.ui.table.segment
   %tr
-    %th Name
-    %th Address
-    %th Phone
+    %th Nombre
+    %th Dirección
+    %th Teléfono
     %th
     %th
     %th
@@ -15,7 +15,7 @@
       %td= center.name
       %td= center.address
       %td= center.phone
-      %td= link_to 'Show', center
-      %td= link_to 'Edit', edit_center_path(center)
-      %td= link_to 'Destroy', center, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to 'Ver', center
+      %td= link_to 'Editar', edit_center_path(center)
+      %td= link_to 'Eliminar', center, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

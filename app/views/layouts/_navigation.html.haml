@@ -4,7 +4,7 @@
   .welcome
     Bienvenido
   .username
-    = truncate(current_user.name, :length => 17)
+    = truncate(current_user.name, :length => 10)
 .list-menu
   -if can? :read, Member
     = link_to "Participantes", members_path, class: "list-group-item"

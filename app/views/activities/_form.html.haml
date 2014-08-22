@@ -11,16 +11,16 @@
 
 
   .form-group
-    = f.label :title
+    = f.label :title , "Nombre"
     = f.text_field :title, :class => "form-control" 
   .form-group
-    = f.label :description
+    = f.label :description , "Descripción"
     = f.text_area :description, :class => "form-control"
   .form-group
-    = f.label :attendes
+    = f.label :attendes , "Parcipantes"
     = f.text_field :participants, :class => "form-control"
   .form-group
-    = f.label :objective
+    = f.label :objective, "Objetivo"
     = f.text_area :objective, :class => "form-control"
   
     -for area in Area.all 
