@@ -25,6 +25,9 @@
         .tab-pane#info
         .tab-pane#family
           - @member.families do |family| 
+            = "#{family.firstname} #{family.lastname}"
+            %em
+              ="(#{family.phone_home})"
             %hr  
         .tab-pane#salud
           - @member.health_insurances do |insurances|

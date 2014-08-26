@@ -1,14 +1,16 @@
 .col-md-12.panel
-  %h3 User
+  %h3 Usuario
   %p
     User: #{@user.name}
   %p
     Email: #{@user.email if @user.email}
-
-  =form_for [:admin,@user] do |user|
-    -@prof.each do |profile|
-      =check_box_tag "user[role_ids][]", profile.id, @user.roles.include?(profile)
-      = profile.name
-      %em
-        = "(#{profile.descripcion})"
-    = user.submit
+  .form
+    =form_for [:admin,@user] do |user|
+      -@prof.each do |profile|
+        .form-group
+          .ch
+            =check_box_tag "user[role_ids][]", profile.id, @user.roles.include?(profile)
+            = profile.name
+            %em
+              = "(#{profile.descripcion})"
+      = user.submit
