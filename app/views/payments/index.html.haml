@@ -1,0 +1,46 @@
+= render "shared/vig_menu" 
+.col-md-9
+  .panel
+    %h1 Pago Mensualidad 
+
+    %table.table
+      %tr
+        %th Precio
+        %th Descripción   
+        %tr
+          %td= @member.payments.first.price
+          %td= @member.payments.first.description
+    %h1 Otros Servicios
+    %table.table
+      %tr
+        %th Nombre
+        %th Precio
+        %th Descripción
+        %th
+        %th
+        %th
+      - @member.payments.first.additional_services.each do |additional_service|
+        %tr
+          %td= additional_service.name
+          %td= additional_service.price
+          %td= additional_service.description         
+          %td= link_to 'Eliminar', del_relation_additional_services_path(@member, :additional_id => additional_service.id), :data => { :confirm => 'Are you sure?' }
+    %h1 Listado de servicios adicionales
+
+    = form_for @member.payments.first, url: create_service_payments_path(@member.payments.first), method: :past do |f|
+      %table.table
+        %tr
+          %th Nombre
+          %th Precio
+          %th Descripción
+          %th
+          %th
+          %th
+          - @additional_services.each do |additional_service|
+            %tr
+              %td= additional_service.name
+              %td= additional_service.price
+              %td= additional_service.description
+              %td= check_box_tag 'additional_services[]', additional_service.id 
+          .form-group
+      = f.submit 'Guardar', class: "btn btn-primary"        

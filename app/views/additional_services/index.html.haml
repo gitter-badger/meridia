@@ -1,0 +1,26 @@
+.container
+  .col-md-12
+    .panel
+      %h1 Listado de servicios adicionales
+
+      %table.table
+        %tr
+          %th Nombre
+          %th Precio
+          %th Descripción
+          %th
+          %th
+          %th
+
+        - @additional_services.each do |additional_service|
+          %tr
+            %td= additional_service.name
+            %td= additional_service.price
+            %td= additional_service.description
+            %td= link_to 'Ver', additional_service
+            %td= link_to 'Editar', edit_additional_service_path(additional_service)
+            %td= link_to 'Eliminar', additional_service, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+      %br
+
+      = link_to 'Nuevo servicio', new_additional_service_path, class: "btn btn-success"
