@@ -1,0 +1,9 @@
+.container
+  .col-md-12
+    .panel
+      %h1 Editar servicio adicional
+      = render 'form'
+
+      = link_to 'Ver', @additional_service
+      \|
+      = link_to 'Volver', additional_services_path

@@ -6,13 +6,13 @@ class CustomersController < ApplicationController
     @customer = Customer.new
     @member = @customer.members.build
     family = @member.families.build
+    payment = @member.payments.build
     health = @member.health_insurances.build
     service = @member.health_services.build
   end
 
   def create
     @customer= Customer.new(customer_params)
-    
     if @customer.save
         redirect_to members_path
     else
@@ -58,7 +58,11 @@ class CustomersController < ApplicationController
           :phone2,
           :phone1,
           :address
-      ]
+        ],
+        payments_attributes:[
+          :price,
+          :description
+        ]
       ])
     end
 end
