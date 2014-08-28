@@ -24,16 +24,21 @@
       .panel.tab-content
         .tab-pane#info
         .tab-pane#family
-          - @member.families do |family| 
+          = link_to "Agregar Familiar", '#', class:"btn btn-success pull-right"
+          %hr
+          - @member.families.each do |family| 
             = "#{family.firstname} #{family.lastname}"
             %em
               ="(#{family.phone_home})"
             %hr  
         .tab-pane#salud
-          - @member.health_insurances do |insurances|
+          = link_to "Agregar Familiar", '#', class:"btn btn-success pull-right"
+          - @member.health_insurances.each do |insurances|
             %hr  
-          - @member.health_services do |service|
-            %hr    
+            =insurances.company
+          - @member.health_services.each do |service|
+            %hr 
+            = service.hospital
         .tab-pane.active#perfil
           %h4
             = (@member.name + " "+ @member.lastname).capitalize 

@@ -47,8 +47,11 @@ class VigsTest
 		total = 0
 		answers = self.answers 
 		answers.each do |a|
-			total += a.options_answers.points.to_i
-		end
+			if a.options_answers
+        total += a.options_answers.points.to_i
+		
+      end
+    end
 		self.points = { total: total }
 		self.save!
 	end

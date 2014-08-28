@@ -2,10 +2,12 @@ Meridia::Application.routes.draw do
 
 
   resources :tests
-  resources :activities
+  resources :activities do
+    resources :lessons, only:[:create]
+  end
   resources :centers 
   resources :attends 
-  
+  resources :lessons  
   get "prospect_grafic", to: "prospect_grafic#index"
  
  	resources :prospects do

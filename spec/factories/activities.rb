@@ -3,13 +3,7 @@
 FactoryGirl.define do
   factory :activity do
     title "MyString"
-    body "MyString"
-    participants "MyString"
-    area "MyString"
-    adjetive "MyString"
-    physical_level "MyString"
-    social_level "MyString"
-    depression_level "MyString"
-    anxiety_level "MyString"
+    participants 20
+    center_id "123456"
   end
 end

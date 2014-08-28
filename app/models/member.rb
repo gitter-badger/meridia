@@ -46,7 +46,7 @@ class Member
   field :date_borth, type: Date
   field :birthday_city, type: String
   field :code, type: String
-  field :status, type: String
+  field :status, type: String, default: "active"
 	field :days, type: Array
 	field :avatar, type:String
 

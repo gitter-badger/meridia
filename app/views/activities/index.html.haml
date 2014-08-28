@@ -5,62 +5,6 @@
   %h3
     Horario Semanal
   %table.table
-    %thead
-      %tr
-        %th
-          Hora
-        %th
-          Lunes
-        %th
-          Martes
-        %th
-          Miercoles
-        %th
-          Jueves
-        %th
-          Viernes
-        %th
-          Sabado
-    - (8..18).map do |n|
-      %tr
-        %td
-          = n
-        -if  @time.monday?
-          %td.yellow
-            = lesson(@activities, n , :monday)
-        -else
-          %td
-            = lesson(@activities, n , :monday)
-        -if @time.tuesday?
-          %td.yellow
-            = lesson(@activities, n , :tuesday)
-        -else
-          %td
-            = lesson(@activities, n , :tuesday)
-        -if @time.wednesday?
-          %td.yellow
-            = lesson(@activities, n , :wednesday)
-        -else
-          %td
-            = lesson(@activities, n , :wednesday)
-        -if @time.thursday?
-          %td 
-            = lesson(@activities, n , :thursday)
-        -else
-          %td
-            = lesson(@activities, n , :thursday)
-        -if @time.friday?
-          %td.yellow 
-            = lesson(@activities, n , :friday)
-        -else  
-          %td 
-            = lesson(@activities, n , :friday)
-        %td 
-          = lesson(@activities, n , :saturday)
-
-  %h2
-    Actividades Desactivadas
-  %table.table
     %tr
       %th Title
       %th Participants

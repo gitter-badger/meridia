@@ -13,7 +13,7 @@ Bundler.require(*Rails.groups)
 
 module Meridia
   class Application < Rails::Application
-
+    config.time_zone = 'Mexico City'
    	initializer 'setup_asset_pipeline', :group => :all  do |app|
 		# We don't want the default of everything that isn't js or css, because it pulls too many things in
 		app.config.assets.precompile.shift
