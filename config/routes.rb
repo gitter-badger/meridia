@@ -82,4 +82,10 @@ Meridia::Application.routes.draw do
   	resources :roles
 	end
 
+  namespace 'payment' do
+    resources :reports
+    resources :attends
+    get 'payments', to: 'reports#payments'
+    get 'assistance', to: 'reports#assistance'
+  end
 end

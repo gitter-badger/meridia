@@ -1,4 +1,4 @@
-class AdditionalServicesController < ApplicationController
+class Admin::AdditionalServicesController < ApplicationController
   layout 'admin'  
   before_action :set_additional_service, only: [:show, :edit, :update, :destroy]
 
