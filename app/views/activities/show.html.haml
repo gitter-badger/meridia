@@ -1,11 +1,23 @@
-%p#notice= notice
-%p
-  %b Title:
-  = @activity.title
-%p
-  %b Participants:
-  = @activity.participants
+.panel
+  %h2
+    = @activity.title
+  %p
+    = @activity.description
 
-= link_to 'Editar', edit_activity_path(@activity)
-\|
-= link_to 'Atras', activities_path
+  %h3
+    Objerivos
+  %P
+    = @activity.objective
+
+  %fieldset.fieldset
+    =form_for @lesson, url: activity_lessons_path(@activity,@lesson) do |f|
+      .form-group
+        =f.label :day
+        =f.select :day, Lesson::DAY, :selected => @lesson.day
+        = f.label :hour
+        = f.select :hour, (8..18).map{ |h| h.to_i > 9 ? [h, h] : ['%s%s' % [0, h], h] }, :selected => @lesson.hour
+        = f.label :length
+        = f.select :length, (1..8).map{ |h| h.to_i > 9 ? [h, h] : ['%s%s' % [0, h], h] }
+        =f.submit
+ 
+

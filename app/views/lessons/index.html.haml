@@ -1,0 +1,36 @@
+.panel
+  = @lesson= (lessons @lessons)
+  %table.table
+    %thead
+      %tr
+        %th
+          hora
+        %th
+          Lunes
+        %th
+          Martes
+        %th
+          Miercoles
+        %th
+          Jueves
+        %th
+          Viernes
+        %th
+          Sabado
+    %tbody
+      -(0..10).map do |hour| 
+        %tr
+          %td
+            =hour + 8
+          %td
+            =@lesson[hour][:monday].to_sentence(two_words_connector: '-')
+          %td
+            =@lesson[hour][:tuesday].to_sentence(two_words_connector: '-')
+          %td
+            =@lesson[hour][:wednesday].to_sentence(two_words_connector: '-')
+          %td
+            =@lesson[hour][:thursday].to_sentence(two_words_connector: '-')
+          %td
+            =@lesson[hour][:friday].to_sentence(two_words_connector: '-')
+          %td
+            =@lesson[hour][:saturday].to_sentence(two_words_connector: '-')

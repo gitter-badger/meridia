@@ -31,9 +31,9 @@ module VigsHelper
 		total = points['total']
 		case total
 				when 0..44
-					"Dependencia : #{total} (Severa)"
+					"Dependencia : #{total} (Alta)"
 				when 45..59
-					"Dependencia :  #{total} (Grave)"
+					"Dependencia :  #{total} (Mayor)"
 				when 60..79
 					"Dependencia :#{total} Puntos (Moderada)"
 				when 80..100
@@ -55,7 +55,7 @@ module VigsHelper
 		when 11..20
 						"Total : #{total} (Demecia Moderada)"
 		when 0..10
-						"Total : #{total} (Demencia Severa)"
+						"Total : #{total} (Demencia Alta)"
 		else
 						"No Disponible"
 		end
@@ -136,7 +136,7 @@ module VigsHelper
 		arr_cognitia << ['Deterioro Cognitivo', cognitivo]
 		arr_cognitia << ['Deterioro Leve', leve]
 		arr_cognitia << ['Demecia Moderada', moderada]
-		arr_cognitia << ['Demencia Severa', severa]
+		arr_cognitia << ['Demencia Alta', severa]
 		arr_cognitia << ['No llenado', none]
 		arr_cognitia << ['Falta examen', falta]
 		arr_cognitia 
@@ -170,12 +170,15 @@ module VigsHelper
 			end				
 		end
 		arr_dependencia = []
-		arr_dependencia << ['Servera', severa]
-		arr_dependencia << ['Grave', grave]
+		arr_dependencia << ['Alta', severa]
+		arr_dependencia << ['Mayor', grave]
 		arr_dependencia << ['Moderada', moderada]
 		arr_dependencia << ['Ligera', ligera]
 		arr_dependencia << ['No llenado', none]
 		arr_dependencia << ['Falta examen', falta]
 		arr_dependencia 
 	end
+  def oars points
+    "Deprecion : #{points['total']} Puntos"
+  end
 end

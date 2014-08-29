@@ -1,8 +1,6 @@
 class Activity
   include Mongoid::Document
-  include Mongoid::Multitenancy::Document 
   include Mongoid::Timestamps
-	tenant(:center)
 
   field :title, type: String
   field :objective, type: String
@@ -14,7 +12,7 @@ class Activity
 
   
 	has_and_belongs_to_many :areas
-  embeds_many :lessons
+  has_many :lessons
 	
 	has_and_belongs_to_many :members
   accepts_nested_attributes_for :areas

@@ -14,8 +14,8 @@
       - @members.each do |member|
         %tr
           %td= link_to  member.name, member_path(member)
-          %td= member.phone
-          %td
+          %td= age(member.date_borth)
+          %td= member.country
           %td= member.code
           %td= member.status
 
