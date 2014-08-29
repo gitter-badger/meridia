@@ -30,6 +30,10 @@ class PaymentsController < ApplicationController
     @payment = Payment.new(payment_params)
     respond_to do |format|
       if @invoice.payments << @payment
+        total = @invoice.payments.sum("price")
+        if total == @invoice.total || total > @invoice.total
+          @invoice.update_attributes(status: 2)
+        end
         format.html { redirect_to @invoice, notice: 'Payment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @payment }
       else
