@@ -1,0 +1,100 @@
+= render "shared/vig_menu" 
+.col-md-9
+  .panel
+    %h1 Pago Mensualidad
+    %table.table
+      %tr
+        %th 
+          %h3 Precio
+        %th
+          %h3= @member.monthly_payment
+      %tr
+        %td
+          %button.btn.btn-primary.btn-success{"data-target" => "#myModal", "data-toggle" => "modal"}
+            %span.icon-plus-square
+              Editar precio
+    %h1 Otros Servicios
+    %table.table
+      %tr
+        %th Fecha del servicio
+        %th Nombre
+        %th Precio
+        %th Descripción
+        %th
+        %th
+        %th
+      -@invoices.each do |invoice|
+        %tr
+          %td= invoice.date_service
+          %td= invoice.additional_service.name
+          %td= invoice.additional_service.price
+          %td= invoice.additional_service.description         
+          %td= link_to 'Eliminar', invoice_path(invoice), :class => "btn btn-default" , :method => :delete , :confirm => 'Are you sure?' 
+    %h1 Listado de servicios adicionales
+    %table.table
+      %tr
+        %th Fecha del servicio
+        %th Nombre
+        %th Precio
+        %th Descripción
+        %th
+        %th
+        %th
+        - @additional_services.each do |additional_service|
+          %tr
+            = form_for :invoice do |f|
+              = hidden_field_tag :additional_service , additional_service.id
+              = f.hidden_field :member, :value => @member.id
+              %td= f.text_field :date_service , class: 'datepicker'
+              %td= additional_service.name
+              %td= additional_service.description
+              %td= additional_service.price
+              %td= f.submit 'Agregar', class: "btn btn-success"
+= form_for Invoice.new  do |i|
+  .modal.fade#myModal
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+          %h4
+            Agregar o descontar Pago mensualidad
+        .modal-body
+          .form-group
+            = i.hidden_field :member, :value => @member.id
+            = i.label :name, "Fecha del servicio" 
+            = i.text_field :date_service , class: 'datepicker form-control '
+          = i.fields_for :additional_service do |f|
+            .form-group
+              = f.label :name, "Nombre servicio"
+              = f.text_field :name, class: "form-control "
+            .form-group
+              = f.label :price, "Valor" 
+              = f.text_field :price, class: "form-control"
+            .form-group
+              = f.label :description, "Descripción"
+              = f.text_area :description, class: "form-control"            
+          .modal-footer
+            .form-group
+              = i.submit "Guardar", class: "btn btn-success" 
+
+:javascript
+  $(function() {
+    $( ".datepicker" ).datepicker({
+      format: 'yyyy/mm/dd'
+    });
+  });
+  console.log("afdsa");
+  $('#new_invoice').validate({
+    rules : {
+      'invoice[additional_service][name]': { required: true },
+      'invoice[additional_service][price]': { required: true },
+    },             
+   highlight: function(label) {
+        $(label).closest('.form-group').removeClass('has-success');
+        $(label).closest('.form-group').addClass('has-error');
+    },
+   success: function(label) {        
+        $(label).closest('.form-group').removeClass('has-error');
+        $(label).closest('.form-group').addClass('has-success');
+    }
+  });

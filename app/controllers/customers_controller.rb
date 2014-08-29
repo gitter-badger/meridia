@@ -6,7 +6,6 @@ class CustomersController < ApplicationController
     @customer = Customer.new
     @member = @customer.members.build
     family = @member.families.build
-    payment = @member.payments.build
     health = @member.health_insurances.build
     service = @member.health_services.build
   end
@@ -37,6 +36,7 @@ class CustomersController < ApplicationController
                 :date_borth,
                 :neighborhood,
                 :city,
+                :monthly_payment,
                 :days =>[],
         families_attributes:[
                 :firstname,

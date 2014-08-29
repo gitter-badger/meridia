@@ -18,10 +18,7 @@
             %li
               %a{"data-toggle" => "tab", href: "#tab3"} Familiares
             %li
-              %a{"data-toggle" => "tab", href: "#tab4"} Servicio Salud 
-            %li
-              %a{"data-toggle" => "tab", href: "#tab5"} Pagos
-
+              %a{"data-toggle" => "tab", href: "#tab4"} Servicio Salud           
       .tab-content
         #tab1.tab-pane
           .col-md-10.col-md-offset-1
@@ -89,8 +86,14 @@
             .col-md-5
               .form-group
                 = member.label :birthday_city
-                = member.text_field :birthday_city, class: "form-control"
+                = member.text_field :birthday_city, class: "form-control"            
+            .col-md-5.col-md-offset-1
+              .form-group
+                =member.label :monthly_payment , "Valor Mensualidad"
+                =member.text_field :monthly_payment, class: "form-control"              
             .col-md-10.col-md-offset-1
+              .form-group
+                =member.label :days , "Días que viene al centro"
               -Constants::DAYS.each_with_index do |day, index|
                 .checkbox
                   = label_tag day
@@ -164,20 +167,6 @@
                 .form-group
                   = service.label :phone2
                   = service.text_field :phone2, class: "form-control"
-          #tab5.tab-pane
-            .col-md-10.col-md-offset-1
-              %p.lead
-                pago.
-            = member.fields_for :payments do |payment|
-              .col-md-3.col-md-offset-1
-                .form-group
-                  =payment.label :price , "Precio"
-                  =payment.text_field :price, class: "form-control"
-              .row
-              .col-md-10.col-md-offset-1
-                .form-group
-                  =payment.label :description , "Descripción"
-                  =payment.text_area :description, class: "form-control"           
           .col-md-10.col-md-offset-1
             %ul.pager.wizard
               %li.previous

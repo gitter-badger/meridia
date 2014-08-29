@@ -6,7 +6,7 @@ class PaymentsController < ApplicationController
   # GET /PaymentsController
   # GET /payments.json
   def index
-    @member= Member.find(params[:member_id])
+     @member= Member.all
      @additional_services = AdditionalService.all
   end
 
@@ -40,19 +40,6 @@ class PaymentsController < ApplicationController
     end
   end
 
-  def create_service
-    @payment = Payment.find(params['format'])
-    #payment.additional_services.create(params['additional_services'])
-    if  params['additional_services']
-      params['additional_services'].each do |additional_service|
-        service = AdditionalService.find(additional_service)
-        @payment.additional_services << service
-      end
-    end
-    if @payment.save
-      redirect_to member_payments_path(@payment.member)
-    end
-  end
 
   # PATCH/PUT /payments/1
   # PATCH/PUT /payments/1.json

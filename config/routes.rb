@@ -1,17 +1,19 @@
 Meridia::Application.routes.draw do
 
 
+  resources :invoices do
+    collection do
+      post 'create_service'
+    end
+  end
+
   resources :additional_services do
     collection do
         get 'del_relation'
       end
   end
 
-  resources :payments do
-    collection do
-        post 'create_service'
-      end
-  end
+  resources :payments
 
   resources :tests
   resources :activities do
@@ -57,7 +59,7 @@ Meridia::Application.routes.draw do
     resources :allergies, only: [ :index, :new, :create, :destroy ]
     resources :signs, only: [ :index, :new, :create, :destroy ]
     resources :medicines, only: [ :index, :new, :create, :destroy ]
-    resources :payments, only: [ :index, :new, :create, :destroy ]
+    resources :invoices, only: [ :index, :new, :create, :destroy ]
 
     resources :nursing, only: [ :index, :new, :create ] do
       collection do
