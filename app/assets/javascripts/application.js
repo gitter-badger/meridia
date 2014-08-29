@@ -17,6 +17,8 @@
 //= require amodule/highcharts
 //= require jquery.validate
 //= require wizard
+//= require bootstrap-datepicker
+
 $(document).ready(function() {
   $('.navbar-toggle ').click(function() {
     $('.list-menu > a').toggleClass('active');

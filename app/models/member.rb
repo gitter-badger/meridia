@@ -9,7 +9,7 @@ class Member
   embeds_many :families
   embeds_many :health_insurances
   embeds_many :health_services
-  has_many :payments
+  has_many :invoices
   has_many :allergies
   has_many :medicines
   has_many :breaths
@@ -27,7 +27,6 @@ class Member
 	has_one :attend
   has_and_belongs_to_many :activities
   accepts_nested_attributes_for :families
-	accepts_nested_attributes_for :payments
   accepts_nested_attributes_for :health_insurances
   accepts_nested_attributes_for :health_services
   accepts_nested_attributes_for :signs, :allergies, :medicines, :breaths, :bloods, :others, :nutritions, :bodies, :depositions, :mobilizations, :hygienes, :communications, :sleeps, :pains
@@ -50,7 +49,8 @@ class Member
   field :code, type: String
   field :status, type: String
 	field :days, type: Array
-	field :avatar, type:String
+  field :avatar, type:String
+	field :monthly_payment, type:String
 
 	mount_uploader :avatar, AvatarUploader
   

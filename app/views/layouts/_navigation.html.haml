@@ -14,5 +14,6 @@
     = link_to "Actividades & Horarios", activities_path, class: "list-group-item"
   -if can? :read, Attend
     = link_to "Asistencia", attends_path, class: "list-group-item"
+    = link_to "Pagos", payments_path, class: "list-group-item"
   = link_to 'Salir', destroy_user_session_path,class: "list-group-item", :method=>'delete'
   

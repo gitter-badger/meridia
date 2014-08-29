@@ -13,6 +13,6 @@
       = link_to "Horarios",member_schedule_index_path(@member), class: "list-group-item" unless @vig.nil?
       = link_to "Enfermeria",member_nursing_index_path(@member), class: "list-group-item"
       = link_to "Evolucion", member_progress_index_path(@member), class: "list-group-item"
-      = link_to "Pagos", member_payments_path(@member), class: "list-group-item"
+      = link_to "Pagos", member_invoices_path(@member), class: "list-group-item"
 - content_for :javascripts do
   = javascript_include_tag "vigs"

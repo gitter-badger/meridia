@@ -41,6 +41,10 @@ $(document).ready(function() {
             number: true,
             minlength: 7
           },
+          "customer[members_attributes][0][monthly_payment]": {
+            required: true,
+            number: true,
+          },
           "customer[members_attributes][0][date_borth]":{
             required: true
           },
