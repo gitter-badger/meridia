@@ -1,4 +1,5 @@
 = render "shared/vig_menu"
+- @lesson= (lessons @lessons)
 .col-md-9
   .panel
     %h3 
@@ -22,20 +23,20 @@
             Viernes
           %th
             Sabado
-      - (8..18).map do |n|
+      - (0..10).map do |hour|
         %tr
           %td
-            = n
+            = hour + 8
           %td
-            = lesson(@activities, n , :monday)
+            =@lesson[hour][:monday].to_sentence(two_words_connector: '-')
           %td
-            = lesson(@activities, n , :tuesday)
+            =@lesson[hour][:tuesday].to_sentence(two_words_connector: '-')
           %td
-            = lesson(@activities, n , :wednesday)
+            =@lesson[hour][:wednesday].to_sentence(two_words_connector: '-')
           %td 
-            = lesson(@activities, n , :thursday)
+            =@lesson[hour][:thursday].to_sentence(two_words_connector: '-')
           %td 
-            = lesson(@activities, n , :friday)
+            =@lesson[hour][:friday].to_sentence(two_words_connector: '-')
           %td 
-            = lesson(@activities, n , :saturday)
+            =@lesson[hour][:saturday].to_sentence(two_words_connector: '-')
 

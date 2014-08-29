@@ -1,0 +1,4 @@
+.panel
+  = button_to "Gebenerar Pagos Mensual", payments_path 
+  -@payments.each do |invoice|
+    = invoice.id

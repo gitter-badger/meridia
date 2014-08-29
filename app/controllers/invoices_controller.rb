@@ -44,9 +44,12 @@ class InvoicesController < ApplicationController
   # PATCH/PUT /invoices/1
   # PATCH/PUT /invoices/1.json
   def update
+    binding.pry
+    data = invoice_params
+    data[:list_services][:date_service].to_date 
     respond_to do |format|
-      if @invoice.update(invoice_params)
-        format.html { redirect_to @invoice, notice: 'Invoice was successfully updated.' }
+      if @invoice.list_services << ListService.new(invoice_params[:list_services])
+        format.html { redirect_to member_additional_services_path(@member), notice: 'Invoice was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -70,6 +73,6 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:date, :description, :date_service ,:additional_service , :member, additional_service:[:name, :price, :description])
+      params.require(:invoice).permit(:date, :description, :date_service ,:additional_service , :member, list_services:[:date_service,:name, :price, :description])
     end
 end

@@ -13,14 +13,14 @@
               Horario
             %th
               Check
-          -for activity in @current_activity
+          -for activity in @current_lesson
             %tr
               %td
                 = activity.title
               %td
                 = activity.description
               %td
-                = check_box_tag "member[activity_ids][]" , activity.id, @member.activities.include?(activity)        
+                = check_box_tag "member[lesson_ids][]" , lesson.id, @member.lessonss.include?(lesson)        
       %h3
         Actividades Recomendas
       %table.table
@@ -33,19 +33,13 @@
             Horario
           %th
             Check
-        - for activity in @activities 
+        - for lesson in @lessons
           %tr
             %td
-              = activity.title
+              = lesson.activity.title
             %td
-              = activity.description
+              = lesson.activity.description
             %td
-              - activity.lessons.each do |lesson|
-                =lesson.day
-                =lesson.hour
-                =lesson.minutes
-                ="-"
-            %td
-              = check_box_tag "member[activity_ids][]" , activity.id, @member.activities.include?(activity)          
+              = check_box_tag "member[lesson_ids][]" , lesson.id, @member.lessons.include?(lesson)          
 
       =f.submit "Crear Horario", class: "btn btn-success"

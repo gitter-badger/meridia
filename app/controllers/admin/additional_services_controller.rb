@@ -1,12 +1,11 @@
 class AdditionalServicesController < ApplicationController
+  layout 'admin'  
   before_action :set_additional_service, only: [:show, :edit, :update, :destroy]
 
   # GET /additional_services
   # GET /additional_services.json
   def index
-    @member= Member.find(params[:member_id])
     @additional_services = AdditionalService.all
-    @invoice =  @member.invoices.last.nil? ? @member.invoices.create!  : @member.invoices.last
   end
 
   # GET /additional_services/1
@@ -43,7 +42,6 @@ class AdditionalServicesController < ApplicationController
   # PATCH/PUT /additional_services/1
   # PATCH/PUT /additional_services/1.json
   def update
-
     respond_to do |format|
       if @additional_service.update(additional_service_params)
         format.html { redirect_to @additional_service, notice: 'Additional service was successfully updated.' }
