@@ -26,11 +26,11 @@ class PaymentsController < ApplicationController
   # POST /payments
   # POST /payments.json
   def create
+    @invoice = Invoice.find(params[:invoice_id])
     @payment = Payment.new(payment_params)
-
     respond_to do |format|
-      if @payment.save
-        format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
+      if @invoice.payments << @payment
+        format.html { redirect_to @invoice, notice: 'Payment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @payment }
       else
         format.html { render action: 'new' }

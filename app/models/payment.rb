@@ -1,11 +1,13 @@
 class Payment
   include Mongoid::Document
+  include Mongoid::Timestamps
   
   field :price, type: Integer
   field :description, type: String
+  field :date
+  field :type
+  
+  embedded_in :invoice
 
-  belongs_to :member
-  has_many :additional_services
-
-  validates_presence_of :price, :description
+  validates_presence_of :price
 end

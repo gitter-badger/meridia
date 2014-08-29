@@ -7,6 +7,7 @@ class AdditionalServicesController < ApplicationController
     @member= Member.find(params[:member_id])
     @additional_services = AdditionalService.all
     @invoice =  @member.invoices.last.nil? ? @member.invoices.create!  : @member.invoices.last
+    @list_service = ListService.new
   end
 
   # GET /additional_services/1

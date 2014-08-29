@@ -29,7 +29,7 @@
           %td= service.name
           %td= service.price
           %td= service.description         
-          %td= link_to 'Eliminar', invoice_path(invoice), :class => "btn btn-default" , :method => :delete , :confirm => 'Are you sure?' 
+          %td= link_to 'Eliminar', member_invoice_list_service_path(@member,@invoice,service), :class => "btn btn-default" , :method => :delete , :confirm => 'Are you sure?' 
     %h1 Listado de servicios adicionales
     %table.table
       %tr
@@ -43,14 +43,15 @@
 
         - @additional_services.each do |additional_service|
           %tr
-            = form_for @invoice  do |f|
-              = hidden_field_tag :additional_service , additional_service.id
-              = f.fields_for :list_services do |a|
-                %td= a.text_field :date_service , class: 'datepicker'
-                %td= additional_service.name
-                %td= additional_service.description
-                %td= additional_service.price
-                %td= f.submit 'Agregar', class: "btn btn-success"
+            = form_for [@member,@invoice,@list_service]  do |a|
+              =a.hidden_field :description, :value => additional_service.description
+              =a.hidden_field :price, :value => additional_service.price
+              =a.hidden_field :name, :value => additional_service.name
+              %td= a.text_field :date_service , class: 'datepicker'
+              %td= additional_service.name
+              %td= additional_service.description
+              %td= additional_service.price
+              %td= a.submit 'Agregar', class: "btn btn-success"
 = form_for @invoice  do |i|
   .modal.fade#myModal
     .modal-dialog
