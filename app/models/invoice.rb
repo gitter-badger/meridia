@@ -7,7 +7,8 @@ class Invoice
 
   belongs_to :member
   #belongs_to :additional_service
-  embeds_one :additional_service
+  has_many :additional_service
+  embeds_many :list_services
 
-  validates_presence_of :date_service
+  #accepts_nested_attributes_for :list_services
 end

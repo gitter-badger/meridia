@@ -5,6 +5,6 @@ class AdditionalService
   field :description, type: String
 
   #has_many :envoices  
-  embedded_in :envoice
+  belongs_to :envoice
   validates_presence_of :price
  end

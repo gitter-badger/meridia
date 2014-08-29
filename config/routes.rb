@@ -59,7 +59,8 @@ Meridia::Application.routes.draw do
     resources :allergies, only: [ :index, :new, :create, :destroy ]
     resources :signs, only: [ :index, :new, :create, :destroy ]
     resources :medicines, only: [ :index, :new, :create, :destroy ]
-    resources :invoices, only: [ :index, :new, :create, :destroy ]
+    resources :additional_services, only: [ :index]
+    resources :invoices
 
     resources :nursing, only: [ :index, :new, :create ] do
       collection do
