@@ -3,26 +3,26 @@ class ScheduleController < ApplicationController
 	#authorize_resource :class => false
   def index
 		@member = Member.find(params[:member_id])
-		@activities = @member.activities
+		@lessons = @member.lessons
 	end
 
 	def new
 		@vig = Vig.find(params[:vig_id])
 		@member = @vig.member 
-		@current_activity = @vig.member.activities
-		@activities = Activity.all
+		@current_activity = @vig.member.lessons
+		@lessons = Lesson.all
 	end
 
 
 	def create
 		@member = Member.find(params[:member_id])
-		@member.activities.clear
+		@member.lessons.clear
 		@member.update_attributes(member_params)
 		redirect_to member_schedule_index_path(@member)	
 	end
 
 	private
 	def member_params
-		params.require(:member).permit(activity_ids: [])	
+		params.require(:member).permit(lesson_ids: [])	
 	end
 end

@@ -14,7 +14,7 @@
             Perfil
         %li
           %a{href: "#info", :"data-toggle"=>"tab"}
-            Informacion
+            Objetivos
         %li
           %a{href: "#family", :"data-toggle"=>"tab"}
             Familiares
@@ -47,37 +47,44 @@
             = 'años )'
             = 'Cuidad'
             =  @member.city
+          %hr
           .row
             -unless @vig.nil?
-              .col-md-3.text-center
-                .panel.panel-default
-                  .panel-heading.text-cente
-                    %h4 Dependencia
-                  .panel-body
-                    = raw(barthel(@vig.abvd))
-              .col-md-3.text-center
-                .panel.panel-default
-                  .panel-heading 
-                    %h4 Marcha y Eq
-                  .panel-body
-                    = raw(tinetti(@vig.tinetti))
-              .col-md-3.text-center
-                .panel.panel-default
-                  .panel-heading 
-                    %h4 Cognitivo
-                  .panel-body
-                    = raw(mental(@vig.folstein))
-              .col-md-3.text-center
-                .panel.panel-default
-                  .panel-heading 
-                    %h4 Depresión
-                  .panel-body
-                    = raw(yesavage(@vig.yesavage))
+              .col-md-2.text-center
+                = raw(barthel(@vig.abvd))
+                %p
+                  %strong ABVD
+              .col-md-2.text-center
+                = raw(lawton(@vig.aivd))
+                %p
+                  %strong
+                    AIVD
+              .col-md-2.text-center
+                -tinetti = tinetti(@vig.tinetti)
+                = tinetti[:scala]
+                %p
+                  %strong
+                    R. Caidas
+              .col-md-2.text-center
+                = raw(yesavage(@vig.yesavage))
+                %p
+                  %strong
+                    Depresión
+              .col-md-2.text-center
+                = raw(mental(@vig.folstein))
+                %p
+                  %strong
+                    Cognitivo
+              .col-md-2.text-center
+                -hamilton= hamilton(@vig.hamilton)
+                = hamilton[:scala]
+                %p
+                  %strong
+                    Ansiedad
             - else
               .col-md-12
-                .panel.panel-default
-                  .panel-heading 
-                    %h4 Aun no se ha hecho el ProBien
+                %h4 Aun no se ha hecho el ProBien
+          %hr
           .row
             .col-md-6
               .text-danger

@@ -25,7 +25,7 @@ class Member
   has_many :pains
 	has_many :probiens
 	has_one :attend
-  has_and_belongs_to_many :activities
+  has_and_belongs_to_many :lessons
   accepts_nested_attributes_for :families
 	accepts_nested_attributes_for :payments
   accepts_nested_attributes_for :health_insurances

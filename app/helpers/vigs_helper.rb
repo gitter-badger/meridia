@@ -11,18 +11,18 @@ module VigsHelper
 
 	def hamilton(points)
 		total = points['total']+ points['total2']
-		html  = "Asiedad Somatica:#{ points['total2']} <br>
-		Ansiedad Psiquica: #{points['total1']}
-		<br>"
+		html = Hash.new
+    html[:somatica]="Asiedad Somatica:#{ points['total2']}"
+    html[:psiquica]="Ansiedad Psiquica: #{points['total1']}"
 		case total.to_i
 			when 0..5
-				html += "Total : #{total} (Ausencia de Ansiedad)"
+				html[:scala]="Ausencia"
 			when 6..14
-				html +="Total :  #{total} (Ansiedad leve)"
+				html[:scala]="Leve"
 			when proc {|total| total > 15 }
-				html += "Total : #{total} (Ansiedad Moderada/Grave)"
+				html[:scala]="Moderada/Grave"
 			else
-				html = "No Disponible"
+				html[:scala]="No Disponible"
 		end
 		html
 	end
@@ -31,13 +31,13 @@ module VigsHelper
 		total = points['total']
 		case total
 				when 0..44
-					"Dependencia : #{total} (Alta)"
+					"Alta"
 				when 45..59
-					"Dependencia :  #{total} (Mayor)"
+					"Mayor"
 				when 60..79
-					"Dependencia :#{total} Puntos (Moderada)"
+					"Puntos Moderada"
 				when 80..100
-					"Dependendia : #{total} (Ligera)"
+					"Ligera"
 				else
 					"No disponible"
 		end
@@ -47,15 +47,15 @@ module VigsHelper
 		total = points['total']
 		case total
 		when total >= 25
-				"Total : #{total} (Normal)"
+				"Normal"
 		when 24..26
-				"Total : #{total} (Deterioro Cognitivo)"		
+				"Deterioro C"		
 		when 21..23
-						"Total : #{total} (Deterioro Leve)"
+						"Leve"
 		when 11..20
-						"Total : #{total} (Demecia Moderada)"
+						"D. Moderada"
 		when 0..10
-						"Total : #{total} (Demencia Alta)"
+						"D. Alta"
 		else
 						"No Disponible"
 		end
@@ -64,27 +64,27 @@ module VigsHelper
 	def lawton(points)
 		case points['total']
 		when 4..7
-						"Dependencia : #{points['total']}(Moderada)"
+						"Moderada"
 		when 0..4
-						"Dependencia : #{points['total']}(Mayor)"
+						"Mayor"
 		else
 						"No disponible"
 		end
 	end
 	def tinetti(points)
 		total = points['total']+ points['total2']
-		html  = "Marcha:#{ points['total2']} <br>
-		Equilibrio: #{points['total']}
-		<br>"
+		html= {}
+    html[:marcha]  = "Marcha:#{ points['total2']}"
+    html[:eq]="Equilibrio: #{points['total']}<br>"
 		case total.to_i
 			when 25..28
-				html += "Total : #{total} (Riesgo Bajo)"
+				html[:scala]= "Riesgo Bajo"
 			when 19..24
-				html +="Total :  #{total} (Riesgo moderada)"
+				html [:scala]="Riesgo moderada"
 			when proc {|total| total < 18 }
-				html += "Total : #{total} (Alto riesgo de caidas)"
+				html [:scala]= "Alto riesgo de caidas"
 			else
-				html = "No Disponible"
+				html[:scala] = "No Disponible"
 		end
 		html
 		
@@ -92,11 +92,11 @@ module VigsHelper
 	def yesavage(points)
 		case points['total']
 		when 0..5
-						"Deprecion : #{points['total']}(Normal)"
+						"Normal"
 		when 6..9
-						"Deprecion : #{points['total']}(Leve)"
+						"Leve"
 		when points['total'] > 10 
-						 "Deprecion : #{points['total']}(establecida)"
+						 "D.establecida"
 		else
 						"No disponible"
 		end
