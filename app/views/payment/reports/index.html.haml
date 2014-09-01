@@ -1,0 +1,35 @@
+= include_gon 
+.col-md-12
+  .panel
+    #container
+:javascript
+  $(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Volumen díario de participantes discriminado por horas'
+        },
+        xAxis: {
+            categories: ['8am', '9am', '10am', '11am', '12m', '1am', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm']
+        },
+        yAxis: {
+            title: {
+                text: 'Miembros'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: 'Numero de Miembros',
+            data: gon.members
+        }]
+    });
+  });
