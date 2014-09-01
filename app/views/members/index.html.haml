@@ -1,6 +1,7 @@
 .col-md-12
   .panel.panel_table_index
     -if can? :create, Member
+      = link_to 'Reportes Altas y bajas', member_reports_path, class: 'btn btn-success pull-right'
       = link_to 'Nuevo Participante', new_customer_path, class: 'btn btn-success pull-right'
     %table.table
       %thead

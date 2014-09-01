@@ -1,6 +1,5 @@
 Meridia::Application.routes.draw do
-
-
+  
   resources :invoices do
     collection do
       post 'create_service'
@@ -61,13 +60,15 @@ Meridia::Application.routes.draw do
     resources :medicines, only: [ :index, :new, :create, :destroy ]
     resources :additional_services, only: [ :index]
     resources :invoices
-
+    collection do
+      get 'high_low', to: 'members#high_low'
+    end
     resources :nursing, only: [ :index, :new, :create ] do
       collection do
         get 'step_two', to: 'nursing#step_two'
         get 'step_three', to: 'nursing#step_three'
         get 'step_four', to: 'nursing#step_four'
-        get 'step_five', to: 'nursing#step_five'
+        get 'step_five', to: 'nursing#step_five'        
       end
     end
   end
@@ -83,9 +84,10 @@ Meridia::Application.routes.draw do
 	end
 
   namespace 'payment' do
-    resources :reports
-    resources :attends
-    get 'payments', to: 'reports#payments'
-    get 'assistance', to: 'reports#assistance'
+    resources :reports   
+  end
+
+  namespace 'member' do
+    resources :reports   
   end
 end
