@@ -3,34 +3,20 @@ class PaymentsController < ApplicationController
   before_filter :authenticate_user!
   #load_and_authorize_resource
 
-  # GET /PaymentsController
-  # GET /payments.json
-  def index
-     @payments= Payment.all
-  end
 
-  # GET /payments/1
-  # GET /payments/1.json
-  def show
-  end
-
-  # GET /payments/new
-  def new
-    @payment = Payment.new
-  end
-
-  # GET /payments/1/edit
-  def edit
-  end
 
   # POST /payments
   # POST /payments.json
   def create
+    @invoice = Invoice.find(params[:invoice_id])
     @payment = Payment.new(payment_params)
-
     respond_to do |format|
-      if @payment.save
-        format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
+      if @invoice.payments << @payment
+        total = @invoice.payments.sum("price")
+        if total == @invoice.total || total > @invoice.total
+          @invoice.update_attributes(status: 2)
+        end
+        format.html { redirect_to @invoice, notice: 'Payment was successfully created.' }
         format.json { render action: 'show', status: :created, location: @payment }
       else
         format.html { render action: 'new' }

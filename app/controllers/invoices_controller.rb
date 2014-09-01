@@ -4,15 +4,13 @@ class InvoicesController < ApplicationController
   # GET /invoices
   # GET /invoices.json
   def index
-   @member= Member.find(params[:member_id])
-   @additional_services = AdditionalService.all
-   @invoices =  Invoice.where(date_create: Date.today.at_beginning_of_month...Date.today.at_end_of_month)
+   @invoices =  Invoice.active
   end
 
   # GET /invoices/1
   # GET /invoices/1.json
   def show
-
+    @payment = Payment.new
   end
 
   # GET /invoices/new
@@ -44,12 +42,10 @@ class InvoicesController < ApplicationController
   # PATCH/PUT /invoices/1
   # PATCH/PUT /invoices/1.json
   def update
-    binding.pry
-    data = invoice_params
-    data[:list_services][:date_service].to_date 
+    @invoice.status_change(invoice_params[:status])if invoice_params[:status]
     respond_to do |format|
-      if @invoice.list_services << ListService.new(invoice_params[:list_services])
-        format.html { redirect_to member_additional_services_path(@member), notice: 'Invoice was successfully updated.' }
+      if @invoice.update_attributes(invoice_params)
+        format.html { redirect_to member_additional_services_path(params[:member_id]), notice: 'Invoice was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

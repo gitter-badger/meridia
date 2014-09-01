@@ -1,12 +1,76 @@
-%p#notice= notice
+.panel
+  .well
+    .row
+      .col-md-12
+      .col-md-6
+        %strong
+          Fecha:
+        %br
+         
+      .col-md-6
+        %strong
+          Participante:
+        = @invoice.member.name
+        
+  %h3
+    Detalles Adicionales
+  %table.table
+    %thead
+      %tr
+        %th
+          Fecha
+        %th
+          Nombre
+        %th
+          Precio
+    %tbody
+      -@invoice.list_services.each do |service|
+        %tr
+          %td
+            =service.date_service
+          %td
+            =service.name
+          %td
+            =service.price
+      %tr
+        %td
+        %td
+          %strong
+            Total
+        %td
+          %strong
+            = @invoice.total
 
-%p
-  %b Date:
-  = @invoice.date
-%p
-  %b Description:
-  = @invoice.description
-
-= link_to 'Edit', edit_invoice_path(@invoice)
-\|
-= link_to 'Back', invoices_path
+  %h3
+    Pagos
+  %table.table
+    %thead
+      %tr
+        %th
+          Fecha
+        %th
+        %th
+          Valor
+    %tbody
+      -@invoice.payments.each do |payment|
+        %tr
+          %td
+            = payment.created_at.to_date
+          %td
+          %td
+            = payment.price
+      %tr
+        %td
+        %td
+          %strong
+            Total
+        %td
+          = price = @invoice.payments.sum("price")
+  %h3.pull-right
+    Valor Pendiente #{@invoice.total - price}
+  %br
+  -if @invoice.status == 1
+    .mod
+      = form_for [@invoice,@payment] do |f|
+        = f.number_field :price
+        = f.submit
