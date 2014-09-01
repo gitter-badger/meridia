@@ -3,25 +3,7 @@ class PaymentsController < ApplicationController
   before_filter :authenticate_user!
   #load_and_authorize_resource
 
-  # GET /PaymentsController
-  # GET /payments.json
-  def index
-     @payments= Payment.all
-  end
 
-  # GET /payments/1
-  # GET /payments/1.json
-  def show
-  end
-
-  # GET /payments/new
-  def new
-    @payment = Payment.new
-  end
-
-  # GET /payments/1/edit
-  def edit
-  end
 
   # POST /payments
   # POST /payments.json

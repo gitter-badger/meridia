@@ -15,6 +15,6 @@ class ListServicesController < ApplicationController
   private
 
   def list_service_params
-    params.require(:list_service).permit(:date_service,:name, :price, :description)
+    params.require(:list_service).permit(:date_service,:name, :price, :description, :type)
   end
 end

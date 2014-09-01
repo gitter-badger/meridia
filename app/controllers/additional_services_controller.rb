@@ -7,7 +7,9 @@ class AdditionalServicesController < ApplicationController
     @member= Member.find(params[:member_id])
     @additional_services = AdditionalService.all
     @invoice =  @member.invoices.last.nil? ? @member.invoices.create!  : @member.invoices.last
+    @adittional = @invoice.list_services.sum('price')
     @list_service = ListService.new
+    @invoices = @member.invoices
   end
 
   # GET /additional_services/1

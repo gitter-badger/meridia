@@ -11,7 +11,6 @@ Meridia::Application.routes.draw do
       end
   end
 
-  resources :payments
 
   resources :tests
   resources :activities do
