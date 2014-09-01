@@ -11,6 +11,7 @@ Meridia::Application.routes.draw do
       end
   end
 
+  resources :payments
 
   resources :tests
   resources :activities do
@@ -82,9 +83,10 @@ Meridia::Application.routes.draw do
 	end
 
   namespace 'payment' do
-    resources :reports
-    resources :attends
-    get 'payments', to: 'reports#payments'
-    get 'assistance', to: 'reports#assistance'
+    resources :reports   
+  end
+
+  namespace 'member' do
+    resources :reports   
   end
 end
