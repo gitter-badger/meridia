@@ -1,0 +1,64 @@
+= include_gon 
+.panel
+  .well
+    =form_for :search, url:  member_reports_path ,method: :get ,html: {class: "form-inline"} do |f|
+      %label Desde:
+      = f.date_field :start_date,value: @date_start,class: "form-control datepicker"
+      %label Hasta :
+      = f.date_field :date_end,value: @date_end,class: "form-control datepicker"
+      = f.submit  "Generar Informe", class: "btn btn-success"
+  .row
+    .col-md-12
+      #container
+    .col-md-6
+      %h4
+      #contact
+  %hr      
+  .row
+    .col-md-6
+      #level
+    .col-md-6
+      #tracing
+:javascript
+  $(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Reporte Mensual Altas y Bajas'
+        },
+        xAxis: {
+            categories: gon.arr_months
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'N° Miembros'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Miembros Inscritos',
+            data: gon.arr_members
+               }]
+            });
+          });    
+  $(function() {
+    $( ".datepicker" ).datepicker({
+      format: 'yyyy/mm/dd'
+    });
+  });

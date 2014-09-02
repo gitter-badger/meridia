@@ -37,6 +37,7 @@
                   - @counter += 1
         - elsif member.type == 'checkbox'
           %section
+          %table.table
             %header
               %label= member.name
             = fields_for "answers[#{@counter}]" do |q|
@@ -44,10 +45,11 @@
               = q.hidden_field :vig_id, :value => @vig.id
             - member.answers.each do |a|
               = fields_for "answers[#{@counter}]", a do |m| 
-                .radio
-                  %label 
-                    =m.object.option.content
-                    = m.radio_button :options_answers_id, m.object.option.id, :checked => true
+                .radio                
+                  %label
+                  %tr
+                    %td=m.object.option.content
+                    %td= m.radio_button :options_answers_id, m.object.option.id, :checked => true
             - @counter += 1
         - elsif member.type == 'nested'
           %section
