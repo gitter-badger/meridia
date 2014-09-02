@@ -16,6 +16,7 @@ class Customer
   field :contact, type: String
   field :address, type: String
   field :neighborhood, type: String
+  field :mail,         type:String
 
-  validates_presence_of :name, :lastname, :phone, :mobile , :address
+  validates_presence_of :name, :lastname, :phone, :mobile 
 end

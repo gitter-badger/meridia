@@ -79,14 +79,18 @@
               Total
             %th
               Status
+            %th
         %tbody
           -@invoices.each do |invoice|
             %tr
               %td
+                =invoice.created_at.to_date
               %td
                 =invoice.total
               %td
-                =invoice.status
+                =Invoice::STATUS[invoice.status]
+              %td 
+                =link_to "Detalles", invoice 
 = form_for [@member,@invoice,@list_service]  do |i|
   .modal.fade#myModal
     .modal-dialog

@@ -4,7 +4,7 @@ class ProspectMember
 
   field :name, type: String
   field :lastname, type: String
-  field :genre, type: String
+  field :genre, type: Integer,default: 1
   field :age, type: String
   field :phone, type: String
   field :mobile, type: String

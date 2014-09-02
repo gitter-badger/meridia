@@ -18,6 +18,7 @@ class Invoice
   scope :cloused, -> {where(status: 2)}
   #accepts_nested_attributes_for :list_services
 
+  STATUS=['Actual','Pendiente de Pago', 'Pagado']
 
   def status_change(status)
     case status

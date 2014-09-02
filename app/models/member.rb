@@ -33,7 +33,7 @@ class Member
 
   field :name, type: String
   field :lastname, type: String
-  field :gender, type: Symbol, default: :male
+  field :gender, type: Integer, default: 1
   field :marital_status, type: Symbol, default: :married
   field :country, type: String, default: "mexican@"
   field :origin, type: String, default: "D.F."
@@ -47,12 +47,19 @@ class Member
   field :date_borth, type: Date
   field :birthday_city, type: String
   field :code, type: String
-  field :status, type: String, default: "active"
+  field :status, type: Integer, default: 0
 	field :days, type: Array
   field :avatar, type:String
 	field :monthly_payment, type:Integer, default: 0
 
 	mount_uploader :avatar, AvatarUploader
+  validates_presence_of :name, :lastname, :gender, :phone
   
-  validates_presence_of :name, :lastname, :gender, :date_borth, :phone , :address
+  STATUS=[["Pendiente", 0],["Activo","1"],["Baja",2],["Baja Permanente",3],["Prueba",4]]
+
+  scope :pendiente, -> {where(status: 0)}
+  scope :activo, -> {where(status: 1)}
+  scope :baja, -> {where(status: 2)}
+  scope :permanente, -> {where(status: 3)}
+  scope :prueba, -> {where(satatus: 4)}
 end

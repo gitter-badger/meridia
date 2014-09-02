@@ -103,11 +103,11 @@
               .col-md-6
                 .form-group
                   =f.label :status ,'Status'
-                  =select_tag "status", options_for_select([["Cancelado",'Cancel'],['En Espera','Espera'],['Activo','Active']]),class: 'form-control'
+                  =select_tag "status", options_for_select(Prospect::STATUS),class: 'form-control'
               .col-md-6
                 .form-group
                   =f.label :reason, 'Razon'
-                  =select_tag "reason", options_for_select(Prospect::STATUS),class: 'form-control'
+                  =select_tag "reason", options_for_select(Prospect::REASON),class: 'form-control'
 
             .col-md-12
               .form-group

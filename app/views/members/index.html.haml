@@ -1,7 +1,7 @@
 .col-md-12
   .panel.panel_table_index
-    -if can? :create, Member
-      = link_to 'Nuevo Participante', new_customer_path, class: 'btn btn-success pull-right'
+    %h1
+      Participantes activos
     %table.table
       %thead
         %tr
@@ -17,6 +17,6 @@
           %td= age(member.date_borth)
           %td= member.country
           %td= member.code
-          %td= member.status
+          %td
 
 

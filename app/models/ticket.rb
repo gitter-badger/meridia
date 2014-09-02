@@ -11,4 +11,11 @@ class Ticket
 	
 	belongs_to :user
 	belongs_to :prospect
+
+  before_save :validate_status
+
+  def validate_status
+    self.status = true if self.type == 3 
+  end
+
 end

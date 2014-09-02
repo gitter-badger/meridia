@@ -5,7 +5,7 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @members = Member.all
+    @members = Member.activo
   end
 
   # GET /members/1
