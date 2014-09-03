@@ -5,14 +5,17 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @members = Member.activo
+    @members = Member.inclulle_pendiente
   end
 
   # GET /members/1
   # GET /members/1.json
   def show
-  	@vig = @member.vigs.last
-	end
+    @vig = @member.vigs.last
+	  if @member.status == 0
+      redirect_to edit_customer_path(@member.customer)
+    end
+  end
 
   # GET /members/new
   def new

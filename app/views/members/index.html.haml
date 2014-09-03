@@ -1,22 +1,20 @@
 .col-md-12
   .panel.panel_table_index
     %h1
-      Participantes activos
+      Participantes
     %table.table
       %thead
         %tr
           %th Nombre
-          %th Edad
           %th Nacionalidad
           %th Código
           %th Estado
 
       - @members.each do |member|
-        %tr
+        %tr{class: Member::STATUS[member.status][0]}
           %td= link_to  member.name, member_path(member)
-          %td= age(member.date_borth)
           %td= member.country
           %td= member.code
-          %td= member.status
+          %td= Member::STATUS[member.status][0]
 
 

@@ -9,25 +9,29 @@ class CustomersController < ApplicationController
     health = @member.health_insurances.build
     service = @member.health_services.build
   end
+  def edit
+    @customer = Customer.find(params[:id])
+  end
 
-  def create
-    @customer= Customer.new(customer_params)
-    if @customer.save
+  def update
+    @customer = Customer.find(params[:id])
+    if @customer.update_attributes(customer_params)
         redirect_to members_path
     else
-      render action: 'new' 
+      render action: 'edit' 
     end
     
   end
 
   private
     def set_customer
-      @customer = Customer.find(params[:customer_id])
+      @customer = Customer.find(params[:id])
     end   
 
     def customer_params
       params.require(:customer).permit(:name,:lastname,:phone,:mobile,:address, :neighborhood,
         members_attributes:[
+                :id,
                 :name,
                 :lastname,
                 :address,
@@ -36,33 +40,9 @@ class CustomersController < ApplicationController
                 :date_borth,
                 :neighborhood,
                 :city,
+                :status,
                 :monthly_payment,
                 :days =>[],
-        families_attributes:[
-                :firstname,
-                :lastname,
-                :relationship,
-                :phone_home,
-                :address,
-                :phone_mobile,
-                :city
-      ],
-        health_insurances_attributes:[
-          :company,
-          :licence_number,
-          :policy_number,
-          :institute,
-        ],
-        health_services_attributes:[
-          :hospital,
-          :phone2,
-          :phone1,
-          :address
-        ],
-        payments_attributes:[
-          :price,
-          :description
-        ]
       ])
     end
 end

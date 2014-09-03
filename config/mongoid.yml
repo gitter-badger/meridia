@@ -75,4 +75,4 @@ production:
       options:
         #skip_version_check: true
         #safe: truei
-        use_activesupport_time_zone: true
+        #use_activesupport_time_zone: true

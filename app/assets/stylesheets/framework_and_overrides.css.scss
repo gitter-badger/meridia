@@ -155,6 +155,9 @@ li{
 }
 }
 
+.check{
+  margin-left: -20px !important;
+}
 .profile_box{
   margin-bottom:10px;
   img{
@@ -172,6 +175,9 @@ li{
 
 }
 
+.pendiente{
+  @extend .warning
+}
 .title_seccion{
   margin: 10px 0px; 
 }

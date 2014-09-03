@@ -1,0 +1,130 @@
+.row
+  = form_for @customer do |f|
+    - if @customer.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@customer.errors.count, "error")} prohibited this member from being saved:"
+        %ul
+          - @customer.errors.full_messages.each do |msg|
+            %li= msg
+
+    #rootwizard
+      .navbar
+        .col-md-10.col-md-offset-1
+          %ul.steps
+            %li
+              %a{"data-toggle" => "tab", href: "#tab1"} Familiar Responsable
+            %li
+              %a{"data-toggle" => "tab", href: "#tab2"} Participante
+            %li
+              %a{"data-toggle" => "tab", href: "#tab3"} Estado de Ingreso
+      .tab-content
+        #tab1.tab-pane
+          .col-md-10.col-md-offset-1
+            %p.lead
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              
+          .col-md-5.col-md-offset-1
+            .form-group
+              =f.label :name 
+              =f.text_field :name, class: "form-control"
+          .col-md-5
+            .form-group
+              =f.label :lastname
+              =f.text_field :lastname, class: "form-control"
+          .col-md-5.col-md-offset-1
+            .form-group
+              =f.label :phone
+              =f.text_field :phone, class: "form-control"
+          .col-md-5
+            .form-group
+              =f.label :mobile
+              =f.text_field :mobile, class: "form-control"
+          .col-md-5.col-md-offset-1
+            .form-group
+              =f.label :address
+              =f.text_field :address, class: "form-control"
+          .col-md-5
+            .form-group
+              =f.label :neighborhood
+              =f.text_field :neighborhood, class: "form-control"
+        
+        = f.fields_for :members do |member|
+          #tab2.tab-pane
+            .col-md-10.col-md-offset-1
+              %p.lead
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            .col-md-5.col-md-offset-1
+              .form-group
+                =member.label :name
+                =member.text_field :name,class: "form-control"
+            .col-md-5
+              .form-group
+                = member.label :lastname
+                = member.text_field :lastname, class: "form-control"
+            .col-md-5.col-md-offset-1
+              .form-group
+                = member.label :address
+                =member.text_field :address ,class: "form-control"
+            .col-md-5
+              .form-group
+                = member.label :phone 
+                = member.text_field :phone,class: "form-control"                
+            .col-md-5.col-md-offset-1
+              .form-group
+                = member.label :city
+                = member.text_field :city, class: "form-control"
+            .col-md-5
+              .form-group
+                = member.label :neighborhood
+                = member.text_field :neighborhood, class: "form-control"
+            .col-md-5.col-md-offset-1
+              .form-group
+                =member.label :date_borth
+                =member.date_field :date_borth, class: "form-control"                
+            .col-md-5
+              .form-group
+          #tab3.tab-pane
+            .col-md-10.col-md-offset-1
+              %p.lead
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            
+            .col-md-5.col-md-offset-1
+              .form-group
+                =member.label :monthly_payment , "Valor Mensualidad"
+                =member.text_field :monthly_payment, class: "form-control"              
+            .col-md-5
+              .form-group
+                =member.label :status 
+              .radio-inline
+                %label
+                  = member.radio_button :status, 0
+                  Pendiente
+              .radio-inline
+                %label
+                  = member.radio_button :status, 1 
+                  Tiempo de Prueba
+              .radio-inline
+                %label
+                  = member.radio_button :status, 2
+                  Activo
+            .col-md-10.col-md-offset-1
+              .form-group
+                =member.label :days , "Días que viene al centro"
+              .checkbox
+                -Constants::DAYS.each_with_index do |day, index|
+                  .checkbox-inline
+                    %label 
+                      = member.check_box :days ,{:multiple=> true,:checked=>true,:class=>"check"}, index, nil
+                      =day
+        .col-md-10.col-md-offset-1
+          %ul.pager.wizard
+            %li.previous
+              %a{:href => "javascript:;"} << Atras
+            %li.next
+              %a{:href => "javascript:;"} Siguiente >>
+            %li.next.finish{:style => "display:none;"}
+              = f.submit "Guardar", class: "btn btn-success pull-right"
+- content_for :javascripts do
+  = javascript_include_tag "jquery.validate"
+  = javascript_include_tag "customers"
+  

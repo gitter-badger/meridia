@@ -6,7 +6,7 @@ class AttendsController < ApplicationController
  		@hour = Time.now.to_formatted_s(:time)
 		@day = Time.now.strftime('%w')
 		stat_day = Time.now.beginning_of_day
-		@members = Member.all
+		@members = Member.attends
 		@attends = Attend.where(:created_at => {:$gte => stat_day, :$lte => Time.now.utc})
 	end
 

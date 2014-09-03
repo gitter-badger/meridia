@@ -11,7 +11,7 @@
   -if can? :read, Prospect
     = link_to "Prospectos", prospects_path, class: "list-group-item"
   -if can? :read, Activity
-    = link_to "Actividades & Horarios", activities_path, class: "list-group-item"
+    = link_to "Actividades & Horarios", lessons_path, class: "list-group-item"
   -if can? :read, Attend
     = link_to "Asistencia", attends_path, class: "list-group-item"
     = link_to "Pagos", invoices_path, class: "list-group-item"

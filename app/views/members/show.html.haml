@@ -23,8 +23,28 @@
             Sevicios de Salud
       .panel.tab-content
         .tab-pane#info
+          -unless @vig.nil?
+            -if  @vig.probien
+              %h4 Cognitivo:
+              %p
+                =@vig.probien.cognitive
+              %h4 Fisico:
+              %p
+                =@vig.probien.physical
+              %h4 Desarrollo personal:
+              %p
+                =@vig.probien.personaldev
+              %h4 Sacial:
+              %p
+                =@vig.probien.social
+              %h4 Salud y Bienestar:
+              %p
+                =@vig.probien.personaldev
+
         .tab-pane#family
-          = link_to "Agregar Familiar", '#', class:"btn btn-success pull-right"
+          = link_to "Agregar Familiar", '#', class: "btn btn-success pull-right"
+          .clear
+          =@member.customer.name 
           %hr
           - @member.families.each do |family| 
             = "#{family.firstname} #{family.lastname}"
@@ -32,7 +52,9 @@
               ="(#{family.phone_home})"
             %hr  
         .tab-pane#salud
-          = link_to "Agregar Familiar", '#', class:"btn btn-success pull-right"
+          = link_to " Sevicio de Salud", '#', class: "btn btn-success pull-right"
+          .clear
+          %hr  
           - @member.health_insurances.each do |insurances|
             %hr  
             =insurances.company
@@ -101,13 +123,13 @@
                 -@member.medicines.each do |medicine|
                   %li
                     ="#{ medicine.name} (#{ medicine.way})" 
-      .col-md-14 
-        .div.panel
-          %h3 Observaciones
-          - unless @vig.nil? || @vig.probien.nil?
-            -@vig.probien.descriptions.each do |description|
-              .div.well
-                =description.name
+          .row
+            .col-md-12 
+              %h3 Observaciones
+              - unless @vig.nil? || @vig.probien.nil?
+                -@vig.probien.descriptions.each do |description|
+                  .well
+                    =description.name
 = form_for Vig.new , url: member_vigs_path(@member) do |vig|
   .modal.fade#myModal
     .modal-dialog

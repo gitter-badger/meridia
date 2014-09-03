@@ -71,15 +71,17 @@ class Prospect
    
    
   def change_status(status)
+    customer = nil
     case status.to_i
     when 0
       self.update_attributes!(status: 0)
     when 1
       customer = Customer.create!(name: self.name, lastname: self.lastname,phone: self.phone,mobile: self.mobile, mail: self.mail)
-      customer.members <<  Member.new(name: self.prospect_member.name, lastname: self.prospect_member.lastname,gender: self.prospect_member.genre ,phone: self.prospect_member.phone )
-      self.update_attributes!(status: 1)
+      customer.members << Member.new(name: self.prospect_member.name, lastname: self.prospect_member.lastname,gender: self.prospect_member.genre ,phone: self.prospect_member.phone )
+      self.update_attributes!(status: 1) 
     when 2
       self.update_attributes!(status: 2)
     end
+    customer
   end  
 end

@@ -30,4 +30,6 @@
           %td= link_to 'Editar', edit_prospect_path(prospect)
           %td= link_to 'Eliminar', prospect, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-
+- @ventas.each do |venta|
+  = link_to "#{venta.name} #{venta.lastname}", venta
+  %br

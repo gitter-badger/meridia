@@ -3,9 +3,9 @@
     .col-md-12
       %h3
         = "#{@prospect.name} #{@prospect.lastname}".upcase
-
-        %button.btn.btn-success.pull-right{"data-target" => "#myModal", "data-toggle" => "modal"}
-          Crear Nuevo Evento      
+        - if @prospect.status != 1
+          %button.btn.btn-success.pull-right{"data-target" => "#myModal", "data-toggle" => "modal"}
+            Crear Nuevo Evento      
     .col-md-6
       .sub-content.right-border
         %h4 
@@ -64,8 +64,9 @@
     .pull-right
       =@label
     %strong
-      = ticket.type
       = ticket.title
+    %em
+      = "(#{Ticket::STATUS[ticket.type][0]})"
       %br
     %p
       = ticket.observation
@@ -98,7 +99,7 @@
             .col-md-6
               .form-group
                 = f.label :type, 'Tipo'
-                = f.select :type,['Llamada','Email','Cita', ['Cambio de Estado', 3 ] ],{},class: 'form-control'
+                = f.select :type,Ticket::STATUS,{},class: 'form-control'
             #status{style:"display:none"}
               .col-md-6
                 .form-group

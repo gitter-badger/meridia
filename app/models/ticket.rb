@@ -1,7 +1,7 @@
 class Ticket
   include Mongoid::Document
   include Mongoid::Timestamps
-	field :type, type: String
+	field :type, type: Integer, default: 0
   field :observation, type: String
   field :call, type: String
   field :visit, type: String
@@ -14,6 +14,7 @@ class Ticket
 
   before_save :validate_status
 
+  STATUS=[['llamada',0],['email',1],['Cita','2'],['Cambio de estado',3]]
   def validate_status
     self.status = true if self.type == 3 
   end
