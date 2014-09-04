@@ -4,5 +4,6 @@ class Center
 	field :name, type: String
   field :address, type: String
   field :phone, type: String
-  field :inscription, type: Integer
+  field :inscription, type: Integer, default: 0
+
 end

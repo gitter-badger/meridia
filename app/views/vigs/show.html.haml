@@ -17,36 +17,64 @@
               .well.text-center
                 .row
                   .col-md-3
-                    = raw(barthel(@vig.abvd))
-                    %br
-                    %strong
-                      ABVD- Barthel
+                    -res= barthel(@vig.abvd)
+                    %ul.res_vig
+                      %li.res
+                        =res[:points]
+                      %li
+                        =res[:scale]
+                      %li.test
+                        ABVD-Barthel
                   .col-md-3
-                    = raw(lawton(@vig.aivd))
-                    %br
-                    %strong
-                      AIVD Lawton-Brody
+                    - res = lawton(@vig.aivd)
+                    %ul.res_vig
+                      %li.res
+                        =res[:points]
+                      %li
+                        =res[:scale]
+                      %li.test
+                        AIVD Lawton-Brody
                   .col-md-3
-                    = raw(tinetti(@vig.tinetti))
-                    %br
-                    %strong
-                      Marcha y Equilibrio
+                    -res =tinetti(@vig.tinetti)
+                    %ul.res_vig
+                      %li.res
+                        =res[:points]
+                      %li
+                        =res[:scale]
+                        %em
+                          ="#{res[:marcha]} #{res[:eq]}"
+                      %li.test
+                        Tinetti
                   .col-md-3
-                    = raw (mental(@vig.folstein))
-                    %br
-                    %strong
-                      Funcion Cognitiva
+                    - html = mental(@vig.folstein)
+                    %ul.res_vig
+                      %li.res
+                        =res[:points]
+                      %li
+                        =res[:scale]
+                      %li.test
+                        Funcion Cognitiva
                 .row
                   %hr
                   .col-md-3
-                    = raw (yesavage(@vig.yesavage))
-                    %strong
-                      Deprecion Yasavage
+                    - html = yesavage(@vig.yesavage)
+                    %ul.res_vig
+                      %li.res
+                        =res[:points]
+                      %li
+                        =res[:scale]
+                      %li.test
+                        Deprecion Yasavage
                   .col-md-3
-                    = raw(hamilton(@vig.hamilton))
-                    %br
-                    %strong
-                      Hamilton
+                    - html = hamilton(@vig.hamilton)
+                    %ul.res_vig
+                      %li.res
+                        =res[:points]
+                      %li
+                        =res[:scale]
+                        ="#{res[:psiquica]} #{res[:somatica]}"
+                      %li.test
+                        Hamilton
                   .col-md-3
                     %strong
                       Nutricion

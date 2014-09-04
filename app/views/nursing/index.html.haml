@@ -42,8 +42,6 @@
           %dd= @member.religion
           %dt Ocupacion
           %dd= @member.occupation
-          %dt Cuidador Principal
-          %dd= "%s %s" % [@member.families.first.firstname, @member.families.first.lastname]
           %dt Conocimiento de diagnostico
           %dd
           %dt Grupo Sanguineo
@@ -263,5 +261,4 @@
           %tr
             %td= link_to vig.name, member_vig_path(@member,vig)
             %td= (vig.created_at).strftime('%Y-%m-%d')
-    #allergies.tab-content
-      %h2 Alergias
+    

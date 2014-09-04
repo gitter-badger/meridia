@@ -1,6 +1,5 @@
 Meridia::Application.routes.draw do
 
-
   resources :invoices do
     resources :payments
   end
@@ -58,6 +57,7 @@ Meridia::Application.routes.draw do
     resources :signs, only: [ :index, :new, :create, :destroy ]
     resources :medicines, only: [ :index, :new, :create, :destroy ]
     resources :additional_services, only: [ :index]
+    resources :families,only: [ :update,:create, :destroy ]
     resources :invoices do
       resources :list_services, only: [:create,:destroy]
     end

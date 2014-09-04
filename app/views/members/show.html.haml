@@ -42,22 +42,39 @@
                 =@vig.probien.personaldev
 
         .tab-pane#family
-          = link_to "Agregar Familiar", '#', class: "btn btn-success pull-right"
+          = link_to "Agregar Familiar", '#', class: "btn btn-success pull-right",:"data-toggle"=>"modal" ,:"data-target"=>"#familyNew"
           .clear
-          =@member.customer.name 
-          %hr
+          %h4
+            Responsable:
+          .icons-list
+            %span
+              ="#{@member.customer.name} #{@member.customer.lastname} "
+            %span.icon-phone2
+              =@member.customer.phone
+          %h4
+            Familiares:
           - @member.families.each do |family| 
-            = "#{family.firstname} #{family.lastname}"
-            %em
-              ="(#{family.phone_home})"
-            %hr  
+            .icons-list
+              %span
+                %strong
+                  = "#{family.firstname} #{family.lastname}"
+              %span.icon-heart3
+                = Family::REALTIONSHIP[family.relationship][0] 
+              %span.icon-phone2
+                =family.phone_home
+              %span.icon-phone2
+                =family.phone_mobile
+        
         .tab-pane#salud
-          = link_to " Sevicio de Salud", '#', class: "btn btn-success pull-right"
-          .clear
+          = link_to " Sevicios de Salud", '#', class: "btn btn-success pull-right",:"data-toggle"=>"modal" ,:"data-target"=>"#healthNew"
+          %h4
+            Servicios de Salud:
           %hr  
           - @member.health_insurances.each do |insurances|
             %hr  
             =insurances.company
+          %h4
+            Hospital:
           - @member.health_services.each do |service|
             %hr 
             = service.hospital
@@ -73,35 +90,58 @@
           .row
             -unless @vig.nil?
               .col-md-2.text-center
-                = raw(barthel(@vig.abvd))
-                %p
-                  %strong ABVD
+                - html =barthel(@vig.abvd)
+                %ul.res_vig
+                  %li.res
+                    =html[:points]
+                  %li
+                    =html[:scale]
+                  %li.test
+                    ABVD
               .col-md-2.text-center
-                = raw(lawton(@vig.aivd))
-                %p
-                  %strong
+                - html= lawton(@vig.aivd)
+                %ul.res_vig
+                  %li.res
+                    =html[:points]
+                  %li
+                    =html[:scale]
+                  %li.test
                     AIVD
               .col-md-2.text-center
-                -tinetti = tinetti(@vig.tinetti)
-                = tinetti[:scala]
-                %p
-                  %strong
+                -html = tinetti(@vig.tinetti)
+                %ul.res_vig
+                  %li.res
+                    =html[:points]
+                  %li
+                    =html[:scale]
+                  %li.test
                     R. Caidas
               .col-md-2.text-center
-                = raw(yesavage(@vig.yesavage))
-                %p
-                  %strong
-                    Depresión
+                - html =yesavage(@vig.yesavage)
+                %ul.res_vig
+                  %li.res
+                    =html[:points]
+                  %li
+                    =html[:scale]
+                  %li.test
+                    R. Caidas
               .col-md-2.text-center
-                = raw(mental(@vig.folstein))
-                %p
-                  %strong
+                - html =mental(@vig.folstein)
+                %ul.res_vig
+                  %li.res
+                    =html[:points]
+                  %li
+                    =html[:scale]
+                  %li.test
                     Cognitivo
               .col-md-2.text-center
-                -hamilton= hamilton(@vig.hamilton)
-                = hamilton[:scala]
-                %p
-                  %strong
+                -html= hamilton(@vig.hamilton)
+                %ul.res_vig
+                  %li.res
+                    =html[:points]
+                  %li
+                    =html[:scale]
+                  %li.test
                     Ansiedad
             - else
               .col-md-12
@@ -130,25 +170,39 @@
                 -@vig.probien.descriptions.each do |description|
                   .well
                     =description.name
-= form_for Vig.new , url: member_vigs_path(@member) do |vig|
-  .modal.fade#myModal
+= form_for [@member,@family] do |family|
+  .modal.fade#familyNew
     .modal-dialog
       .modal-content
         .modal-header
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
           %h4
-            Nueva Valoracion
+            Nuevo Familiar
         .modal-body
-          .form-group
-            =vig.label :name
-            = vig.text_field :name, class: "form-control"
-          .form-gruop
-            %label
-              Agregar Examen
-          - for test in Test.all
-            .form-group
-              .checkbox
-                = label_tag test.title
-                =  check_box_tag "vig[test_ids][]" , test.id
+          .row
+            .col-md-12
+              .form-group
+                =family.label :firstname, "Nombre"
+                =family.text_field :firstname, class: "form-control"
+              .form-gruop
+                =family.label :lastname, "Apellido"
+                =family.text_field :lastname, class: "form-control"
+              .form-group
+                .ckeckbox
+                  =family.label :rated, "Marcar Como Destacado en caso de emergencia"
+                  =family.check_box :rated
+            .col-md-6
+              .form-group
+                =family.label :phone_home, "Telefono #1"
+                =family.text_field :phone_home, class: "form-control"
+            .col-md-6
+              .form-group
+                =family.label :phone_mobile, "Mobil #1"
+                =family.text_field :phone_mobile, class: "form-control"
+            .col-md-12
+              .form-group
+                =family.label :relationship, "Relacion"
+                =family.select :relationship, Family::REALTIONSHIP,{},class: "form-control"
+           
         .modal-footer
-          = vig.submit "Guardar", class: "btn btn-success" 
+          = family.submit "Guardar", class: "btn btn-success" 

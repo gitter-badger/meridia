@@ -14,6 +14,8 @@ class PaymentsController < ApplicationController
       if @invoice.payments << @payment
         total = @invoice.payments.sum("price")
         if total == @invoice.total || total > @invoice.total
+          res = total - @invoice.total if total > @invoice.total
+          @invoice.member.update_attributes(payment_add: res)
           @invoice.update_attributes(status: 2)
         end
         format.html { redirect_to @invoice, notice: 'Payment was successfully created.' }

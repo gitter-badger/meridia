@@ -6,7 +6,7 @@ class AdditionalServicesController < ApplicationController
   def index
     @member= Member.find(params[:member_id])
     @additional_services = AdditionalService.all
-    @invoice =  @member.invoices.last.nil? ? @member.invoices.create!  : @member.invoices.last
+    @invoice =  Invoice.invoice_validate(@member)
     @adittional = @invoice.list_services.sum('price')
     @list_service = ListService.new
     @invoices = @member.invoices
@@ -84,6 +84,6 @@ class AdditionalServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def additional_service_params
-      params.require(:additional_service).permit(:name, :price, :description , :additional_id)
+      params.require(:additional_service).permit(:id,:name, :price, :description , :additional_id)
     end
 end

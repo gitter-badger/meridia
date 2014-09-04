@@ -42,7 +42,6 @@ class InvoicesController < ApplicationController
   # PATCH/PUT /invoices/1
   # PATCH/PUT /invoices/1.json
   def update
-    @invoice.status_change(invoice_params[:status])if invoice_params[:status]
     respond_to do |format|
       if @invoice.update_attributes(invoice_params)
         format.html { redirect_to member_additional_services_path(params[:member_id]), notice: 'Invoice was successfully updated.' }
@@ -69,6 +68,6 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:date, :description, :date_service ,:additional_service , :member, list_services:[:date_service,:name, :price, :description])
+      params.require(:invoice).permit(:date,:status, :description, :date_service ,:additional_service , :member, list_services_attributes:[:date_service,:name, :price, :description,:id])
     end
 end

@@ -96,7 +96,7 @@ class NursingController < ApplicationController
         end
       when 'step_five'
         if @member.update!(member_params)
-          format.html { redirect_to step_five_member_nursing_index_path(@member), notice: '' }
+          format.html { redirect_to @member, notice: '' }
         else
           format.html { render action: 'new' }
         end

@@ -12,8 +12,9 @@ module VigsHelper
 	def hamilton(points)
 		total = points['total']+ points['total2']
 		html = Hash.new
-    html[:somatica]="Asiedad Somatica:#{ points['total2']}"
-    html[:psiquica]="Ansiedad Psiquica: #{points['total1']}"
+    html[:points] = total
+    html[:somatica]="Somatica:#{ points['total2']}"
+    html[:psiquica]="Psiquica: #{points['total1']}"
 		case total.to_i
 			when 0..5
 				html[:scala]="Ausencia"
@@ -23,83 +24,103 @@ module VigsHelper
 				html[:scala]="Moderada/Grave"
 			else
 				html[:scala]="No Disponible"
-		end
+		    html[:points] = ""
+        html[:somatica]=""
+        html[:psiquica]=""
+    end
 		html
 	end
 
 	def barthel(points)
-		total = points['total']
-		case total
+		html = Hash.new
+    html[:points] = points['total']
+    case points['total']
 				when 0..44
-					"Alta"
+					html[:scale]="Alta"
 				when 45..59
-					"Mayor"
+					html[:scale]="Mayor"
 				when 60..79
-					"Puntos Moderada"
+					html[:scale]="Puntos Moderada"
 				when 80..100
-					"Ligera"
+					html[:scale]="Ligera"
 				else
-					"No disponible"
+					html[:scale]="No disponible"
+          html[:points] = ""
 		end
+    html
 	end
 
 	def mental(points)
 		total = points['total']
-		case total
+		html = Hash.new
+    html[:points] = total
+    case total
 		when total >= 25
-				"Normal"
+			html[:scale]=	"Normal"
 		when 24..26
-				"Deterioro C"		
+			html[:scale]=	"Deterioro C"		
 		when 21..23
-						"Leve"
+					html[:scale]=	"Leve"
 		when 11..20
-						"D. Moderada"
+						html[:scale]= "D. Moderada"
 		when 0..10
-						"D. Alta"
+				html[:scale]=		"D. Alta"
 		else
-						"No Disponible"
-		end
+		  html[:scale]="No disponible"
+      html[:points] = ""
+    end
+    html
 	end
 
 	def lawton(points)
-		case points['total']
+		html = Hash.new
+    html[:points] = points['total']
+    case points['total']
 		when 4..7
-						"Moderada"
+			html[:scale]="Moderada"
 		when 0..4
-						"Mayor"
-		else
-						"No disponible"
-		end
+		  html[:scale]="Mayor"
+    else
+		  html[:points] = ""
+      html[:scale]="No disponible"
+    end
+    html
 	end
 	def tinetti(points)
 		total = points['total']+ points['total2']
 		html= {}
+    html[:points] = total
     html[:marcha]  = "Marcha:#{ points['total2']}"
-    html[:eq]="Equilibrio: #{points['total']}<br>"
+    html[:eq]="Eq:#{points['total']}"
 		case total.to_i
 			when 25..28
-				html[:scala]= "Riesgo Bajo"
+				html[:scale]= "R. Bajo"
 			when 19..24
-				html [:scala]="Riesgo moderada"
-			when proc {|total| total < 18 }
-				html [:scala]= "Alto riesgo de caidas"
+				html [:scale]="R. moderada"
+			when proc {|total| total < 18 && total>0 }
+				html [:scale]= "R.Alto"
 			else
-				html[:scala] = "No Disponible"
-		end
+				html[:scale] = "No Disponible"
+		    html[:points] = ""
+    end
 		html
 		
 	end
 	def yesavage(points)
-		case points['total']
+		html= {}
+    html[:points] =points['total']
+    case points['total']
 		when 0..5
-						"Normal"
+					html[:scale]=	"Normal"
 		when 6..9
-						"Leve"
+					html[:scale]=	"Leve"
 		when points['total'] > 10 
-						 "D.establecida"
+						html[:scale]= "D.establecida"
 		else
-						"No disponible"
-		end
+					html[:scale]=	"No disponible"
+		      html[:points] = ""
+    end
+    html
 	end
 
 	def arr_cognitiva members

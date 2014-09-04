@@ -51,7 +51,8 @@ class Member
 	field :days, type: Array
   field :avatar, type:String
 	field :monthly_payment, type:Integer, default: 0
- 
+  field :payment_add, type: Integer, default: 0 
+
 	mount_uploader :avatar, AvatarUploader
   validates_presence_of :name, :lastname, :gender, :phone
   

@@ -16,7 +16,9 @@ class Payment
   def invoice_status
     invoice = self.invoice
     total = invoice.payments.sum("price")
-    #invoice.update_attributes(status:2)
+    if total > invoice.total 
+      res = total - invoice.total
+    end 
   end
 
 end

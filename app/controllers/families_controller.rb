@@ -2,21 +2,6 @@ class FamiliesController < ApplicationController
   before_action :set_family, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
   load_and_authorize_resource
-  # GET /families
-  # GET /families.json
-  def index
-    @families = Family.all
-  end
-
-  # GET /families/1
-  # GET /families/1.json
-  def show
-  end
-
-  # GET /families/new
-  def new
-    @family = Family.new
-  end
 
   # GET /families/1/edit
   def edit
@@ -25,11 +10,11 @@ class FamiliesController < ApplicationController
   # POST /families
   # POST /families.json
   def create
+    @member = Member.find(params[:member_id])
     @family = Family.new(family_params)
-
     respond_to do |format|
-      if @family.save
-        format.html { redirect_to @family, notice: 'Family was successfully created.' }
+      if @member.families << @family
+        format.html { redirect_to @member, notice: 'Family was successfully created.' }
         format.json { render action: 'show', status: :created, location: @family }
       else
         format.html { render action: 'new' }
@@ -70,6 +55,6 @@ class FamiliesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def family_params
-      params.require(:family).permit(:firstname, :lastname, :relationship, :phone_home, :address, :phone_mobile)
+      params.require(:family).permit(:firstname,:rate, :lastname, :relationship, :phone_home, :address, :phone_mobile)
     end
 end

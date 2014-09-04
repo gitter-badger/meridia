@@ -22,7 +22,9 @@
                 (Detalles)
             .pull-right
               %h4
-                = raw( calculate @answers[0].vigs_test)
+                - html =calculate @answers[0].vigs_test
+                = html[:points]
+                = "(#{html[:scale]})"
       %label
         - i += 1
         =" #{i}. " 

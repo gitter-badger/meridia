@@ -2,7 +2,7 @@ class ListService
   include Mongoid::Document
   field :date_service, type: Date
   field :name, type: String
-  field :price, type: Float
+  field :price, type: Float, default: 0
   field :description, type: String
   field :type,        type: Integer, default: 0
   
