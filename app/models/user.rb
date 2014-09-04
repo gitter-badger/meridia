@@ -10,7 +10,8 @@ class User
 
   ##relatios
 	has_many :tickets
-	## Database authenticatable
+	belongs_to :center
+  ## Database authenticatable
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
 	field :name, 							 type: String, default:	""
@@ -39,4 +40,9 @@ class User
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
+  before_save :center
+
+  def center
+    self.center_id = center.first
+  end
 end

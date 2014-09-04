@@ -6,4 +6,5 @@ class Center
   field :phone, type: String
   field :inscription, type: Integer, default: 0
 
+  has_many :users
 end
