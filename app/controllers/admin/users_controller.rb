@@ -36,7 +36,7 @@ class Admin::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def center_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmationi, :role_ids =>[])
+      params.require(:user).permit(:name, :email, :center_id, :password, :password_confirmation, :role_ids =>[])
     end
 
 end
