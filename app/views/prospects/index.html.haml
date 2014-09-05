@@ -18,18 +18,15 @@
         %th
 
     - @prospects.each do |prospect|
-      %tr
+      %tr{class: "#{Prospect::STATUS[prospect.status][0]}"}
         %td= link_to "#{prospect.name} #{prospect.lastname}", prospect
         %td= prospect.phone 
         %td= prospect.mobile
         %td= prospect.mail
         %td= prospect.delegacion
-        %td= Prospect::STATUS[prospect.status]
+        %td= Prospect::STATUS[prospect.status][0]
         /
           %td= link_to 'Ver', prospect
           %td= link_to 'Editar', edit_prospect_path(prospect)
           %td= link_to 'Eliminar', prospect, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-- @ventas.each do |venta|
-  = link_to "#{venta.name} #{venta.lastname}", venta
-  %br

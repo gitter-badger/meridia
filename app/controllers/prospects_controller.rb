@@ -5,8 +5,7 @@ class ProspectsController < ApplicationController
   # GET /prospects
   # GET /prospects.json
   def index
-    @prospects = Prospect.activo
-    @ventas = Prospect.venta
+    @prospects = Prospect.all
   end
 
   # GET /prospects/1

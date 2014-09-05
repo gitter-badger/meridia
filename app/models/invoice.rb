@@ -13,6 +13,7 @@ class Invoice
   has_many :additional_service
   embeds_many :list_services
   embeds_many :payments
+
   scope :active, -> { where(status: 1) }
   scope :open,  -> {where(status: 0)}
   scope :cloused, -> {where(status: 2)}
@@ -35,7 +36,7 @@ class Invoice
   end
 
   def self.invoice_validate(member) 
-    invoice = Invoice.open.last 
+    invoice = member.invoices.open.last 
     if invoice.nil? 
       invoice = first_invoice(member)
     end
@@ -43,7 +44,7 @@ class Invoice
   end
 
   def self.first_invoice(member)
-    if Invoice.where(inscription: true).empty?
+    if member.invoices.where(inscription: true).empty?
     invoice = Invoice.create(:description => "Primera Factura",inscription: true)
     inscripcion = ListService.new(date_service:Time.now, name: "Inscripcion", price: Mongoid::Multitenancy.current_tenant.inscription , description: "Inscripcion de participantes" )
     invoice.list_services << inscripcion

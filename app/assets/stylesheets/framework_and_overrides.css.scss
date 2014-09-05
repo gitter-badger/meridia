@@ -178,6 +178,12 @@ li{
 .pendiente{
   @extend .warning
 }
+.cancelado{
+  @extend .danger
+}
+.venta{
+  @extend .success
+}
 .title_seccion{
   margin: 10px 0px; 
 }

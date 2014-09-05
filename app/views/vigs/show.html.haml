@@ -46,7 +46,7 @@
                       %li.test
                         Tinetti
                   .col-md-3
-                    - html = mental(@vig.folstein)
+                    - res = mental(@vig.folstein)
                     %ul.res_vig
                       %li.res
                         =res[:points]
@@ -57,7 +57,7 @@
                 .row
                   %hr
                   .col-md-3
-                    - html = yesavage(@vig.yesavage)
+                    - res = yesavage(@vig.yesavage)
                     %ul.res_vig
                       %li.res
                         =res[:points]
@@ -66,7 +66,7 @@
                       %li.test
                         Deprecion Yasavage
                   .col-md-3
-                    - html = hamilton(@vig.hamilton)
+                    - res = hamilton(@vig.hamilton)
                     %ul.res_vig
                       %li.res
                         =res[:points]

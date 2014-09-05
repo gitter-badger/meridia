@@ -13,17 +13,17 @@ module VigsHelper
 		total = points['total']+ points['total2']
 		html = Hash.new
     html[:points] = total
-    html[:somatica]="Somatica:#{ points['total2']}"
-    html[:psiquica]="Psiquica: #{points['total1']}"
+    html[:somatica]="Somatica: #{ points['total2']}"
+    html[:psiquica]="Psiquica: #{points['total']}"
 		case total.to_i
 			when 0..5
-				html[:scala]="Ausencia"
+				html[:scale]="Ausencia"
 			when 6..14
-				html[:scala]="Leve"
+				html[:scale]="Leve"
 			when proc {|total| total > 15 }
-				html[:scala]="Moderada/Grave"
+				html[:scale]="Moderada/Grave"
 			else
-				html[:scala]="No Disponible"
+				html[:scale]="No Disponible"
 		    html[:points] = ""
         html[:somatica]=""
         html[:psiquica]=""

@@ -90,57 +90,57 @@
           .row
             -unless @vig.nil?
               .col-md-2.text-center
-                - html =barthel(@vig.abvd)
+                - res  =barthel(@vig.abvd)
                 %ul.res_vig
                   %li.res
-                    =html[:points]
+                    =res[:points]
                   %li
-                    =html[:scale]
+                    =res[:scale]
                   %li.test
                     ABVD
               .col-md-2.text-center
-                - html= lawton(@vig.aivd)
+                - res= lawton(@vig.aivd)
                 %ul.res_vig
                   %li.res
-                    =html[:points]
+                    =res[:points]
                   %li
-                    =html[:scale]
+                    =res[:scale]
                   %li.test
                     AIVD
               .col-md-2.text-center
-                -html = tinetti(@vig.tinetti)
+                -res = tinetti(@vig.tinetti)
                 %ul.res_vig
                   %li.res
-                    =html[:points]
+                    =res[:points]
                   %li
-                    =html[:scale]
+                    =res[:scale]
                   %li.test
                     R. Caidas
               .col-md-2.text-center
-                - html =yesavage(@vig.yesavage)
+                - res =yesavage(@vig.yesavage)
                 %ul.res_vig
                   %li.res
-                    =html[:points]
+                    =res[:points]
                   %li
-                    =html[:scale]
+                    =res[:scale]
                   %li.test
                     R. Caidas
               .col-md-2.text-center
-                - html =mental(@vig.folstein)
+                - res =mental(@vig.folstein)
                 %ul.res_vig
                   %li.res
-                    =html[:points]
+                    =res[:points]
                   %li
-                    =html[:scale]
+                    =res[:scale]
                   %li.test
                     Cognitivo
               .col-md-2.text-center
-                -html= hamilton(@vig.hamilton)
+                -res= hamilton(@vig.hamilton)
                 %ul.res_vig
                   %li.res
-                    =html[:points]
+                    =res[:points]
                   %li
-                    =html[:scale]
+                    =res[:scale]
                   %li.test
                     Ansiedad
             - else

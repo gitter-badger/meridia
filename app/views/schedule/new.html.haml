@@ -2,7 +2,7 @@
 .col-md-9
   .panel
     = form_for @member, url: member_schedule_index_path(@member), method: :post do |f|     
-      - if !@current_activity.empty?
+      - if !@current_lesson.empty?
         %h3 
           Horario Actual
         %table.table
@@ -10,17 +10,22 @@
             %th 
               Actividad
             %th
+              Descripcion
+            %th
               Horario
             %th
               Check
-          -for activity in @current_lesson
-            %tr
-              %td
-                = activity.title
-              %td
-                = activity.description
-              %td
-                = check_box_tag "member[lesson_ids][]" , lesson.id, @member.lessonss.include?(lesson)        
+          -unless @current_lesson.nil?
+            -for lesson in @current_lesson
+              %tr
+                %td
+                  = lesson.activity.title
+                %td
+                  = lesson.activity.description
+                %td
+                  = "#{lesson.day} #{lesson.hour} hrs"
+                %td
+                  = check_box_tag "member[lesson_ids][]" , lesson.id, @member.lessons.include?(lesson)        
       %h3
         Actividades Recomendas
       %table.table
@@ -33,13 +38,14 @@
             Horario
           %th
             Check
-        - for lesson in @lessons
-          %tr
-            %td
-              = lesson.activity.title
-            %td
-              = lesson.activity.description
-            %td
-              = check_box_tag "member[lesson_ids][]" , lesson.id, @member.lessons.include?(lesson)          
+        -unless @lesson.nil?
+          - for lesson in @lessons
+            %tr
+              %td
+                = lesson.activity.title
+              %td
+                = lesson.activity.description
+              %td
+                = check_box_tag "member[lesson_ids][]" , lesson.id, @member.lessons.include?(lesson)          
 
       =f.submit "Crear Horario", class: "btn btn-success"

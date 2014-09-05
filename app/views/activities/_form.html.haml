@@ -38,68 +38,6 @@
     .form-group
       = f.label :physical, "Fisico"
       = f.select :physical, [['Fincional',1],['Con ayuda',2],['Dependiente',3]]
-  %br
-  %fieldset#lessons
-    %legend Horarios
-    - @counter = 0
-    = f.fields_for :lessons do |lesson|
-      %div.lesson
-        = lesson.label :day
-        = lesson.select :day, Lesson::DAY, :selected => lesson.object.day
-        = lesson.label :hour
-        = lesson.select :hour, (0..24).map{ |h| h.to_i > 9 ? [h, h] : ['%s%s' % [0, h], h] }, :selected => lesson.object.hour
-        = lesson.label :minutes
-        = lesson.select :minutes, [["00","0"]].concat(10.step(50,10).map{ |h| [h,h] })
-        = lesson.label :length
-        = lesson.select :length, (1..10).map{ |h| h.to_i > 9 ? [h, h] : ['%s%s' % [0, h], h] }
-        - if @counter > 0
-          = lesson.button :eliminar, :class => "lesson", :type => "button", :data => { :type => "delete", :id => @counter  }
-      - @counter = @counter + 1
   .action
     = f.button action_name == "edit" ? "Actualizar" : "Crear", :class => "btn btn-primary"
     = f.button 'Agregar Horario', :class => "lesson btn btn-default", :type => "button", :data => { :type => "add" }
-- content_for :footer do
-  %script{ :src => "//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" }
-  :javascript
-    window.jQuery || document.write('<script src="assets/javascripts/jquery-1.11.0.min.js"><\/script>')
-  :javascript
-    (function($){
-      $(function(){
-
-        total = +$('div.lesson').size() - 1
-        copy = $('div.lesson').first().clone().html()
-        var action = '#{action_name}'
-
-        function remove_lesson(){
-          console.log('click');
-        }
-        $('.lesson[data-type="add"]').on('click', function( e ){
-          e.stopPropagation();
-
-          var regularexp = new RegExp( '[]', 'g' )
-          var html = copy.replace(/\[\d\]/g, '['+(total+1)+']').replace(/\_\d\_/g, '_'+(total+1)+'_')
-          if( action == 'edit'){
-            html = html.replace(/selected="selected"/g, '')
-          }
-          var wrapper = $('<div/>', {class: 'lesson'})
-          wrapper.append( html )
-
-          var button = $( '<button/>', { class: 'delete', text: 'Eliminar', click: function( event){ event.preventDefault(); $( this ).parent().remove() }  } )
-          wrapper.append( button );
-
-          //Added to DOM
-          wrapper.appendTo( '#lessons' )
-          total++
-        })
-
-        $('.lesson[data-type="delete"]').on('click',function(e){
-          console.log('prueba')
-          var id = $( this ).data('id')
-          var removeinput = $( '<input/>', { type: 'hidden', name: 'activity[lessons_attributes]['+id+'][_destroy]', value: '1' } )
-          var parent = $( this ).parent();
-          parent.prepend( removeinput );
-          parent.css({ display: 'none' });
-        })
-
-      })
-    })(jQuery)

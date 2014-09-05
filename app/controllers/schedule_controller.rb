@@ -9,7 +9,7 @@ class ScheduleController < ApplicationController
 	def new
 		@vig = Vig.find(params[:vig_id])
 		@member = @vig.member 
-		@current_activity = @vig.member.lessons
+		@current_lesson = @vig.member.lessons
 		@lessons = Lesson.all
 	end
 
