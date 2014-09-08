@@ -13,7 +13,7 @@ Meridia::Application.routes.draw do
   end
   resources :centers 
   resources :attends 
-  resources :lessons  
+  resources :lessons, only:[:index,:show,:update] 
   get "prospect_grafic", to: "prospect_grafic#index"
  
  	resources :prospects do

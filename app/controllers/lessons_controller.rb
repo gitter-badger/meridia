@@ -2,6 +2,9 @@ class LessonsController < ApplicationController
   def index
   @lessons = Lesson.all
   end
+  def show
+  @lesson= Lesson.find(params[:id])
+  end
   def create
     @lesson = Lesson.new(lessons_params)
     activity = Activity.find(params[:activity_id])

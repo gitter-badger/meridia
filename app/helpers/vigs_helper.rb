@@ -122,6 +122,26 @@ module VigsHelper
     end
     html
 	end
+  def oars points
+    html = {}
+    html[:points] =points['total']
+    case points['total']
+    when 0
+      html[:scale]="Exelentes recursos sociales"
+    when 1
+      html[:scale]="Buenos recursos sociales"
+    when 2
+      html[:scale]="Deterioro leve"
+    when 3
+      html[:scale]="Deterioro moderado"
+    when 4
+      html[:scale]="Deterioro grave"
+    when 5
+      html[:scale]="Deterioro Total"
+    else
+    end
+    html
+  end
 
 	def arr_cognitiva members
 		normal = 0
@@ -199,7 +219,4 @@ module VigsHelper
 		arr_dependencia << ['Falta examen', falta]
 		arr_dependencia 
 	end
-  def oars points
-    "Deprecion : #{points['total']} Puntos"
-  end
 end

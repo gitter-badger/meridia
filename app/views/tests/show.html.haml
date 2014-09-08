@@ -25,19 +25,18 @@
                   = fields_for "answers[#{@counter}]", option do |m|
                     .radio
                       %label
-                        = m.object.option.content
                         = m.radio_button :options_answers_id, m.object.option.id, (key == 0 ? { :checked => true } : {} )
+                        = m.object.option.content
                 - @counter += 1
               - else
                 = fields_for "answers[#{@counter}]", a do |m|
-                  %span= m.object.question.content
-                  = m.text_field :note 
-                  = m.hidden_field :question_id, :value => m.object.question.id
-                  %br
+                  .form-group
+                    %label= m.object.question.content
+                    = m.text_field :note, class: "form-control" 
+                    = m.hidden_field :question_id, :value => m.object.question.id
                   - @counter += 1
         - elsif member.type == 'checkbox'
           %section
-          %table.table
             %header
               %label= member.name
             = fields_for "answers[#{@counter}]" do |q|
@@ -47,9 +46,8 @@
               = fields_for "answers[#{@counter}]", a do |m| 
                 .radio                
                   %label
-                  %tr
-                    %td=m.object.option.content
-                    %td= m.radio_button :options_answers_id, m.object.option.id, :checked => true
+                    = m.radio_button :options_answers_id, m.object.option.id, :checked => true
+                    =m.object.option.content
             - @counter += 1
         - elsif member.type == 'nested'
           %section
@@ -58,9 +56,10 @@
             - member.answers.each_with_index do |a, i|
               - @nested_id = a.id if a.option.isnested == true
               = fields_for "answers[#{@counter}]", a do |m| 
-                %span= m.object.option.content
-                = m.radio_button :options_answers_id, m.object.option.id,  (i == 1 ? { :checked => true } : {} ).merge({:data => {:section => a.id.to_s }})
-                %br
+                .radio
+                  %label
+                    = m.radio_button :options_answers_id, m.object.option.id,  (i == 1 ? { :checked => true } : {} ).merge({:data => {:section => a.id.to_s }})
+                    = m.object.option.content
             - @counter += 1
             %section{ :data=>{ :option => @nested_id }}
               - member.inputs.each do |nested|
@@ -75,9 +74,10 @@
                   - else
                     - nested.answers.each_with_index do |a, i|
                       = fields_for "answers[#{@counter}]", a do |m|
-                        = m.radio_button :options_answers_id, m.object.option.id, (i == 0 ? { :checked => true } : {} )
-                        %span= m.object.option.content
-                        %br
+                        .radio
+                          %label
+                            = m.radio_button :options_answers_id, m.object.option.id, (i == 0 ? { :checked => true } : {} )
+                            = m.object.option.content
                     - @counter += 1
         - else
           %label= member.name

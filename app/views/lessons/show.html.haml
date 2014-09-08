@@ -1,0 +1,23 @@
+.panel
+  %h2
+    = @lesson.activity.title
+  %p
+    =@lesson.activity.description
+
+  %hr
+  %h4
+    Participantes
+  %table.table
+    %thead
+      %tr
+        %th
+          Nombre
+        %th
+          Edad
+    %tbody
+      -@lesson.members.each do |member|
+        %tr
+          %td
+            =link_to "#{member.name} #{member.lastname}", member
+          %td
+            = age(member.date_borth) if member.date_borth

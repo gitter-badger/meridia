@@ -5,10 +5,10 @@ module LessonsHelper
     lessons.each do |lesson|
       if lesson.length > 1
         (lesson.hour..lesson.hour + lesson.length).map do |hour|
-          schedule[hour-8][lesson.day] << lesson.activity.title
+          schedule[hour-8][lesson.day] << "#{link_to lesson.activity.title, lesson}"
         end
       else
-        schedule[lesson.hour-8][lesson.day] << lesson.activity.title
+        schedule[lesson.hour-8][lesson.day] << "#{link_to lesson.activity.title, lesson}"
       end
     end
     schedule

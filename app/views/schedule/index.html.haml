@@ -28,15 +28,15 @@
           %td
             = hour + 8
           %td
-            =@lesson[hour][:monday].to_sentence(two_words_connector: '-')
+            =raw(@lesson[hour][:monday].to_sentence(two_words_connector: '-'))
           %td
-            =@lesson[hour][:tuesday].to_sentence(two_words_connector: '-')
+            =raw(@lesson[hour][:tuesday].to_sentence(two_words_connector: '-'))
           %td
-            =@lesson[hour][:wednesday].to_sentence(two_words_connector: '-')
+            =raw(@lesson[hour][:wednesday].to_sentence(two_words_connector: '-'))
           %td 
-            =@lesson[hour][:thursday].to_sentence(two_words_connector: '-')
+            =raw(@lesson[hour][:thursday].to_sentence(two_words_connector: '-'))
           %td 
-            =@lesson[hour][:friday].to_sentence(two_words_connector: '-')
+            =raw(@lesson[hour][:friday].to_sentence(two_words_connector: '-'))
           %td 
-            =@lesson[hour][:saturday].to_sentence(two_words_connector: '-')
+            =raw(@lesson[hour][:saturday].to_sentence(two_words_connector: '-'))
 
