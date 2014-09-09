@@ -3,7 +3,8 @@
     .col-md-12
       %h3
         = "#{@prospect.name} #{@prospect.lastname}".upcase
-        - if @prospect.status != 1
+        =@prospect.status
+        - unless  @prospect.status == 1
           %button.btn.btn-success.pull-right{"data-target" => "#myModal", "data-toggle" => "modal"}
             Crear Nuevo Evento      
     .col-md-6
