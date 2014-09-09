@@ -45,6 +45,6 @@
             -if member_exist @attends, member
               %tr
                 %td
-                  = "#{attend.member.name} #{attend.member.lastname}"
+                  = "#{member.name} #{member.lastname}"
                 %td
                   = f.check_box :member_id,{:multiple => true},  member._id, nil
