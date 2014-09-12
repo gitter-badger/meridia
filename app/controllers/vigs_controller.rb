@@ -6,7 +6,8 @@ class VigsController < ApplicationController
   # GET /vigs
   # GET /vigs.json
   def index
-    @vigs = @member.vigs.withot_nursing
+    @vigs = @member.vigs.withot_nursing.desc(:created_at)
+    @attr = Vig.test_applicate(@vigs)
   end
 
   # GET /vigs/1

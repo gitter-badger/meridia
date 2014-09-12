@@ -51,5 +51,4 @@
               %td= sign.measures.where({ kindof: :weight }).first.value
               //%td= sign.measures.where({ kindof: :height }).first.value
               %td= button_to 'Eliminar', {:controller => :signs, :action => :destroy, :id => sign.id }, :method => :delete
-        #container{:style => "min-width: 310px; height: 400px; margin: 0 auto"}
       

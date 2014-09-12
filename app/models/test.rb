@@ -7,6 +7,7 @@ class Test
   field :description, type: String
   field :test_code, type: Integer
 	field :calculate, type: Symbol
+  field :code, type: Integer, default: 0
   enum :kindof, [ :gerontology, :nursing ]
 
   has_many :questions
@@ -14,5 +15,7 @@ class Test
   has_many :vigs_test
   accepts_nested_attributes_for :questions
 
+
+  TEST_CODE={"bartel"=>1,"lawton_and_brody"=>2,"mini_mental"=>3,"yesavage"=>4,"oars"=>5,"tinetti"=>6,"hamilton"=>7,"nursing"=>8,"dimmy"=>9}
 
 end

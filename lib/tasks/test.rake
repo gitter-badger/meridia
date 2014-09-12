@@ -77,7 +77,7 @@ namespace :test do
     end
 
     def bartel
-      test = Test.new(title: "ÍNDICE DE BARTHEL", calculate: :barthel, test_code: 1 )
+      test = Test.new(title: "ÍNDICE DE BARTHEL", calculate: :barthel, code: 1 )
       test.save!
 
 
@@ -138,7 +138,7 @@ namespace :test do
     end	
 
     def personal_history 
-      test = Test.new(title: "BREVE HISTORIA PERSONAL", calculate: nil, test_code: 2 )
+      test = Test.new(title: "BREVE HISTORIA PERSONAL", calculate: nil, code: Test::TYPE["personal"] )
       test.save!
 
       questions = Array.new
@@ -191,7 +191,7 @@ namespace :test do
     end
 
     def dummy_funcionality
-      test = Test.new(title: "Dummy de la Funcionalidad", calculate: :average, test_code: 3 )
+      test = Test.new(title: "Dummy de la Funcionalidad", calculate: :average, code: 9 )
       test.save!
       
       options= Array.new
@@ -322,7 +322,7 @@ namespace :test do
     end
 
     def oars_social
-      test = Test.new(title: "OARS Social",calculate: :oars,test_code:4 )
+      test = Test.new(title: "OARS Social",calculate: :oars,code:5 )
       test.save!
 
       # question 1
@@ -461,7 +461,7 @@ namespace :test do
     end
 
     def index_lawton_and_brody
-      test = Test.new(title: "ÍNDICE DE LAWTON & BRODY", calculate: :lawton,test_code: 5 )
+      test = Test.new(title: "ÍNDICE DE LAWTON & BRODY", calculate: :lawton,code: 2 )
       test.save!
 
       options= Array.new
@@ -521,7 +521,7 @@ namespace :test do
     end
 
     def mini_mental
-      test = Test.new(title: "MINI-MENTAL STATE EXAMINATION (MMSE)", calculate: :mental,test_code: 6)
+      test = Test.new(title: "MINI-MENTAL STATE EXAMINATION (MMSE)", calculate: :mental,code: 3)
       test.save!
 
       #
@@ -614,7 +614,7 @@ namespace :test do
     end
 
     def yesavage
-      test = Test.new(title: "ESCALA DE YESAVAGE (Versión reducida)", calculate: :yesavage, test_code:7)
+      test = Test.new(title: "ESCALA DE YESAVAGE (Versión reducida)", calculate: :yesavage,code: 4)
       test.save!
 
       options= Array.new
@@ -694,7 +694,7 @@ namespace :test do
     end
 
     def tinetti
-      test = Test.new(title: "ESCALA DE TINETTI", calculate: :tinetti, test_code:8 )
+      test = Test.new(title: "ESCALA DE TINETTI", calculate: :tinettii,code:6 )
       test.save!
 
       # question 1
@@ -816,7 +816,7 @@ namespace :test do
     end
 
     def hamilton
-      test = Test.new(title: "ESCALA DE ANSIEDAD DE HAMILTON", calculate: :hamilton )
+      test = Test.new(title: "ESCALA DE ANSIEDAD DE HAMILTON",code:7, calculate: :hamilton )
       test.save!
       #
       # question 1
@@ -947,7 +947,7 @@ namespace :test do
     end
 
     def nursing
-      test = Test.new(title: "VALORACION INICIAL DE ENFERMERIA", kindof: :nursing );
+      test = Test.new(title: "VALORACION INICIAL DE ENFERMERIA", kindof: :nursing,code: 8 );
       test.save!
 
       questions = Array.new
