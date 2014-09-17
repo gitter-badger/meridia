@@ -8,7 +8,7 @@ class Test
   field :test_code, type: Integer
 	field :calculate, type: Symbol
   field :code, type: Integer, default: 0
-  enum :kindof, [:psicologico, :gerontology, :nursing ]
+  enum :kindof, [:gerontology, :nursing,:psicologico, ]
 
   has_many :questions
   has_and_belongs_to_many  :vigs

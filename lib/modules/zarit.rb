@@ -1,7 +1,8 @@
 require 'modules/build_test'
 class Zarit
+  include BuildTest 
   def self.test
-      test = Test.new(title: "TEST DE ZARIT", calculate: :barthel, code: 11, kindof: :psicologico )
+      test = Test.new(title: "TEST DE ZARIT", calculate: :zarit, code: 11, kindof: :psicologico )
       test.save!
 
   options= Array.new

@@ -113,8 +113,8 @@
               .checkbox
                 -Constants::DAYS.each_with_index do |day, index|
                   .checkbox-inline
-                    %label 
-                      = member.check_box :days ,{:multiple=> true,:checked=>true,:class=>"check"}, index, nil
+                    %label
+                      = member.check_box :days ,{:multiple=> true,:checked=> member.object.days.include?(index.to_s),:class=>"check"}, index, nil
                       =day
         .col-md-10.col-md-offset-1
           %ul.pager.wizard

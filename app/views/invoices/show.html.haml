@@ -68,10 +68,14 @@
           = price = @invoice.payments.sum("price")
   %h3.pull-right
     Valor Pendiente #{@invoice.total - price}
-  %br
-  -if @invoice.status != 2
-    .mod
-      = form_for [@invoice,@payment] do |f|
-        = f.number_field :price
-        = f.submit
   .clearfix
+  .well
+    -if @invoice.status != 2
+      .col-md-6
+        = form_for [@invoice,@payment] do |f|
+          .form-group
+            = f.label :price, "Precio"
+            = f.number_field :price, class: "form-control"
+          .form-group
+            = f.submit "Agregar Pago", class: "btn btn-success pull-right" 
+    .clearfix

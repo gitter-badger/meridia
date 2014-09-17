@@ -1,7 +1,10 @@
 .panel
   %h3
     Asistentes
-    = link_to 'Ver Reporte',  payment_reports_path, class: 'btn btn-success pull-right'
+    = link_to 'Ver Reporte',  payment_reports_path, class: 'btn btn-link pull-right'
+    %button.btn.btn-link.pull-right{"data-target" => "#new_attent", "data-toggle" => "modal"}
+      Agregar Novedad
+  
   %table.table
     %thead
       %tr
@@ -30,6 +33,7 @@
   %hr
   %h3
     Pendientes 
+  
   = form_for :attend do |f|
     = f.submit "Actualizar", class: "btn btn-success pull-right"
     %table.table
@@ -48,3 +52,25 @@
                   = "#{member.name} #{member.lastname}"
                 %td
                   = f.check_box :member_id,{:multiple => true},  member._id, nil
+    
+    
+    #new_attent.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-body
+            %table.table
+              %thead
+                %tr
+                  %th
+                    Nombre
+                  %th
+                    Check
+              -@members.each do |member|
+                -if !member.days.include? @day
+                  %tr
+                    %td
+                      = "#{member.name} #{member.lastname}"
+                    %td
+                      = f.check_box :member_id,{:multiple => true},  member._id, nil
+          .modal-footer
+            = f.submit "Agregar asistente", class: "btn btn-success pull-right"            

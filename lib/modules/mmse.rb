@@ -2,7 +2,7 @@ require 'modules/build_test'
 class Mmse
   include BuildTest
     def self.test 
-      test = Test.new(title: "BREVE HISTORIA PERSONAL", calculate: nil, code: Test::TYPE["personal"] )
+      test = Test.new(title: "BREVE HISTORIA PERSONAL", calculate: nil, code: 3 )
       test.save!
 
       questions = Array.new

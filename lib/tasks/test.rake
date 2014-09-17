@@ -22,9 +22,13 @@ namespace :test do
     Hamilton.test
     Zarit.test
     #Dummy.test 
-    
-    
   end
+
+  task :clear=> :enviroment do
+    tests = Test.all
+    tests.detroy_all
+  end
+
 end
   
   

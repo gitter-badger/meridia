@@ -104,8 +104,9 @@
                   Aplicado
                 %td
                   = @res[0].points["total2"].nil? ? @res[0].points["total"] : @res[0].points["total"].to_i + @res[0].points["total2"].to_i 
-                %td
-                  =link_to "Detalles", answers_all_path(@res[0].id), class: "btn btn-success btn-xs"
+                - if can? :read, Answer
+                  %td
+                    =link_to "Detalles", answers_all_path(@res[0].id), class: "btn btn-success btn-xs"
               -else
                 %td
                   Pendiente

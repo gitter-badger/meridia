@@ -23,7 +23,6 @@ class Vig
 
 	scope :withot_nursing,-> { where :kind => "gerontology"}	
 
-
   def self.test_applicate(list)
     res = [] 
     current = [0,0,0,0,0,0]

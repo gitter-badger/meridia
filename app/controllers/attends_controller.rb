@@ -29,9 +29,10 @@ class AttendsController < ApplicationController
 
   def update
 		attend =Attend.find(params[:id])
-		attend.update
+		attend.update_attributes(attend_params)
 		redirect_to attends_path
   end
+
 	private
 	def attend_params
 		params.require(:attend).permit(:member_id=>[])	

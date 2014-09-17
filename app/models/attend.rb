@@ -9,7 +9,8 @@ class Attend
 
 	before_create :entry
 	before_update :exit
-	def entry
+
+  def entry
 		self.entry_time = Time.now
 	end
 
