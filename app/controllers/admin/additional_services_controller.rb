@@ -29,7 +29,7 @@ class Admin::AdditionalServicesController < ApplicationController
 
     respond_to do |format|
       if @additional_service.save
-        format.html { redirect_to @additional_service, notice: 'Additional service was successfully created.' }
+        format.html { redirect_to admin_additional_service_path(@additional_service), notice: 'Additional service was successfully created.' }
         format.json { render action: 'show', status: :created, location: @additional_service }
       else
         format.html { render action: 'new' }
@@ -44,7 +44,7 @@ class Admin::AdditionalServicesController < ApplicationController
   def update
     respond_to do |format|
       if @additional_service.update(additional_service_params)
-        format.html { redirect_to @additional_service, notice: 'Additional service was successfully updated.' }
+        format.html { redirect_to admin_additional_service_path(@additional_service), notice: 'Additional service was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -58,7 +58,7 @@ class Admin::AdditionalServicesController < ApplicationController
   def destroy
     @additional_service.destroy
     respond_to do |format|
-      format.html { redirect_to additional_services_url }
+      format.html { redirect_to admin_additional_services_url }
       format.json { head :no_content }
     end
   end

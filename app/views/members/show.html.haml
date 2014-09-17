@@ -8,7 +8,8 @@
   .row
     = render 'shared/vig_menu'
     .col-md-9 
-      %ul.nav.nav-tabs#myTab
+      = link_to "Editar Participante", edit_customer_path(@member.customer), class: "pull-right btn btn-default"
+      %ul.nav.nav-tabs
         %li.active
           %a{href: "#perfil", :"data-toggle"=>"tab"}
             Perfil

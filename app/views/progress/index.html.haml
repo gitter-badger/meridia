@@ -1,3 +1,4 @@
+
 - content_for :title_breadcrumb do
   %strong
     = @member.name.upcase
@@ -8,6 +9,19 @@
 = render "shared/vig_menu" 
 .col-md-9
   .panel
-    Progreso1
+    #sings
   #container{:style => "min-width: 310px; height: 400px; margin: 0 auto"}
-= javascript_include_tag 'progress'
+
+  -data = sings @sings
+    
+:javascript
+  last =  JSON.parse("#{@attr[1]}")
+  current = JSON.parse("#{@attr[0]}")
+  ta = JSON.parse("#{data[0]}")
+  fc = JSON.parse("#{data[1]}")
+  fr = JSON.parse("#{data[2]}")
+
+
+= javascript_include_tag "sings"
+= javascript_include_tag "vigs"
+

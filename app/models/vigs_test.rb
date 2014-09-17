@@ -8,7 +8,8 @@ class VigsTest
 	belongs_to :vig
 	belongs_to :test
 	has_many :answers
-	def calcule(test) 
+	
+  def calcule(test) 
 		res = send(test.calculate)
 	end
 

@@ -22,7 +22,6 @@ gem 'rails_12factor'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem "fog"
 gem 'gon'
-
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :mri_21, :rbx]

@@ -17,10 +17,10 @@
             %td= additional_service.name
             %td= additional_service.price
             %td= additional_service.description
-            %td= link_to 'Ver', additional_service
-            %td= link_to 'Editar', edit_additional_service_path(additional_service)
-            %td= link_to 'Eliminar', additional_service, :method => :delete, :data => { :confirm => 'Are you sure?' }
+            %td= link_to 'Ver', admin_additional_service_path(additional_service)
+            %td= link_to 'Editar', edit_admin_additional_service_path(additional_service)
+            %td= link_to 'Eliminar', admin_additional_service_path(additional_service), :method => :delete, :data => { :confirm => 'Are you sure?' }
 
       %br
 
-      = link_to 'Nuevo servicio', new_additional_service_path, class: "btn btn-success"
+      = link_to 'Nuevo servicio', new_admin_additional_service_path, class: "btn btn-success"

@@ -17,7 +17,7 @@
         - if attend.member
           %tr
             %td
-              = attend.member.name
+              = "#{attend.member.name} #{attend.member.lastname}"
             %td
               =attend.entry_time.to_formatted_s(:time)
             %td
@@ -45,6 +45,6 @@
             -if member_exist @attends, member
               %tr
                 %td
-                  = member.name
+                  = "#{member.name} #{member.lastname}"
                 %td
                   = f.check_box :member_id,{:multiple => true},  member._id, nil

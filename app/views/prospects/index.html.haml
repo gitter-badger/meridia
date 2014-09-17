@@ -10,7 +10,7 @@
       %th Telefono
       %th Mobile
       %th Email
-      %th Delegacion
+      %th Participante
       %th Status
       /
         %th
@@ -23,7 +23,7 @@
         %td= prospect.phone 
         %td= prospect.mobile
         %td= prospect.mail
-        %td= prospect.delegacion
+        %td= "#{prospect.prospect_member.name} #{prospect.prospect_member.lastname}"
         %td= Prospect::STATUS[prospect.status][0]
         /
           %td= link_to 'Ver', prospect

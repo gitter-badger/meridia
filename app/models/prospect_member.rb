@@ -17,10 +17,10 @@ class ProspectMember
     has_many :pathologies
     PERSON_CONTACT = %W(la_persona_misma hijo hija hermano hermana nieto nieta sobrino
                                          sobrina esposo esposa amistad asistente vecino(a) Yerno Nuera)
-    COGNITIVE = %W(Deterioro Cognitivo
-                                Demencia Leve
-                                Dem. Moderada
-                                Dem. Avanzada
+    COGNITIVE = %W(Deterioro_Cognitivo
+                                Demencia_Leve
+                                Dem_Moderada
+                                Dem_Avanzada
                                 Sin_información
                                 )
     PHYSICAL = %W(Con_ayuda 

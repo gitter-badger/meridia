@@ -12,7 +12,7 @@
 
       - @members.each do |member|
         %tr{class: Member::STATUS[member.status][0]}
-          %td= link_to  member.name, member_path(member)
+          %td= link_to  "#{member.name} #{member.lastname}", member_path(member)
           %td= member.country
           %td= member.code
           %td= Member::STATUS[member.status][0]

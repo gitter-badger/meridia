@@ -4,11 +4,6 @@ Meridia::Application.routes.draw do
     resources :payments
   end
 
-  resources :additional_services do
-    collection do
-        get 'del_relation'
-      end
-  end
 
   resources :payments
 
@@ -18,7 +13,7 @@ Meridia::Application.routes.draw do
   end
   resources :centers 
   resources :attends 
-  resources :lessons  
+  resources :lessons, only:[:index,:show,:update] 
   get "prospect_grafic", to: "prospect_grafic#index"
  
  	resources :prospects do
@@ -74,7 +69,8 @@ Meridia::Application.routes.draw do
 
   namespace 'admin' do
 		root to: "users#index", :as => "root_admin"
-		resources :users do
+		resources :additional_services
+    resources :users do
 			collection do
 				post 'new_user'
 			end

@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe Vig do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context "Orden para infome de probien" do
+    
+      
+  end
+
 end
