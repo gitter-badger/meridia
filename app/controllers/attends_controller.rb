@@ -29,7 +29,7 @@ class AttendsController < ApplicationController
 
   def update
 		attend =Attend.find(params[:id])
-		attend.update_attributes(attend_params)
+		attend.update
 		redirect_to attends_path
   end
 
