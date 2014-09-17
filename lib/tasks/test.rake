@@ -4,9 +4,9 @@ require 'modules/mna'
 require 'modules/oars'
 require 'modules/mmse'
 require 'modules/tinetti'
-require 'module/hamilton'
-require 'module/dummy'
-require 'module/zarit'
+require 'modules/hamilton'
+require 'modules/dummy'
+require 'modules/zarit'
 
 namespace :test do
   desc "test"
