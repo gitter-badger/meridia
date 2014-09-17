@@ -3,7 +3,10 @@ class ProgressController < ApplicationController
 	#load_and_authorize_resource
 	def index
 		@member= Member.find(params[:member_id])
-	end
+    @vigs = @member.vigs.withot_nursing.desc(:created_at)
+    @attr = Vig.test_applicate(@vigs)
+    @sings = @member.signs.limit(40)
+  end
 
 	def show
 	end
