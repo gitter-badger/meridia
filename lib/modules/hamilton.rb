@@ -132,6 +132,5 @@ class Hamilton
       test_build(test,"Conducta en el transcurso del test: Tendencia al abatimiento. Agitación: manos inquietas, cierra los puños, tics. Inquietud. Rostro preocupado. Palidez facial. Traga saliva. Eructos. Taquicardia o palpitaciones. Ritmo respiratorio acelerado. Sudoración." ,"check", answers: options ,group: 1)
     end
 
-
 end
 

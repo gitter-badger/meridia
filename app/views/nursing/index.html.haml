@@ -67,11 +67,12 @@
             - @breath_value = ( level[1] == @breath_level ) ? level[0] : '--'
           %dd= @breath_value
           %dt Circulacion
-          - @blood_level = @member.bloods.first.level
-          - @blood_value = nil
-          - Blood::LEVELS.map do |level|
-            - @blood_value =( level[1] == @blood_level ) ? level[0] : ''
-          %dd= @blood_value
+          - if @member.bloods
+            - @blood_level = @member.bloods.first.level
+            - @blood_value = nil
+            - Blood::LEVELS.map do |level|
+              - @blood_value =( level[1] == @blood_level ) ? level[0] : ''
+            %dd= @blood_value
           %dt Edema
           %dd= yes_or_not @member.others.first.edema
           %dt Nivel de Edema
