@@ -67,7 +67,7 @@
             - @breath_value = ( level[1] == @breath_level ) ? level[0] : '--'
           %dd= @breath_value
           %dt Circulacion
-          - if @member.bloods
+          - if !@member.bloods.empty?
             - @blood_level = @member.bloods.first.level
             - @blood_value = nil
             - Blood::LEVELS.map do |level|
