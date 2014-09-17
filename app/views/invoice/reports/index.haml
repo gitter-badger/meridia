@@ -1,0 +1,139 @@
+= include_gon
+.panel
+  .row
+    .col-md-3
+      .info_box.text-right
+        .icon
+          %span.icon-exclamation-circle.green
+        .summary
+          %h4
+            = @pending_pays
+          Pagos pendientes
+    .col-md-3
+      .info_box
+        .icon
+          %span.glyphicon-heart.red
+        .summary
+          %h4
+            = @total_pays
+          Total de pagos
+    .col-md-3
+      .info_box
+        .icon
+          %span.icon-shopping-cart.blue
+        .summary
+          %h4
+            = @sum_total_pays
+          Total Dinero en pagos
+    .col-md-3
+      .info_box
+        .icon
+          %span.icon-bubble.black
+        .summary
+          %h4
+            = @fte
+          FTE
+  .well
+    =form_for :search, url:  invoice_reports_path ,method: :get ,html: {class: "form-inline"} do |f|
+      %label Desde:
+      = f.date_field :start_date,value: @date_start,class: "form-control datepicker"
+      %label Hasta :
+      = f.date_field :date_end,value: @date_end,class: "form-control datepicker"
+      = f.submit  "Generar Informe", class: "btn btn-success"
+  .row
+    .col-md-12
+      #container
+    .col-md-12
+      #container1
+    .col-md-6
+      %h4
+      #contact
+  %hr
+  .row
+    .col-md-6
+      #level
+    .col-md-6
+      #tracing
+:javascript
+  $(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Reporte Mensual de pagos'
+        },
+        xAxis: {
+            categories: gon.arr_months
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Cantidad en pesos'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b> {point.y}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Pago en pesos',
+            data: gon.arr_pays
+               }]
+            });
+          });    
+  $(function() {
+    $( ".datepicker" ).datepicker({
+      format: 'yyyy/mm/dd'
+    });
+  });
+
+  $(function () {
+    $('#container1').highcharts({
+        title: {
+            text: 'Cantidad de pagos por días'
+        },
+        xAxis: {
+            categories: gon.arr_days
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'N° de pagos'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">Día: {point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b> {point.y}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Pagos por día',
+            data: gon.arr_pays_day
+               }]
+            });
+          });    
+  $(function() {
+    $( ".datepicker" ).datepicker({
+      format: 'yyyy/mm/dd'
+    });
+  });
