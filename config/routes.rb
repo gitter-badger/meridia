@@ -89,4 +89,7 @@ Meridia::Application.routes.draw do
   namespace 'member' do
     resources :reports   
   end
+   namespace 'invoice' do
+    resources :reports   
+  end
 end

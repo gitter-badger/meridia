@@ -26,80 +26,80 @@
         #tab1.tab-pane
           .col-md-5.col-md-offset-1
             .form-group
-              = f.label :name
+              = f.label :name, "Nombre"
               = f.text_field :name, class: 'form-control'
           .col-md-5
             .form-group
-              = f.label :lastname
+              = f.label :lastname, "Apellidos"
               = f.text_field :lastname, class: 'form-control'
           .col-md-5.col-md-offset-1
             .form-group
-              = f.label :mobile
+              = f.label :mobile , "Celular"
               = f.text_field :mobile, class: 'form-control'
           .col-md-5
             .form-group
-              = f.label :phone
+              = f.label :phone , "Teléfono"
               = f.text_field :phone, class: 'form-control'
           .col-md-5.col-md-offset-1
             .form-group
-              = f.label :mail
+              = f.label :mail , "Email"
               = f.text_field :mail, class: 'form-control'
           .col-md-5
             .form-group
-              = f.label :relationship
+              = f.label :relationship ,"Parentesco"
               = f.select :relationship,ProspectMember::PERSON_CONTACT ,{}, class: 'form-control' 
           .col-md-5.col-md-offset-1
             .form-group
-              = f.label :delegacion
+              = f.label :delegacion , "Delegación"
               = f.select :delegacion,Prospect::DELEGATION,{}, class: 'form-control'
           .col-md-5
             .form-group
-              = f.label :other_state
+              = f.label :other_state , "Otro estado"
               = f.text_field :other_state, class: 'form-control'
           .col-md-5.col-md-offset-1
             .form-group
-              = f.label :contact_type
+              = f.label :contact_type , "Tipo de contancto"
               = f.select :contact_type,Prospect::MEDIO,{}, class: 'form-control'
           .col-md-5
             .form-group
-              = f.label :observation_contact
+              = f.label :observation_contact, "Observaciones"
               = f.text_field :observation_contact, class: 'form-control'
         
         = f.fields_for :prospect_member do |member|
           #tab2.tab-pane
             .col-md-5.col-md-offset-1
               .form-group
-                = member.label :name 
+                = member.label :name , "Nombre"
                 = member.text_field :name,class: 'form-control' 
             .col-md-5
               .form-group
-                = member.label :lastname
+                = member.label :lastname ,"Apellidos"
                 = member.text_field :lastname, class: 'form-control'
             .col-md-5.col-md-offset-1
               .form-group
-                =member.label :genre
+                =member.label :genre ,"Genero"
                 = member.select :genre, [['Masculino', 1],['Femenino','0']],{}, class: 'form-control'
             .col-md-5
               .form-group
-                = member.label :age
+                = member.label :age , "Edad"
                 = member.number_field :age, class: 'form-control'
             .col-md-5.col-md-offset-1
               .form-group
-                =member.label :phone
+                =member.label :phone , "Teléfono"
                 =member.text_field :phone, class: 'form-control' 
             .col-md-5
               .form-group
-                =member.label :mobile 
+                =member.label :mobile , "Celular"
                 =member.text_field :mobile, class: 'form-control'
 
           #tab3.tab-pane
             .col-md-5.col-md-offset-1   
               .form-group
-                =member.label :physical
+                =member.label :physical , "Estado Físico"
                 =member.select :physical,ProspectMember::PHYSICAL,{},class: 'form-control'
             .col-md-5
               .form-group
-                =member.label :cognitive
+                =member.label :cognitive, "Estado Cognitivo"
                 =member.select :cognitive,ProspectMember::COGNITIVE,{}, class: 'form-control'
             .col-md-10.col-md-offset-1
               %label
@@ -111,7 +111,7 @@
                     = check_box_tag "prospect[prospect_member_attributes[pathology_ids][]]" , pathology.id
             .col-md-10.col-md-offset-1
               .form-group
-                = f.label :observation
+                = f.label :observation , "Observaciones"
                 = f.text_area :observation, class: "form-control"
               
         .col-md-10.col-md-offset-1

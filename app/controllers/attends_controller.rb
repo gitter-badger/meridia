@@ -36,4 +36,5 @@ class AttendsController < ApplicationController
 	def attend_params
 		params.require(:attend).permit(:member_id=>[])	
 	end
+
 end

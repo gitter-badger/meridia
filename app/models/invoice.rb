@@ -55,4 +55,8 @@ class Invoice
     invoice
   end
 
+  def self.get_start_end_date date_start,date_end
+    where(:created_at.gte=>date_start, :created_at.lte =>date_end)
+  end
+  
 end

@@ -1,5 +1,4 @@
 = include_gon 
-
 .col-md-12
   .panel
     .well
@@ -10,10 +9,12 @@
         = f.date_field :date_end,value: @date_end,class: "form-control datepicker"
         = f.submit  "Generar Informe", class: "btn btn-success"
     .well
-      #container
+      #container_report1
+    .well
+      #container_report2
 :javascript
   $(function () {
-    $('#container').highcharts({
+    $('#container_report1').highcharts({
         chart: {
             type: 'line'
         },
@@ -21,11 +22,11 @@
             text: 'Volumen díario de participantes discriminado por horas'
         },
         xAxis: {
-            categories: ['8am', '9am', '10am', '11am', '12m', '1am', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm']
+            categories: ['7am', '8am', '9am', '10am', '11am', '12m', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm']
         },
         yAxis: {
             title: {
-                text: 'Miembros'
+                text: 'Parcipantes'
             }
         },
         plotOptions: {
@@ -37,8 +38,36 @@
             }
         },
         series: [{
-            name: 'Numero de Miembros',
-            data: gon.members
+            name: 'Numero de Parcipantes',
+            data:  gon.arr_hours
+        }]
+    });
+    $('#container_report2').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Volumen díario de participantes discriminado por días'
+        },
+        xAxis: {
+            categories: gon.arr_days
+        },
+        yAxis: {
+            title: {
+                text: 'Parcipantes'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: 'Numero de Parcipantes',
+            data: gon.arr_users_per_days
         }]
     });
   }); 
@@ -47,3 +76,7 @@
       format: 'yyyy/mm/dd'
     });
   });
+
+  console.log( gon.arr_hours);
+  console.log( gon.arr_days);
+  console.log( gon.arr_users_per_days);
