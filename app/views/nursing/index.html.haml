@@ -61,16 +61,16 @@
         %h3 Oxigenacion
         %dl.dl-horizontal
           %dt Respiracion
-          - @breath_level = @member.breaths.empty? ? 0: @member.breaths.first.level
+          - @breath_level = @member.breaths.empty? ? 0 : @member.breaths.first.level
           - @breath_value = nil
           - Breath::LEVELS.map do |level|
-            - ( level[1] == @breath_level ) ? @breath_value = level[0] : ''
+            - @breath_value = ( level[1] == @breath_level ) ? level[0] : '--'
           %dd= @breath_value
           %dt Circulacion
           - @blood_level = @member.bloods.first.level
           - @blood_value = nil
           - Blood::LEVELS.map do |level|
-            - ( level[1] == @blood_level ) ? @blood_value = level[0] : ''
+            - @blood_value =( level[1] == @blood_level ) ? level[0] : ''
           %dd= @blood_value
           %dt Edema
           %dd= yes_or_not @member.others.first.edema

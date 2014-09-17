@@ -14,7 +14,7 @@ class NursingController < ApplicationController
   # GET /nursing/1
   # GET /nursing/1.json
   def show
-    #@member= Member.find(params[:member_id])
+    @member= Member.find(params[:member_id])
   end
 
   # GET /nursing/new
