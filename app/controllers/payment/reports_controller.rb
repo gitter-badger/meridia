@@ -30,12 +30,12 @@ class Payment::ReportsController < ApplicationController
   def report_hour date_start,date_end
     arr_members_hour=[]
     attends = Attend.get_start_end_date(@date_start,@date_end)
-    members_enter = attends.asc(:entry_time).group_by { |m| m.entry_time.beginning_of_hour }
-    members_out = attends.asc(:exit).group_by { |m| m.exit_time.beginning_of_hour }     
-    h_members_enter= members_enter.collect{|k,str|  [k.strftime("%H").to_i,str.length] }    
+    members_enter = attends.asc(:entry_time).group_by { |m| m.entry_time.strftime('%H').to_i }
+
+    members_out = attends.asc(:exit).group_by { |m| !m.exit_time.nil? ? m.exit_time.beginning_of_hour : 'empty' }
+    members_out = members_out.except("empty")
+    h_members_enter= members_enter.collect{|k,str|  [k,str.length] }    
     h_members_enter = Hash[*h_members_enter.flatten]
-    h_members_out= members_out.collect{|k,str|  [k.strftime("%H").to_i,str.length] }
-    h_members_out = Hash[*h_members_out.flatten] 
     count=0
     (0..12).each do |i|
       if h_members_enter.has_key? i+7
@@ -45,22 +45,26 @@ class Payment::ReportsController < ApplicationController
         arr_members_hour[i]=count
       end
     end
-    (0..12).each do |i|
-      if h_members_out.has_key? i+7
-        j=i
-        count-=h_members_out[j+7]
-        (j..12).each do |i|
-          arr_members_hour[i]=count
-        end   
+    if !members_out.blank?
+      h_members_out= members_out.collect{|k,str|  [k,str.length] }
+      h_members_out = Hash[*h_members_out.flatten]     
+      (0..12).each do |i|
+        if h_members_out.has_key? i+7
+          j=i
+          count-=h_members_out[j+7]
+          (j..12).each do |i|
+            arr_members_hour[i]=count
+          end   
+        end
       end
-    end
+  end
     arr_members_hour    
   end
 
   def report_day date_start,date_end
     attends = Attend.get_start_end_date(@date_start,@date_end)
-    members_day =  attends.group_by { |m| m.created_at.beginning_of_day } 
-    arr_days =  members_day.map { |k,v| [k.strftime("%A")]}
+    members_day =  attends.group_by { |m| m.created_at.strftime('%A') } 
+    arr_days =  members_day.map { |k,v| [k]}
     arr_members =  members_day.map { |k,v| v.length}    
     {:arr_days => arr_days, :arr_members => arr_members}
   end

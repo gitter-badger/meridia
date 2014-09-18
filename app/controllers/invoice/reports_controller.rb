@@ -18,6 +18,7 @@ class Invoice::ReportsController < ApplicationController
     @sum_total_pays=invoices.where(status: 3).sum(:total)
     pays_by_months = mount_for_month(invoices)  
     pays_by_days = report_day(invoices)  
+    # cantidad de ingresos entre factura del mes divido 12845
     @fte = ((@sum_total_pays*cant_members)/12845.0).round(7)
     gon.arr_months = pays_by_months[:arr_months]
     gon.arr_pays = pays_by_months[:arr_pays]
