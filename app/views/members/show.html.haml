@@ -21,7 +21,7 @@
             Familiares
         %li
           %a{href: "#salud", :"data-toggle"=>"tab"}
-            Sevicios de Salud
+            Servicios de Salud
       .panel.tab-content
         .tab-pane#info
           -unless @vig.nil?
@@ -67,7 +67,7 @@
                 =family.phone_mobile
         
         .tab-pane#salud
-          = link_to " Sevicios de Salud", '#', class: "btn btn-success pull-right",:"data-toggle"=>"modal" ,:"data-target"=>"#healthNew"
+          = link_to " Servicios de Salud", '#', class: "btn btn-success pull-right",:"data-toggle"=>"modal" ,:"data-target"=>"#healthNew"
           %h4
             Servicios de Salud:
           %hr  
@@ -116,7 +116,7 @@
                   %li
                     =res[:scale]
                   %li.test
-                    R. Caidas
+                    R. Caídas
               .col-md-2.text-center
                 - res =yesavage(@vig.yesavage)
                 %ul.res_vig
@@ -125,7 +125,7 @@
                   %li
                     =res[:scale]
                   %li.test
-                    R. Caidas
+                    R. Caídas
               .col-md-2.text-center
                 - res =mental(@vig.folstein)
                 %ul.res_vig
@@ -152,7 +152,7 @@
             .col-md-6
               .text-danger
                 %strong
-                  Alegias:
+                  Alergías:
                 %ul
                   -@member.allergies.each do |allergy|
                     %li

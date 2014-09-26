@@ -8,4 +8,5 @@ class Allergy
   field :name, type: String
   #embedded_in :member
   belongs_to :member
+
 end

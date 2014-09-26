@@ -34,7 +34,7 @@
                 .col-sm-8
                   = medicine.text_field :name, :class => "form-control"
               .form-group
-                = medicine.label 'dias de la semana', :class => "col-sm-2 control-label"
+                = medicine.label 'días de la semana', :class => "col-sm-2 control-label"
                 .col-sm-8
                   - Medicine::DAY.each do |day|
                     = medicine.label day, :class => "checkbox-inline" do
@@ -49,11 +49,11 @@
                 .col-sm-8
                   = medicine.select :dose, (1..10).map{ |h| h.to_i > 9 ? [h, h] : ['%s%s' % [0, h], h] }, :selected => medicine.object.dose
               .form-group
-                = medicine.label 'Via', :class => "col-sm-2 control-label"
+                = medicine.label 'Vía', :class => "col-sm-2 control-label"
                 .col-sm-8
                   = medicine.text_field :way,  :class => "form-control"
               .form-group
-                = medicine.label 'Vigencia', :class => "col-sm-2 control-label"
+                = medicine.label 'Horario', :class => "col-sm-2 control-label"
                 .col-sm-8
                   = medicine.text_field :validity,  :class => "form-control"
         = f.button "Agregar", :class => "btn btn-default btn-add", :type => "button", :data => { :clone => ".medicine", :cloneto => "#medicines-wrapper"  }

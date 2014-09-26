@@ -14,7 +14,7 @@
         %legend Eliminacion
         = f.fields_for :depositions, @member.depositions.build do |deposition|
           .form-group
-            = deposition.label :urinary_pattern, 'Patron Urinario', :class => "col-sm-2 control-label"
+            = deposition.label :urinary_pattern, 'Patrón Urinario', :class => "col-sm-2 control-label"
             .col-sm-8
               = label_tag '', '', :class => "radio-inline" do
                 = deposition.radio_button :urinary_pattern, 1
@@ -65,7 +65,7 @@
                 = deposition.radio_button :intestinal_movement, 0
                 No
           .form-group
-            = deposition.label :intestinal_pattern, 'Patron Intestinal', :class => "col-sm-4 control-label"
+            = deposition.label :intestinal_pattern, 'Patrón Intestinal', :class => "col-sm-4 control-label"
             .col-sm-8
               = label_tag '', '', :class => "radio-inline" do
                 = deposition.radio_button :intestinal_pattern, 1
@@ -92,7 +92,7 @@
                 = deposition.radio_button :intestinal_frequency, 3
                 3 dias
           .form-group
-            = deposition.label :intestinal_characteristics, 'Caracteristicas Intestinal', :class => "col-sm-4 control-label"
+            = deposition.label :intestinal_characteristics, 'Características Intestinal', :class => "col-sm-4 control-label"
             .col-sm-8
               = label_tag '', '', :class => "radio-inline" do
                 = deposition.radio_button :intestinal_characteristics, 1
@@ -119,7 +119,7 @@
                 = deposition.radio_button :laxatives, 0
                 No
           .form-group
-            = deposition.label :laxatives_note, 'Si respondio afirmativamente, cual?', :class => "col-sm-4 control-label"
+            = deposition.label :laxatives_note, 'Si respondió afirmativamente, cual?', :class => "col-sm-4 control-label"
             .col-sm-8
               = deposition.text_field :laxatives_note, :class => "form-control"
           .form-group
@@ -132,11 +132,11 @@
                 = deposition.radio_button :catheter_or_ostomy, 0
                 No
           .form-group
-            = deposition.label :catheter_or_ostomy_note, 'Si respondio afirmativamente, cual?', :class => "col-sm-4 control-label"
+            = deposition.label :catheter_or_ostomy_note, 'Si respondió afirmativamente, cual?', :class => "col-sm-4 control-label"
             .col-sm-8
               = deposition.text_field :catheter_or_ostomy_note, :class => "form-control"
           .form-group
-            = deposition.label :sweating, 'Sudoracion', :class => "col-sm-4 control-label"
+            = deposition.label :sweating, 'Sudoración', :class => "col-sm-4 control-label"
             .col-sm-8
               = label_tag '', '', :class => "radio-inline" do
                 = deposition.radio_button :sweating, 1
@@ -152,7 +152,7 @@
         %legend Movilizacion
         = f.fields_for :mobilizations, @member.mobilizations.build do |mobilization|
           .form-group
-            = mobilization.label :mobilization, 'Movilizacion', :class => "col-sm-2 control-label"
+            = mobilization.label :mobilization, 'Movilización', :class => "col-sm-2 control-label"
             .col-sm-8
               = label_tag '', '', :class => "radio-inline" do
                 = mobilization.radio_button :mobilization, 1
@@ -203,7 +203,7 @@
         %legend Higiene
         = f.fields_for :hygienes, @member.hygienes.build do |hygiene|
           .form-group
-            = hygiene.label :bath, 'Preferencia de hora de bano', :class => "col-sm-4 control-label"
+            = hygiene.label :bath, 'Preferencia de hora de baño', :class => "col-sm-4 control-label"
             .col-sm-8
               = label_tag '', '', :class => "radio-inline" do
                 = hygiene.radio_button :bath, 1

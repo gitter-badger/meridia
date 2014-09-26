@@ -9,7 +9,7 @@
   %ul.nav.nav-tabs#myTab
     %li.active
       %a{href: "#perfil", :"data-toggle"=>"tab"}
-        Valoracion Inicial
+        Valoración Inicial
     %li
       %a{href: member_allergies_path(@member ) }
         Alergias
@@ -22,7 +22,7 @@
   .panel
     #perfil.tab-content
       - if !@vie.nil?
-        %h3 Informacion Del Participante
+        %h3 Información Del Participante:
         %dl.dl-horizontal
           %dt Fecha de Nacimiento
           %dd= @member.date_borth.strftime "%d-%b-%Y" if @member.date_borth
@@ -38,35 +38,35 @@
           %dd= @member.origin
           %dt Nivel Educativo
           %dd= @member.education
-          %dt Religion
+          %dt Religión
           %dd= @member.religion
-          %dt Ocupacion
+          %dt Ocupación
           %dd= @member.occupation
           %dt Conocimiento de diagnostico
           %dd
-          %dt Grupo Sanguineo
+          %dt Grupo Sanguíneo
           %dd
           %dt RH
           %dd
           %dt Diagnostico
           %dd
-          %dt Bebidas Alcoholicas
+          %dt Bebidas Alcohólicas
           %dd
           %dt Tabaquismo
           %dd
-          %dt Medico Tratante
+          %dt Médico Tratante
           %dd= @member.doctors.first
           %dt Breve Historia
           %dd 
-        %h3 Oxigenacion
+        %h3 Oxigenación:
         %dl.dl-horizontal
-          %dt Respiracion
+          %dt Respiración
           - @breath_level = @member.breaths.empty? ? 0 : @member.breaths.first.level
           - @breath_value = nil
           - Breath::LEVELS.map do |level|
             - @breath_value = ( level[1] == @breath_level ) ? level[0] : '--'
           %dd= @breath_value
-          %dt Circulacion
+          %dt Circulación:
           - if !@member.bloods.empty?
             - @blood_level = @member.bloods.first.level
             - @blood_value = nil
@@ -80,7 +80,8 @@
             %dd= ( @member.others.first.edema_level == 1 ) ? "Moderado" : "Leve"
             %dt Llenado Capilar
             %dd= ( @member.others.first.capilar == 1 ) ? "< Seg" : "> Seg"
-        %h3 Nutricion
+          %dd 
+        %h3 Nutrición:
         - if !@member.nutritions.empty?
           %dl.dl-horizontal
             %dt Perdida de peso > 5kg sin causa aparente
@@ -97,7 +98,7 @@
             %dd= yes_or_not @member.nutritions.first.change_note
             %dt Alimentos que le causan malestar
             %dd= yes_or_not @member.nutritions.first.foods
-        %h3 Exploracion Fisica
+        %h3 Exploración Física:
         - if !@member.bodies.empty?
           %dl.dl-horizontal
             %dt Piel
@@ -108,7 +109,7 @@
             - Body::LEVELS[1][1].each do |level|
               - if level[1] == @member.bodies.first.mucous
                 %dd= level[0]
-            %dt Denticion
+            %dt Dentición
             - Body::LEVELS[2][1].each do |level|
               - if level[1] == @member.bodies.first.dentition
                 %dd= level[0]
@@ -116,9 +117,9 @@
             - Body::LEVELS[3][1].each do |level|
               - if level[1] == @member.bodies.first.oral_cavity
                 %dd= level[0]
-          %h3 Escala de Riesgo de Caidas (J.H. Downton)
+          %h3 Escala de Riesgo de Caídas (J.H. Downton)
           %dl.dl-horizontal
-            %dt Caidas Previas
+            %dt Caídas Previas
             %dd= @member.bodies.first.previous_fallen
             %dt Medicamentos
             %dd= @member.bodies.first.medicines
@@ -126,16 +127,16 @@
             %dd= @member.bodies.first.sensory_deficits
             %dt Estado Mental
             %dd= @member.bodies.first.state_of_mind
-            %dt Deambulacion
+            %dt Deambulación
             %dd= @member.bodies.first.ambulation
-        %h3 Eliminacion
+        %h3 Eliminación:
         - if !@member.depositions.empty? 
           %dl.dl-horizontal
-            %dt Patron Urinario
+            %dt Patrón Urinario
             - Deposition::LEVELS[0][1].each do |level|
               - if level[1] == @member.depositions.first.urinary_pattern
                 %dd= level[0]
-            %dt Patron Urinario
+            %dt Patrón Urinario
             - Deposition::LEVELS[1][1].each do |level|
               - if level[1] == @member.depositions.first.urinary_frequency
                 %dd= level[0]
@@ -145,7 +146,7 @@
                 %dd= level[0]
             %dt Movimiento Intestinal en los 4 cuadrantes
             %dd= yes_or_not @member.depositions.first.intestinal_movement
-            %dt Patron Intestinal
+            %dt Patrón Intestinal
             - Deposition::LEVELS[4][1].each do |level|
               - if level[1] == @member.depositions.first.intestinal_pattern
                 %dd= level[0]
@@ -169,7 +170,7 @@
             - Deposition::LEVELS[9][1].each do |level|
               - if level[1] == @member.depositions.first.sweating
                 %dd= level[0]
-        %h3 Movilizacion
+        %h3 Movilizacion:
         - if !@member.mobilizations.empty?
           %dl.dl-horizontal
             %dt Mobilizacion
@@ -184,7 +185,7 @@
             - Mobilization::LEVELS[2][1].each do |level|
               - if level[1] == @member.mobilizations.first.devices
                 %dd= level[0]
-        %h3 Higiene
+        %h3 Higiene:
         - if !@member.hygienes.empty?
           %dl.dl-horizontal
             %dt Preferencia Hora de Bano
@@ -201,7 +202,7 @@
                 %dd= level[0]
             %dt Recomendaciones sobre habitos higienicos
             %dd= @member.hygienes.first.observations
-        %h3 Comunicacion
+        %h3 Comunicacion:
         - if !@member.communications.empty?
           %dl.dl-horizontal
             %dt Dificultad para ver
@@ -218,7 +219,7 @@
             %dd= yes_or_not @member.communications.first.glasses
             %dt Observaciones
             %dd= @member.communications.first.observations
-        %h3 Reposos y Sueno
+        %h3 Reposos y Sueño:
         - if !@member.sleeps.empty?
           %dl.dl-horizontal
             %dt Horas de sueno
@@ -241,7 +242,7 @@
             %dd= @member.sleeps.first.other_note
             %dt Observaciones
             %dd= @member.sleeps.first.observations
-        %h3 Dolor
+        %h3 Dolor:
         - if !@member.pains.empty?
           %dl.dl-horizontal
             %dt En las ultimas 24 horas ha experimentado dolor?
@@ -260,7 +261,7 @@
                 %dd= level[0]
             %dt Otras Observaciones
       - else
-        No hay una valoracion de enfermeria actualmente, 
+        No hay una valoración de enfermeria actualmente, 
         -if can? :create, Vig
           %a{ :href => new_member_nursing_path } quieres crearla?
       -# %table.table

@@ -4,13 +4,13 @@
       .col-md-12
       .col-md-6
         %strong
-          Fecha:
+          Fecha: 
         %br
          
       .col-md-6
         %strong
           Participante:
-        = @invoice.member.name
+        = @invoice.member.name 
         
   %h3
     Detalles Adicionales
@@ -73,5 +73,6 @@
     .mod
       = form_for [@invoice,@payment] do |f|
         = f.number_field :price
-        = f.submit
-  .clearfix
+        = f.submit "Crear pago"
+  %br
+    = link_to 'Exportar excel', url_for(:format => 'xls') , class: 'btn btn-success'

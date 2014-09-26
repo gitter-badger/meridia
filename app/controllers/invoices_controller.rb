@@ -10,7 +10,12 @@ class InvoicesController < ApplicationController
   # GET /invoices/1
   # GET /invoices/1.json
   def show
-    @payment = Payment.new
+    @payment = Payment.new    
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xls
+      format.xml  { render :xml => @users }
+    end
   end
 
   # GET /invoices/new
