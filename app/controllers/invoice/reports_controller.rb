@@ -12,13 +12,14 @@ class Invoice::ReportsController < ApplicationController
       @date_end = params[:search][:date_end]
     end
     invoices = Invoice.get_start_end_date(@date_start,@date_end)
-    cant_members = Member.where(status: 1).length
+    @cant_members = Member.where(status: 1).length
     @pending_pays=invoices.where(status: 1).length
     @total_pays=invoices.where(status: 3).length
     @sum_total_pays=invoices.where(status: 3).sum(:total)
-    pays_by_months = mount_for_month(invoices)  
+    pays_by_months = mount_for_month(invoices)
     pays_by_days = report_day(invoices)  
-    @fte = ((@sum_total_pays*cant_members)/12845.0).round(7)
+    # cantidad de ingresos entre factura del mes divido 12845
+    @fte = ((@sum_total_pays/12845.0)).round(2)
     gon.arr_months = pays_by_months[:arr_months]
     gon.arr_pays = pays_by_months[:arr_pays]
     gon.arr_days = pays_by_days[:arr_days]

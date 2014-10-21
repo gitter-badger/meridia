@@ -31,8 +31,12 @@
           %span.icon-bubble.black
         .summary
           %h4
+            FTE 
             = @fte
-          FTE
+          %h4
+            Participates 
+            = @fte / @cant_members
+          
   .well
     =form_for :search, url:  invoice_reports_path ,method: :get ,html: {class: "form-inline"} do |f|
       %label Desde:

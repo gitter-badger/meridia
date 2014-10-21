@@ -4,13 +4,13 @@
       .col-md-12
       .col-md-6
         %strong
-          Fecha:
+          Fecha: 
         %br
          
       .col-md-6
         %strong
           Participante:
-        = @invoice.member.name
+        = @invoice.member.name 
         
   %h3
     Detalles Adicionales
@@ -68,14 +68,11 @@
           = price = @invoice.payments.sum("price")
   %h3.pull-right
     Valor Pendiente #{@invoice.total - price}
-  .clearfix
-  .well
-    -if @invoice.status != 2
-      .col-md-6
-        = form_for [@invoice,@payment] do |f|
-          .form-group
-            = f.label :price, "Precio"
-            = f.number_field :price, class: "form-control"
-          .form-group
-            = f.submit "Agregar Pago", class: "btn btn-success pull-right" 
-    .clearfix
+  %br
+  -if @invoice.status != 2
+    .mod
+      = form_for [@invoice,@payment] do |f|
+        = f.number_field :price
+        = f.submit "Crear pago"
+  %br
+    = link_to 'Exportar excel', url_for(:format => 'xls') , class: 'btn btn-success'

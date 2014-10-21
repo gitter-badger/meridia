@@ -17,10 +17,16 @@
 //= require amodule/highcharts
 //= require jquery.validate
 //= require wizard
+//= require exporting
 //= require bootstrap-datepicker
 
 $(document).ready(function() {
   $('.navbar-toggle ').click(function() {
     $('.list-menu > a').toggleClass('active');
   });
+
+  /**
+ * Create a global getSVG method that takes an array of charts as an argument
+ */
+
 });

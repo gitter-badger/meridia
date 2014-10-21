@@ -2,7 +2,7 @@
   %strong
     = @member.name.upcase
     = @member.lastname.upcase
-  ="/Valoracion Inicial de Enfermeria"
+  ="/Valoración Inicial de Enfermeria"
 
 .col-md-12
   .panel
@@ -14,11 +14,11 @@
         %legend Reposo y Sueno
         = f.fields_for :sleeps, @member.sleeps.build do |sleep|
           .form-group
-            = sleep.label :duration, 'Horas de sueno', :class => "col-sm-2 control-label"
+            = sleep.label :duration, 'Horas de sueño', :class => "col-sm-2 control-label"
             .col-sm-8
               = label_tag '', '', :class => "radio-inline" do
                 = sleep.radio_button :duration, 1
-                <6 horas
+                < 6 horas
               = label_tag '', '', :class => "radio-inline" do
                 = sleep.radio_button :duration, 2
                 De 6 a 8 horas
@@ -35,7 +35,7 @@
                 = sleep.radio_button :nap, 0
                 No
           .form-group
-            = sleep.label :pattern, 'Patron de sueno', :class => "col-sm-2 control-label"
+            = sleep.label :pattern, 'Patrón de sueno', :class => "col-sm-2 control-label"
             .col-sm-8
               = label_tag '', '', :class => "radio-inline" do
                 = sleep.radio_button :pattern, 1
@@ -44,7 +44,7 @@
                 = sleep.radio_button :pattern, 0
                 DisContinuo
           .form-group
-            = sleep.label :drugs, 'Toma algun medicamento para dormir?', :class => "col-sm-2 control-label"
+            = sleep.label :drugs, 'Toma algún medicamento para dormir?', :class => "col-sm-2 control-label"
             .col-sm-8
               = label_tag '', '', :class => "radio-inline" do
                 = sleep.radio_button :drugs, 1
@@ -143,4 +143,4 @@
                 = pain.radio_button :level, 3
                 Severo
       %hr
-      = f.submit "Finalizar Valoracion", :class => "btn btn-primary" 
+      = f.submit "Finalizar Valoración", :class => "btn btn-primary" 

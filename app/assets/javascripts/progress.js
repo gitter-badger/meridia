@@ -1,4 +1,3 @@
-$(document).ready(function() {
   $(function () {
     $('#container').highcharts({
         chart: {
@@ -133,4 +132,4 @@ $(document).ready(function() {
         }
     });
 });
-});
+

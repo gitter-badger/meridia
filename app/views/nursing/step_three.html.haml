@@ -44,7 +44,7 @@
                 = body.radio_button :mucous, 2
                 Deshidratadas
           .form-group
-            = body.label :dentition, 'Denticion', :class => "col-sm-2 control-label"
+            = body.label :dentition, 'Dentición', :class => "col-sm-2 control-label"
             .col-sm-8
               = label_tag '', '', :class => "radio-inline" do
                 = body.radio_button :dentition, 1
@@ -65,6 +65,9 @@
             = body.label :oral_cavity, 'Cavidad Oral', :class => "col-sm-2 control-label"
             .col-sm-8
               = label_tag '', '', :class => "radio-inline" do
+                = body.radio_button :oral_cavity, 0
+                Ninguna
+              = label_tag '', '', :class => "radio-inline" do
                 = body.radio_button :oral_cavity, 1
                 Placas
               = label_tag '', '', :class => "radio-inline" do
@@ -74,7 +77,7 @@
                 = body.radio_button :oral_cavity, 3
                 Lesiones
         %fieldset#jdownton{ :style =>  "padding: 0 0 1em 0;" }
-          %legend Escala de Riesgo de Caidas (J.H Downton)
+          %legend Escala de Riesgo de Caídas (J.H Downton)
           .form-group
             = body.label :previous_fallen, 'Cavidad Oral', :class => "col-sm-2 control-label"
             .col-sm-8
@@ -109,7 +112,7 @@
                 = body.radio_button :medicines, 1
                 Otros medicamentos
           .form-group
-            = body.label :sensory_deficits, 'Déficits sensoriales', :class => "col-sm-2 control-label"
+            = body.label :sensory_deficits, 'Deficits sensoriales', :class => "col-sm-2 control-label"
             .col-sm-8
               = label_tag '', '', :class => "radio-inline" do
                 = body.radio_button :sensory_deficits, 0
