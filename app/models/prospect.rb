@@ -22,11 +22,13 @@ class Prospect
   validates_presence_of :name, :lastname, :phone, :mobile, :mail
  
    
-  STATUS=[["activo",0],["venta",1],["cancelado",2]] 
+  STATUS=[["activo",0],["venta",1],["cancelado",2],["Tiempo de Prueba",3]] 
   scope :activo, -> {where(status: 0)}
   scope :cancelado, -> {where(status: 2)}
   scope :venta, -> {where(status:1)}
+  scope :prueba, -> {where(status:3)}
 
+  
   MEDIO = %W(Facebook
             e-mailing
             Google
@@ -59,7 +61,7 @@ class Prospect
               Contrata_residencia
               No_interés_real
               INDEP/Busca_talleres
-              Fue_a_Club Mayores
+              Fue_a_Club_Mayores
               Fue_a_Residencia
               Fallecimiento
               Precio
@@ -75,7 +77,7 @@ class Prospect
     case status.to_i
     when 0
       self.update_attributes!(status: 0)
-    when 1
+    when 1,3
       customer = Customer.create!(name: self.name, lastname: self.lastname,phone: self.phone,mobile: self.mobile, mail: self.mail)
       customer.members << Member.new(name: self.prospect_member.name, lastname: self.prospect_member.lastname,gender: self.prospect_member.genre ,phone: self.prospect_member.phone )
       self.update_attributes!(status: 1) 

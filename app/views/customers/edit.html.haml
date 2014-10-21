@@ -21,72 +21,67 @@
         #tab1.tab-pane
           .col-md-10.col-md-offset-1
             %p.lead
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               
           .col-md-5.col-md-offset-1
             .form-group
-              =f.label :name 
+              =f.label :name, "Nombre: " 
               =f.text_field :name, class: "form-control"
           .col-md-5
             .form-group
-              =f.label :lastname
+              =f.label :lastname, "Apellido:"
               =f.text_field :lastname, class: "form-control"
           .col-md-5.col-md-offset-1
             .form-group
-              =f.label :phone
+              =f.label :phone, "Telefono"
               =f.text_field :phone, class: "form-control"
           .col-md-5
             .form-group
-              =f.label :mobile
+              =f.label :mobile, "Movíl"
               =f.text_field :mobile, class: "form-control"
           .col-md-5.col-md-offset-1
             .form-group
-              =f.label :address
+              =f.label :address, "Dirección"
               =f.text_field :address, class: "form-control"
           .col-md-5
             .form-group
-              =f.label :neighborhood
+              =f.label :neighborhood, "Colonia"
               =f.text_field :neighborhood, class: "form-control"
         
         = f.fields_for :members do |member|
           #tab2.tab-pane
             .col-md-10.col-md-offset-1
-              %p.lead
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             .col-md-5.col-md-offset-1
               .form-group
-                =member.label :name
+                =member.label :name, "Nombre"
                 =member.text_field :name,class: "form-control"
             .col-md-5
               .form-group
-                = member.label :lastname
+                = member.label :lastname, "Apellido"
                 = member.text_field :lastname, class: "form-control"
             .col-md-5.col-md-offset-1
               .form-group
-                = member.label :address
+                = member.label :address, "Dirección"
                 =member.text_field :address ,class: "form-control"
             .col-md-5
               .form-group
-                = member.label :phone 
+                = member.label :phone, "Telefono"
                 = member.text_field :phone,class: "form-control"                
             .col-md-5.col-md-offset-1
               .form-group
-                = member.label :city
+                = member.label :city, "Ciudad"
                 = member.text_field :city, class: "form-control"
             .col-md-5
               .form-group
-                = member.label :neighborhood
+                = member.label :neighborhood, "Colonia"
                 = member.text_field :neighborhood, class: "form-control"
             .col-md-5.col-md-offset-1
               .form-group
-                =member.label :date_borth
+                =member.label :date_borth, "Fecha de Nacimiento"
                 =member.date_field :date_borth, class: "form-control"                
             .col-md-5
               .form-group
           #tab3.tab-pane
             .col-md-10.col-md-offset-1
-              %p.lead
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             
             .col-md-5.col-md-offset-1
               .form-group
@@ -107,6 +102,10 @@
                 %label
                   = member.radio_button :status, 1
                   Activo
+              .radio-inline
+                %label
+                  =member.radio_button :status, 2
+                  Baja
             .col-md-10.col-md-offset-1
               .form-group
                 =member.label :days , "Días que viene al centro"

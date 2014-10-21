@@ -6,6 +6,13 @@
     = @member.lastname.upcase
   ="/Valoraciones"
 .col-md-9
+  %ul.nav.nav-tabs
+    %li.active
+      = link_to "Gerontología", ""
+    %li
+      =link_to "Psicologia", ""
+    %li
+      = link_to "Fisioterapia"
   .panel
     #container
     %h3 Valoraciónes
@@ -13,16 +20,15 @@
       %button.btn.btn-primary.pull-right.btn-success{"data-target" => "#myModal", "data-toggle" => "modal"}
         %span.icon-plus-square
         Agregar Nueva Valoración
+    %table.table
+      %tr
+        %th Nombre
+        %th Fecha
 
-      %table.table
+      - @vigs.each do |vig|
         %tr
-          %th Nombre
-          %th Fecha
-
-        - @vigs.each do |vig|
-          %tr
-            %td= link_to vig.name, member_vig_path(@member,vig)
-            %td= (vig.created_at).strftime('%Y-%m-%d')
+          %td= link_to vig.name, member_vig_path(@member,vig)
+          %td= (vig.created_at).strftime('%Y-%m-%d')
     
     .tab-pane#psicologia 
       %h3 Valoraciones Psicologicas

@@ -34,7 +34,7 @@
             = @prospect.contact_type
     .col-md-6
       %h4
-        Miembro:
+        Prospecto:
       %br
       %p
         %em
@@ -91,11 +91,11 @@
           .row
             .col-md-12
               .form-group
-                = f.label :title
+                = f.label :title, "Nombre del Evento"
                 = f.text_field :title, class: 'form-control'
             .col-md-6 
               .form-group
-                = f.label :event_date
+                = f.label :event_date, "Fecha del Evento"
                 = f.date_field :event_date, class: 'form-control'
             .col-md-6
               .form-group
@@ -113,7 +113,7 @@
 
             .col-md-12
               .form-group
-                = f.label :observation
+                = f.label :observation, "Observación"
                 = f.text_area :observation, class: 'form-control'
           
         .modal-footer
