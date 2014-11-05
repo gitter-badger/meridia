@@ -24,7 +24,7 @@ namespace :test do
     #Dummy.test 
   end
 
-  task :clear=> :enviroment do
+  task :clear=> :environment do
     tests = Test.all
     tests.detroy_all
   end
