@@ -22,6 +22,7 @@ class Prospect
   validates_presence_of :name, :lastname, :phone, :mobile, :mail
  
    
+  GENRE=['mujer','hombre']
   STATUS=[["activo",0],["venta",1],["cancelado",2],["Tiempo de Prueba",3]] 
   scope :activo, -> {where(status: 0)}
   scope :cancelado, -> {where(status: 2)}

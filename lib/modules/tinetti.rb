@@ -77,18 +77,23 @@ class Tinetti
       options= Array.new
       options << {"contentq"=> "No sobrepasa al pie izquierdo con el paso","point" => 0, "desc" => ""}
       options << {"contentq"=> "Sobrepasa al pie izquierdo","point" => 0, "desc" => ""}
-      options << {"contentq"=> "El pie derecho, no se separa completamente del suelo con el paso","point" => 0, "desc" => ""}
-      options << {"contentq"=> "El pie derecho, se separa completamente del suelo","point" => 1, "desc" => ""}
       test_build(test,"Longitud y altura de paso a) Movimiento del pie derecho" ,"check", answers: options, group: 2 )
       #
+      options= Array.new
+      options << {"contentq"=> "El pie derecho, no se separa completamente del suelo con el paso","point" => 0, "desc" => ""}
+      options << {"contentq"=> "El pie derecho, se separa completamente del suelo","point" => 1, "desc" => ""}
+      test_build(test,"" ,"check", answers: options, group: 2 )
+      
       # question 11
       options= Array.new
       options << {"contentq"=> "No sobrepasa al pie derecho, con el paso","point" => 0, "desc" => ""}
       options << {"contentq"=> "Sobrepasa al pie derecho","point" => 1, "desc" => ""}
+      test_build(test,"b) Movimiento del pie izquierdo" ,"check", answers: options, group: 2 )
+      # 
+      options= Array.new
       options << {"contentq"=> "El pie izquierdo, no se separa completamente del suelo con el paso","point" => 0, "desc" => ""}
       options << {"contentq"=> "El pie izquierdo, se separa completamente del suelo","point" => 1, "desc" => ""}
       test_build(test,"b) Movimiento del pie izquierdo" ,"check", answers: options, group: 2 )
-      # 
       # question 12
       options= Array.new
       options << {"contentq"=> "La longitud de los pasos con los pies izquierdo y derecho, no es igual","point" => 0, "desc" => ""}

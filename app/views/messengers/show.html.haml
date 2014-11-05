@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Text:
+  = @messenger.text
+%p
+  %b Subjet:
+  = @messenger.subjet
+%p
+  %b Status:
+  = @messenger.status
+
+= link_to 'Edit', edit_messenger_path(@messenger)
+\|
+= link_to 'Back', messengers_path

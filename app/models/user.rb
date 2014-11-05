@@ -15,6 +15,7 @@ class User
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
 	field :name, 							 type: String, default:	""
+  field :photo,              type: String, default: ""
   ## Recoverable
   field :reset_password_token,   type: String
   field :reset_password_sent_at, type: Time

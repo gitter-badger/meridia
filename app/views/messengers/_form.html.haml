@@ -1,0 +1,19 @@
+= form_for @messenger do |f|
+  - if @messenger.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@messenger.errors.count, "error")} prohibited this messenger from being saved:"
+      %ul
+        - @messenger.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :text
+    = f.text_field :text
+  .field
+    = f.label :subjet
+    = f.text_field :subjet
+  .field
+    = f.label :status
+    = f.text_field :status
+  .actions
+    = f.submit 'Save'

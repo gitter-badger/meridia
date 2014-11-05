@@ -1,0 +1,21 @@
+.panel
+  %h1
+    Lista de mensajes
+.panel
+  %table.table
+    %tr
+      %th Text
+      %th Subjet
+      %th Status
+      %th
+      %th
+      %th
+
+    - @messengers.each do |messenger|
+      %tr
+        %td= messenger.text
+        %td= messenger.subjet
+        %td= messenger.status
+
+%br
+

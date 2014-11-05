@@ -34,11 +34,11 @@
                 %span.icon-hospital-o
                   = Mongoid::Multitenancy.current_tenant.name
             %li
-              = link_to "", class: 'off' do 
+              = link_to (edit_user_path(current_user)) , class: 'off' do 
                 %span.icon-user-md
                   Perfil
             %li
-              = link_to "", class: 'off' do 
+              = link_to user_messengers_path(current_user), class: 'off' do 
                 %span.icon-bubbles
                   Mensajes
             %li
