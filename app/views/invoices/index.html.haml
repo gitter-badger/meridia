@@ -1,18 +1,23 @@
 .panel
-  %h2
-    Facturas Pendientes
-    = link_to 'Ver Reporte',  invoice_reports_path, class: 'btn btn-success pull-right'
+  .row
+    .col-md-4
+      %h2
+        Facturas Pendientes
+    .col-md-4
+    .col-md-4
+      = link_to 'Ver Reporte',  invoice_reports_path, class: 'btn btn-success pull-right'
+.panel
   %table.table
     %thead
       %tr
         %th
-          Fecha
+          = sorteable "create_at", "Fecha"
         %th
           Participante
         %th
           Total
         %th
-          Status
+          = sorteable "status","Status"
         %th
     %tbody
       -@invoices.each do |invoice|
@@ -24,7 +29,7 @@
           %td
             =invoice.total
           %td
-            =invoice.status
+            =Invoice::STATUS[invoice.status]
           %td
             = link_to "detalle", invoice
 

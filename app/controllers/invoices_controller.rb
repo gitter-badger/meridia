@@ -1,10 +1,10 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
-
+  helper_method :sort_column, :sort_direction 
   # GET /invoices
   # GET /invoices.json
   def index
-   @invoices =  Invoice.active
+    @invoices =  Invoice.active.order_by(sort_column + ' ' + sort_direction)
   end
 
   # GET /invoices/1
@@ -65,6 +65,12 @@ class InvoicesController < ApplicationController
     redirect_to member_invoices_path(@invoice.member)
   end
 
+  def sort_direction 
+    params[:direction] || "ASC"
+  end
+  def sort_column
+    params[:sort] || "date_create"
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_invoice

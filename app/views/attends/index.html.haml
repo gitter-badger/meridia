@@ -1,10 +1,14 @@
 .panel
-  %h3
-    Asistentes
-    = link_to 'Ver Reporte',  payment_reports_path, class: 'btn btn-link pull-right'
-    %button.btn.btn-link.pull-right{"data-target" => "#new_attent", "data-toggle" => "modal"}
-      Agregar Novedad
-  
+  .row
+    .col-md-4
+      %h1
+        Asistentes
+    .col-md-4
+    .col-md-4
+      = link_to 'Ver Reporte',  payment_reports_path, class: 'btn btn-link pull-right'
+      %button.btn.btn-link.pull-right{"data-target" => "#new_attent", "data-toggle" => "modal"}
+        Agregar Novedad
+.panel  
   %table.table
     %thead
       %tr
@@ -13,8 +17,9 @@
         %th
           Hora Entrada
         %th
-          Hora Salida
+          Hora de Salida
         %th
+          Salida
     %tbody
       -@attends.each do |attend|
         - if attend.member
@@ -23,13 +28,17 @@
               = "#{attend.member.name} #{attend.member.lastname}"
             %td
               =attend.entry_time.to_formatted_s(:time)
-            %td
-              -if attend.exit_time.nil?
-                = form_for attend do |f|
+            
+            -if attend.exit_time.nil?
+              = form_for attend do |f|
+                %td
+                  =f.time_select :exit_time 
+                %td
                   =f.submit "Salir"
-              -elsif
+            -elsif
+              %td
                 =attend.exit_time.to_formatted_s(:time)
-
+              %td
   %hr
   %h3
     Pendientes 
@@ -42,6 +51,8 @@
           %th
             Nombre
           %th
+            Hora de Ingreso
+          %th
             Check
       %tbody
         -@members.each do |member|
@@ -50,6 +61,8 @@
               %tr
                 %td
                   = "#{member.name} #{member.lastname}"
+                %td
+                  = f.time_select :entry_time 
                 %td
                   = f.check_box :member_id,{:multiple => true},  member._id, nil
     
@@ -64,12 +77,16 @@
                   %th
                     Nombre
                   %th
+                    Hora de Ingreso
+                  %th
                     Check
               -@members.each do |member|
                 -if !member.days.include? @day
                   %tr
                     %td
                       = "#{member.name} #{member.lastname}"
+                    %td
+                      = f.time_select :entry_time 
                     %td
                       = f.check_box :member_id,{:multiple => true},  member._id, nil
           .modal-footer

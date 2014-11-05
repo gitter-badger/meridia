@@ -3,7 +3,7 @@ class Mna
   include BuildTest
 
     def self.test_short
-      test= Test.new(title: "Mini Nutritional assessment MNA (Cribaje)", calculate: :mna , code: 9, description: " Responda al cuestionario eligiendo la opción adecuada para cada pregunta. Sume los puntos para el resultado final.",kindof: :psicologico)
+      test= Test.new(title: "Mini Nutritional assessment MNA (Cribaje)", calculate: :mna , code: 9, description: " Responda al cuestionario eligiendo la opción adecuada para cada pregunta. Sume los puntos para el resultado final.",kindof: :medical)
       test.save!
 
       questions = Array.new
@@ -54,7 +54,7 @@ class Mna
     end
 
     def self.test_ext
-      test= Test.new(title: "Mini Nutritional assessment MNA Completo", calculate: :mna_ext , code: 10, description: " Responda al cuestionario eligiendo la opción adecuada para cada pregunta. Sume los puntos para el resultado final.",kindof: :psicologico)
+      test= Test.new(title: "Mini Nutritional assessment MNA Completo", calculate: :mna_ext , code: 10, description: " Responda al cuestionario eligiendo la opción adecuada para cada pregunta. Sume los puntos para el resultado final.",kindof: :medical)
       test.save!
 
       questions = Array.new

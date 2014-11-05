@@ -1,8 +1,14 @@
 .panel
   - @lesson= (lessons @lessons)
-  %h2
-    Horario
-  = link_to "Crear Actividad", new_activity_path, class: "btn btn-success pull-right"
+  .row
+    .col-md-4
+      %h2
+        Horario
+    .col-md-3 
+    .col-md-5
+      = link_to "Crear Actividad", new_activity_path, class: "btn btn-success pull-right"
+      = link_to "Lista de Actividades", "#", class: 'btn btn-success pull-right'
+.panel
   %table.table
     %thead
       %tr

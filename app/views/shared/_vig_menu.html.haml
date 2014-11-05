@@ -10,7 +10,7 @@
     .list-group
       = link_to "Perfil", member_path(@member), class: "list-group-item"
       = link_to "Valoraciones", member_vigs_path(@member) , class: "list-group-item"      
-      = link_to "Horarios",member_schedule_index_path(@member), class: "list-group-item" unless @vig.nil?
+      = link_to "Horarios",member_schedule_index_path(@member), class: "list-group-item" unless @member.lessons.empty?
       = link_to "Enfermería",member_nursing_index_path(@member), class: "list-group-item"
       = link_to "Evolución", member_progress_index_path(@member), class: "list-group-item"
       = link_to "Pagos", member_additional_services_path(@member), class: "list-group-item"

@@ -2,7 +2,7 @@ require 'modules/build_test'
 class Tinetti
   include BuildTest
     def self.test
-      test = Test.new(title: "ESCALA DE TINETTI", calculate: :tinettii,code:6 )
+      test = Test.new(title: "ESCALA DE TINETTI", calculate: :tinetti,code:6 )
       test.save!
 
       # question 1

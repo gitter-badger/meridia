@@ -30,12 +30,14 @@ describe MembersController do
   # MembersController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  
   describe "GET index" do
     it "assigns all members as @members" do
       member = Member.create! valid_attributes
       get :index, {}, valid_session
       assigns(:members).should eq([member])
     end
+
   end
 
   describe "GET show" do

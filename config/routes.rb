@@ -34,11 +34,13 @@ Meridia::Application.routes.draw do
   end
   resources :customers
  
+  #autneticacion
 
  	devise_for :users
   authenticated :user do
     root to: "centers#show", :as => "root_center"
   end
+  
   devise_scope :user do
     root to: "devise/sessions#new", :as => "unauthenticated"
   end 
@@ -55,7 +57,7 @@ Meridia::Application.routes.draw do
     resources :families,only: [ :update,:create, :destroy ]
     resources :invoices do
       resources :list_services, only: [:create,:destroy]
-    end
+  end
 
     resources :nursing, only: [ :index, :new, :create ] do
       collection do

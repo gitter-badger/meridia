@@ -30,11 +30,22 @@
             %li
               = link_to "Pagos", customers_path, class: "visible-xs"
             %li
-              =link_to  Mongoid::Multitenancy.current_tenant.name,root_center_path
+              =link_to root_center_path do
+                %span.icon-hospital-o
+                  = Mongoid::Multitenancy.current_tenant.name
+            %li
+              = link_to "", class: 'off' do 
+                %span.icon-user-md
+                  Perfil
+            %li
+              = link_to "", class: 'off' do 
+                %span.icon-bubbles
+                  Mensajes
             %li
               = link_to destroy_user_session_path, class: 'off', :method=>'delete' do
                 %span.icon-power-off
-    .general-row
+                  Salir
+    .main 
       .col-md-2.main-menu.hidden-xs.hidden-sm
         = render 'layouts/navigation'
       .col-md-10.col-md-offset-2   

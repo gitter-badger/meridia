@@ -1,11 +1,12 @@
 class MembersController < ApplicationController
+  helper_method  :sort_column, :sort_direction
   before_action :set_member, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
  # load_and_authorize_resource
   # GET /members
   # GET /members.json
   def index
-    @members = Member.inclulle_pendiente
+    @members = Member.inclulle_pendiente.order_by(sort_column+" "+ sort_direction)
   end
 
   # GET /members/1
@@ -66,6 +67,13 @@ class MembersController < ApplicationController
     end
   end
 
+    def sort_column
+      params[:sort] || "name"
+    end
+    
+    def sort_direction
+      params[:direction] || "ASC"
+    end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_member
@@ -77,4 +85,5 @@ class MembersController < ApplicationController
     def member_params
       params.require(:member).permit(:name, :addres, :phone, :age, :avatar, :avatar_cache, :code, :status, customer_attributes:[:name], signs_attributes:[ measures_attributes:[:kindof, :value ]], allergies_attributes: [ :id, :kindof, :name ], medicines_attributes: [ :id, :name, :frequency, :doses, :way, :validity, :day => [] ] )
     end
+    
 end

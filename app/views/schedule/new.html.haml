@@ -39,13 +39,14 @@
             Horario
           %th
             Check
-        -unless @lesson.nil?
+        -unless @lessons.nil?
           - for lesson in @lessons
             %tr
               %td
                 = lesson.activity.title
               %td
                 = lesson.activity.description
+              %td
               %td
                 = check_box_tag "member[lesson_ids][]" , lesson.id, @member.lessons.include?(lesson)          
 

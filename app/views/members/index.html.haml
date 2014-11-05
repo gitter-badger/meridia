@@ -1,25 +1,33 @@
-.col-md-12
-  .panel.panel_table_index
-    %h1
-      Participantes
+.panel
+  .row
+    .col-md-4
+      %h1
+        Participantes
+    .col-md-4
+      .input-group 
+        %input#filter.form-control{:placeholder => "Ingrese su filtro aca...", :type => "text"}/  
+        %span.input-group-addon.icon-search-plus 
+    .col-md-4
       = link_to 'Ver Reporte',  member_reports_path, class: 'btn btn-success pull-right'
-    .col-md-6.input-group
-      %span.input-group-addon Filtro
-      %input#filter.form-control{:placeholder => "Ingrese su filtro aca...", :type => "text"}/  
-    %table.table
-      %thead
-        %tr
-          %th Nombre
-          %th Nacionalidad
-          %th Código
-          %th Estado
-      %tbody.searchable
-        - @members.each do |member|
-          %tr{class: Member::STATUS[member.status][0]}
-            %td= link_to  "#{member.name} #{member.lastname}", member_path(member)
-            %td= member.country
-            %td= member.code
-            %td= Member::STATUS[member.status][0]
+      = link_to "Exportar XML", "#", class: 'btn btn-success pull-right'
+  .clearfix
+.panel.panel_table_index
+  .col-md-6.input-group
+  %table.table
+    %thead
+      %tr
+        %th 
+          = sorteable "name", "Nombre"
+        %th 
+          = sorteable "country","Nacionalidad"
+        %th 
+          = sorteable "status","Estado"
+    %tbody.searchable
+      - @members.each do |member|
+        %tr{class: Member::STATUS[member.status][0]}
+          %td= link_to  "#{member.name} #{member.lastname}", member_path(member)
+          %td= member.country
+          %td= Member::STATUS[member.status][0]
 
 :javascript
   $('#filter').keyup(function () {

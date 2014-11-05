@@ -1,17 +1,29 @@
 .panel
-  %h1 Prospectos
-  = link_to 'Informes', prospect_grafic_path, class: "btn btn-info pull-right"
-  -if can? :create, Prospect
-    = link_to 'Nuevo prospecto', new_prospect_path, class: "btn btn-success pull-right"
-
+  .row
+    .col-md-4
+      %h1
+        Prospectos
+    .col-md-4
+      .input-group
+        %input#filter.form-control{:placeholder => "Ingrese su busqueda.."}
+        %span.input-group-addon.icon-search-plus
+    .col-md-4
+      = link_to 'Informes', prospect_grafic_path, class: "btn btn-info pull-right"
+      -if can? :create, Prospect
+        = link_to 'Nuevo prospecto', new_prospect_path, class: "btn btn-success pull-right"
+    
+  .clearfix
+.panel
   %table.table
     %tr
-      %th Nombre
+      %th 
+        =sorteable "name", "Nombre"
       %th Telefono
       %th Mobile
       %th Email
       %th Participante
-      %th Status
+      %th 
+        = sorteable "satatus", "Status"
       /
         %th
         %th

@@ -22,21 +22,28 @@ gem 'rails_12factor'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem "fog"
 gem 'gon'
+
 group :development do
+  gem 'guard-livereload', require: false 
+  gem 'guard-rspec'
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :mri_21, :rbx]
   gem 'foreman'
   gem 'html2haml'
   gem 'rails_layout'
-	gem 'pry-debugger'
-	gem 'pry'
+  gem 'pry-debugger'
+  gem 'pry'
+
 end
+
 group :development, :test do
-  gem 'factory_girl_rails'
   gem 'rspec-rails'
-end
-group :test do
+  gem 'factory_girl_rails'
+  gem 'faker'
   gem 'capybara'
+end
+
+group :test do
   gem 'database_cleaner', '1.0.1'
   gem 'email_spec'
   gem 'mongoid-rspec', '>= 1.10.0'

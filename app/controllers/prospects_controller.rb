@@ -1,11 +1,12 @@
 class ProspectsController < ApplicationController
   before_action :set_prospect, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
   before_filter :authenticate_user!
   load_and_authorize_resource
   # GET /prospects
   # GET /prospects.json
   def index
-    @prospects = Prospect.all
+    @prospects = Prospect.order(sort_column + ' ' + sort_direction)
   end
 
   # GET /prospects/1
@@ -78,4 +79,12 @@ class ProspectsController < ApplicationController
 			:prospect_member_attributes=>[:name,:lastname,:genre,:age,:phone,:mobile,:cognitive, :physical, :transport, :pathology_ids => []
 			])
     end
+
+      def sort_column
+        params[:sort] || "name"
+      end
+      
+      def sort_direction
+        params[:direction] || "asc"
+      end
 end

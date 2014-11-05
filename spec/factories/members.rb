@@ -2,10 +2,9 @@
 
 FactoryGirl.define do
   factory :member do
-    name "MyString"
-    phone "MyString"
-    age "34"
-    code "MyString"
-    status "MyString"
+    name {Faker::Name.first_name}
+    lastname {Faker::Name.last_name}
+    phone {Faker::PhoneNumber.phone_number}
+    status 1
   end
 end

@@ -3,9 +3,9 @@
   .well
     =form_for :search, url:  member_reports_path ,method: :get ,html: {class: "form-inline"} do |f|
       %label Desde:
-      = f.date_field :start_date,value: @date_start,class: "form-control datepicker"
+      = f.date_field :start_date,value: @date_start,class: "form-control"
       %label Hasta :
-      = f.date_field :date_end,value: @date_end,class: "form-control datepicker"
+      = f.date_field :date_end,value: @date_end,class: "form-control"
       = f.submit  "Generar Informe", class: "btn btn-success"
   .row
     .col-md-12
@@ -57,8 +57,3 @@
                }]
             });
           });    
-  $(function() {
-    $( ".datepicker" ).datepicker({
-      format: 'yyyy/mm/dd'
-    });
-  });
