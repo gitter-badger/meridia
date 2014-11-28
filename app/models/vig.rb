@@ -21,8 +21,8 @@ class Vig
   has_many :answers
   has_many :vigs_tests
 
-	scope :withot_nursing,-> { where :kind => "gerontology"}	
-
+	scope :withot_nursing,-> { where :kind => :gerontology}	
+  scope :nursing, -> {where :kind => :nursing}
   def self.test_applicate(list)
     res = [] 
     current = [0,0,0,0,0,0]

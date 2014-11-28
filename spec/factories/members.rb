@@ -5,6 +5,7 @@ FactoryGirl.define do
     name {Faker::Name.first_name}
     lastname {Faker::Name.last_name}
     phone {Faker::PhoneNumber.phone_number}
+    gender 1
     status 1
   end
 end

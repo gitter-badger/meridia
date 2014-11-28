@@ -21,6 +21,8 @@
         Medicamentos
   .panel
     #perfil.tab-content
+      -if can? :create, Vig
+        %a{ :href => new_member_nursing_path(@member), class:"pull-right" } Editar Datos
       - if !@vie.nil?
         %h3 Información Del Participante:
         %dl.dl-horizontal

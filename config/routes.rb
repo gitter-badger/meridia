@@ -1,12 +1,16 @@
 Meridia::Application.routes.draw do
 
 
+
   resources :invoices do
     resources :payments
   end
 
 
   resources :payments
+  resources :mailboxes do
+    resources :tags
+  end
   resources :users, only:[:edit,:update] do
   	resources :messengers
 	end

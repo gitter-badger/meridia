@@ -12,14 +12,6 @@ describe "Members" do
       visit members_path
       page.status_code.should == 200
     end
-    
-    it "sorteable links default" do
-     visit members_path
-     within('#name') do
-      click_on "nombre"
-     end
-     page.should have_content("Participantes") 
-    end
 
   end
 end

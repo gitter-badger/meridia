@@ -1,15 +1,19 @@
-%p#notice= notice
+.panel
+  %h1 Mailbox
+.row
+  .col-md-3
+    = render "shared/mail_nav"
+  .col-md-9
+    .panel
+      %p#notice= notice
 
-%p
-  %b Text:
-  = @messenger.text
-%p
-  %b Subjet:
-  = @messenger.subjet
-%p
-  %b Status:
-  = @messenger.status
+      %p
+        %b Text:
+        = @messenger.text
+      %p
+        %b Subjet:
+        = @messenger.subjet
+      %p
+        %b Status:
+        = @messenger.status
 
-= link_to 'Edit', edit_messenger_path(@messenger)
-\|
-= link_to 'Back', messengers_path

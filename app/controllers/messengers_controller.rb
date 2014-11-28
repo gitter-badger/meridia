@@ -14,6 +14,7 @@ class MessengersController < ApplicationController
 
   # GET /messengers/new
   def new
+    @mailboxes = current_user.mailbox
     @messenger = Messenger.new
   end
 
@@ -25,10 +26,10 @@ class MessengersController < ApplicationController
   # POST /messengers.json
   def create
     @messenger = Messenger.new(messenger_params)
-
+    current_user.mailbox.messengers << @messenger  
     respond_to do |format|
       if @messenger.save
-        format.html { redirect_to @messenger, notice: 'Messenger was successfully created.' }
+        format.html { redirect_to mailbox_path(current_user.mailbox), notice: 'Messenger was successfully created.' }
         format.json { render action: 'show', status: :created, location: @messenger }
       else
         format.html { render action: 'new' }

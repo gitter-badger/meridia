@@ -41,9 +41,6 @@ class AdditionalServicesController < ApplicationController
       end
     end
   end
-  
-  
-  # PATCH/PUT /additional_services/1
   # PATCH/PUT /additional_services/1.json
   def update
 

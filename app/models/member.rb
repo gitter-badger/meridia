@@ -26,10 +26,23 @@ class Member
 	has_many :probiens
 	has_one :attend
   has_and_belongs_to_many :lessons
-  accepts_nested_attributes_for :families
-  accepts_nested_attributes_for :health_insurances
-  accepts_nested_attributes_for :health_services
-  accepts_nested_attributes_for :signs, :allergies, :medicines, :breaths, :bloods, :others, :nutritions, :bodies, :depositions, :mobilizations, :hygienes, :communications, :sleeps, :pains
+  accepts_nested_attributes_for :families, reject_if: proc{|attr| attr['firstname'].blank?}
+  accepts_nested_attributes_for :health_insurances, reject_if: proc{|attr| attr['company'].blank?}
+  accepts_nested_attributes_for :health_services, reject_if: proc{|attr| attr['company'].blank?}
+  accepts_nested_attributes_for :signs
+  accepts_nested_attributes_for :allergies, reject_if: proc{|attr| attr['name'].blank?}
+  accepts_nested_attributes_for :medicines, reject_if: proc{|attr| attr['name'].blank?}
+  accepts_nested_attributes_for :breaths
+  accepts_nested_attributes_for :bloods
+  accepts_nested_attributes_for :others
+  accepts_nested_attributes_for :nutritions
+  accepts_nested_attributes_for :bodies
+  accepts_nested_attributes_for :depositions
+  accepts_nested_attributes_for :mobilizations
+  accepts_nested_attributes_for :hygienes
+  accepts_nested_attributes_for :communications
+  accepts_nested_attributes_for :sleeps
+  accepts_nested_attributes_for :pains
 
   field :name, type: String
   field :lastname, type: String

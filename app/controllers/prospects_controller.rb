@@ -12,7 +12,7 @@ class ProspectsController < ApplicationController
   # GET /prospects/1
   # GET /prospects/1.jso
   def show
-		@tickets = @prospect.tickets.desc(:created_at)
+		@tickets = @prospect.tickets.desc(:event_date)
 		@prospect_member = @prospect.prospect_member
 		@ticket = Ticket.new 
 	end

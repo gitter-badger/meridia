@@ -1,0 +1,12 @@
+.panel
+  = link_to "Nuevo", new_user_messenger_path(current_user), class: "btn-success btn-block btn"
+.list-menu
+  .list-group-item
+    %span.icon-mail
+    =link_to "Recibidos",""
+  .list-group-item
+    %span.icon-paperplane
+    =link_to "Enviados",""
+  .list-group-item
+    %span.icon-warning
+    =link_to "Importantes",""

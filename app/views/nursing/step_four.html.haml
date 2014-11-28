@@ -1,7 +1,6 @@
 - content_for :title_breadcrumb do
   %strong
-    = @member.name.upcase
-    = @member.lastname.upcase
+    = link_to "#{@member.name.upcase} #{ @member.lastname.upcase}", member_path(@member)
   ="/Valoracion Inicial de Enfermeria"
 
 .col-md-12

@@ -12,16 +12,15 @@ class ApplicationController < ActionController::Base
 
 	def after_sign_in_path_for(resource)
 		set_current_client(resource.center)
+    set_mailbox if current_user.mailbox.nil?
 		request.env['omniauth.origin'] || stored_location_for(resource) || root_center_path
-	end	 
+  end	 
 
-	rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_path, :alert => exception.message
+  def set_mailbox 
+    current_user.create_mailbox
   end
-
-
 	def set_current_client(center)
-		current_client = Center.find(center)
+    current_client = Center.find(center)
 		Mongoid::Multitenancy.current_tenant = current_client
 	end
 
@@ -33,8 +32,8 @@ class ApplicationController < ActionController::Base
 	end
 	
 	rescue_from CanCan::AccessDenied do |exception|
-					flash[:error] = exception.message
-					redirect_to root_center_path
+	  flash[:error] = exception.message
+	  redirect_to root_center_path
 	end
 	
 	protected

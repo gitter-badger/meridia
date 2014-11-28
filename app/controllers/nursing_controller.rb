@@ -20,10 +20,9 @@ class NursingController < ApplicationController
   # GET /nursing/new
   def new
     @member = Member.find(params[:member_id])
-
-    # check for initial evaluation
-    @member.vigs.create! kind: :nursing
-
+    if @member.vigs.nursing.empty?
+      Vig.create(kind: :nursing)
+    end
     @member.allergies.build kindof: :medicine
     @member.medicines.build day: [:monday, :tuesday, :wednesday, :thursday, :friday ]
   end
@@ -111,8 +110,8 @@ class NursingController < ApplicationController
   # PATCH/PUT /vigs/1.json
   def update
     respond_to do |format|
-      if @vig.update(vig_params)
-        format.html { redirect_to @vig, notice: 'Vig was successfully updated.' }
+      if @member.update!(member_params)
+        format.html { redirect_to @member, notice: 'Vig was successfully updated.' }
       else
         format.html { render action: 'edit' }
       end

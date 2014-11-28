@@ -9,13 +9,19 @@ class User
   devise :database_authenticatable,:recoverable, :rememberable, :trackable, :validatable
 
   ##relatios
+
 	has_many :tickets
-	belongs_to :center
+	has_one :mailbox
+  has_many :messages
+  has_many :tags
+  belongs_to :center
+  
   ## Database authenticatable
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
 	field :name, 							 type: String, default:	""
   field :photo,              type: String, default: ""
+  field :role,               type: String, default: ""
   ## Recoverable
   field :reset_password_token,   type: String
   field :reset_password_sent_at, type: Time
@@ -29,8 +35,8 @@ class User
   field :last_sign_in_at,    type: Time
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
-	
-
+  
+  mount_uploader :photo, AvatarUploader 
   ## Confirmable
   # field :confirmation_token,   type: String
   # field :confirmed_at,         type: Time

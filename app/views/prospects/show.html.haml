@@ -70,6 +70,10 @@
       = "(#{Ticket::STATUS[ticket.type][0]})"
       %br
     %p
+      %strong
+        %span.icon-clock
+        = ticket.event_date
+    %p
       = ticket.observation
     -if !ticket.status && ticket.type != 3
       =form_for [@prospect , ticket] do |f|
@@ -95,7 +99,7 @@
                 = f.text_field :title, class: 'form-control'
             .col-md-6 
               .form-group
-                = f.label :event_date, "Fecha del Evento"
+                = f.label :event_date, "Fecha para realizar evento"
                 = f.date_field :event_date, class: 'form-control'
             .col-md-6
               .form-group

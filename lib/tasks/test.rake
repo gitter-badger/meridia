@@ -8,12 +8,12 @@ require 'modules/hamilton'
 require 'modules/dummy'
 require 'modules/zarit'
 
-namespace :test do
+namespace :test_s do
   desc "test"
 
   task :setup_test=> :environment do
     Barthel.test
-    Oars.test
+    #Oars.test
     Lawton.test
     Mna.test_short
     Mna.test_ext

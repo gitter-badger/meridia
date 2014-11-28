@@ -2,4 +2,34 @@
   %h1
     = current_user.name
 .panel
+  .row
+    .col-md-4
+      = image_tag(current_user.photo, class: "img-thumbnail")
+    .col-md-8
+      .fieldset
+        %h2
+        = form_for current_user do |f|
+          .form-group
+            = f.label :name, "Nombre"
+            = f.text_field :name, class: "form-control"
+          .form-group
+            = f.label :email
+            = f.email_field :email, class: "form-control"
+          .form-group
+            = f.label :password
+            %i (Mantener en blanco si no se desea cambiar)
+            %br/
+            = f.password_field :password,class: "form-control", :autocomplete => "off"
+          .form-group
+            = f.label :password_confirmation
+            %br/
+            = f.password_field :password_confirmation,class: "form-control"
+          .form-group
+            = f.label :current_password
+            %i (confirmacion de tu contraseña)
+            %br/
+            = f.password_field :current_password, class: "form-control"
+          %div= f.submit "Actualizar", class:"btn btn-success pull-right"
+              
+
 

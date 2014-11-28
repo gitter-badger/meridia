@@ -4,7 +4,7 @@ class InvoicesController < ApplicationController
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices =  Invoice.active.order_by(sort_column + ' ' + sort_direction)
+    @invoices =  Invoice.all.order_by(sort_column + ' ' + sort_direction)
   end
 
   # GET /invoices/1

@@ -19,14 +19,14 @@
         %th 
           = sorteable "name", "Nombre"
         %th 
-          = sorteable "country","Nacionalidad"
+          = sorteable "gender","Genero"
         %th 
           = sorteable "status","Estado"
     %tbody.searchable
       - @members.each do |member|
         %tr{class: Member::STATUS[member.status][0]}
           %td= link_to  "#{member.name} #{member.lastname}", member_path(member)
-          %td= member.country
+          %td= Prospect::GENRE[member.gender]
           %td= Member::STATUS[member.status][0]
 
 :javascript

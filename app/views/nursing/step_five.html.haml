@@ -1,14 +1,13 @@
 - content_for :title_breadcrumb do
   %strong
-    = @member.name.upcase
-    = @member.lastname.upcase
+    = link_to "#{@member.name.upcase} #{ @member.lastname.upcase}", member_path(@member)
   ="/Valoración Inicial de Enfermeria"
 
 .col-md-12
   .panel
     = render 'steps'
-    %hr
     = form_for( @member, :url => member_nursing_index_path(@member), :method => "post", :html => { :class => "form-horizontal" }  ) do |f|
+      %hr
       = hidden_field_tag :_step, 'step_five'
       %fieldset#depositions{ :style =>  "padding: 0 0 1em 0;" }
         %legend Reposo y Sueno

@@ -38,7 +38,7 @@
                 %span.icon-user-md
                   Perfil
             %li
-              = link_to user_messengers_path(current_user), class: 'off' do 
+              = link_to mailbox_path(current_user.mailbox), class: 'off' do 
                 %span.icon-bubbles
                   Mensajes
             %li
