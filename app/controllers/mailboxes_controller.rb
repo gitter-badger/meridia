@@ -10,6 +10,7 @@ class MailboxesController < ApplicationController
   # GET /mailboxes/1
   # GET /mailboxes/1.json
   def show
+    @mgs = Messenger.all
   end
 
   # GET /mailboxes/new

@@ -12,7 +12,7 @@ class User
 
 	has_many :tickets
 	has_one :mailbox
-  has_many :messages
+  has_many :messengers
   has_many :tags
   belongs_to :center
   

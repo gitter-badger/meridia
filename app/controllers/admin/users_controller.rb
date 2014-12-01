@@ -12,7 +12,8 @@ class Admin::UsersController < ApplicationController
 	
 	def	new_user
 		@user = User.new(center_params)
-		if @user.save
+	  @user.create_mailbox	
+    if @user.save
 			redirect_to admin_users_path
 		else
 			redirect_to admin_users_path

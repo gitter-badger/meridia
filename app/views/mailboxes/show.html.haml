@@ -6,5 +6,19 @@
     = render "shared/mail_nav"
   .col-md-9
     .panel
+      %table.table
+        %thead
+          %th
+            De:
+          %th
+            Asunto
+
+        %tbody
+          -@mgs.each do |mgs|
+            %tr
+              %td
+                General  
+              %td
+                =link_to mgs.subjet, ""
 
 
