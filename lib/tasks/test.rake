@@ -13,7 +13,7 @@ namespace :test_s do
 
   task :setup_test=> :environment do
     Barthel.test
-    #Oars.test
+    Oars.test
     Lawton.test
     Mna.test_short
     Mna.test_ext
