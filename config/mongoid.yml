@@ -75,3 +75,6 @@ production:
       options:
         #skip_version_check: true
         #safe: truei
+  options:
+    use_activesupport_time_zone: true
+    

@@ -5,9 +5,9 @@ class AttendsController < ApplicationController
 	def index
  		@hour = Time.now.to_formatted_s(:time)
 		@day = Time.now.strftime('%w')
-		stat_day = Time.now.beginning_of_day
+    stat_day = Time.now.beginning_of_day.utc
 		@members = Member.attends
-    @attends = Attend.between(entry_time: stat_day..Time.now)
+    @attends = Attend.between(entry_time: stat_day..Time.now.utc)
   end
 
   def create
