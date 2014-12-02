@@ -7,8 +7,8 @@ class AttendsController < ApplicationController
 		@day = Time.now.strftime('%w')
 		stat_day = Time.now.beginning_of_day
 		@members = Member.attends
-		@attends = Attend.where(:created_at => {:$gte => stat_day, :$lte => Time.now.utc})
-	end
+    @attends = Attend.between(:entry_time => stat_day..Time.now.utc)
+  end
 
   def create
 		if params[:attend]
