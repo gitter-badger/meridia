@@ -75,5 +75,3 @@ production:
       options:
         #skip_version_check: true
         #safe: truei
-        use_activesupport_time_zone: false
-        use_utc: true
