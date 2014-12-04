@@ -8,7 +8,7 @@ require 'modules/hamilton'
 require 'modules/dummy'
 require 'modules/zarit'
 
-namespace :test_s do
+namespace :test do
   desc "test"
 
   task :setup_test=> :environment do
@@ -21,7 +21,8 @@ namespace :test_s do
     Tinetti.test
     Hamilton.test
     Zarit.test
-    #Dummy.test 
+    Yesavage.test
+    #Dummy.test
   end
 
   task :clear=> :environment do
@@ -30,10 +31,10 @@ namespace :test_s do
   end
 
 end
-  
-  
-  
-  
+
+
+
+
   #    def nursing
 #      test = Test.new(title: "VALORACION INICIAL DE ENFERMERIA", kindof: :nursing,code: 8 );
  #     test.save!

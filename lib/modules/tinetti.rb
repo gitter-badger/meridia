@@ -17,7 +17,7 @@ class Tinetti
       options << {"contentq"=> "Capaz, pero usa los brazos para ayudarse","point" => 1, "desc" => ""}
       options << {"contentq"=> "Capaz sin usar los brazos","point" => 2, "desc" => ""}
       test_build(test,"Levantarse" ,"check", answers: options, group: 1 )
-      
+
       # question 3
       options= Array.new
       options << {"contentq"=> "Incapaz sin ayuda","point" => 0, "desc" => ""}
@@ -56,10 +56,15 @@ class Tinetti
       options= Array.new
       options << {"contentq"=> "Pasos discontinuos","point" => 0, "desc" => ""}
       options << {"contentq"=> "Continuos.","point" => 1, "desc" => ""}
+
+      test_build(test,"Vuelta de 360 grados sobre su propio eje" ,"check", answers: options, group: 1 )
+
+      options= Array.new
       options << {"contentq"=> "Inestable (se tambalea, se agarra)","point" => 1, "desc" => ""}
       options << {"contentq"=> "Estable","point" => 0, "desc" => ""}
       test_build(test,"Vuelta de 360 grados sobre su propio eje" ,"check", answers: options, group: 1 )
-      # 
+
+      #
       # question 9
       options= Array.new
       options << {"contentq"=> "Inseguro, calcula mal la distancia, cae en la silla","point" => 0, "desc" => ""}
@@ -83,13 +88,13 @@ class Tinetti
       options << {"contentq"=> "El pie derecho, no se separa completamente del suelo con el paso","point" => 0, "desc" => ""}
       options << {"contentq"=> "El pie derecho, se separa completamente del suelo","point" => 1, "desc" => ""}
       test_build(test,"" ,"check", answers: options, group: 2 )
-      
+
       # question 11
       options= Array.new
       options << {"contentq"=> "No sobrepasa al pie derecho, con el paso","point" => 0, "desc" => ""}
       options << {"contentq"=> "Sobrepasa al pie derecho","point" => 1, "desc" => ""}
       test_build(test,"b) Movimiento del pie izquierdo" ,"check", answers: options, group: 2 )
-      # 
+      #
       options= Array.new
       options << {"contentq"=> "El pie izquierdo, no se separa completamente del suelo con el paso","point" => 0, "desc" => ""}
       options << {"contentq"=> "El pie izquierdo, se separa completamente del suelo","point" => 1, "desc" => ""}
