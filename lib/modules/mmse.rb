@@ -2,7 +2,7 @@ require 'modules/build_test'
 class Mmse
   include BuildTest
   def self.test
-    test = Test.new(title: "MINI-MENTAL STATE EXAMINATION (MMSE)", calculate: :mental,test_code: 6)
+    test = Test.new(title: "MINI-MENTAL STATE EXAMINATION (MMSE)", calculate: :mmse,test_code: 6)
     test.save!
 
     #

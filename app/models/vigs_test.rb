@@ -5,7 +5,8 @@ class VigsTest
 	field :status, type: String
 	field :points, type: Hash	
 	field :res, type: Integer
-	belongs_to :vig
+	belongs_to :user
+  belongs_to :vig
 	belongs_to :test
 	has_many :answers
 	
@@ -13,17 +14,17 @@ class VigsTest
 		res = send(test.calculate)
 	end
 
-	def barthel
+	def abvd
 		suma
 		self.vig.update_attributes(abvd: self.points)
 	end
 
-	def mental
+	def folstein
 		suma
 		self.vig.update_attributes(folstein: self.points)
 	end
 
-	def lawton
+	def aivd
 		suma	
 		self.vig.update_attributes(aivd: self.points)
 	end
@@ -43,7 +44,14 @@ class VigsTest
 	end
 	def oars
 		suma
-	end	
+	end
+  
+  def mmse
+    suma
+  end
+  def zarit
+    suma
+  end
 	def suma
 		total = 0
 		answers = self.answers 

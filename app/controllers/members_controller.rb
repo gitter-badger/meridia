@@ -12,8 +12,8 @@ class MembersController < ApplicationController
   # GET /members/1
   # GET /members/1.json
   def show
-    @vig = @member.vigs.last
-	  @family = Family.new
+    @probien = @member.probiens.last
+    @family = Family.new
     if @member.status == 0
       redirect_to edit_customer_path(@member.customer)
     end

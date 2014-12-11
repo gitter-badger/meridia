@@ -6,7 +6,8 @@ class VigsController < ApplicationController
   # GET /vigs
   # GET /vigs.json
   def index
-    @vigs = @member.vigs.withot_nursing.desc(:created_at)
+    @vigs = @member.vigs.active.desc(:created_at).limit(4)
+    @vigs_old = @member.vigs.closed.desc(:created_at).limit(6)
     @attr = Vig.test_applicate(@vigs)
   end
 
@@ -21,24 +22,24 @@ class VigsController < ApplicationController
     @vig = Vig.new
   end
 
-
   def create
-		member = Member.find(params[:member_id])
-    current_vig = member.vigs.last
-		@vig = Vig.new(vig_params)
-		if !current_vig.nil?
-			@vig.abvd = current_vig.abvd
-			@vig.aivd = current_vig.aivd
-			@vig.tinetti = current_vig.tinetti
-			@vig.folstein = current_vig.folstein
-			@vig.yesavage = current_vig.yesavage
-			@vig.hamilton = current_vig.hamilton
-			@vig.nutrition = current_vig.nutrition
-			@vig.oars = current_vig.oars
-		end	
+		@member = Member.find(params[:member_id])
+    current_vig = @member.vigs.last
+    @vig = Vig.new(vig_params)
+    if !current_vig.nil?
+      @vig.abvd = current_vig.abvd
+      @vig.aivd = current_vig.aivd
+      @vig.tinetti = current_vig.tinetti
+      @vig.folstein = current_vig.folstein
+      @vig.yesavage = current_vig.yesavage
+      @vig.hamilton = current_vig.hamilton
+      @vig.nutrition = current_vig.nutrition
+      @vig.oars = current_vig.oars
+    end
+    current_user.vigs << @vig
 		respond_to do |format|
       if @member.vigs << @vig
-				format.html { redirect_to member_vig_path(@member, @vig), notice: 'Vig was successfully created.' }
+				format.html { redirect_to member_vigs_path(@member), notice: 'Vig was successfully created.' }
       else
         format.html { render action: 'new' }
       end

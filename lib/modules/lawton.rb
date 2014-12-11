@@ -3,7 +3,7 @@ require 'modules/build_test'
 class Lawton
   include BuildTest
     def self.test
-      test = Test.new(title: "ÍNDICE DE LAWTON & BRODY", calculate: :lawton,code: 2 )
+      test = Test.new(title: "ÍNDICE DE LAWTON & BRODY", calculate: :aivd,code: 2 )
       test.save!
 
       options= Array.new

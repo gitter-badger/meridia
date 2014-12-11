@@ -11,7 +11,7 @@ class AnswersController < ApplicationController
 		answers= params[:answers].values.collect { |q| Answer.new(q)}	
 		vig = answer_params[:vigs]
 		vig_test = VigsTest.new(status: true ,vig_id: vig, test_id: test.id)
-		
+	  current_user.vigs_tests << vig_test	
 
 		if answers.all?(&:valid?)
 			answers.each do |anw|

@@ -26,12 +26,10 @@ Meridia::Application.routes.draw do
  	resources :prospects do
     resources :tickets, only: [:create, :update]
   end
+  
  
  	resources :vigs do
-    resources :progress , only: [:create]
     resources :tests
-    resources :probien, only: [:create, :new]
-    resources :schedule,only: [:new]
   end
   
   get ':vigs_test_id/answers', to: 'answers#index', as: 'answers_all'
@@ -53,7 +51,8 @@ Meridia::Application.routes.draw do
   end 
 
   resources :members do   
-    resources :schedule, only: [:index,:create,:show]
+    resources :probien, only: [:update, :new]
+    resources :schedule, only: [:index,:create,:show,:new]
     resources :progress , only: [:index]
     resources :vigs
     resources :medicals

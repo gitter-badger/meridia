@@ -24,23 +24,23 @@
             Servicios de Salud
       .panel.tab-content
         .tab-pane#info
-          -unless @vig.nil?
-            -if  @vig.probien
+          -unless @probien.nil?
+            -if  @probien
               %h4 Cognitivo:
               %p
-                =@vig.probien.cognitive
+                =@probien.cognitive
               %h4 Fisico:
               %p
-                =@vig.probien.physical
+                =@probien.physical
               %h4 Desarrollo personal:
               %p
-                =@vig.probien.personaldev
-              %h4 Sacial:
+                =@probien.personaldev
+              %h4 Social:
               %p
-                =@vig.probien.social
+                =@probien.social
               %h4 Salud y Bienestar:
               %p
-                =@vig.probien.personaldev
+                =@probien.personaldev
 
         .tab-pane#family
           = link_to "Agregar Familiar", '#', class: "btn btn-success pull-right",:"data-toggle"=>"modal" ,:"data-target"=>"#familyNew"
@@ -89,9 +89,9 @@
             =  @member.city
           %hr
           .row
-            -unless @vig.nil?
+            -unless @probien.nil?
               .col-md-2.text-center
-                - res  =barthel(@vig.abvd)
+                - res  =abvd(@probien.abvd)
                 %ul.res_vig
                   %li.res
                     =res[:points]
@@ -100,7 +100,7 @@
                   %li.test
                     ABVD
               .col-md-2.text-center
-                - res= lawton(@vig.aivd)
+                - res= aivd(@probien.aivd)
                 %ul.res_vig
                   %li.res
                     =res[:points]
@@ -109,7 +109,7 @@
                   %li.test
                     AIVD
               .col-md-2.text-center
-                -res = tinetti(@vig.tinetti)
+                -res = tinetti(@probien.tinetti)
                 %ul.res_vig
                   %li.res
                     =res[:points]
@@ -118,16 +118,16 @@
                   %li.test
                     R. Caídas
               .col-md-2.text-center
-                - res =yesavage(@vig.yesavage)
+                - res =yesavage(@probien.yesavage)
                 %ul.res_vig
                   %li.res
                     =res[:points]
                   %li
                     =res[:scale]
                   %li.test
-                    R. Caídas
+                    Depresión
               .col-md-2.text-center
-                - res =mental(@vig.folstein)
+                - res =mmse(@probien.folstein)
                 %ul.res_vig
                   %li.res
                     =res[:points]
@@ -136,7 +136,7 @@
                   %li.test
                     Cognitivo
               .col-md-2.text-center
-                -res= hamilton(@vig.hamilton)
+                -res= hamilton(@probien.hamilton)
                 %ul.res_vig
                   %li.res
                     =res[:points]
@@ -167,8 +167,8 @@
           .row
             .col-md-12 
               %h3 Observaciones
-              - unless @vig.nil? || @vig.probien.nil?
-                -@vig.probien.descriptions.each do |description|
+              - unless @probien.nil?
+                -@probien.descriptions.each do |description|
                   .well
                     =description.name
 = form_for [@member,@family] do |family|

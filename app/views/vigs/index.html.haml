@@ -8,11 +8,9 @@
 .col-md-9
   %ul.nav.nav-tabs
     %li.active
-      = link_to "Gerontología", "#gerontologica",:"data-toggle"=>"tab"
+      = link_to "Valoraciones Activas", "#gerontologica",:"data-toggle"=>"tab"
     %li
-      = link_to "Psicologia", "#psicologia", :"data-toggle"=>"tab"
-    %li
-      = link_to "Rehabilitación","#ortopedia",:"data-toggle"=>"tab"
+      = link_to "Historial Valoraciones", "#psicologia", :"data-toggle"=>"tab"
   .panel
     .tab-content
       .tab-pane.active#gerontologica
@@ -21,57 +19,75 @@
         - if can? :create, Vig
           %button.btn.btn-primary.pull-right.btn-success{"data-target" => "#myModal", "data-toggle" => "modal"}
             %span.icon-plus-square
-            Agregar Nueva Valoración
-        %table.table
-          %tr
-            %th Nombre
-            %th Fecha
-
-          - @vigs.each do |vig|
-            %tr
-              %td= link_to vig.name, member_vig_path(@member,vig)
-              %td= (vig.created_at).strftime('%Y-%m-%d')
-        
+              Agregar Nueva Valoración
+          = link_to "Calcular Probien",new_member_probien_path(@member),class: "btn btn-primary"
+          .clearfix
+        - @vigs.each do |vig|
+          %hr
+            %strong
+              Valoración creada por #{ link_to vig.user.name, "#" } - 
+            =(vig.created_at).strftime('%Y-%m-%d')
+          %table.table
+            %thead
+              %tr
+                %th
+                  Test
+                %th
+                  Resultado 
+                %th
+            %tbody
+              -vig.tests.each do |test|
+                -value =  status(test, vig)
+                %tr
+                  %td
+                    = (test.title).titleize 
+                  -if value
+                    %td
+                      = @res[0].points[:total2].nil? ? @res[0].points[:total] : @res[0].points[:total].to_i + @res[0].points[:total2].to_i 
+                    %td
+                      =link_to "Detalles", answers_all_path(@res[0].id),class: "btn btn-success btn-xs"
+                  -else
+                    %td
+                      ="--"
+                    %td
+                      - if !vig.status
+                        No se Aplico
+                      -else
+                        =link_to "Aplicar", vig_test_path(vig,test),class:"btn btn-warning btn-xs"
       .tab-pane#psicologia 
-        %h3 Valoraciones Psicologicas
-        %button.btn.btn-primary.pull-right.btn-success{"data-target" => "#psicologiaModal", "data-toggle" => "modal"}
-          %span.icon-plus-square
-          Agregar Nueva Valoracion
-       
-        %table.table
-          %thead
-            %tr
-              %th
-                Nombre
-              %th
-                Fecha
-      .tab-pane#ortopedia
-        %h3
-          Valoraciones Rehabilitación
-  = form_for Vig.new , url: member_vigs_path(@member) do |vig|
-    .modal.fade#psicologiaModal
-      .modal-dialog
-        .modal-content
-          .modal-header
-            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
-            %h4
-              Nueva Valoración
-          .modal-body
-            .form-group
-              =vig.label :name, "Nombre de la Valoración"
-              = vig.text_field :name, class: "form-control"
-            .form-gruop
-              %label
-                Agregar Examen Psicologico
-            - for test in Test.psicologico
-              .form-group
-                .checkbox
-                  .col-md-9
-                    = label_tag test.title
-                  .col-md-3
-                    =  check_box_tag "vig[test_ids][]" , test.id
-          .modal-footer
-            = vig.submit "Guardar", class: "btn btn-success" 
+        %h3 Historial Valoraciones
+        - @vigs_old.each do |vig|
+          %hr
+            %strong
+              Valoración creada por #{ link_to vig.user.name, "#" } - 
+            =(vig.created_at).strftime('%Y-%m-%d')
+          %table.table
+            %thead
+              %tr
+                %th
+                  Test
+                %th
+                  Resultado 
+                %th
+            %tbody
+              -vig.tests.each do |test|
+                -value =  status(test, vig)
+                %tr
+                  %td
+                    = (test.title).titleize 
+                  -if value
+                    %td
+                      = @res[0].points[:total2].nil? ? @res[0].points[:total] : @res[0].points[:total].to_i + @res[0].points[:total2].to_i 
+                    %td
+                      =link_to "Detalles", answers_all_path(@res[0].id),class: "btn btn-success btn-xs"
+                  -else
+                    %td
+                      ="--"
+                    %td
+                      - if !vig.status
+                        No se Aplico
+                      -else
+                        =link_to "Aplicar", vig_test_path(vig,test),class:"btn btn-warning btn-xs"
   
   = form_for Vig.new , url: member_vigs_path(@member) do |vig|
     .modal.fade#myModal
@@ -82,13 +98,10 @@
             %h4
               Nueva Valoración
           .modal-body
-            .form-group
-              =vig.label :name, "Nombre de la Valoración"
-              = vig.text_field :name, class: "form-control"
             .form-gruop
               %label
                 Agregar Examen
-            - for test in Test.gerontology
+            - for test in Test.all
               .form-group
                 .checkbox
                   .col-md-9

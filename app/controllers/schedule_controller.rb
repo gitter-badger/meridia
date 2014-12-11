@@ -7,9 +7,8 @@ class ScheduleController < ApplicationController
 	end
 
 	def new
-		@vig = Vig.find(params[:vig_id])
-		@member = @vig.member 
-		@current_lesson = @vig.member.lessons
+    @member = Member.find(params[:member_id]) 
+		@current_lesson = @member.lessons
 		@lessons = Lesson.all
 	end
 
@@ -18,7 +17,8 @@ class ScheduleController < ApplicationController
 		@member = Member.find(params[:member_id])
 		@member.lessons.clear
 		@member.update_attributes(member_params)
-		redirect_to member_schedule_index_path(@member)	
+		
+    redirect_to member_schedule_index_path(@member)	
 	end
 
 	private

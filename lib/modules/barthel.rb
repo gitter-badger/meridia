@@ -4,7 +4,7 @@ class Barthel
   include BuildTest
   
   def self.test
-      test = Test.new(title: "ÍNDICE DE BARTHEL", calculate: :barthel, code: 1 )
+      test = Test.new(title: "ÍNDICE DE BARTHEL", calculate: :abvd, code: 1 )
       test.save!
 
 

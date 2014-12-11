@@ -8,7 +8,7 @@
         .well.text-center
           .row
             .col-md-3
-              -res= barthel(@vig.abvd)
+              -res= abvd(@probien.abvd)
               %ul.res_vig
                 %li.res
                   =res[:points]
@@ -17,7 +17,7 @@
                 %li.test
                   ABVD-Barthel
             .col-md-3
-              - res = lawton(@vig.aivd)
+              - res = aivd(@probien.aivd)
               %ul.res_vig
                 %li.res
                   =res[:points]
@@ -26,7 +26,7 @@
                 %li.test
                   AIVD Lawton-Brody
             .col-md-3
-              -res =tinetti(@vig.tinetti)
+              -res =tinetti(@probien.tinetti)
               %ul.res_vig
                 %li.res
                   =res[:points]
@@ -37,7 +37,7 @@
                 %li.test
                   Tinetti
             .col-md-3
-              - res = mental(@vig.folstein)
+              - res = mmse(@probien.folstein)
               %ul.res_vig
                 %li.res
                   =res[:points]
@@ -48,7 +48,7 @@
           .row
             %hr
             .col-md-3
-              - res = yesavage(@vig.yesavage)
+              - res = yesavage(@probien.yesavage)
               %ul.res_vig
                 %li.res
                   =res[:points]
@@ -57,7 +57,7 @@
                 %li.test
                   Deprecion Yasavage
             .col-md-3
-              - res = hamilton(@vig.hamilton)
+              - res = hamilton(@probien.hamilton)
               %ul.res_vig
                 %li.res
                   =res[:points]
@@ -72,7 +72,7 @@
             .col-md-3
               %strong
                 OARS
-    = form_for @probien, url: vig_probien_index_path(@vig), method: :past do |f|
+    = form_for  [@member, @probien] do |f|
       .form-group
         = f.label :objetive, "Objetivo General"
         = f.text_area :objetive, class: "form-control"

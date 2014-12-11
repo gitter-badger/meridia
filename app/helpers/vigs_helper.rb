@@ -8,9 +8,14 @@ module VigsHelper
 	def calculate(test)
 		send(test.test.calculate, test.points)
 	end
+  def zarit(points)
 
+    html = Hash.new
+    html[:points] = points['total']
+    html
+  end
 	def hamilton(points)
-		total = points['total']+ points['total2']
+		total = points[:total]+ points[:total2]
 		html = Hash.new
     html[:points] = total
     html[:somatica]="Somatica: #{ points['total2']}"
@@ -31,7 +36,7 @@ module VigsHelper
 		html
 	end
 
-	def barthel(points)
+	def abvd(points)
 		html = Hash.new
     html[:points] = points['total']
     case points['total']
@@ -50,8 +55,8 @@ module VigsHelper
     html
 	end
 
-	def mental(points)
-		total = points['total']
+	def mmse(points)
+		total = points[:total]
 		html = Hash.new
     html[:points] = total
     case total
@@ -72,9 +77,9 @@ module VigsHelper
     html
 	end
 
-	def lawton(points)
+	def aivd(points)
 		html = Hash.new
-    html[:points] = points['total']
+    html[:points] = points[:total]
     case points['total']
 		when 4..7
 			html[:scale]="Moderada"
@@ -87,7 +92,7 @@ module VigsHelper
     html
 	end
 	def tinetti(points)
-		total = points['total']+ points['total2']
+		total = points[:total]+ points[:total2]
 		html= {}
     html[:points] = total
     html[:marcha]  = "Marcha:#{ points['total2']}"
@@ -108,13 +113,13 @@ module VigsHelper
 	end
 	def yesavage(points)
 		html= {}
-    html[:points] =points['total']
-    case points['total']
+    html[:points] =points[:total]
+    case points[:total]
 		when 0..5
 					html[:scale]=	"Normal"
 		when 6..9
 					html[:scale]=	"Leve"
-		when points['total'] > 10 
+		when points[:total] > 10 
 						html[:scale]= "D.establecida"
 		else
 					html[:scale]=	"No disponible"
@@ -124,7 +129,7 @@ module VigsHelper
 	end
   def oars points
     html = {}
-    html[:points] =points['total']
+    html[:points] =points[:total]
     case points['total']
     when 0
       html[:scale]="Exelentes recursos sociales"

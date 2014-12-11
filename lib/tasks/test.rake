@@ -7,6 +7,7 @@ require 'modules/tinetti'
 require 'modules/hamilton'
 require 'modules/dummy'
 require 'modules/zarit'
+require 'modules/yesavage'
 
 namespace :test do
   desc "test"
@@ -26,8 +27,11 @@ namespace :test do
   end
 
   task :clear=> :environment do
-    tests = Test.all
-    tests.detroy_all
+    Test.all.delete_all
+    Vig.all.delete_all
+    Answer.all.delete_all
+    OptionsAnswer.all.delete_all
+    Question.all.delete_all
   end
 
 end

@@ -4,7 +4,9 @@ class Vig
 
   field :name, type: String
   field :date, type: String
-  field :status, type: Integer
+  field :status, type: Boolean, default: true
+  field :kind, type: Symbol, default: :gerontology
+
   field	:abvd, type: Hash,default: {total: -1}
   field	:aivd, type: Hash, default: {total: -1}
   field :tinetti, type: Hash, default: {total: -1,total2: -1}
@@ -13,16 +15,17 @@ class Vig
   field :hamilton, type: Hash, default: {total: -1 ,total2: -1}
   field :nutrition, type: Hash,default: {total: -1}
   field :oars, type: Hash,default: {total: -1}
-  field :kind, type: Symbol, default: :gerontology
-
+  
   belongs_to :member
-  has_one :probien
+  belongs_to :probien
   has_and_belongs_to_many  :tests
   has_many :answers
   has_many :vigs_tests
-
-	scope :withot_nursing,-> { where :kind => :gerontology}	
+  belongs_to :user
+	scope :general,-> { where :kind => :gerontology}	
   scope :nursing, -> {where :kind => :nursing}
+  scope :active, -> {where :status => true}  
+  scope :closed, -> {where :status => false} 
   def self.test_applicate(list)
     res = [] 
     current = [0,0,0,0,0,0]
@@ -65,8 +68,8 @@ class Vig
             test["hamilton"]= vig.hamilton["total"]
           elsif
             last[5]= vig.abvd["total"]
-          end
         end  
+          end
       end
     end
     res =[current,last]

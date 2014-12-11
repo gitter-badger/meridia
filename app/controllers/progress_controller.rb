@@ -3,7 +3,7 @@ class ProgressController < ApplicationController
 	#load_and_authorize_resource
 	def index
 		@member= Member.find(params[:member_id])
-    @vigs = @member.vigs.withot_nursing.desc(:created_at)
+    @vigs = @member.vigs.general.desc(:created_at)
     @attr = Vig.test_applicate(@vigs)
     @sings = @member.signs.limit(40)
   end
@@ -11,8 +11,8 @@ class ProgressController < ApplicationController
 	def show
 	end
 
-	def create
-		@vig = Vig.find(params[:vig_id])
-		redirect_to new_vig_probien_path(@vig)	
-	end
+	#def create
+	#	@vig = Vig.find(params[:vig_id])
+	#	redirect_to new_vig_probien_path(@vig)	
+	#end
 end

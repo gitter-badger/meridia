@@ -14,6 +14,8 @@ class User
 	has_one :mailbox
   has_many :messengers
   has_many :tags
+  has_many :vigs
+  has_many :vigs_tests
   belongs_to :center
   
   ## Database authenticatable
